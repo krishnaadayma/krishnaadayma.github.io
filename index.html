@@ -1,172 +1,258 @@
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body {
-        font-family: 'Arial', sans-serif;
-        line-height: 1.6;
-        color: #e0e0e0;
-        background-color: #0a0a0a;
-    }
-    
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    
-    /* Header Styles */
-    header {
-        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-        color: #ffffff;
-        padding: 100px 0;
-        text-align: center;
-        border-bottom: 1px solid #333;
-    }
-    
-    .header-content h1 {
-        font-size: 3rem;
-        margin-bottom: 10px;
-        color: #ffffff;
-    }
-    
-    .header-content p {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-        opacity: 0.8;
-        color: #b0b0b0;
-    }
-    
-    .btn {
-        display: inline-block;
-        background: #404040;
-        color: #ffffff;
-        padding: 12px 30px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        border: 1px solid #555;
-    }
-    
-    .btn:hover {
-        background: #505050;
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(255,255,255,0.1);
-    }
-    
-    /* Section Styles */
-    section {
-        padding: 80px 0;
-        background: #0a0a0a;
-    }
-    
-    .section-title {
-        text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 50px;
-        color: #ffffff;
-    }
-    
-    /* About Section */
-    .about-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 50px;
-        align-items: center;
-    }
-    
-    .about-content p {
-        color: #b0b0b0;
-        font-size: 1.1rem;
-    }
-    
-    /* Skills Section */
-    .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-    }
-    
-    .skill-card {
-        background: #1a1a1a;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        text-align: center;
-        border: 1px solid #333;
-        transition: transform 0.3s ease;
-    }
-    
-    .skill-card:hover {
-        transform: translateY(-5px);
-        border-color: #555;
-    }
-    
-    .skill-card h3 {
-        color: #ffffff;
-        margin-bottom: 15px;
-    }
-    
-    .skill-card p {
-        color: #888;
-    }
-    
-    /* Experience Section */
-    .experience-item {
-        background: #1a1a1a;
-        padding: 30px;
-        margin-bottom: 30px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        border: 1px solid #333;
-    }
-    
-    .experience-item h3 {
-        color: #ffffff;
-        margin-bottom: 10px;
-    }
-    
-    .experience-item strong {
-        color: #b0b0b0;
-    }
-    
-    .experience-item p {
-        color: #888;
-        margin-top: 10px;
-    }
-    
-    /* Contact Section */
-    .contact-info {
-        text-align: center;
-        font-size: 1.1rem;
-        color: #b0b0b0;
-    }
-    
-    .contact-info p {
-        margin: 10px 0;
-    }
-    
-    footer {
-        background: #1a1a1a;
-        color: #888;
-        text-align: center;
-        padding: 30px 0;
-        border-top: 1px solid #333;
-    }
-    
-    /* Additional Dapper Elements */
-    .accent {
-        color: #ffffff;
-        font-weight: bold;
-    }
-    
-    .divider {
-        height: 1px;
-        background: linear-gradient(90deg, transparent, #333, transparent);
-        margin: 40px 0;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Dayma - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background-color: #0a0a0a;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 1px solid #333;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+            color: #b0b0b0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #404040;
+            color: #ffffff;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid #555;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #505050;
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 50px 0;
+            background: #0a0a0a;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .about-content p {
+            color: #b0b0b0;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-card {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        
+        .skill-card h3 {
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        
+        .skill-card p {
+            color: #888;
+        }
+        
+        /* Experience Section */
+        .experience-item {
+            background: #1a1a1a;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+        
+        .experience-item h3 {
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        
+        .experience-item strong {
+            color: #b0b0b0;
+        }
+        
+        .experience-item p {
+            color: #888;
+            margin-top: 10px;
+        }
+        
+        /* Contact Section */
+        .contact-info {
+            text-align: center;
+            font-size: 1rem;
+            color: #b0b0b0;
+        }
+        
+        .contact-info p {
+            margin: 8px 0;
+        }
+        
+        footer {
+            background: #1a1a1a;
+            color: #888;
+            text-align: center;
+            padding: 25px 0;
+            border-top: 1px solid #333;
+            margin-top: 30px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Krishna Dayma</h1>
+                <p>International Business & Data Analyst</p>
+                <p>Data-Driven Strategies | Cross-Cultural Communication | Process Optimization</p>
+                <a href="#contact" class="btn">Get In Touch</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div>
+                    <p>Economics and International Development graduate with expertise in business analysis, data visualization, and cross-cultural communication. Proven ability to drive operational improvements and enhance internationalization strategies through data-driven insights.</p>
+                </div>
+                <div>
+                    <p>Fluent in English, Hindi, and Italian, with experience in international stakeholder engagement and strategic business planning. Currently enhancing expertise with certifications in Financial Management and Investment Risk Management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Core Competencies</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Data Analysis</h3>
+                    <p>Excel, Data Visualization, Business Intelligence</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Business Strategy</h3>
+                    <p>International Trade, Market Research, Strategic Planning</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Process Optimization</h3>
+                    <p>Workflow Improvement, Productivity Enhancement</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Cross-Cultural Communication</h3>
+                    <p>Multilingual: English, Hindi, Italian</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <div class="experience-item">
+                <h3>HR & Communications Intern</h3>
+                <p><strong>University of Parma</strong> | Mar 2024 - Jun 2024</p>
+                <p>Spearheaded the university's flagship "Open Day" for over 6,000 students, enhancing international recruitment and brand visibility. Developed strategic onboarding programs that improved first-year student integration and navigational efficiency.</p>
+            </div>
+            
+            <div class="experience-item">
+                <h3>Junior Business & Marketing Analyst</h3>
+                <p><strong>Shubh Labh Pvt Ltd.</strong> | May 2024 - Dec 2024</p>
+                <p>Drove data-driven growth by analyzing marketing channel performance, resulting in an <strong>8% increase</strong> in business reach and customer engagement. Implemented process optimizations that <strong>boosted team productivity by 15%</strong> while reducing client investment risk.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-info">
+                <p>Email: krishna.saq@gmail.com</p>
+                <p>Mobile: +39 375 632 0447</p>
+                <p>Location: Bologna, Italy</p>
+                <p>LinkedIn: linkedin.com/in/krishnaadayma</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Krishna Dayma. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
