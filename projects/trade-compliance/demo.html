@@ -360,4 +360,178 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        title
+                        title: {
+                            display: true,
+                            text: 'Italy: Process Timeline (Days)',
+                            font: { size: 16, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, max: 10 }
+                    }
+                }
+            });
+
+            // India Tariff Structure Chart
+            const indiaTariffCtx = document.getElementById('indiaTariffChart').getContext('2d');
+            new Chart(indiaTariffCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Basic Customs', 'IGST', 'Compensation Cess', 'Other Levies'],
+                    datasets: [{
+                        data: [35, 40, 15, 10],
+                        backgroundColor: ['#FF9933', '#138808', '#FFFFFF', '#000080'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'India: Tariff Structure (%)',
+                            font: { size: 16, weight: 'bold' }
+                        },
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            // India Compliance Metrics Chart
+            const indiaComplianceCtx = document.getElementById('indiaComplianceChart').getContext('2d');
+            new Chart(indiaComplianceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Documentation', 'Customs Clearance', 'Quality Checks', 'Regulatory Compliance'],
+                    datasets: [{
+                        label: 'Days Required',
+                        data: [8, 4, 5, 6],
+                        backgroundColor: '#FF9933',
+                        borderColor: '#CC7900',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'India: Process Timeline (Days)',
+                            font: { size: 16, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, max: 10 }
+                    }
+                }
+            });
+
+            // Comparison Bar Chart
+            const comparisonBarCtx = document.getElementById('comparisonBarChart').getContext('2d');
+            new Chart(comparisonBarCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Tariff Rate', 'Clearance Time', 'Doc Requirements', 'Compliance Cost'],
+                    datasets: [
+                        {
+                            label: 'Italy',
+                            data: [7, 2, 8, 12],
+                            backgroundColor: '#008C45'
+                        },
+                        {
+                            label: 'India',
+                            data: [12, 4, 15, 18],
+                            backgroundColor: '#FF9933'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Key Metrics Comparison',
+                            font: { size: 16, weight: 'bold' }
+                        }
+                    }
+                }
+            });
+
+            // Comparison Radar Chart
+            const comparisonRadarCtx = document.getElementById('comparisonRadarChart').getContext('2d');
+            new Chart(comparisonRadarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Ease of Compliance', 'Cost Efficiency', 'Digitalization', 'Transparency', 'Speed', 'Predictability'],
+                    datasets: [
+                        {
+                            label: 'Italy',
+                            data: [85, 80, 75, 90, 85, 88],
+                            backgroundColor: 'rgba(0, 140, 69, 0.2)',
+                            borderColor: '#008C45',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'India',
+                            data: [70, 65, 80, 75, 70, 72],
+                            backgroundColor: 'rgba(255, 153, 51, 0.2)',
+                            borderColor: '#FF9933',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Compliance Performance Radar',
+                            font: { size: 16, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        function resetCharts() {
+            // Destroy all charts and reinitialize
+            Chart.instances.forEach(instance => instance.destroy());
+            initializeCharts();
+            
+            // Show confirmation
+            alert('Charts have been reset to default values!');
+        }
+
+        function exportData() {
+            // Simulate data export
+            const data = {
+                italy: { complianceRate: 92, savings: 1200000, clearance: 48 },
+                india: { complianceRate: 85, savings: 900000, clearance: 72 },
+                timestamp: new Date().toISOString()
+            };
+            
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "trade-compliance-data.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            
+            alert('Data exported successfully!');
+        }
+    </script>
+</body>
+</html>
