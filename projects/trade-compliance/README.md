@@ -1,13 +1,9 @@
-# International Trade Compliance System
+<div align="center">
 
-## 📚 Documentation
-[View Comprehensive Documentation](documentation.html)
+# Project Documentation
 
-## 🚀 Live Demo
-[Try Interactive Demo](demo.html)
+## International Trade Compliance System - Technical Documentation & Research
 
-## 💻 Source Code
-[Download Python Code](trade_compliance.py)
+### Comprehensive analysis of Italy-India trade regulations and compliance requirements
 
-## 📖 Overview
-A Python application for analyzing trade regulations between Italy and India...
+</div>
