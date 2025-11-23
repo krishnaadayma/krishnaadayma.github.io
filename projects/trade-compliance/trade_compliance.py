@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>International Trade Compliance System | Krishna Dayma</title>
     <meta name="description" content="Python application analyzing trade regulations between Italy and India with comprehensive compliance data and interactive analytics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
     /* ===== OPTIMIZED CSS FOR TRADE COMPLIANCE ===== */
@@ -21,6 +24,8 @@
         --accent-warning: #ff6b35;
         --accent-portfolio: #6c757d;
         --border-color: #333;
+        --gradient-primary: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        --gradient-accent: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
         
         /* Typography scale */
         --text-xs: clamp(0.75rem, 2vw, 0.875rem);
@@ -44,6 +49,12 @@
         --radius-md: 0.5rem;
         --radius-lg: 0.75rem;
         --radius-xl: 1rem;
+        
+        /* Animation */
+        --transition-fast: 0.2s ease;
+        --transition-medium: 0.3s ease;
+        --transition-slow: 0.5s ease;
+        --shadow-glow: 0 0 20px rgba(0, 122, 204, 0.3);
     }
 
     /* Reset and base styles */
@@ -58,7 +69,7 @@
     }
 
     body {
-        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         line-height: 1.6;
         color: var(--text-secondary);
         background-color: var(--bg-primary);
@@ -111,12 +122,27 @@
 
     /* Header */
     header {
-        background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+        background: var(--gradient-primary);
         color: var(--text-primary);
         padding: var(--space-2xl) var(--space-md);
         text-align: center;
         border-radius: var(--radius-xl);
         margin-bottom: var(--space-xl);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+    }
+
+    .header-content h1 {
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .header-content .subtitle {
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .header-content .tech-tags {
+        animation: fadeInUp 0.8s ease-out 0.4s both;
     }
 
     /* Button system */
@@ -133,10 +159,27 @@
         font-weight: 600;
         font-size: var(--text-base);
         border: 1px solid var(--border-color);
-        transition: all 0.2s ease;
+        transition: all var(--transition-fast);
         cursor: pointer;
         margin: var(--space-xs);
         text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: left var(--transition-medium);
+    }
+
+    .btn:hover::before {
+        left: 100%;
     }
 
     .btn:hover,
@@ -146,7 +189,7 @@
     }
 
     .btn-primary {
-        background: var(--accent-primary);
+        background: var(--gradient-accent);
         border-color: var(--accent-primary);
     }
 
@@ -154,6 +197,7 @@
     .btn-primary:focus {
         background: #005a9e;
         border-color: #005a9e;
+        box-shadow: var(--shadow-glow);
     }
 
     .btn-secondary {
@@ -177,6 +221,7 @@
     .btn-warning:focus {
         background: linear-gradient(135deg, #e55a25, #c53030);
         border-color: #e55a25;
+        box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
     }
 
     .btn-portfolio {
@@ -204,6 +249,11 @@
         margin-right: var(--space-sm);
         color: white;
         display: inline-block;
+        transition: transform var(--transition-fast);
+    }
+
+    .tech-tag:hover {
+        transform: scale(1.05);
     }
 
     /* Feature grid */
@@ -220,11 +270,31 @@
         border-radius: var(--radius-lg);
         text-align: center;
         border: 1px solid var(--border-color);
-        transition: transform 0.2s ease;
+        transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform var(--transition-medium);
+    }
+
+    .feature-card:hover::before {
+        transform: scaleX(1);
     }
 
     .feature-card:hover {
-        transform: translateY(-4px);
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-glow);
     }
 
     /* Output samples */
@@ -238,6 +308,11 @@
         font-size: var(--text-sm);
         line-height: 1.5;
         overflow-x: auto;
+        transition: transform var(--transition-medium);
+    }
+
+    .output-sample:hover {
+        transform: translateY(-4px);
     }
 
     /* Project links section */
@@ -262,6 +337,30 @@
         border-radius: var(--radius-lg);
         margin: var(--space-xl) 0;
         border: 1px solid var(--border-color);
+        transition: transform var(--transition-medium);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .dashboard-cta::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(0,122,204,0.05) 0%, rgba(0,90,158,0.05) 100%);
+        opacity: 0;
+        transition: opacity var(--transition-medium);
+    }
+
+    .dashboard-cta:hover::before {
+        opacity: 1;
+    }
+
+    .dashboard-cta:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-glow);
     }
 
     /* Systematic output layout */
@@ -274,6 +373,12 @@
         border: 1px solid var(--border-color);
         overflow: hidden;
         margin: var(--space-lg) 0;
+        transition: transform var(--transition-medium);
+    }
+
+    .system-partition:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-glow);
     }
 
     .partition-header {
@@ -305,6 +410,11 @@
         border-bottom: 1px solid var(--bg-tertiary);
         display: flex;
         align-items: flex-start;
+        transition: color var(--transition-fast);
+    }
+
+    .compact-list li:hover {
+        color: var(--text-primary);
     }
 
     .compact-list li:last-child {
@@ -320,6 +430,39 @@
     /* Section spacing */
     section {
         margin: var(--space-2xl) 0;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Scroll animations */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     /* Mobile optimizations */
@@ -355,13 +498,29 @@
         /* Reduce motion for better performance */
         @media (prefers-reduced-motion: reduce) {
             .btn,
-            .feature-card {
+            .feature-card,
+            .output-sample,
+            .dashboard-cta,
+            .system-partition {
                 transition: none;
             }
             
             .btn:hover,
-            .feature-card:hover {
+            .feature-card:hover,
+            .output-sample:hover,
+            .dashboard-cta:hover,
+            .system-partition:hover {
                 transform: none;
+            }
+            
+            .btn::before,
+            .feature-card::before,
+            .dashboard-cta::before {
+                display: none;
+            }
+            
+            html {
+                scroll-behavior: auto;
             }
         }
     }
@@ -385,17 +544,19 @@
 <body>
     <div class="container">
         <header>
-            <h1>🌍 International Trade Compliance System</h1>
-            <p class="subtitle">Python application for analyzing trade regulations between Italy and India</p>
-            <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Data Analysis</span>
-                <span class="tech-tag">International Business</span>
-                <span class="tech-tag">Trade Compliance</span>
+            <div class="header-content">
+                <h1>🌍 International Trade Compliance System</h1>
+                <p class="subtitle">Python application for analyzing trade regulations between Italy and India</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Data Analysis</span>
+                    <span class="tech-tag">International Business</span>
+                    <span class="tech-tag">Trade Compliance</span>
+                </div>
             </div>
         </header>
 
-        <section>
+        <section class="fade-in">
             <h2>About This Project</h2>
             <p>This Python application provides comprehensive trade compliance data for international business operations between Italy and India, including documentation requirements, logistics information, and regulatory frameworks.</p>
             
@@ -415,17 +576,17 @@
             </div>
         </section>
 
-        <section class="project-links-section">
+        <section class="project-links-section fade-in">
             <h2>Project Links</h2>
             <div class="links-grid">
                 <a href="demo.html" class="btn btn-primary">📊 Interactive Demo</a>
                 <a href="documentation.html" class="btn">📚 Documentation</a>
                 <a href="trade_compliance.py" download class="btn btn-secondary">💾 Download Code</a>
-                <a href="https://krishnaadayma.github.io/" class="btn btn-portfolio">Back to Portfolio</a>
+                <a href="https://krishnaadayma.github.io/" class="btn btn-portfolio">← Back to Portfolio</a>
             </div>
         </section>
 
-        <section class="dashboard-cta">
+        <section class="dashboard-cta fade-in">
             <h2>Interactive Analytics Dashboard</h2>
             <p>Explore our advanced data visualization platform with interactive charts and comprehensive trade analytics:</p>
             <a href="demo.html" class="btn btn-warning" style="padding: var(--space-md) var(--space-xl);">
@@ -433,7 +594,7 @@
             </a>
         </section>
 
-        <section>
+        <section class="fade-in">
             <h2>Example Output</h2>
             <div class="system-partition">
                 <div class="partition-header">
@@ -462,7 +623,7 @@
             </div>
         </section>
 
-        <section>
+        <section class="fade-in">
             <h2>How to Run</h2>
             <p>Download the Python file and run it using:</p>
             <div class="output-sample">
@@ -477,8 +638,23 @@
     </div>
 
     <script>
-        // Smooth scrolling for anchor links
+        // Scroll animation functionality
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -491,6 +667,12 @@
                     }
                 });
             });
+            
+            // Initial check for scroll animations
+            handleScrollAnimations();
+            
+            // Add scroll event listener for animations
+            window.addEventListener('scroll', handleScrollAnimations);
         });
     </script>
 </body>
