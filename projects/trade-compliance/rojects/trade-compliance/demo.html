@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Compliance Demo | Krishna Dayma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background-color: #0a0a0a;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            padding: 40px 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #007acc;
+        }
+        
+        .demo-controls {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #007acc;
+            color: #ffffff;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background: #005a9e;
+            transform: translateY(-2px);
+        }
+        
+        .btn-italy {
+            background: #28a745;
+        }
+        
+        .btn-italy:hover {
+            background: #1e7e34;
+        }
+        
+        .btn-india {
+            background: #dc3545;
+        }
+        
+        .btn-india:hover {
+            background: #c82333;
+        }
+        
+        .output-container {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            min-height: 400px;
+        }
+        
+        .output-content {
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007acc;
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Trade Compliance System Demo</h1>
+            <p>Interactive demonstration of trade regulations between Italy and India</p>
+        </header>
+
+        <div class="demo-controls">
+            <h2>Explore Trade Data</h2>
+            <p>Click the buttons below to view trade compliance information:</p>
+            <br>
+            <button class="btn btn-italy" onclick="showItaly()">View Italy Trade Data</button>
+            <button class="btn btn-india" onclick="showIndia()">View India Trade Data</button>
+            <button class="btn" onclick="showComparison()">Compare Countries</button>
+            <button class="btn" onclick="showBilateral()">Show Bilateral Trade</button>
+            <button class="btn" onclick="clearOutput()">Clear Output</button>
+        </div>
+
+        <div class="output-container">
+            <div class="output-content" id="output">
+👆 Click the buttons above to explore trade compliance data between Italy and India.
+
+This demo showcases the Python trade compliance system that analyzes:
+• Country-specific regulations
+• Documentation requirements  
+• Trade logistics
+• Bilateral trade context
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Project Page</a>
+    </div>
+
+    <script>
+        function showItaly() {
+            const output = `
+ITALY TRADE COMPLIANCE DATA
+============================
+
+📋 GENERAL INFORMATION:
+• Official Name: Italian Republic
+• Capital: Rome
+• Currency: Euro (EUR)
+• EU Member: Yes
+
+🚢 TRADE LOGISTICS:
+• Primary Ports: Genoa, Trieste, Gioia Tauro, Naples, La Spezia
+• Primary Airports: Rome Fiumicino (FCO), Milan Malpensa (MXP)
+• HS System: EU Combined Nomenclature (CN)
+• Common Incoterms: FCA, EXW, CIF, DAP
+
+📄 DOCUMENTATION REQUIREMENTS:
+• Commercial Invoice: Required
+• Packing List: Required  
+• Certificate of Origin: Often required (EUR.1 for preferential treatment)
+• Bill of Lading/AWB: Required
+• Customs Declaration: EU Single Administrative Document (SAD)
+• Required Identifiers: EORI Number
+
+⚖️ REGULATORY ENVIRONMENT:
+• Customs Procedure: Aligned with EU Customs Union
+• Import Tariffs: EU Common External Tariff (CET)
+• VAT on Imports: 22.0%
+• Standards: CE Marking required for many products
+• Restricted Items: Dangerous goods, Counterfeit goods, Protected species
+
+💡 KEY INSIGHTS:
+• EU member with standardized customs procedures
+• High VAT rate but streamlined documentation
+• Strong infrastructure with multiple major ports
+            `;
+            document.getElementById('output').textContent = output;
+        }
+
+        function showIndia() {
+            const output = `
+INDIA TRADE COMPLIANCE DATA
+============================
+
+📋 GENERAL INFORMATION:
+• Official Name: Republic of India  
+• Capital: New Delhi
+• Currency: Indian Rupee (INR)
+• EU Member: No
+
+🚢 TRADE LOGISTICS:
+• Primary Ports: Jawaharlal Nehru (Nhava Sheva), Mundra, Chennai, Visakhapatnam
+• Primary Airports: Delhi (DEL), Mumbai (BOM), Chennai (MAA), Bangalore (BLR)
+• HS System: Indian Trade Classification (Harmonized System)
+• Common Incoterms: FOB, EXW, CIF
+
+📄 DOCUMENTATION REQUIREMENTS:
+• Commercial Invoice: Required
+• Packing List: Required
+• Certificate of Origin: Often required
+• Bill of Lading/AWB: Required
+• Customs Declaration: Electronic (ICEGATE) - Bill of Entry
+• Required Identifiers: Import Export Code (IEC)
+
+⚖️ REGULATORY ENVIRONMENT:
+• Customs Procedure: Governed by Customs Act, 1962
+• Import Tariffs: Basic Customs Duty + Integrated GST + Social Welfare Surcharge
+• VAT on Imports: IGST applied (rates vary: 5%, 12%, 18%, 28%)
+• Standards: BIS Certification required for many products
+• Restricted Items: Animal products, Firearms, Gold & Silver bullion
+
+💡 KEY INSIGHTS:
+• Complex multi-layered tax system (GST)
+• Electronic customs declaration system
+• Specific certification requirements for many products
+            `;
+            document.getElementById('output').textContent = output;
+        }
+
+        function showComparison() {
+            const output = `
+ITALY vs INDIA - TRADE COMPARISON
+==================================
+
+🌍 GENERAL COMPARISON:
+Metric              Italy               India
+Currency            Euro (EUR)          Indian Rupee (INR)  
+EU Member           Yes                 No
+Customs Union       EU Customs Union    Independent system
+
+🚢 LOGISTICS COMPARISON:
+• Ease of Business Rank: Italy (58) vs India (63)
+• LPI Score: Italy (3.8) vs India (3.2)
+
+💰 TAX COMPARISON:
+• Italy: VAT 22% (standard rate)
+• India: GST 5-28% (varies by product)
+
+📄 DOCUMENTATION:
+• Italy: EORI Number, SAD Declaration
+• India: IEC Code, Bill of Entry
+
+⚖️ REGULATORY FRAMEWORK:
+• Italy: EU standardized procedures
+• India: National customs regulations
+
+💡 KEY DIFFERENCES:
+• Italy benefits from EU standardization
+• India has more complex tax structure
+• Both require specific business identifiers
+            `;
+            document.getElementById('output').textContent = output;
+        }
+
+        function showBilateral() {
+            const output = `
+ITALY-INDIA BILATERAL TRADE
+============================
+
+📊 TRADE AGREEMENT:
+• No dedicated bilateral FTA
+• Trade under WTO MFN rules
+• Certificate of Origin required for WTO MFN tariffs
+
+📦 KEY TRADE GOODS - INDIA TO ITALY:
+1. Textiles & Apparel
+2. Leather Goods  
+3. Automotive Parts
+4. Iron & Steel
+5. Chemicals
+6. Rice & Coffee
+
+📦 KEY TRADE GOODS - ITALY TO INDIA:
+1. Machinery & Engines
+2. Electrical Equipment
+3. Chemicals & Pharmaceuticals
+4. Plastics
+5. Luxury Goods (Fashion, Furniture)
+6. Wine & Food Products
+
+💡 TRADE INSIGHTS:
+• Complementary economies
+• Italy exports high-value manufactured goods
+• India exports textiles, automotive parts, commodities
+• Growing trade relationship with significant potential
+            `;
+            document.getElementById('output').textContent = output;
+        }
+
+        function clearOutput() {
+            document.getElementById('output').textContent = `👆 Click the buttons above to explore trade compliance data between Italy and India.
+
+This demo showcases the Python trade compliance system that analyzes:
+• Country-specific regulations
+• Documentation requirements  
+• Trade logistics
+• Bilateral trade context`;
+        }
+    </script>
+</body>
+</html>
