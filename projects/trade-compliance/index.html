@@ -1,22 +1,200 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Trade Project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Compliance System | Krishna Dayma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background-color: #0a0a0a;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            padding: 40px 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #007acc;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #007acc;
+            color: #ffffff;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            background: #005a9e;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #28a745;
+        }
+        
+        .btn-secondary:hover {
+            background: #1e7e34;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #007acc;
+            color: #007acc;
+        }
+        
+        .btn-outline:hover {
+            background: #007acc;
+            color: white;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        
+        .feature-card h3 {
+            color: #007acc;
+            margin-bottom: 15px;
+        }
+        
+        .tech-tags {
+            margin: 20px 0;
+        }
+        
+        .tech-tag {
+            background: #0056b3;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-right: 8px;
+            color: white;
+            display: inline-block;
+        }
+        
+        .output-sample {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #007acc;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+    </style>
 </head>
 <body>
-    <h1>My Trade Compliance System</h1>
-    <p>This is my Python project that analyzes trade between Italy and India.</p>
-    
-    <h2>Download the Code</h2>
-    <a href="trade_compliance.py">Click here to download my Python file</a>
-    
-    <h2>What It Does</h2>
-    <ul>
-        <li>Shows trade rules for Italy</li>
-        <li>Shows trade rules for India</li>
-        <li>Compares both countries</li>
-    </ul>
-    
-    <p><a href="../">← Back to my main website</a></p>
+    <div class="container">
+        <header>
+            <h1>🌍 International Trade Compliance System</h1>
+            <p class="subtitle">Python application for analyzing trade regulations between Italy and India</p>
+            <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Data Analysis</span>
+                <span class="tech-tag">International Business</span>
+                <span class="tech-tag">Trade Compliance</span>
+            </div>
+        </header>
+
+        <section>
+            <h2>About This Project</h2>
+            <p>This Python application provides comprehensive trade compliance data for international business operations between Italy and India, including documentation requirements, logistics information, and regulatory frameworks.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🇮🇹 Italy Data</h3>
+                    <p>EU compliance standards, ports, VAT information, and documentation requirements</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🇮🇳 India Data</h3>
+                    <p>Customs procedures, import licenses, GST rates, and trade logistics</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Comparison</h3>
+                    <p>Side-by-side analysis of trade regulations and bilateral context</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Project Links</h2>
+            <div>
+                <a href="trade_compliance.py" download class="btn">Download Python Code</a>
+                <a href="README.md" class="btn btn-secondary">View Documentation</a>
+                <a href="../" class="btn btn-outline">Back to Portfolio</a>
+            </div>
+        </section>
+
+        <section>
+            <h2>Example Output</h2>
+            <div class="output-sample">
+                🌍 INTERNATIONAL TRADE COMPLIANCE SYSTEM<br>
+                ==================================================<br>
+                <br>
+                TRADE COMPLIANCE DATA: ITALY<br>
+                ==================================================<br>
+                <br>
+                📋 GENERAL INFORMATION:<br>
+                • Official Name: Italian Republic<br>
+                • Currency: Euro (EUR)<br>
+                • EU Member: Yes<br>
+                <br>
+                🚢 TRADE LOGISTICS:<br>
+                • Primary Ports: Genoa, Trieste, Gioia Tauro...<br>
+                • VAT on Imports: 22.0%<br>
+            </div>
+        </section>
+
+        <section>
+            <h2>How to Run</h2>
+            <p>Download the Python file and run it using:</p>
+            <div class="output-sample">
+                python trade_compliance.py
+            </div>
+        </section>
+    </div>
 </body>
 </html>
