@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Add this meta tag to prevent caching issues -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>International Trade Compliance System | Krishna Dayma</title>
-    <!-- Rest of your code continues -->
+    <meta name="description" content="Python application analyzing trade regulations between Italy and India">
     <style>
-        /* SIMPLE CENTERED STYLES */
+        /* Match your portfolio's exact styling */
         * {
             margin: 0;
             padding: 0;
@@ -18,94 +14,199 @@
         }
         
         body {
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: #0a0a0a;
-            color: #ffffff;
+            color: #e0e0e0;
             line-height: 1.6;
+            min-height: 100vh;
+            padding: 0;
+        }
+        
+        /* Main container matching portfolio width and spacing */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
         }
         
-        .center-container {
+        .content-wrapper {
             text-align: center;
-            max-width: 800px;
             width: 100%;
+            background: rgba(26, 26, 26, 0.8);
+            padding: 4rem 3rem;
+            border-radius: 16px;
+            border: 1px solid #333;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #007acc;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #007acc 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            line-height: 1.2;
         }
         
         .subtitle {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             color: #b0b0b0;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .tech-tags {
-            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 3rem 0;
         }
         
         .tech-tag {
-            display: inline-block;
-            background: #007acc;
+            background: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 1rem;
-            margin: 0.25rem;
-            font-size: 0.9rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
         }
         
-        .buttons {
-            margin-top: 2rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: #28a745;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            border-radius: 0.5rem;
-            margin: 0.5rem;
-            transition: transform 0.2s;
-        }
-        
-        .btn:hover {
+        .tech-tag:hover {
             transform: translateY(-2px);
         }
         
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(40, 167, 69, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #e0e0e0;
+            border: 2px solid #444;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #007acc;
+            transform: translateY(-3px);
+        }
+        
+        /* Match portfolio responsive design */
         @media (max-width: 768px) {
+            .main-container {
+                padding: 2rem 1rem;
+            }
+            
+            .content-wrapper {
+                padding: 3rem 2rem;
+                margin: 1rem;
+            }
+            
             h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .subtitle {
                 font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .tech-tags {
+                gap: 0.75rem;
+                margin: 2rem 0;
+            }
+            
+            .tech-tag {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+                padding: 1rem 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .content-wrapper {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="center-container">
-        <h1>🌍 International Trade Compliance System</h1>
-        <p class="subtitle">Python application for analyzing trade regulations between Italy and India</p>
-        
-        <div class="tech-tags">
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Data Analysis</span>
-            <span class="tech-tag">International Business</span>
-            <span class="tech-tag">Trade Compliance</span>
-        </div>
-        
-        <div class="buttons">
-            <a href="demo.html" class="btn">📊 View Demo</a>
-            <a href="https://krishnaadayma.github.io/" class="btn">← Back to Portfolio</a>
+    <div class="main-container">
+        <div class="content-wrapper">
+            <h1>🌍 International Trade Compliance System</h1>
+            <p class="subtitle">Python application for analyzing trade regulations between Italy and India</p>
+            
+            <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Data Analysis</span>
+                <span class="tech-tag">International Business</span>
+                <span class="tech-tag">Trade Compliance</span>
+            </div>
+            
+            <div class="button-group">
+                <a href="demo.html" class="btn btn-primary">📊 View Demo</a>
+                <a href="https://krishnaadayma.github.io/" class="btn btn-secondary">← Back to Portfolio</a>
+            </div>
         </div>
     </div>
 </body>
