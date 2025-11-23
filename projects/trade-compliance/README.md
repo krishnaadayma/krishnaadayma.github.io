@@ -1,13 +1,13 @@
 # International Trade Compliance System
 
-A Python application for analyzing trade regulations between Italy and India.
+## 📚 Documentation
+[View Comprehensive Documentation](documentation.html)
 
-## Features
-- Country-specific trade regulations
-- Documentation requirements analysis  
-- Bilateral trade context
-- Regulatory compliance comparison
+## 🚀 Live Demo
+[Try Interactive Demo](demo.html)
 
-## How to Run
-```bash
-python trade_compliance.py
+## 💻 Source Code
+[Download Python Code](trade_compliance.py)
+
+## 📖 Overview
+A Python application for analyzing trade regulations between Italy and India...
