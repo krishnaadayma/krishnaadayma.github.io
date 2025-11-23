@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Documentation | Trade Compliance System</title>
 <style>
-    /* MOBILE-FIRST CSS FRAMEWORK FOR DOCUMENTATION PAGE */
+    /* ===== AUTO-OPTIMIZING CSS FOR DOCUMENTATION ===== */
     * {
         margin: 0;
         padding: 0;
@@ -19,47 +19,63 @@
         line-height: 1.6;
         color: #e0e0e0;
         background-color: #0a0a0a;
-        padding: 15px;
     }
 
     .container {
         width: 100%;
-        max-width: 1200px;
+        max-width: min(1200px, 95vw);
         margin: 0 auto;
-        padding: 0 15px;
+        padding: 0 clamp(15px, 3vw, 30px);
     }
 
     header {
         background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
         color: #ffffff;
-        padding: 50px 20px;
+        padding: clamp(35px, 7vw, 70px) clamp(18px, 3.5vw, 35px);
         text-align: center;
-        border-radius: 10px;
-        margin-bottom: 30px;
+        border-radius: clamp(7px, 1.5vw, 12px);
+        margin-bottom: clamp(20px, 4vw, 40px);
     }
 
-    h1 { font-size: 2rem; color: #ffffff; margin-bottom: 15px; }
-    h2 { font-size: 1.5rem; color: #ffffff; margin-bottom: 15px; }
-    h3 { font-size: 1.25rem; color: #ffffff; margin-bottom: 10px; }
+    h1 { 
+        font-size: clamp(1.5rem, 4.5vw, 2.2rem); 
+        color: #ffffff; 
+        margin-bottom: clamp(8px, 1.5vw, 15px); 
+    }
+    
+    h2 { 
+        font-size: clamp(1.2rem, 3.5vw, 1.8rem); 
+        color: #ffffff; 
+        margin-bottom: clamp(8px, 1.5vw, 15px); 
+    }
+    
+    h3 { 
+        font-size: clamp(1rem, 3vw, 1.4rem); 
+        color: #ffffff; 
+        margin-bottom: clamp(6px, 1.2vw, 12px); 
+    }
 
     p {
         color: #b0b0b0;
-        margin-bottom: 15px;
+        margin-bottom: clamp(10px, 2vw, 18px);
         line-height: 1.6;
+        font-size: clamp(0.85rem, 2.2vw, 1rem);
+        max-width: min(60ch, 95vw);
     }
 
     .btn {
         display: inline-block;
         background: #404040;
         color: #ffffff;
-        padding: 12px 25px;
+        padding: clamp(9px, 2.2vw, 12px) clamp(16px, 3vw, 24px);
         text-decoration: none;
-        border-radius: 5px;
+        border-radius: clamp(4px, 1vw, 6px);
         font-weight: bold;
         transition: all 0.3s ease;
         border: 1px solid #555;
-        margin: 5px;
+        margin: clamp(3px, 1vw, 6px);
         text-align: center;
+        font-size: clamp(0.8rem, 2vw, 0.95rem);
     }
 
     .btn:hover {
@@ -79,74 +95,84 @@
 
     .section {
         background: #1a1a1a;
-        padding: 30px;
-        border-radius: 8px;
-        margin-bottom: 25px;
+        padding: clamp(20px, 4vw, 35px);
+        border-radius: clamp(6px, 1.5vw, 10px);
+        margin-bottom: clamp(18px, 3.5vw, 30px);
         border: 1px solid #333;
     }
 
     .feature-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        margin: 20px 0;
+        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+        gap: clamp(12px, 2.5vw, 20px);
+        margin: clamp(15px, 3vw, 25px) 0;
     }
 
     .feature-card {
         background: #2d2d2d;
-        padding: 20px;
-        border-radius: 6px;
+        padding: clamp(15px, 3vw, 25px);
+        border-radius: clamp(5px, 1.2vw, 8px);
         border: 1px solid #404040;
     }
 
     .nav-links {
         text-align: center;
-        margin: 30px 0;
+        margin: clamp(20px, 4vw, 35px) 0;
     }
 
-    /* Mobile responsiveness */
+    .section-title {
+        font-size: clamp(1.3rem, 4vw, 1.8rem);
+        margin-bottom: clamp(15px, 3vw, 25px);
+        color: #ffffff;
+        border-bottom: clamp(1px, 0.3vw, 2px) solid #333;
+        padding-bottom: clamp(8px, 1.5vw, 12px);
+    }
+
+    .subsection {
+        margin: clamp(12px, 2.5vw, 20px) 0;
+        padding: clamp(15px, 3vw, 25px);
+        background: #2d2d2d;
+        border-radius: clamp(4px, 1vw, 6px);
+        border-left: clamp(3px, 1vw, 5px) solid #007acc;
+    }
+
+    /* Calculator Styles */
+    .calculator {
+        background: #2d2d2d;
+        padding: clamp(18px, 3.5vw, 30px);
+        border-radius: clamp(6px, 1.5vw, 10px);
+        margin: clamp(15px, 3vw, 25px) 0;
+        border: 1px solid #404040;
+    }
+
+    .calculator-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+        gap: clamp(12px, 2.5vw, 20px);
+        margin: clamp(15px, 3vw, 25px) 0;
+    }
+
+    .calculator-input {
+        background: #1a1a1a;
+        padding: clamp(12px, 2.5vw, 20px);
+        border-radius: clamp(4px, 1vw, 6px);
+        border: 1px solid #404040;
+    }
+
+    /* Mobile-specific adjustments */
     @media (max-width: 768px) {
         body {
             padding: 10px;
-            font-size: 14px;
         }
 
-        .container {
-            padding: 0 10px;
-        }
-
-        header {
-            padding: 40px 15px;
-        }
-
-        h1 { font-size: 1.8rem; }
-        h2 { font-size: 1.4rem; }
-        h3 { font-size: 1.2rem; }
-
-        .btn {
-            padding: 12px 20px;
-            font-size: 0.9rem;
+        .nav-links .btn {
             display: block;
             width: 100%;
-            margin: 5px 0;
-        }
-
-        .section {
-            padding: 20px;
+            margin: clamp(5px, 1vw, 8px) 0;
         }
 
         .feature-grid {
             grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        .feature-card {
-            padding: 15px;
-        }
-
-        .nav-links .btn {
-            width: 100%;
-            margin: 5px 0;
         }
     }
 
@@ -155,14 +181,8 @@
             padding: 8px;
         }
 
-        header {
-            padding: 30px 10px;
-        }
-
-        h1 { font-size: 1.6rem; }
-        
         .section {
-            padding: 15px;
+            padding: clamp(15px, 3vw, 25px);
         }
     }
 </style>
