@@ -6,7 +6,7 @@
     <title>International Trade Compliance System | Krishna Dayma</title>
     <meta name="description" content="Python application analyzing trade regulations between Italy and India">
     <style>
-        /* Analytics Dashboard Styling */
+        /* Professional Light Theme Styling */
         * {
             margin: 0;
             padding: 0;
@@ -15,8 +15,8 @@
         
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            color: #e8e8e8;
+            background: #FFFDF7;
+            color: #333344;
             line-height: 1.6;
             min-height: 100vh;
             padding: 0;
@@ -33,18 +33,18 @@
         .dashboard-header {
             text-align: center;
             margin-bottom: 3rem;
-            padding: 3rem 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #FFFDF7 0%, #F8F5EC 100%);
+            border-radius: 24px;
+            border: 1px solid #E8E4D9;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
         
         .main-title {
             font-size: 3.2rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            background: linear-gradient(135deg, #2A5C8A 0%, #4A8BC1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -58,9 +58,9 @@
         
         .subtitle {
             font-size: 1.4rem;
-            color: #a0a0c0;
+            color: #666677;
             margin-bottom: 2rem;
-            font-weight: 300;
+            font-weight: 400;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -76,14 +76,14 @@
         }
         
         .tech-pill {
-            background: linear-gradient(135deg, rgba(0, 114, 255, 0.15) 0%, rgba(0, 198, 255, 0.15) 100%);
-            color: #00c6ff;
+            background: linear-gradient(135deg, #E8F2FA 0%, #D4E7F7 100%);
+            color: #2A5C8A;
             padding: 0.8rem 1.8rem;
             border-radius: 25px;
             font-size: 0.95rem;
             font-weight: 600;
-            border: 1px solid rgba(0, 198, 255, 0.3);
-            backdrop-filter: blur(10px);
+            border: 1px solid #C5D9ED;
+            box-shadow: 0 4px 12px rgba(42, 92, 138, 0.1);
         }
         
         /* Features Grid */
@@ -95,19 +95,19 @@
         }
         
         .feature-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: #FFFFFF;
             padding: 2.5rem 2rem;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            border: 1px solid #E8E4D9;
             text-align: center;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
         }
         
         .feature-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(0, 198, 255, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: #C5D9ED;
+            box-shadow: 0 15px 35px rgba(42, 92, 138, 0.1);
         }
         
         .feature-icon {
@@ -120,11 +120,11 @@
             font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: #ffffff;
+            color: #2A5C8A;
         }
         
         .feature-desc {
-            color: #b0b0d0;
+            color: #666677;
             font-size: 1rem;
             line-height: 1.5;
         }
@@ -133,21 +133,22 @@
         .action-section {
             text-align: center;
             margin: 4rem 0 2rem 0;
-            padding: 3rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3.5rem;
+            background: linear-gradient(135deg, #FFFDF7 0%, #F8F5EC 100%);
+            border-radius: 24px;
+            border: 1px solid #E8E4D9;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
         
         .action-title {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
-            color: #ffffff;
+            color: #2A5C8A;
         }
         
         .action-subtitle {
-            color: #a0a0c0;
+            color: #666677;
             margin-bottom: 2.5rem;
             font-size: 1.1rem;
             max-width: 500px;
@@ -178,25 +179,26 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            background: linear-gradient(135deg, #2A5C8A 0%, #4A8BC1 100%);
             color: white;
-            box-shadow: 0 8px 25px rgba(0, 114, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(42, 92, 138, 0.3);
         }
         
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 114, 255, 0.4);
+            box-shadow: 0 12px 25px rgba(42, 92, 138, 0.4);
         }
         
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: #e8e8e8;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: #FFFFFF;
+            color: #2A5C8A;
+            border: 2px solid #C5D9ED;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
         
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #00c6ff;
+            background: #F0F7FF;
+            border-color: #2A5C8A;
             transform: translateY(-3px);
         }
         
@@ -210,16 +212,17 @@
         
         .stat-item {
             text-align: center;
-            padding: 2rem 1rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 2.5rem 1rem;
+            background: #FFFFFF;
+            border-radius: 16px;
+            border: 1px solid #E8E4D9;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
         }
         
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            background: linear-gradient(135deg, #2A5C8A 0%, #4A8BC1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -227,24 +230,34 @@
         }
         
         .stat-label {
-            color: #a0a0c0;
-            font-size: 0.9rem;
+            color: #666677;
+            font-size: 0.95rem;
             font-weight: 500;
+        }
+        
+        /* Footer Note */
+        .footer-note {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            color: #888899;
+            font-size: 0.9rem;
+            border-top: 1px solid #E8E4D9;
         }
         
         /* Responsive Design */
         @media (max-width: 768px) {
             .dashboard-container {
-                padding: 1rem;
+                padding: 1.5rem;
             }
             
             .dashboard-header {
-                padding: 2rem 1.5rem;
+                padding: 3rem 1.5rem;
                 margin-bottom: 2rem;
             }
             
             .main-title {
-                font-size: 2.2rem;
+                font-size: 2.4rem;
             }
             
             .title-icon {
@@ -252,7 +265,7 @@
             }
             
             .subtitle {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             .features-grid {
@@ -265,8 +278,12 @@
             }
             
             .action-section {
-                padding: 2rem 1.5rem;
+                padding: 2.5rem 1.5rem;
                 margin: 2rem 0;
+            }
+            
+            .action-title {
+                font-size: 1.8rem;
             }
             
             .button-group {
@@ -287,7 +304,7 @@
         
         @media (max-width: 480px) {
             .main-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
             .title-icon {
@@ -296,6 +313,10 @@
             
             .stats-bar {
                 grid-template-columns: 1fr;
+            }
+            
+            .action-title {
+                font-size: 1.6rem;
             }
         }
     </style>
@@ -367,6 +388,11 @@
                 <a href="https://krishnaadayma.github.io/" class="btn btn-secondary">← Back to Portfolio</a>
             </div>
         </section>
+        
+        <!-- Footer Note -->
+        <div class="footer-note">
+            <p>International Trade Compliance System | Developed by Krishna Dayma</p>
+        </div>
     </div>
 </body>
 </html>
