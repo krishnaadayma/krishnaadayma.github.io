@@ -5,11 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trade Compliance Documentation</title>
     <style>
+        :root {
+            --primary-bg: #F5F5DC;
+            --card-bg: #FFFFFF;
+            --accent-color: #8B4513;
+            --secondary-color: #A0522D;
+            --text-color: #333333;
+            --light-text: #666666;
+            --border-color: #D2B48C;
+            --shadow: 0 8px 32px rgba(139, 69, 19, 0.1);
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
             line-height: 1.6;
         }
         
@@ -22,18 +33,17 @@
         .header {
             text-align: center;
             padding: 40px 20px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
+            background: var(--card-bg);
+            border-radius: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
         }
         
         .header h1 {
-            font-size: 2.8em;
+            font-size: 2.5em;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--accent-color);
         }
         
         .nav-buttons {
@@ -47,25 +57,30 @@
         .btn {
             display: inline-block;
             padding: 12px 25px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: var(--accent-color);
             color: white;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 25px;
             font-weight: bold;
             transition: all 0.3s ease;
-            border: none;
+            border: 2px solid var(--accent-color);
             cursor: pointer;
         }
         
         .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            background: transparent;
+            color: var(--accent-color);
+            transform: translateY(-2px);
         }
         
         .btn-outline {
             background: transparent;
-            border: 2px solid #667eea;
-            color: #667eea;
+            color: var(--accent-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--accent-color);
+            color: white;
         }
         
         .content-grid {
@@ -75,29 +90,23 @@
             margin-bottom: 40px;
         }
         
-        .main-content {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-        
-        .sidebar {
-            background: rgba(255, 255, 255, 0.95);
+        .main-content, .sidebar {
+            background: var(--card-bg);
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
         }
         
         h2 {
-            color: #333;
+            color: var(--accent-color);
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
+            border-bottom: 2px solid var(--border-color);
         }
         
         h3 {
-            color: #667eea;
+            color: var(--secondary-color);
             margin: 25px 0 15px 0;
         }
         
@@ -109,18 +118,23 @@
         }
         
         .spec-card {
-            background: #f8f9fa;
+            background: var(--primary-bg);
             padding: 20px;
             border-radius: 10px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid var(--accent-color);
         }
         
         .calculator {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            padding: 30px;
+            background: var(--accent-color);
+            padding: 25px;
             border-radius: 15px;
             color: white;
-            margin: 30px 0;
+            margin: 25px 0;
+        }
+        
+        .calculator h3 {
+            color: white;
+            margin-bottom: 20px;
         }
         
         .form-group {
@@ -139,6 +153,8 @@
             border: none;
             border-radius: 8px;
             font-size: 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
         }
         
         .result {
@@ -150,7 +166,7 @@
         }
         
         .result-number {
-            font-size: 2.5em;
+            font-size: 2em;
             font-weight: bold;
             margin: 10px 0;
         }
@@ -168,8 +184,32 @@
         .footer {
             text-align: center;
             padding: 30px 20px;
-            color: white;
+            color: var(--light-text);
             margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .quick-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .quick-links li {
+            margin: 12px 0;
+            padding: 10px;
+            background: var(--primary-bg);
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .quick-links li:hover {
+            background: var(--border-color);
+        }
+        
+        .quick-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
         }
         
         @media (max-width: 968px) {
@@ -186,7 +226,7 @@
             <p>Complete technical guide and implementation resources</p>
             <div class="nav-buttons">
                 <a href="index.html" class="btn btn-outline">🏠 Main Page</a>
-                <a href="demo.html" class="btn">📊 Interactive Demo</a>
+                <a href="demo.html" class="btn btn-outline">📊 Interactive Dashboard</a>
                 <a href="#calculator" class="btn">🧮 Cost Calculator</a>
             </div>
         </div>
@@ -271,6 +311,7 @@ const costs = analyzer.calculateCosts({<br>
                 <section id="calculator">
                     <h2>🧮 Trade Cost Calculator</h2>
                     <div class="calculator">
+                        <h3>Estimate Compliance Costs</h3>
                         <div class="form-group">
                             <label for="shipmentValue">Shipment Value (€)</label>
                             <input type="number" id="shipmentValue" placeholder="50000" min="1000" max="1000000">
@@ -295,7 +336,7 @@ const costs = analyzer.calculateCosts({<br>
                             </select>
                         </div>
                         
-                        <button class="btn" onclick="calculateCosts()" style="width: 100%; margin-top: 20px;">
+                        <button class="btn" onclick="calculateCosts()" style="background: white; color: var(--accent-color); width: 100%;">
                             Calculate Costs
                         </button>
                         
@@ -309,16 +350,10 @@ const costs = analyzer.calculateCosts({<br>
 
                 <section style="margin-top: 30px;">
                     <h2>📋 Quick Links</h2>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin: 10px 0;">
-                            <a href="demo.html" style="color: #667eea; text-decoration: none;">📊 Live Analytics Dashboard</a>
-                        </li>
-                        <li style="margin: 10px 0;">
-                            <a href="index.html" style="color: #667eea; text-decoration: none;">🏠 Main Project Page</a>
-                        </li>
-                        <li style="margin: 10px 0;">
-                            <a href="#api-docs" style="color: #667eea; text-decoration: none;">🔗 API Documentation</a>
-                        </li>
+                    <ul class="quick-links">
+                        <li><a href="demo.html">📊 Live Analytics Dashboard</a></li>
+                        <li><a href="index.html">🏠 Main Project Page</a></li>
+                        <li><a href="../index.html">🎓 Back to Portfolio</a></li>
                     </ul>
                 </section>
             </div>
@@ -337,7 +372,6 @@ const costs = analyzer.calculateCosts({<br>
             const productType = document.getElementById('productType').value;
             const destination = document.getElementById('destination').value;
             
-            // Base calculations based on product type and destination
             const baseRates = {
                 electronics: { tariff: 0.07, compliance: 0.03, documentation: 0.02 },
                 textiles: { tariff: 0.12, compliance: 0.04, documentation: 0.03 },
@@ -354,10 +388,9 @@ const costs = analyzer.calculateCosts({<br>
             const documentationCost = shipmentValue * rates.documentation;
             const totalCost = tariffCost + complianceCost + documentationCost;
             
-            // Display results
             document.getElementById('totalCost').textContent = `€${totalCost.toLocaleString('en-US', {maximumFractionDigits: 0})}`;
             document.getElementById('breakdown').innerHTML = `
-                <div style="text-align: left; margin-top: 15px;">
+                <div style="text-align: left; margin-top: 15px; font-size: 0.9em;">
                     <div>Tariffs: €${tariffCost.toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
                     <div>Compliance: €${complianceCost.toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
                     <div>Documentation: €${documentationCost.toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
@@ -366,7 +399,6 @@ const costs = analyzer.calculateCosts({<br>
             document.getElementById('result').style.display = 'block';
         }
         
-        // Calculate on page load with default values
         window.addEventListener('load', calculateCosts);
     </script>
 </body>
