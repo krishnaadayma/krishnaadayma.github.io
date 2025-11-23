@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trade Compliance Documentation</title>
-    <meta name="description" content="Complete technical guide and implementation resources for Trade Compliance Analysis">
+    <title>Trade Compliance Documentation | Krishna Dayma</title>
+    <meta name="description" content="Complete documentation for the International Trade Compliance System">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* ===== OPTIMIZED CSS FRAMEWORK ===== */
         :root {
-            /* Color system */
             --bg-primary: #0a0a0a;
             --bg-secondary: #1a1a1a;
             --bg-tertiary: #2d2d2d;
@@ -20,12 +19,12 @@
             --text-muted: #b0b0b0;
             --accent-primary: #007acc;
             --accent-secondary: #28a745;
-            --accent-warning: #ff6b00;
+            --accent-warning: #ff6b35;
+            --accent-portfolio: #6c757d;
             --border-color: #333;
             --gradient-primary: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             --gradient-accent: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
             
-            /* Typography scale */
             --text-xs: clamp(0.75rem, 2vw, 0.875rem);
             --text-sm: clamp(0.875rem, 2.5vw, 1rem);
             --text-base: clamp(1rem, 3vw, 1.125rem);
@@ -34,7 +33,6 @@
             --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
             --text-3xl: clamp(1.875rem, 6vw, 2.25rem);
             
-            /* Spacing scale */
             --space-xs: clamp(0.5rem, 1vw, 0.75rem);
             --space-sm: clamp(0.75rem, 2vw, 1rem);
             --space-md: clamp(1rem, 3vw, 1.5rem);
@@ -42,25 +40,17 @@
             --space-xl: clamp(2rem, 6vw, 3rem);
             --space-2xl: clamp(3rem, 8vw, 4rem);
             
-            /* Border radius */
             --radius-sm: 0.375rem;
             --radius-md: 0.5rem;
             --radius-lg: 0.75rem;
             --radius-xl: 1rem;
             
-            /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.3);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.4);
-            --shadow-glow: 0 0 20px rgba(0, 122, 204, 0.3);
-            
-            /* Animation */
             --transition-fast: 0.2s ease;
             --transition-medium: 0.3s ease;
             --transition-slow: 0.5s ease;
+            --shadow-glow: 0 0 20px rgba(0, 122, 204, 0.3);
         }
 
-        /* Reset and base styles */
         *, *::before, *::after {
             margin: 0;
             padding: 0;
@@ -79,30 +69,6 @@
             overflow-x: hidden;
         }
 
-        /* Focus styles for accessibility */
-        :focus-visible {
-            outline: 2px solid var(--accent-primary);
-            outline-offset: 2px;
-        }
-
-        /* Skip link for keyboard navigation */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent-primary);
-            color: white;
-            padding: 8px;
-            text-decoration: none;
-            z-index: 1000;
-            border-radius: var(--radius-sm);
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* Container system */
         .container {
             width: 100%;
             max-width: min(1200px, 95vw);
@@ -110,7 +76,6 @@
             padding: 0 var(--space-md);
         }
 
-        /* Typography */
         h1, h2, h3, h4, h5, h6 {
             color: var(--text-primary);
             line-height: 1.2;
@@ -130,12 +95,6 @@
 
         h3 { 
             font-size: var(--text-xl);
-            color: var(--accent-primary);
-        }
-
-        h4 { 
-            font-size: var(--text-lg);
-            color: var(--text-primary);
         }
 
         p {
@@ -146,7 +105,12 @@
             max-width: 65ch;
         }
 
-        /* Header */
+        .subtitle {
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
+        }
+
         header {
             background: var(--gradient-primary);
             color: var(--text-primary);
@@ -159,24 +123,18 @@
             border: 1px solid var(--border-color);
         }
 
-        .header h1 {
+        .header-content h1 {
             animation: fadeInUp 0.8s ease-out;
         }
 
-        .header p {
+        .header-content .subtitle {
             animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
-        .nav-buttons {
-            display: flex;
-            gap: var(--space-sm);
-            justify-content: center;
-            margin-top: var(--space-lg);
-            flex-wrap: wrap;
+        .header-content .tech-tags {
             animation: fadeInUp 0.8s ease-out 0.4s both;
         }
 
-        /* Button system */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -192,6 +150,7 @@
             border: 1px solid var(--border-color);
             transition: all var(--transition-fast);
             cursor: pointer;
+            margin: var(--space-xs);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -216,7 +175,6 @@
         .btn:focus {
             background: #404040;
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
         }
 
         .btn-primary {
@@ -231,222 +189,258 @@
             box-shadow: var(--shadow-glow);
         }
 
-        .btn-outline {
-            background: transparent;
-            color: var(--accent-primary);
-            border-color: var(--accent-primary);
+        .btn-secondary {
+            background: var(--accent-secondary);
+            border-color: var(--accent-secondary);
         }
 
-        .btn-outline:hover,
-        .btn-outline:focus {
-            background: var(--accent-primary);
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            background: #1e7e34;
+            border-color: #1e7e34;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--accent-warning), #e53e3e);
+            border-color: var(--accent-warning);
             color: white;
         }
 
-        /* Content grid */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr minmax(350px, 400px);
-            gap: var(--space-xl);
-            margin-bottom: var(--space-2xl);
+        .btn-warning:hover,
+        .btn-warning:focus {
+            background: linear-gradient(135deg, #e55a25, #c53030);
+            border-color: #e55a25;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
         }
 
-        .main-content, .sidebar {
-            background: var(--bg-secondary);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
+        .btn-portfolio {
+            background: var(--accent-portfolio);
+            border-color: var(--accent-portfolio);
+            color: white;
         }
 
-        h2 {
-            color: var(--text-primary);
-            margin-bottom: var(--space-lg);
-            padding-bottom: var(--space-sm);
-            border-bottom: 2px solid var(--accent-primary);
-            position: relative;
+        .btn-portfolio:hover,
+        .btn-portfolio:focus {
+            background: #545b62;
+            border-color: #545b62;
         }
 
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 60px;
-            height: 2px;
-            background: var(--accent-primary);
-        }
-
-        h3 {
-            color: var(--accent-primary);
-            margin: var(--space-xl) 0 var(--space-md) 0;
-        }
-
-        /* Specification grid */
-        .spec-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            gap: var(--space-lg);
+        .tech-tags {
             margin: var(--space-lg) 0;
         }
 
-        .spec-card {
-            background: var(--bg-tertiary);
+        .tech-tag {
+            background: var(--accent-primary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: 12px;
+            font-size: var(--text-xs);
+            margin-right: var(--space-sm);
+            color: white;
+            display: inline-block;
+            transition: transform var(--transition-fast);
+        }
+
+        .tech-tag:hover {
+            transform: scale(1.05);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
             padding: var(--space-lg);
-            border-radius: var(--radius-md);
-            border-left: 4px solid var(--accent-primary);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transform-origin: left;
             transition: transform var(--transition-medium);
         }
 
-        .spec-card:hover {
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .code-block {
+            background: var(--bg-secondary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--accent-primary);
+            margin: var(--space-lg) 0;
+            font-family: 'Courier New', monospace;
+            font-size: var(--text-sm);
+            line-height: 1.5;
+            overflow-x: auto;
+            transition: transform var(--transition-medium);
+        }
+
+        .code-block:hover {
             transform: translateY(-4px);
         }
 
-        /* Calculator */
-        .calculator {
-            background: var(--gradient-accent);
-            padding: var(--space-lg);
-            border-radius: var(--radius-lg);
-            color: white;
-            margin: var(--space-lg) 0;
-            transition: transform var(--transition-medium);
+        .code-header {
+            background: var(--bg-tertiary);
+            padding: var(--space-sm) var(--space-md);
+            margin: -var(--space-lg) -var(--space-lg) var(--space-md) -var(--space-lg);
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: var(--text-sm);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
         }
 
-        .calculator:hover {
+        pre {
+            color: #d4d4d4;
+            font-family: 'Courier New', monospace;
+            font-size: var(--text-sm);
+            line-height: 1.5;
+            white-space: pre;
+            tab-size: 4;
+            margin: 0;
+        }
+
+        .code-comment { color: #6A9955; }
+        .code-keyword { color: #569CD6; }
+        .code-string { color: #CE9178; }
+        .code-number { color: #B5CEA8; }
+        .code-function { color: #DCDCAA; }
+        .code-parameter { color: #9CDCFE; }
+
+        .project-links-section {
+            text-align: center;
+            margin: var(--space-xl) 0;
+        }
+
+        .links-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            justify-content: center;
+            margin-top: var(--space-md);
+        }
+
+        .dashboard-cta {
+            text-align: center;
+            background: var(--bg-secondary);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            margin: var(--space-xl) 0;
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,122,204,0.05) 0%, rgba(0,90,158,0.05) 100%);
+            opacity: 0;
+            transition: opacity var(--transition-medium);
+        }
+
+        .dashboard-cta:hover::before {
+            opacity: 1;
+        }
+
+        .dashboard-cta:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-glow);
         }
 
-        .calculator h3 {
-            color: white;
-            margin-bottom: var(--space-md);
-        }
-
-        .form-group {
-            margin-bottom: var(--space-md);
-        }
-
-        label {
-            display: block;
-            margin-bottom: var(--space-xs);
-            font-weight: 600;
-            color: white;
-        }
-
-        input, select {
-            width: 100%;
-            padding: var(--space-sm);
-            border: none;
-            border-radius: var(--radius-md);
-            font-size: var(--text-base);
-            background: var(--bg-primary);
-            color: var(--text-primary);
+        .system-partition {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
             border: 1px solid var(--border-color);
-            transition: border-color var(--transition-fast);
-        }
-
-        input:focus, select:focus {
-            border-color: var(--accent-primary);
-            outline: none;
-        }
-
-        .result {
-            background: rgba(255, 255, 255, 0.15);
-            padding: var(--space-lg);
-            border-radius: var(--radius-md);
-            margin-top: var(--space-md);
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .result-number {
-            font-size: var(--text-3xl);
-            font-weight: bold;
-            margin: var(--space-sm) 0;
-            color: white;
-        }
-
-        /* Code block */
-        .code-block {
-            background: #1a1a1a;
-            color: var(--text-secondary);
-            padding: var(--space-lg);
-            border-radius: var(--radius-md);
+            overflow: hidden;
             margin: var(--space-lg) 0;
+            transition: transform var(--transition-medium);
+        }
+
+        .system-partition:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .partition-header {
+            background: var(--bg-tertiary);
+            color: var(--accent-primary);
+            font-weight: bold;
+            padding: var(--space-md);
+            border-bottom: 2px solid var(--accent-primary);
             font-family: 'Courier New', monospace;
-            overflow-x: auto;
-            border-left: 4px solid var(--accent-primary);
-            font-size: var(--text-sm);
-            line-height: 1.5;
-            white-space: pre;
-            word-wrap: break-word;
         }
 
-        /* Lists */
-        ul, ol {
-            color: var(--text-muted);
-            margin-bottom: var(--space-md);
-            padding-left: var(--space-lg);
+        .partition-section {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--border-color);
         }
 
-        li {
-            margin-bottom: var(--space-xs);
-            line-height: 1.6;
+        .partition-section:last-child {
+            border-bottom: none;
         }
 
-        /* Quick links */
-        .quick-links {
+        .compact-list {
             list-style: none;
             padding: 0;
-            margin: var(--space-lg) 0;
+            margin: 0;
         }
 
-        .quick-links li {
-            margin: var(--space-sm) 0;
-            padding: var(--space-sm);
-            background: var(--bg-tertiary);
-            border-radius: var(--radius-md);
-            transition: all var(--transition-fast);
-            border: 1px solid transparent;
-        }
-
-        .quick-links li:hover {
-            background: var(--bg-primary);
-            border-color: var(--accent-primary);
-            transform: translateX(4px);
-        }
-
-        .quick-links a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
+        .compact-list li {
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid var(--bg-tertiary);
             display: flex;
-            align-items: center;
-            gap: var(--space-sm);
+            align-items: flex-start;
+            transition: color var(--transition-fast);
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: var(--space-xl) var(--space-md);
-            color: var(--text-muted);
-            margin-top: var(--space-2xl);
-            border-top: 1px solid var(--border-color);
+        .compact-list li:hover {
+            color: var(--text-primary);
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .compact-list li:last-child {
+            border-bottom: none;
         }
 
-        /* Scroll animations */
+        .list-bullet {
+            color: var(--accent-secondary);
+            margin-right: var(--space-sm);
+            font-weight: bold;
+        }
+
+        section {
+            margin: var(--space-2xl) 0;
+        }
+
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -458,43 +452,66 @@
             transform: translateY(0);
         }
 
-        /* Mobile optimizations */
-        @media (max-width: 968px) {
-            .content-grid {
-                grid-template-columns: 1fr;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: var(--space-sm);
             }
 
-            .nav-buttons {
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+
+            .links-grid {
                 flex-direction: column;
                 align-items: center;
             }
 
-            .nav-buttons .btn {
+            .links-grid .btn {
                 width: min(100%, 300px);
                 margin: var(--space-xs) 0;
             }
 
-            .main-content, .sidebar {
+            .dashboard-cta {
                 padding: var(--space-lg);
             }
 
-            /* Reduce motion for better performance */
+            .code-block {
+                padding: var(--space-md);
+                font-size: var(--text-xs);
+            }
+
             @media (prefers-reduced-motion: reduce) {
                 .btn,
-                .spec-card,
-                .calculator,
-                .quick-links li {
+                .feature-card,
+                .code-block,
+                .dashboard-cta,
+                .system-partition {
                     transition: none;
                 }
                 
                 .btn:hover,
-                .spec-card:hover,
-                .calculator:hover,
-                .quick-links li:hover {
+                .feature-card:hover,
+                .code-block:hover,
+                .dashboard-cta:hover,
+                .system-partition:hover {
                     transform: none;
                 }
                 
-                .btn::before {
+                .btn::before,
+                .feature-card::before,
+                .dashboard-cta::before {
                     display: none;
                 }
                 
@@ -513,200 +530,170 @@
                 padding: var(--space-xl) var(--space-md);
             }
 
-            .spec-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .calculator {
+            .feature-card {
                 padding: var(--space-md);
             }
         }
     </style>
 </head>
-<body>
-    <!-- Skip link for accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
 
+<body>
     <div class="container">
-        <header class="fade-in">
-            <h1>📚 Trade Compliance Documentation</h1>
-            <p>Complete technical guide and implementation resources</p>
-            <div class="nav-buttons">
-                <a href="index.html" class="btn btn-outline">🏠 Main Page</a>
-                <a href="demo.html" class="btn btn-outline">📊 Interactive Dashboard</a>
-                <a href="#calculator" class="btn btn-primary">🧮 Cost Calculator</a>
+        <header>
+            <div class="header-content">
+                <h1>📚 Trade Compliance Documentation</h1>
+                <p class="subtitle">Complete guide for integrating and using the International Trade Compliance System</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">JavaScript SDK</span>
+                    <span class="tech-tag">API Documentation</span>
+                    <span class="tech-tag">Trade Compliance</span>
+                    <span class="tech-tag">International Business</span>
+                </div>
             </div>
         </header>
 
-        <main id="main-content">
-            <div class="content-grid">
-                <div class="main-content">
-                    <section id="overview" class="fade-in">
-                        <h2>🌍 Project Overview</h2>
-                        <p>This platform provides comprehensive trade compliance analysis for Italy-India bilateral trade, featuring advanced analytics, cost calculations, and regulatory tracking.</p>
-                        
-                        <div class="spec-grid">
-                            <div class="spec-card">
-                                <h4>Data Sources</h4>
-                                <p>WTO, EU Commission, Indian Customs, Trade Maps</p>
-                            </div>
-                            <div class="spec-card">
-                                <h4>Update Frequency</h4>
-                                <p>Real-time + Quarterly regulatory updates</p>
-                            </div>
-                            <div class="spec-card">
-                                <h4>Coverage</h4>
-                                <p>500+ product categories, 150+ regulations</p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section id="architecture" class="fade-in">
-                        <h2>🏗️ System Architecture</h2>
-                        <h3>Data Layer</h3>
-                        <ul>
-                            <li>MySQL database for structured trade data</li>
-                            <li>MongoDB for unstructured regulatory documents</li>
-                            <li>Redis cache for performance optimization</li>
-                        </ul>
-                        
-                        <h3>API Layer</h3>
-                        <ul>
-                            <li>RESTful APIs for data access</li>
-                            <li>WebSocket connections for real-time updates</li>
-                            <li>OAuth 2.0 authentication</li>
-                        </ul>
-                        
-                        <h3>Presentation Layer</h3>
-                        <ul>
-                            <li>Responsive HTML/CSS/JavaScript frontend</li>
-                            <li>Chart.js for data visualization</li>
-                            <li>Progressive Web App capabilities</li>
-                        </ul>
-                    </section>
-
-                    <section id="implementation" class="fade-in">
-                        <h2>⚙️ Implementation Guide</h2>
-                        
-                        <h3>Quick Start</h3>
-                        <div class="code-block">// Initialize trade compliance analyzer
-const analyzer = new TradeCompliance({
-    country: 'italy',
-    productCategory: 'electronics', 
-    updateFrequency: 'realtime'
+        <section class="fade-in">
+            <h2>Quick Start</h2>
+            <p>Get started with the Trade Compliance SDK in just a few lines of code:</p>
+            
+            <div class="code-block">
+                <div class="code-header">JavaScript / Node.js</div>
+                <pre><code><span class="code-comment">// Initialize trade compliance analyzer</span>
+<span class="code-keyword">const</span> analyzer = <span class="code-keyword">new</span> <span class="code-function">TradeCompliance</span>({
+    country: <span class="code-string">'italy'</span>,
+    productCategory: <span class="code-string">'electronics'</span>,
+    updateFrequency: <span class="code-string">'realtime'</span>
 });
 
-// Calculate compliance costs
-const costs = analyzer.calculateCosts({
-    shipmentValue: 50000,
-    productType: 'consumer_goods'
-});</div>
-                        
-                        <h3>Integration Steps</h3>
-                        <ol>
-                            <li>Clone the repository and install dependencies</li>
-                            <li>Configure API endpoints and authentication</li>
-                            <li>Initialize database with sample trade data</li>
-                            <li>Set up regulatory update webhooks</li>
-                            <li>Deploy frontend to your web server</li>
-                        </ol>
-                    </section>
+<span class="code-comment">// Calculate compliance costs</span>
+<span class="code-keyword">const</span> costs = analyzer.<span class="code-function">calculateCosts</span>({
+    shipmentValue: <span class="code-number">50000</span>,
+    productType: <span class="code-string">'consumer_goods'</span>
+});
+
+<span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">'Compliance Costs:'</span>, costs);</code></pre>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>Installation Methods</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>📦 npm</h3>
+                    <div class="code-block">
+                        <pre><code>npm install trade-compliance-sdk</code></pre>
+                    </div>
                 </div>
-
-                <div class="sidebar">
-                    <section id="calculator" class="fade-in">
-                        <h2>🧮 Trade Cost Calculator</h2>
-                        <div class="calculator">
-                            <h3>Estimate Compliance Costs</h3>
-                            <div class="form-group">
-                                <label for="shipmentValue">Shipment Value (€)</label>
-                                <input type="number" id="shipmentValue" placeholder="50000" min="1000" max="1000000">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="productType">Product Category</label>
-                                <select id="productType">
-                                    <option value="electronics">Electronics</option>
-                                    <option value="textiles">Textiles</option>
-                                    <option value="machinery">Machinery</option>
-                                    <option value="chemicals">Chemicals</option>
-                                    <option value="food">Food Products</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="destination">Destination Country</label>
-                                <select id="destination">
-                                    <option value="italy">Italy → India</option>
-                                    <option value="india">India → Italy</option>
-                                </select>
-                            </div>
-                            
-                            <button class="btn" onclick="calculateCosts()" style="background: white; color: var(--accent-primary); width: 100%; font-weight: 600;">
-                                Calculate Costs
-                            </button>
-                            
-                            <div class="result" id="result" style="display: none;">
-                                <h3>Estimated Compliance Costs</h3>
-                                <div class="result-number" id="totalCost">€0</div>
-                                <div id="breakdown"></div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="fade-in">
-                        <h2>📋 Quick Links</h2>
-                        <ul class="quick-links">
-                            <li><a href="demo.html">📊 Live Analytics Dashboard</a></li>
-                            <li><a href="index.html">🏠 Main Project Page</a></li>
-                            <li><a href="https://krishnaadayma.github.io/">🎓 Back to Portfolio</a></li>
-                        </ul>
-                    </section>
+                <div class="feature-card">
+                    <h3>🐈 yarn</h3>
+                    <div class="code-block">
+                        <pre><code>yarn add trade-compliance-sdk</code></pre>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <h3>🌐 CDN</h3>
+                    <div class="code-block">
+                        <pre><code><span class="code-keyword">&lt;script</span> <span class="code-parameter">src</span>=<span class="code-string">"https://unpkg.com/trade-compliance-sdk"</span><span class="code-keyword">&gt;&lt;/script&gt;</span></code></pre>
+                    </div>
                 </div>
             </div>
-        </main>
+        </section>
 
-        <footer class="footer">
-            <div class="container">
-                <p>Trade Compliance Documentation &copy; 2024 | Technical Implementation Guide</p>
+        <section class="project-links-section fade-in">
+            <h2>Project Navigation</h2>
+            <div class="links-grid">
+                <a href="../index.html" class="btn btn-primary">🏠 Back to Project</a>
+                <a href="../demo.html" class="btn btn-warning">🚀 Live Demo</a>
+                <a href="../trade_compliance.py" download class="btn btn-secondary">💾 Download Python Code</a>
+                <a href="https://krishnaadayma.github.io/" class="btn btn-portfolio">🌐 Back to Portfolio</a>
             </div>
-        </footer>
+        </section>
+
+        <section class="dashboard-cta fade-in">
+            <h2>Interactive Analytics Dashboard</h2>
+            <p>Explore our advanced data visualization platform with interactive charts and comprehensive trade analytics:</p>
+            <a href="../demo.html" class="btn btn-warning" style="padding: var(--space-md) var(--space-xl); margin-top: var(--space-md);">
+                🚀 Launch Analytics Dashboard
+            </a>
+        </section>
+
+        <section class="fade-in">
+            <h2>API Reference</h2>
+
+            <div class="system-partition">
+                <div class="partition-header">TRADE COMPLIANCE CLASS</div>
+                <div class="partition-section">
+                    <div style="color: var(--accent-secondary); font-weight: bold; margin-bottom: var(--space-sm);">📋 CONSTRUCTOR:</div>
+                    <div class="code-block">
+                        <pre><code><span class="code-keyword">new</span> <span class="code-function">TradeCompliance</span>(config: Object)</code></pre>
+                    </div>
+                </div>
+                <div class="partition-section">
+                    <div style="color: var(--accent-secondary); font-weight: bold; margin-bottom: var(--space-sm);">⚙️ CONFIGURATION OPTIONS:</div>
+                    <ul class="compact-list">
+                        <li><span class="list-bullet">•</span> <code>country</code> - Target country code ('italy', 'india', etc.)</li>
+                        <li><span class="list-bullet">•</span> <code>productCategory</code> - Product category ('electronics', 'textiles', etc.)</li>
+                        <li><span class="list-bullet">•</span> <code>updateFrequency</code> - Data update frequency ('realtime', 'daily', 'weekly')</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="system-partition">
+                <div class="partition-header">CALCULATE COSTS METHOD</div>
+                <div class="partition-section">
+                    <div class="code-block">
+                        <pre><code>analyzer.<span class="code-function">calculateCosts</span>(params: Object): Promise&lt;Object&gt;</code></pre>
+                    </div>
+                </div>
+                <div class="partition-section">
+                    <div style="color: var(--accent-secondary); font-weight: bold; margin-bottom: var(--space-sm);">📊 PARAMETERS:</div>
+                    <ul class="compact-list">
+                        <li><span class="list-bullet">•</span> <code>shipmentValue</code> - Total value of shipment in EUR</li>
+                        <li><span class="list-bullet">•</span> <code>productType</code> - Type of product ('consumer_goods', 'industrial', etc.)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>Advanced Examples</h2>
+            
+            <div class="code-block">
+                <div class="code-header">Batch Processing Multiple Shipments</div>
+                <pre><code><span class="code-comment">// Process multiple shipments efficiently</span>
+<span class="code-keyword">const</span> shipments = [
+    { value: <span class="code-number">50000</span>, type: <span class="code-string">'consumer_goods'</span> },
+    { value: <span class="code-number">75000</span>, type: <span class="code-string">'industrial'</span> },
+    { value: <span class="code-number">120000</span>, type: <span class="code-string">'electronics'</span> }
+];
+
+<span class="code-keyword">const</span> results = <span class="code-keyword">await</span> Promise.<span class="code-function">all</span>(
+    shipments.<span class="code-function">map</span>(shipment => 
+        analyzer.<span class="code-function">calculateCosts</span>(shipment)
+    )
+);
+
+<span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">'Batch Results:'</span>, results);</code></pre>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">Error Handling</div>
+                <pre><code><span class="code-keyword">try</span> {
+    <span class="code-keyword">const</span> costs = <span class="code-keyword">await</span> analyzer.<span class="code-function">calculateCosts</span>({
+        shipmentValue: <span class="code-number">50000</span>,
+        productType: <span class="code-string">'consumer_goods'</span>
+    });
+    <span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">'Success:'</span>, costs);
+} <span class="code-keyword">catch</span> (error) {
+    <span class="code-function">console</span>.<span class="code-function">error</span>(<span class="code-string">'Compliance check failed:'</span>, error.<span class="code-parameter">message</span>);
+    <span class="code-comment">// Handle error appropriately</span>
+}</code></pre>
+            </div>
+        </section>
     </div>
 
     <script>
-        // Cost calculator functionality
-        function calculateCosts() {
-            const shipmentValue = parseFloat(document.getElementById('shipmentValue').value) || 50000;
-            const productType = document.getElementById('productType').value;
-            const destination = document.getElementById('destination').value;
-            
-            const baseRates = {
-                electronics: { tariff: 0.07, compliance: 0.03, documentation: 0.02 },
-                textiles: { tariff: 0.12, compliance: 0.04, documentation: 0.03 },
-                machinery: { tariff: 0.05, compliance: 0.025, documentation: 0.015 },
-                chemicals: { tariff: 0.08, compliance: 0.05, documentation: 0.04 },
-                food: { tariff: 0.15, compliance: 0.06, documentation: 0.05 }
-            };
-            
-            const rates = baseRates[productType];
-            const destinationMultiplier = destination === 'italy' ? 1.0 : 1.1;
-            
-            const tariffCost = shipmentValue * rates.tariff * destinationMultiplier;
-            const complianceCost = shipmentValue * rates.compliance;
-            const documentationCost = shipmentValue * rates.documentation;
-            const totalCost = tariffCost + complianceCost + documentationCost;
-            
-            document.getElementById('totalCost').textContent = `€${totalCost.toLocaleString('en-US', {maximumFractionDigits: 0})}`;
-            document.getElementById('breakdown').innerHTML = `
-                <div style="text-align: left; margin-top: var(--space-sm); font-size: var(--text-sm);">
-                    <div>Tariffs: €${tariffCost.toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
-                    <div>Compliance: €${complianceCost.toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
-                    <div>Documentation: €${documentationCost.toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
-                </div>
-            `;
-            document.getElementById('result').style.display = 'block';
-        }
-        
         // Scroll animation functionality
         function handleScrollAnimations() {
             const elements = document.querySelectorAll('.fade-in');
@@ -736,9 +723,6 @@ const costs = analyzer.calculateCosts({
                     }
                 });
             });
-            
-            // Calculate initial costs
-            calculateCosts();
             
             // Initial check for scroll animations
             handleScrollAnimations();
