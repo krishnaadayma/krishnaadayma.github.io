@@ -5,14 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krishna Dayma - Portfolio</title>
     <style>
-    /* ===== CSS RESET & MOBILE-FIRST FRAMEWORK ===== */
+    /* ===== AUTO-OPTIMIZING CSS FRAMEWORK ===== */
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
-    /* Essential mobile fixes */
+    :root {
+        /* CSS Variables for easy scaling */
+        --desktop-scale: 1;
+        --mobile-scale: 0.85;
+        --current-scale: var(--desktop-scale);
+        
+        /* Spacing variables */
+        --space-xs: calc(8px * var(--current-scale));
+        --space-sm: calc(16px * var(--current-scale));
+        --space-md: calc(24px * var(--current-scale));
+        --space-lg: calc(32px * var(--current-scale));
+        --space-xl: calc(48px * var(--current-scale));
+        --space-xxl: calc(80px * var(--current-scale));
+        
+        /* Font sizes */
+        --text-xs: calc(0.75rem * var(--current-scale));
+        --text-sm: calc(0.875rem * var(--current-scale));
+        --text-base: calc(1rem * var(--current-scale));
+        --text-lg: calc(1.125rem * var(--current-scale));
+        --text-xl: calc(1.25rem * var(--current-scale));
+        --text-2xl: calc(1.5rem * var(--current-scale));
+        --text-3xl: calc(1.875rem * var(--current-scale));
+        --text-4xl: calc(2.25rem * var(--current-scale));
+        
+        /* Container widths */
+        --container-padding: calc(20px * var(--current-scale));
+        --max-line-length: calc(65ch * var(--current-scale));
+    }
+
     html, body {
         width: 100%;
         overflow-x: hidden;
@@ -22,88 +50,101 @@
         background-color: #0a0a0a;
     }
 
-    /* Container system */
+    /* Auto-scaling container */
     .container {
         width: 100%;
-        max-width: 1200px;
+        max-width: min(1200px, 95vw);
         margin: 0 auto;
-        padding: 0 20px;
+        padding: 0 var(--container-padding);
     }
 
-    /* Mobile-first container padding */
-    @media (max-width: 768px) {
-        .container {
-            padding: 0 15px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .container {
-            padding: 0 10px;
-        }
-    }
-
-    /* Typography system */
+    /* Auto-scaling typography */
     h1, h2, h3, h4, h5, h6 {
         color: #ffffff;
-        margin-bottom: 1rem;
+        margin-bottom: var(--space-sm);
         line-height: 1.3;
         word-wrap: break-word;
+        font-weight: 600;
     }
 
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.5rem; }
-    h4 { font-size: 1.25rem; }
+    h1 { 
+        font-size: clamp(1.8rem, 5vw, 3rem); 
+        text-align: center;
+    }
+    h2 { 
+        font-size: clamp(1.5rem, 4vw, 2.5rem); 
+        text-align: center;
+    }
+    h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); }
+    h4 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); }
 
     p {
         color: #b0b0b0;
-        margin-bottom: 1rem;
+        margin-bottom: var(--space-sm);
         line-height: 1.6;
         word-wrap: break-word;
+        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+        max-width: min(var(--max-line-length), 100%);
     }
 
-    /* Section system */
+    /* Auto-scaling sections */
     section {
-        padding: 60px 0;
+        padding: clamp(40px, 8vw, 80px) 0;
         width: 100%;
     }
 
     .section-title {
         text-align: center;
-        margin-bottom: 3rem;
+        margin-bottom: clamp(2rem, 6vw, 3rem);
         color: #ffffff;
+        max-width: min(800px, 90vw);
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    /* Header system */
+    /* Auto-scaling header */
     header {
         background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
         color: #ffffff;
-        padding: 80px 0;
+        padding: clamp(50px, 10vw, 100px) clamp(20px, 5vw, 40px);
         text-align: center;
-        border-radius: 10px;
-        margin-bottom: 40px;
+        border-radius: clamp(8px, 2vw, 15px);
+        margin-bottom: clamp(30px, 6vw, 60px);
     }
 
-    /* Button system */
+    .header-content h1 {
+        font-size: clamp(1.8rem, 8vw, 3rem);
+        margin-bottom: var(--space-sm);
+    }
+
+    .header-content p {
+        font-size: clamp(1rem, 3vw, 1.3rem);
+        max-width: min(600px, 90vw);
+        margin: 0 auto clamp(1.5rem, 4vw, 2rem);
+    }
+
+    /* Auto-scaling buttons */
     .btn {
         display: inline-block;
         background: #404040;
         color: #ffffff;
-        padding: 12px 30px;
+        padding: clamp(12px, 3vw, 16px) clamp(20px, 4vw, 32px);
         text-decoration: none;
-        border-radius: 5px;
+        border-radius: clamp(5px, 1vw, 8px);
         font-weight: bold;
         transition: all 0.3s ease;
         border: 1px solid #555;
         text-align: center;
         cursor: pointer;
-        margin: 5px;
+        margin: clamp(4px, 1vw, 8px);
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        min-width: max-content;
     }
 
     .btn:hover {
         background: #505050;
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
 
     .btn-primary {
@@ -126,171 +167,161 @@
         border: 1px solid #1e7e34;
     }
 
-    /* Grid system */
-    .grid {
+    /* Auto-scaling grid systems */
+    .about-content {
         display: grid;
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+        gap: clamp(20px, 4vw, 50px);
+        align-items: start;
+        max-width: min(1000px, 95vw);
+        margin: 0 auto;
     }
 
-    .grid-2 {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+        gap: clamp(15px, 3vw, 30px);
+        max-width: min(1000px, 95vw);
+        margin: 0 auto;
     }
 
-    .grid-3 {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-
-    /* Card system */
-    .card {
+    /* Auto-scaling cards */
+    .skill-card {
         background: #1a1a1a;
-        padding: 30px;
-        border-radius: 8px;
+        padding: clamp(20px, 4vw, 35px) clamp(15px, 3vw, 25px);
+        border-radius: clamp(8px, 2vw, 12px);
+        text-align: center;
         border: 1px solid #333;
         transition: transform 0.3s ease;
     }
 
-    .card:hover {
+    .skill-card:hover {
         transform: translateY(-5px);
     }
 
-    /* About section */
-    .about-content {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        align-items: center;
+    .skill-card h3 {
+        font-size: clamp(1.1rem, 3vw, 1.3rem);
+        margin-bottom: var(--space-sm);
     }
 
-    /* Skills section */
-    .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-    }
-
-    .skill-card {
-        background: #1a1a1a;
-        padding: 25px;
-        border-radius: 8px;
-        text-align: center;
-        border: 1px solid #333;
-    }
-
-    /* Experience section */
+    /* Auto-scaling experience items */
     .experience-item {
         background: #1a1a1a;
-        padding: 25px;
-        margin-bottom: 20px;
-        border-radius: 8px;
+        padding: clamp(20px, 4vw, 35px) clamp(15px, 3vw, 30px);
+        margin-bottom: clamp(15px, 3vw, 25px);
+        border-radius: clamp(8px, 2vw, 12px);
         border: 1px solid #333;
+        border-left: clamp(3px, 1vw, 5px) solid #007acc;
+        max-width: min(900px, 95vw);
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    /* Projects section */
+    .experience-item h3 {
+        font-size: clamp(1.1rem, 3vw, 1.4rem);
+        color: #007acc;
+    }
+
+    /* Auto-scaling project cards */
     .project-card {
         background: #1a1a1a;
-        padding: 30px;
-        border-radius: 8px;
-        margin-bottom: 30px;
-        border-left: 4px solid #007acc;
+        padding: clamp(25px, 5vw, 40px) clamp(20px, 4vw, 35px);
+        border-radius: clamp(8px, 2vw, 12px);
+        margin-bottom: clamp(20px, 4vw, 40px);
+        border-left: clamp(3px, 1vw, 5px) solid #007acc;
         border: 1px solid #333;
+        transition: all 0.3s ease;
+        max-width: min(1000px, 95vw);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .project-card h3 {
+        font-size: clamp(1.2rem, 4vw, 1.6rem);
+        color: #007acc;
+        margin-bottom: clamp(15px, 3vw, 20px);
+    }
+
+    .project-card p {
+        font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+        line-height: 1.6;
     }
 
     .project-features {
-        margin-bottom: 20px;
+        margin-bottom: clamp(15px, 3vw, 25px);
     }
 
     .feature-tag {
         background: #2d2d2d;
-        padding: 6px 12px;
-        border-radius: 15px;
-        font-size: 0.8em;
-        margin-right: 10px;
+        padding: clamp(5px, 1vw, 8px) clamp(10px, 2vw, 16px);
+        border-radius: clamp(12px, 2vw, 20px);
+        font-size: clamp(0.7rem, 2vw, 0.85em);
+        margin-right: clamp(6px, 1.5vw, 12px);
         color: #aaaaaa;
         display: inline-block;
-        margin-bottom: 8px;
+        margin-bottom: clamp(5px, 1vw, 10px);
         border: 1px solid #404040;
     }
 
     .project-links {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 20px;
+        gap: clamp(8px, 2vw, 15px);
+        margin-bottom: clamp(15px, 3vw, 25px);
     }
 
     .tech-stack {
-        margin-top: 15px;
+        margin-top: clamp(10px, 2vw, 20px);
     }
 
     .tech-tag {
         background: #0056b3;
-        padding: 5px 10px;
-        border-radius: 12px;
-        font-size: 0.7em;
-        margin-right: 8px;
+        padding: clamp(4px, 1vw, 6px) clamp(8px, 1.5vw, 14px);
+        border-radius: clamp(10px, 2vw, 15px);
+        font-size: clamp(0.65rem, 1.8vw, 0.8em);
+        margin-right: clamp(5px, 1vw, 10px);
         color: white;
         display: inline-block;
     }
 
-    /* Contact section */
+    /* Auto-scaling contact info */
     .contact-info {
         text-align: center;
-        font-size: 1rem;
+        font-size: clamp(0.95rem, 2.5vw, 1.1rem);
         color: #b0b0b0;
+        max-width: min(500px, 95vw);
+        margin: 0 auto;
     }
 
     .contact-info p {
-        margin: 8px 0;
+        margin: clamp(8px, 2vw, 12px) 0;
+        font-size: clamp(0.95rem, 2.5vw, 1.1rem);
     }
 
-    /* Footer */
+    /* Auto-scaling footer */
     footer {
         background: #1a1a1a;
         color: #888;
         text-align: center;
-        padding: 25px 0;
+        padding: clamp(25px, 5vw, 40px) 0;
         border-top: 1px solid #333;
-        margin-top: 30px;
-        border-radius: 10px;
+        margin-top: clamp(30px, 6vw, 60px);
+        border-radius: clamp(8px, 2vw, 15px);
     }
 
-    /* ===== MOBILE RESPONSIVENESS ===== */
+    /* Mobile-specific optimizations */
     @media (max-width: 768px) {
+        :root {
+            --current-scale: var(--mobile-scale);
+        }
+
         body {
-            padding: 15px;
-            font-size: 14px;
-        }
-
-        section {
-            padding: 40px 0;
-        }
-
-        header {
-            padding: 50px 20px;
-            margin-bottom: 20px;
-        }
-
-        h1 { font-size: 2rem; }
-        h2 { font-size: 1.75rem; }
-        h3 { font-size: 1.25rem; }
-
-        .section-title {
-            margin-bottom: 2rem;
-        }
-
-        .about-content {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .skills-grid {
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        .project-card {
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 12px;
         }
 
         .project-links {
@@ -299,17 +330,12 @@
 
         .project-links .btn {
             width: 100%;
-            margin: 5px 0;
+            margin: clamp(3px, 1vw, 5px) 0;
         }
 
-        .experience-item {
-            padding: 20px;
-            margin-bottom: 15px;
-        }
-
-        .btn {
-            padding: 12px 20px;
-            font-size: 0.9rem;
+        /* Ensure text doesn't get too small */
+        p, .btn, .contact-info {
+            font-size: max(0.9rem, 2.5vw);
         }
     }
 
@@ -318,24 +344,37 @@
             padding: 10px;
         }
 
-        header {
-            padding: 40px 15px;
-        }
-
-        h1 { font-size: 1.8rem; }
-        h2 { font-size: 1.5rem; }
-
-        .project-card {
-            padding: 15px;
+        /* Extra mobile optimizations */
+        .container {
+            padding: 0 max(10px, 3vw);
         }
 
         .feature-tag, .tech-tag {
-            font-size: 0.7rem;
-            margin: 2px;
-            padding: 4px 8px;
+            font-size: max(0.65rem, 2vw);
         }
     }
-    </style>
+
+    /* Large desktop enhancements */
+    @media (min-width: 1200px) {
+        .container {
+            max-width: 1200px;
+        }
+        
+        .about-content,
+        .skills-grid,
+        .experience-item,
+        .project-card {
+            max-width: 1000px;
+        }
+    }
+
+    /* Ultra-wide screen support */
+    @media (min-width: 1600px) {
+        .container {
+            max-width: 1400px;
+        }
+    }
+</style>
 </head>
 <body>
     <!-- Header Section -->
@@ -464,6 +503,7 @@
     </footer>
 </body>
 </html>
+
 
 
 
