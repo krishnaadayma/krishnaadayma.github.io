@@ -658,7 +658,7 @@ ITALY-INDIA BILATERAL TRADE ANALYTICS
             });
         }
 
-       function showComparison() {
+      function showComparison() {
     const output = `
 ITALY vs INDIA - COMPREHENSIVE COMPETITIVE ANALYSIS
 ====================================================
@@ -678,11 +678,6 @@ ITALY vs INDIA - COMPREHENSIVE COMPETITIVE ANALYSIS
 • Exports: Italy <span class="data-highlight">$670B</span> vs India <span class="data-highlight">$450B</span>
 • Trade Balance: Italy <span class="positive">+$55B</span> vs India <span class="negative">-$270B</span>
 • Export/GDP Ratio: Italy <span class="data-highlight">32%</span> vs India <span class="data-highlight">12%</span>
-
-🏆 COMPETITIVE ADVANTAGES:
-• Italy: High-value manufacturing, EU market access, luxury branding
-• India: Scale advantage, growth momentum, IT services dominance
-• Synergy: Italian technology + Indian market scale = Perfect partnership
     `;
     
     document.getElementById('output').innerHTML = output;
@@ -698,7 +693,7 @@ ITALY vs INDIA - COMPREHENSIVE COMPETITIVE ANALYSIS
                 <canvas id="tradeComparisonChart"></canvas>
             </div>
             <div class="chart-item">
-                <div class="chart-title">Growth Strategy Projection</div>
+                <div class="chart-title">Growth Strategy Focus</div>
                 <canvas id="growthStrategyChart"></canvas>
             </div>
             <div class="chart-item">
@@ -718,231 +713,156 @@ ITALY vs INDIA - COMPREHENSIVE COMPETITIVE ANALYSIS
     
     document.getElementById('chartsContainer').innerHTML = chartsHtml;
     
-    // GDP Comparison Chart
-    createChart('gdpComparisonChart', {
-        type: 'bar',
-        data: {
-            labels: ['Total GDP ($T)', 'GDP per Capita ($K)', 'GDP Growth (%)'],
-            datasets: [
-                {
-                    label: 'Italy',
-                    data: [2.1, 35, 0.7],
-                    backgroundColor: chartColors.italy
-                },
-                {
-                    label: 'India',
-                    data: [3.7, 2.6, 7.2],
-                    backgroundColor: chartColors.india
-                }
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { color: '#e8e6e3' },
-                    grid: { color: '#444' }
-                },
-                x: {
-                    ticks: { color: '#e8e6e3' },
-                    grid: { color: '#444' }
-                }
-            }
-        }
-    });
-    
-    // Trade Comparison Chart
-    createChart('tradeComparisonChart', {
-        type: 'bar',
-        data: {
-            labels: ['Exports', 'Imports', 'Trade Balance'],
-            datasets: [
-                {
-                    label: 'Italy ($B)',
-                    data: [670, 615, 55],
-                    backgroundColor: chartColors.italy
-                },
-                {
-                    label: 'India ($B)',
-                    data: [450, 720, -270],
-                    backgroundColor: chartColors.india
-                }
-            ]
-        }
-    });
-    
-    // Growth Strategy Chart
-    createChart('growthStrategyChart', {
-        type: 'radar',
-        data: {
-            labels: [
-                'Manufacturing Tech',
-                'Digital Economy', 
-                'Green Energy',
-                'Infrastructure',
-                'Export Capacity',
-                'Innovation Index'
-            ],
-            datasets: [
-                {
-                    label: 'Italy Strategy Focus',
-                    data: [85, 65, 70, 60, 80, 75],
-                    backgroundColor: 'rgba(40, 167, 69, 0.2)',
-                    borderColor: chartColors.italy,
-                    pointBackgroundColor: chartColors.italy
-                },
-                {
-                    label: 'India Strategy Focus',
-                    data: [75, 90, 85, 80, 65, 70],
-                    backgroundColor: 'rgba(229, 62, 62, 0.2)',
-                    borderColor: chartColors.india,
-                    pointBackgroundColor: chartColors.india
-                }
-            ]
-        },
-        options: {
-            scales: {
-                r: {
-                    angleLines: { color: '#444' },
-                    grid: { color: '#444' },
-                    pointLabels: { color: '#e8e6e3' },
-                    ticks: { color: '#e8e6e3', backdropColor: 'transparent' }
-                }
-            }
-        }
-    });
-    
-    // Sector Distribution Chart
-    createChart('sectorDistributionChart', {
-        type: 'bar',
-        data: {
-            labels: ['Services', 'Manufacturing', 'Agriculture', 'Construction', 'Other'],
-            datasets: [
-                {
-                    label: 'Italy (% of GDP)',
-                    data: [70, 16, 2, 6, 6],
-                    backgroundColor: chartColors.italy
-                },
-                {
-                    label: 'India (% of GDP)',
-                    data: [55, 17, 16, 8, 4],
-                    backgroundColor: chartColors.india
-                }
-            ]
-        },
-        options: {
-            indexAxis: 'y',
-            scales: {
-                x: {
-                    stacked: false,
-                    ticks: { color: '#e8e6e3' },
-                    grid: { color: '#444' }
-                },
-                y: {
-                    stacked: false,
-                    ticks: { color: '#e8e6e3' },
-                    grid: { color: '#444' }
-                }
-            }
-        }
-    });
-    
-    // Growth Trajectory Chart
-    createChart('growthTrajectoryChart', {
-        type: 'line',
-        data: {
-            labels: ['2020', '2021', '2022', '2023', '2024P', '2025P'],
-            datasets: [
-                {
-                    label: 'Italy GDP Growth %',
-                    data: [-9.0, 8.3, 3.7, 0.7, 1.2, 1.5],
-                    borderColor: chartColors.italy,
-                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
-                    tension: 0.4,
-                    fill: false
-                },
-                {
-                    label: 'India GDP Growth %',
-                    data: [-6.6, 9.1, 7.0, 7.2, 7.5, 7.8],
-                    borderColor: chartColors.india,
-                    backgroundColor: 'rgba(229, 62, 62, 0.1)',
-                    tension: 0.4,
-                    fill: false
-                }
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    title: {
-                        display: true,
-                        text: 'GDP Growth (%)',
-                        color: '#e8e6e3'
+    // Wait a bit for DOM to update before creating charts
+    setTimeout(() => {
+        // GDP Comparison Chart
+        createChart('gdpComparisonChart', {
+            type: 'bar',
+            data: {
+                labels: ['Total GDP ($T)', 'GDP per Capita ($K)', 'GDP Growth (%)'],
+                datasets: [
+                    {
+                        label: 'Italy',
+                        data: [2.1, 35, 0.7],
+                        backgroundColor: chartColors.italy
                     },
-                    ticks: { color: '#e8e6e3' },
-                    grid: { color: '#444' }
-                },
-                x: {
-                    ticks: { color: '#e8e6e3' },
-                    grid: { color: '#444' }
-                }
-            }
-        }
-    });
-    
-    // Industry Specialization Chart
-    createChart('industrySpecializationChart', {
-        type: 'polarArea',
-        data: {
-            labels: [
-                'Luxury Manufacturing',
-                'Automotive & Machinery', 
-                'IT & Digital Services',
-                'Pharmaceuticals',
-                'Textiles & Apparel',
-                'Agriculture & Food'
-            ],
-            datasets: [{
-                data: [85, 80, 40, 75, 30, 60],
-                backgroundColor: [
-                    'rgba(40, 167, 69, 0.7)',
-                    'rgba(40, 167, 69, 0.6)', 
-                    'rgba(229, 62, 62, 0.7)',
-                    'rgba(40, 167, 69, 0.5)',
-                    'rgba(229, 62, 62, 0.6)',
-                    'rgba(229, 62, 62, 0.5)'
-                ]
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    position: 'right',
-                    labels: {
-                        color: '#e8e6e3',
-                        generateLabels: function(chart) {
-                            const data = chart.data;
-                            if (data.labels.length && data.datasets.length) {
-                                return data.labels.map((label, i) => {
-                                    const value = data.datasets[0].data[i];
-                                    const color = data.datasets[0].backgroundColor[i];
-                                    const country = value > 50 ? '(Italy Strong)' : '(India Strong)';
-                                    return {
-                                        text: `${label} ${country}`,
-                                        fillStyle: color,
-                                        strokeStyle: color,
-                                        lineWidth: 1
-                                    };
-                                });
-                            }
-                            return [];
-                        }
+                    {
+                        label: 'India',
+                        data: [3.7, 2.6, 7.2],
+                        backgroundColor: chartColors.india
                     }
-                }
+                ]
             }
-        }
-    });
+        });
+        
+        // Trade Comparison Chart
+        createChart('tradeComparisonChart', {
+            type: 'bar',
+            data: {
+                labels: ['Exports', 'Imports', 'Trade Balance'],
+                datasets: [
+                    {
+                        label: 'Italy ($B)',
+                        data: [670, 615, 55],
+                        backgroundColor: chartColors.italy
+                    },
+                    {
+                        label: 'India ($B)',
+                        data: [450, 720, -270],
+                        backgroundColor: chartColors.india
+                    }
+                ]
+            }
+        });
+        
+        // Growth Strategy Chart - FIXED
+        createChart('growthStrategyChart', {
+            type: 'radar',
+            data: {
+                labels: [
+                    'Manufacturing Tech',
+                    'Digital Economy', 
+                    'Green Energy',
+                    'Infrastructure',
+                    'Export Capacity',
+                    'Innovation Index'
+                ],
+                datasets: [
+                    {
+                        label: 'Italy Strategy Focus',
+                        data: [85, 65, 70, 60, 80, 75],
+                        backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                        borderColor: chartColors.italy,
+                        pointBackgroundColor: chartColors.italy
+                    },
+                    {
+                        label: 'India Strategy Focus',
+                        data: [75, 90, 85, 80, 65, 70],
+                        backgroundColor: 'rgba(229, 62, 62, 0.2)',
+                        borderColor: chartColors.india,
+                        pointBackgroundColor: chartColors.india
+                    }
+                ]
+            }
+        });
+        
+        // Sector Distribution Chart - FIXED
+        createChart('sectorDistributionChart', {
+            type: 'bar',
+            data: {
+                labels: ['Services', 'Manufacturing', 'Agriculture', 'Construction', 'Other'],
+                datasets: [
+                    {
+                        label: 'Italy (% of GDP)',
+                        data: [70, 16, 2, 6, 6],
+                        backgroundColor: chartColors.italy
+                    },
+                    {
+                        label: 'India (% of GDP)',
+                        data: [55, 17, 16, 8, 4],
+                        backgroundColor: chartColors.india
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y'
+            }
+        });
+        
+        // Growth Trajectory Chart - FIXED
+        createChart('growthTrajectoryChart', {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024P', '2025P'],
+                datasets: [
+                    {
+                        label: 'Italy GDP Growth %',
+                        data: [-9.0, 8.3, 3.7, 0.7, 1.2, 1.5],
+                        borderColor: chartColors.italy,
+                        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                        tension: 0.4,
+                        fill: false
+                    },
+                    {
+                        label: 'India GDP Growth %',
+                        data: [-6.6, 9.1, 7.0, 7.2, 7.5, 7.8],
+                        borderColor: chartColors.india,
+                        backgroundColor: 'rgba(229, 62, 62, 0.1)',
+                        tension: 0.4,
+                        fill: false
+                    }
+                ]
+            }
+        });
+        
+        // Industry Specialization Chart - FIXED
+        createChart('industrySpecializationChart', {
+            type: 'polarArea',
+            data: {
+                labels: [
+                    'Luxury Manufacturing',
+                    'Automotive & Machinery', 
+                    'IT & Digital Services',
+                    'Pharmaceuticals',
+                    'Textiles & Apparel',
+                    'Agriculture & Food'
+                ],
+                datasets: [{
+                    data: [85, 80, 40, 75, 30, 60],
+                    backgroundColor: [
+                        'rgba(40, 167, 69, 0.7)',
+                        'rgba(40, 167, 69, 0.6)', 
+                        'rgba(229, 62, 62, 0.7)',
+                        'rgba(40, 167, 69, 0.5)',
+                        'rgba(229, 62, 62, 0.6)',
+                        'rgba(229, 62, 62, 0.5)'
+                    ]
+                }]
+            }
+        });
+    }, 100);
 }
+
         function clearOutput() {
             document.getElementById('output').innerHTML = `
 📈 TRADE INTELLIGENCE DASHBOARD
