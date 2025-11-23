@@ -4,320 +4,706 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Trade Compliance Dashboard</title>
+    <meta name="description" content="Real-time analytics and comparison between Italy and India trade compliance metrics">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ===== OPTIMIZED CSS FRAMEWORK ===== */
         :root {
-            --primary-bg: #F5F5DC;
-            --card-bg: #FFFFFF;
-            --accent-color: #8B4513;
-            --secondary-color: #A0522D;
-            --text-color: #333333;
-            --light-text: #666666;
-            --border-color: #D2B48C;
-            --shadow: 0 8px 32px rgba(139, 69, 19, 0.1);
-            --italy-color: #8B4513;
-            --india-color: #A0522D;
+            /* Color system */
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --text-muted: #b0b0b0;
+            --accent-primary: #007acc;
+            --accent-secondary: #28a745;
+            --accent-warning: #ff6b00;
+            --border-color: #333;
+            --gradient-primary: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            --gradient-accent: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
+            
+            /* Country colors */
+            --italy-color: #007acc;
+            --india-color: #28a745;
+            
+            /* Typography scale */
+            --text-xs: clamp(0.75rem, 2vw, 0.875rem);
+            --text-sm: clamp(0.875rem, 2.5vw, 1rem);
+            --text-base: clamp(1rem, 3vw, 1.125rem);
+            --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
+            --text-xl: clamp(1.25rem, 4vw, 1.5rem);
+            --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
+            --text-3xl: clamp(1.875rem, 6vw, 2.25rem);
+            
+            /* Spacing scale */
+            --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+            --space-sm: clamp(0.75rem, 2vw, 1rem);
+            --space-md: clamp(1rem, 3vw, 1.5rem);
+            --space-lg: clamp(1.5rem, 4vw, 2rem);
+            --space-xl: clamp(2rem, 6vw, 3rem);
+            --space-2xl: clamp(3rem, 8vw, 4rem);
+            
+            /* Border radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.3);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.4);
+            --shadow-glow: 0 0 20px rgba(0, 122, 204, 0.3);
+            
+            /* Animation */
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+            --transition-slow: 0.5s ease;
         }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--text-color);
+
+        /* Reset and base styles */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
+            color: var(--text-secondary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            padding: var(--space-sm);
         }
-        
+
+        /* Focus styles for accessibility */
+        :focus-visible {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        /* Skip link for keyboard navigation */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-primary);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 1000;
+            border-radius: var(--radius-sm);
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Container system */
         .container {
-            max-width: 1400px;
+            width: 100%;
+            max-width: min(1400px, 95vw);
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 var(--space-md);
         }
-        
-        .header {
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary);
+            line-height: 1.2;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        h1 { 
+            font-size: var(--text-3xl);
             text-align: center;
-            padding: 40px 20px;
-            background: var(--card-bg);
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
+        }
+
+        h2 { 
+            font-size: var(--text-2xl);
+            margin-bottom: var(--space-md);
+        }
+
+        h3 { 
+            font-size: var(--text-xl);
+            color: var(--accent-primary);
+        }
+
+        h4 { 
+            font-size: var(--text-lg);
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: var(--space-sm);
+            line-height: 1.6;
+            font-size: var(--text-base);
+            max-width: 65ch;
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-primary);
+            color: var(--text-primary);
+            padding: var(--space-2xl) var(--space-md);
+            text-align: center;
+            border-radius: var(--radius-xl);
+            margin-bottom: var(--space-xl);
+            position: relative;
+            overflow: hidden;
             border: 1px solid var(--border-color);
         }
-        
+
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: var(--accent-color);
+            animation: fadeInUp 0.8s ease-out;
         }
-        
+
+        .header p {
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
         .controls {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin: 25px 0;
+            gap: var(--space-sm);
+            margin: var(--space-lg) 0;
             flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
-        
+
+        /* Button system */
         .btn {
-            padding: 12px 25px;
-            background: var(--accent-color);
-            color: white;
-            border: 2px solid var(--accent-color);
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            padding: var(--space-sm) var(--space-lg);
             text-decoration: none;
-            display: inline-block;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--text-base);
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .btn:hover {
-            background: transparent;
-            color: var(--accent-color);
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left var(--transition-medium);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            background: #404040;
             transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
-        
+
+        .btn-primary {
+            background: var(--gradient-accent);
+            border-color: var(--accent-primary);
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background: #005a9e;
+            border-color: #005a9e;
+            box-shadow: var(--shadow-glow);
+        }
+
         .btn-outline {
             background: transparent;
-            color: var(--accent-color);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
         }
-        
-        .btn-outline:hover {
-            background: var(--accent-color);
+
+        .btn-outline:hover,
+        .btn-outline:focus {
+            background: var(--accent-primary);
             color: white;
         }
-        
+
+        .btn-warning {
+            background: var(--accent-warning);
+            border-color: var(--accent-warning);
+            color: white;
+        }
+
+        .btn-warning:hover,
+        .btn-warning:focus {
+            background: #e05a00;
+            border-color: #e05a00;
+        }
+
+        /* Dashboard grid */
         .dashboard {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 40px;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
         }
-        
+
         .country-section, .comparison-section {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
+            background: var(--bg-secondary);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
+            transition: transform var(--transition-medium);
         }
-        
+
+        .country-section:hover {
+            transform: translateY(-4px);
+        }
+
         .comparison-section {
             grid-column: 1 / -1;
         }
-        
+
+        /* Country headers */
         .country-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
             border-bottom: 2px solid;
         }
-        
-        .italy-header { border-color: var(--italy-color); }
-        .india-header { border-color: var(--india-color); }
-        
+
+        .italy-header { 
+            border-color: var(--italy-color); 
+        }
+
+        .india-header { 
+            border-color: var(--india-color); 
+        }
+
         .country-flag {
-            font-size: 2em;
-            margin-right: 15px;
+            font-size: 2.5em;
+            margin-right: var(--space-md);
         }
-        
+
         .country-title {
-            font-size: 1.5em;
+            font-size: var(--text-xl);
             font-weight: bold;
-            color: var(--accent-color);
+            color: var(--text-primary);
         }
-        
+
+        .country-subtitle {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: var(--text-sm);
+        }
+
+        /* Chart containers */
         .chart-container {
             position: relative;
-            height: 280px;
-            margin: 20px 0;
+            height: 300px;
+            margin: var(--space-lg) 0;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            border: 1px solid var(--border-color);
         }
-        
+
+        /* Stats grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
         }
-        
+
         .stat-card {
-            background: var(--primary-bg);
-            padding: 20px;
-            border-radius: 10px;
+            background: var(--bg-tertiary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
             text-align: center;
             border-left: 4px solid;
+            transition: transform var(--transition-medium);
         }
-        
-        .italy-stat { border-color: var(--italy-color); }
-        .india-stat { border-color: var(--india-color); }
-        
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .italy-stat { 
+            border-color: var(--italy-color); 
+        }
+
+        .india-stat { 
+            border-color: var(--india-color); 
+        }
+
         .stat-number {
-            font-size: 1.5em;
+            font-size: var(--text-2xl);
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: var(--space-xs);
+            color: var(--text-primary);
         }
-        
+
+        /* Comparison section */
+        .comparison-charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            margin: var(--space-lg) 0;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .advantage-card {
+            background: var(--bg-tertiary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            border-left: 4px solid;
+            transition: transform var(--transition-medium);
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .advantage-italy {
+            border-color: var(--italy-color);
+        }
+
+        .advantage-india {
+            border-color: var(--india-color);
+        }
+
+        .advantage-tips {
+            border-color: var(--accent-primary);
+        }
+
+        .advantage-card h4 {
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .advantage-card ul {
+            color: var(--text-muted);
+            padding-left: var(--space-md);
+        }
+
+        .advantage-card li {
+            margin-bottom: var(--space-xs);
+            line-height: 1.5;
+        }
+
+        /* Footer */
         .footer {
             text-align: center;
-            padding: 30px 20px;
-            color: var(--light-text);
-            margin-top: 40px;
+            padding: var(--space-xl) var(--space-md);
+            color: var(--text-muted);
+            margin-top: var(--space-2xl);
             border-top: 1px solid var(--border-color);
         }
-        
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile optimizations */
         @media (max-width: 968px) {
             .dashboard {
                 grid-template-columns: 1fr;
+            }
+
+            .comparison-charts {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .controls .btn {
+                width: min(100%, 300px);
+                margin: var(--space-xs) 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Reduce motion for better performance */
+            @media (prefers-reduced-motion: reduce) {
+                .btn,
+                .country-section,
+                .stat-card,
+                .advantage-card {
+                    transition: none;
+                }
+                
+                .btn:hover,
+                .country-section:hover,
+                .stat-card:hover,
+                .advantage-card:hover {
+                    transform: none;
+                }
+                
+                .btn::before {
+                    display: none;
+                }
+                
+                html {
+                    scroll-behavior: auto;
+                }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--space-sm);
+            }
+
+            header {
+                padding: var(--space-xl) var(--space-md);
+            }
+
+            .country-section,
+            .comparison-section {
+                padding: var(--space-lg);
+            }
+
+            .country-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-sm);
+            }
+
+            .country-flag {
+                font-size: 2em;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <div class="container">
-        <div class="header">
+        <header class="fade-in">
             <h1>📊 Interactive Trade Compliance Dashboard</h1>
             <p>Real-time analytics and comparison between Italy and India trade compliance metrics</p>
             
             <div class="controls">
                 <a href="index.html" class="btn btn-outline">🏠 Main Page</a>
                 <a href="documentation.html" class="btn btn-outline">📚 Documentation</a>
-                <button class="btn" onclick="resetCharts()">🔄 Reset Charts</button>
-                <button class="btn" onclick="exportData()">📥 Export Data</button>
+                <button class="btn btn-primary" onclick="resetCharts()">🔄 Reset Charts</button>
+                <button class="btn btn-warning" onclick="exportData()">📥 Export Data</button>
             </div>
-        </div>
+        </header>
 
-        <div class="dashboard">
-            <div class="country-section" id="italy">
-                <div class="country-header italy-header">
-                    <div style="display: flex; align-items: center;">
-                        <div class="country-flag">🇮🇹</div>
-                        <div class="country-title">Italy Trade Compliance</div>
+        <main id="main-content">
+            <div class="dashboard">
+                <!-- Italy Section -->
+                <div class="country-section fade-in" id="italy">
+                    <div class="country-header italy-header">
+                        <div style="display: flex; align-items: center;">
+                            <div class="country-flag">🇮🇹</div>
+                            <div>
+                                <div class="country-title">Italy Trade Compliance</div>
+                                <div class="country-subtitle">EU Regulations</div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="color: var(--italy-color); font-weight: bold;">EU Regulations</div>
-                </div>
-                
-                <div class="chart-container">
-                    <canvas id="italyTariffChart"></canvas>
-                </div>
-                
-                <div class="chart-container">
-                    <canvas id="italyComplianceChart"></canvas>
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-card italy-stat">
-                        <div class="stat-number">92%</div>
-                        <div>Compliance Rate</div>
-                    </div>
-                    <div class="stat-card italy-stat">
-                        <div class="stat-number">€1.2M</div>
-                        <div>Annual Savings</div>
-                    </div>
-                    <div class="stat-card italy-stat">
-                        <div class="stat-number">48h</div>
-                        <div>Avg. Clearance</div>
-                    </div>
-                    <div class="stat-card italy-stat">
-                        <div class="stat-number">78</div>
-                        <div>Regulations</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="country-section" id="india">
-                <div class="country-header india-header">
-                    <div style="display: flex; align-items: center;">
-                        <div class="country-flag">🇮🇳</div>
-                        <div class="country-title">India Trade Compliance</div>
-                    </div>
-                    <div style="color: var(--india-color); font-weight: bold;">DGFT Regulations</div>
-                </div>
-                
-                <div class="chart-container">
-                    <canvas id="indiaTariffChart"></canvas>
-                </div>
-                
-                <div class="chart-container">
-                    <canvas id="indiaComplianceChart"></canvas>
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-card india-stat">
-                        <div class="stat-number">85%</div>
-                        <div>Compliance Rate</div>
-                    </div>
-                    <div class="stat-card india-stat">
-                        <div class="stat-number">€0.9M</div>
-                        <div>Annual Savings</div>
-                    </div>
-                    <div class="stat-card india-stat">
-                        <div class="stat-number">72h</div>
-                        <div>Avg. Clearance</div>
-                    </div>
-                    <div class="stat-card india-stat">
-                        <div class="stat-number">94</div>
-                        <div>Regulations</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="comparison-section" id="comparison">
-                <h2 style="text-align: center; margin-bottom: 10px; color: var(--accent-color);">⚖️ Italy-India Comparison</h2>
-                <p style="text-align: center; color: var(--light-text); margin-bottom: 30px;">Side-by-side analysis of key trade compliance metrics</p>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    
                     <div class="chart-container">
-                        <canvas id="comparisonBarChart"></canvas>
+                        <canvas id="italyTariffChart"></canvas>
                     </div>
+                    
                     <div class="chart-container">
-                        <canvas id="comparisonRadarChart"></canvas>
+                        <canvas id="italyComplianceChart"></canvas>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card italy-stat">
+                            <div class="stat-number">92%</div>
+                            <div>Compliance Rate</div>
+                        </div>
+                        <div class="stat-card italy-stat">
+                            <div class="stat-number">€1.2M</div>
+                            <div>Annual Savings</div>
+                        </div>
+                        <div class="stat-card italy-stat">
+                            <div class="stat-number">48h</div>
+                            <div>Avg. Clearance</div>
+                        </div>
+                        <div class="stat-card italy-stat">
+                            <div class="stat-number">78</div>
+                            <div>Regulations</div>
+                        </div>
                     </div>
                 </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
-                    <div style="background: var(--primary-bg); padding: 20px; border-radius: 10px; border-left: 4px solid var(--italy-color);">
-                        <h4 style="color: var(--italy-color);">🇮🇹 Italy Advantages</h4>
-                        <ul style="margin-top: 10px; color: var(--light-text);">
-                            <li>Faster customs clearance</li>
-                            <li>Lower documentation costs</li>
-                            <li>EU standardized procedures</li>
-                        </ul>
+
+                <!-- India Section -->
+                <div class="country-section fade-in" id="india">
+                    <div class="country-header india-header">
+                        <div style="display: flex; align-items: center;">
+                            <div class="country-flag">🇮🇳</div>
+                            <div>
+                                <div class="country-title">India Trade Compliance</div>
+                                <div class="country-subtitle">DGFT Regulations</div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="background: var(--primary-bg); padding: 20px; border-radius: 10px; border-left: 4px solid var(--india-color);">
-                        <h4 style="color: var(--india-color);">🇮🇳 India Advantages</h4>
-                        <ul style="margin-top: 10px; color: var(--light-text);">
-                            <li>Growing market access</li>
-                            <li>Digital initiatives (e-SANAD)</li>
-                            <li>Special economic zones</li>
-                        </ul>
+                    
+                    <div class="chart-container">
+                        <canvas id="indiaTariffChart"></canvas>
                     </div>
-                    <div style="background: var(--primary-bg); padding: 20px; border-radius: 10px; border-left: 4px solid var(--accent-color);">
-                        <h4 style="color: var(--accent-color);">🤝 Optimization Tips</h4>
-                        <ul style="margin-top: 10px; color: var(--light-text);">
-                            <li>Use AEO certified partners</li>
-                            <li>Leverage FTA benefits</li>
-                            <li>Digital documentation</li>
-                        </ul>
+                    
+                    <div class="chart-container">
+                        <canvas id="indiaComplianceChart"></canvas>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card india-stat">
+                            <div class="stat-number">85%</div>
+                            <div>Compliance Rate</div>
+                        </div>
+                        <div class="stat-card india-stat">
+                            <div class="stat-number">€0.9M</div>
+                            <div>Annual Savings</div>
+                        </div>
+                        <div class="stat-card india-stat">
+                            <div class="stat-number">72h</div>
+                            <div>Avg. Clearance</div>
+                        </div>
+                        <div class="stat-card india-stat">
+                            <div class="stat-number">94</div>
+                            <div>Regulations</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison Section -->
+                <div class="comparison-section fade-in" id="comparison">
+                    <h2 style="text-align: center;">⚖️ Italy-India Comparison</h2>
+                    <p style="text-align: center; color: var(--text-muted); margin-bottom: var(--space-xl);">Side-by-side analysis of key trade compliance metrics</p>
+                    
+                    <div class="comparison-charts">
+                        <div class="chart-container">
+                            <canvas id="comparisonBarChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="comparisonRadarChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="advantages-grid">
+                        <div class="advantage-card advantage-italy">
+                            <h4>🇮🇹 Italy Advantages</h4>
+                            <ul>
+                                <li>Faster customs clearance</li>
+                                <li>Lower documentation costs</li>
+                                <li>EU standardized procedures</li>
+                            </ul>
+                        </div>
+                        <div class="advantage-card advantage-india">
+                            <h4>🇮🇳 India Advantages</h4>
+                            <ul>
+                                <li>Growing market access</li>
+                                <li>Digital initiatives (e-SANAD)</li>
+                                <li>Special economic zones</li>
+                            </ul>
+                        </div>
+                        <div class="advantage-card advantage-tips">
+                            <h4>🤝 Optimization Tips</h4>
+                            <ul>
+                                <li>Use AEO certified partners</li>
+                                <li>Leverage FTA benefits</li>
+                                <li>Digital documentation</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </main>
 
-    <div class="footer">
-        <div class="container">
-            <p>Interactive Trade Compliance Dashboard &copy; 2024 | Real-time Analytics</p>
-            <p><a href="../index.html" style="color: var(--accent-color);">← Back to Portfolio</a></p>
-        </div>
+        <footer class="footer">
+            <div class="container">
+                <p>Interactive Trade Compliance Dashboard &copy; 2024 | Real-time Analytics</p>
+                <p><a href="https://krishnaadayma.github.io/" style="color: var(--accent-primary); text-decoration: none;">← Back to Portfolio</a></p>
+            </div>
+        </footer>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeCharts();
-        });
+        // Scroll animation functionality
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
 
+        // Initialize charts with proper dark theme configuration
         function initializeCharts() {
+            const textColor = '#e0e0e0';
+            const gridColor = '#333';
+            const mutedText = '#b0b0b0';
+
             // Italy Tariff Structure Chart
             new Chart(document.getElementById('italyTariffChart'), {
                 type: 'doughnut',
@@ -325,9 +711,9 @@
                     labels: ['Basic Customs', 'VAT', 'Excise Duty', 'Other Taxes'],
                     datasets: [{
                         data: [45, 30, 15, 10],
-                        backgroundColor: ['#8B4513', '#A0522D', '#D2B48C', '#DEB887'],
+                        backgroundColor: ['#007acc', '#005a9e', '#003f6b', '#00253d'],
                         borderWidth: 2,
-                        borderColor: '#F5F5DC'
+                        borderColor: '#1a1a1a'
                     }]
                 },
                 options: {
@@ -338,9 +724,12 @@
                             display: true,
                             text: 'Italy: Tariff Structure (%)',
                             font: { size: 14, weight: 'bold' },
-                            color: '#8B4513'
+                            color: textColor
                         },
-                        legend: { position: 'bottom' }
+                        legend: { 
+                            position: 'bottom',
+                            labels: { color: textColor }
+                        }
                     }
                 }
             });
@@ -353,8 +742,8 @@
                     datasets: [{
                         label: 'Days Required',
                         data: [5, 2, 3, 4],
-                        backgroundColor: '#8B4513',
-                        borderColor: '#654321',
+                        backgroundColor: '#007acc',
+                        borderColor: '#005a9e',
                         borderWidth: 2
                     }]
                 },
@@ -366,11 +755,23 @@
                             display: true,
                             text: 'Italy: Process Timeline (Days)',
                             font: { size: 14, weight: 'bold' },
-                            color: '#8B4513'
+                            color: textColor
+                        },
+                        legend: {
+                            labels: { color: textColor }
                         }
                     },
                     scales: {
-                        y: { beginAtZero: true, max: 10 }
+                        y: { 
+                            beginAtZero: true, 
+                            max: 10,
+                            ticks: { color: mutedText },
+                            grid: { color: gridColor }
+                        },
+                        x: {
+                            ticks: { color: mutedText },
+                            grid: { color: gridColor }
+                        }
                     }
                 }
             });
@@ -382,9 +783,9 @@
                     labels: ['Basic Customs', 'IGST', 'Compensation Cess', 'Other Levies'],
                     datasets: [{
                         data: [35, 40, 15, 10],
-                        backgroundColor: ['#A0522D', '#CD853F', '#D2691E', '#8B4513'],
+                        backgroundColor: ['#28a745', '#1e7e34', '#145a25', '#0c3d17'],
                         borderWidth: 2,
-                        borderColor: '#F5F5DC'
+                        borderColor: '#1a1a1a'
                     }]
                 },
                 options: {
@@ -395,9 +796,12 @@
                             display: true,
                             text: 'India: Tariff Structure (%)',
                             font: { size: 14, weight: 'bold' },
-                            color: '#A0522D'
+                            color: textColor
                         },
-                        legend: { position: 'bottom' }
+                        legend: { 
+                            position: 'bottom',
+                            labels: { color: textColor }
+                        }
                     }
                 }
             });
@@ -410,8 +814,8 @@
                     datasets: [{
                         label: 'Days Required',
                         data: [8, 4, 5, 6],
-                        backgroundColor: '#A0522D',
-                        borderColor: '#8B4513',
+                        backgroundColor: '#28a745',
+                        borderColor: '#1e7e34',
                         borderWidth: 2
                     }]
                 },
@@ -423,11 +827,23 @@
                             display: true,
                             text: 'India: Process Timeline (Days)',
                             font: { size: 14, weight: 'bold' },
-                            color: '#A0522D'
+                            color: textColor
+                        },
+                        legend: {
+                            labels: { color: textColor }
                         }
                     },
                     scales: {
-                        y: { beginAtZero: true, max: 10 }
+                        y: { 
+                            beginAtZero: true, 
+                            max: 10,
+                            ticks: { color: mutedText },
+                            grid: { color: gridColor }
+                        },
+                        x: {
+                            ticks: { color: mutedText },
+                            grid: { color: gridColor }
+                        }
                     }
                 }
             });
@@ -441,12 +857,12 @@
                         {
                             label: 'Italy',
                             data: [7, 2, 8, 12],
-                            backgroundColor: '#8B4513'
+                            backgroundColor: '#007acc'
                         },
                         {
                             label: 'India',
                             data: [12, 4, 15, 18],
-                            backgroundColor: '#A0522D'
+                            backgroundColor: '#28a745'
                         }
                     ]
                 },
@@ -458,7 +874,20 @@
                             display: true,
                             text: 'Key Metrics Comparison',
                             font: { size: 14, weight: 'bold' },
-                            color: '#8B4513'
+                            color: textColor
+                        },
+                        legend: {
+                            labels: { color: textColor }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { color: mutedText },
+                            grid: { color: gridColor }
+                        },
+                        x: {
+                            ticks: { color: mutedText },
+                            grid: { color: gridColor }
                         }
                     }
                 }
@@ -473,15 +902,15 @@
                         {
                             label: 'Italy',
                             data: [85, 80, 75, 90, 85, 88],
-                            backgroundColor: 'rgba(139, 69, 19, 0.2)',
-                            borderColor: '#8B4513',
+                            backgroundColor: 'rgba(0, 122, 204, 0.2)',
+                            borderColor: '#007acc',
                             borderWidth: 2
                         },
                         {
                             label: 'India',
                             data: [70, 65, 80, 75, 70, 72],
-                            backgroundColor: 'rgba(160, 82, 45, 0.2)',
-                            borderColor: '#A0522D',
+                            backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                            borderColor: '#28a745',
                             borderWidth: 2
                         }
                     ]
@@ -494,14 +923,23 @@
                             display: true,
                             text: 'Compliance Performance Radar',
                             font: { size: 14, weight: 'bold' },
-                            color: '#8B4513'
+                            color: textColor
+                        },
+                        legend: {
+                            labels: { color: textColor }
                         }
                     },
                     scales: {
                         r: {
                             beginAtZero: true,
                             max: 100,
-                            ticks: { display: false }
+                            ticks: { 
+                                display: false,
+                                color: mutedText
+                            },
+                            grid: { color: gridColor },
+                            angleLines: { color: gridColor },
+                            pointLabels: { color: mutedText }
                         }
                     }
                 }
@@ -531,6 +969,32 @@
             
             alert('Data exported successfully!');
         }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Initialize charts
+            initializeCharts();
+            
+            // Initial check for scroll animations
+            handleScrollAnimations();
+            
+            // Add scroll event listener for animations
+            window.addEventListener('scroll', handleScrollAnimations);
+        });
     </script>
 </body>
 </html>
