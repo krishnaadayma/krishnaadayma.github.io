@@ -1,216 +1,497 @@
-class InternationalTradeCompliance:
-    def __init__(self):
-        self.trade_data = {
-            "countries": {
-                "Italy": {
-                    "general": {
-                        "country_name": "Italian Republic",
-                        "capital": "Rome",
-                        "currency": "Euro (EUR)",
-                        "iso_currency_code": "EUR",
-                        "official_language": "Italian",
-                        "country_code_iso_3166": "IT",
-                        "eu_member": True,
-                        "gcc_member": False
-                    },
-                    "trade_logistics": {
-                        "primary_ports": ["Genoa", "Trieste", "Gioia Tauro", "Naples", "La Spezia"],
-                        "primary_airports": ["Rome Fiumicino (FCO)", "Milan Malpensa (MXP)"],
-                        "hs_system": "EU Combined Nomenclature (CN) - based on HS",
-                        "incoterms": "Commonly used: FCA, EXW, CIF, DAP",
-                        "document_standard": "EU Standardized (e.g., EORI number required)",
-                        "ease_of_doing_rank": 58,
-                        "lpi_score": 3.8
-                    },
-                    "documentation_requirements": {
-                        "commercial_invoice": True,
-                        "packing_list": True,
-                        "certificate_of_origin": "Often required, EUR.1 for preferential treatment",
-                        "bill_of_lading_awb": True,
-                        "customs_declaration": "EU Single Administrative Document (SAD)",
-                        "import_license": "Required for specific goods (e.g., firearms, pharmaceuticals)",
-                        "phyto_sanitary_certificate": "Required for plants, plant products, certain foods",
-                        "insurance_documents": "Typically arranged by seller for CIF terms",
-                        "required_identifiers": "EORI Number (Economic Operators Registration and Identification)"
-                    },
-                    "regulatory_environment": {
-                        "customs_procedure": "Aligned with EU Customs Union (TARIC database)",
-                        "import_tariffs": "EU Common External Tariff (CET)",
-                        "vat_on_imports": 22.0,
-                        "restricted_items": ["Dangerous goods", "Counterfeit goods", "Protected species (CITES)"],
-                        "standards": "CE Marking required for many products"
-                    }
-                },
-                "India": {
-                    "general": {
-                        "country_name": "Republic of India",
-                        "capital": "New Delhi",
-                        "currency": "Indian Rupee (INR)",
-                        "iso_currency_code": "INR",
-                        "official_language": "Hindi, English",
-                        "country_code_iso_3166": "IN",
-                        "eu_member": False,
-                        "gcc_member": False
-                    },
-                    "trade_logistics": {
-                        "primary_ports": ["Jawaharlal Nehru (Nhava Sheva)", "Mundra", "Chennai", "Visakhapatnam", "Kolkata"],
-                        "primary_airports": ["Delhi (DEL)", "Mumbai (BOM)", "Chennai (MAA)", "Bangalore (BLR)"],
-                        "hs_system": "Indian Trade Classification (Harmonized System) - ITC(HS)",
-                        "incoterms": "Commonly used: FOB, EXW, CIF",
-                        "document_standard": "Indian Customs Electronic Declaration",
-                        "ease_of_doing_rank": 63,
-                        "lpi_score": 3.2
-                    },
-                    "documentation_requirements": {
-                        "commercial_invoice": True,
-                        "packing_list": True,
-                        "certificate_of_origin": "Often required, specific formats for preferential treaties",
-                        "bill_of_lading_awb": True,
-                        "customs_declaration": "Electronic (ICEGATE) - Bill of Entry",
-                        "import_license": "Required for restricted items (IRR), many goods under OGL (Open General License)",
-                        "phyto_sanitary_certificate": "Required for plants, seeds, livestock products",
-                        "insurance_documents": "Typically arranged by importer, except for CIF terms",
-                        "required_identifiers": "Import Export Code (IEC) - Mandatory for all importers/exporters"
-                    },
-                    "regulatory_environment": {
-                        "customs_procedure": "Governed by the Customs Act, 1962",
-                        "import_tariffs": "Basic Customs Duty (BCD) + Integrated GST (IGST) + Social Welfare Surcharge",
-                        "vat_on_imports": "IGST applied (rates vary: 5%, 12%, 18%, 28%)",
-                        "restricted_items": ["Animal products", "Firearms", "Gold & Silver bullion", "Certain chemicals"],
-                        "standards": "BIS Certification required for many products; FSSAI for food"
-                    }
-                }
-            },
-            "bilateral_context": {
-                "trade_agreement": "No dedicated bilateral FTA. Trade under WTO MFN rules.",
-                "preferential_documents": "Certificate of Origin usually required to claim WTO MFN tariffs.",
-                "key_trade_goods": {
-                    "india_to_italy": ["Textiles & Apparel", "Leather Goods", "Automotive Parts", "Iron & Steel", "Chemicals", "Rice", "Coffee"],
-                    "italy_to_india": ["Machinery & Engines", "Electrical Equipment", "Chemicals & Pharmaceuticals", "Plastics", "Luxury Goods (Fashion, Furniture)", "Wine & Food Products"]
-                }
-            }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Trade Compliance System | Krishna Dayma</title>
+    <meta name="description" content="Python application analyzing trade regulations between Italy and India with comprehensive compliance data and interactive analytics.">
+    
+    <style>
+    /* ===== OPTIMIZED CSS FOR TRADE COMPLIANCE ===== */
+    :root {
+        /* Color system */
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --bg-tertiary: #2d2d2d;
+        --text-primary: #ffffff;
+        --text-secondary: #e0e0e0;
+        --text-muted: #b0b0b0;
+        --accent-primary: #007acc;
+        --accent-secondary: #28a745;
+        --accent-warning: #ff6b35;
+        --accent-portfolio: #6c757d;
+        --border-color: #333;
+        
+        /* Typography scale */
+        --text-xs: clamp(0.75rem, 2vw, 0.875rem);
+        --text-sm: clamp(0.875rem, 2.5vw, 1rem);
+        --text-base: clamp(1rem, 3vw, 1.125rem);
+        --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
+        --text-xl: clamp(1.25rem, 4vw, 1.5rem);
+        --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
+        --text-3xl: clamp(1.875rem, 6vw, 2.25rem);
+        
+        /* Spacing scale */
+        --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+        --space-sm: clamp(0.75rem, 2vw, 1rem);
+        --space-md: clamp(1rem, 3vw, 1.5rem);
+        --space-lg: clamp(1.5rem, 4vw, 2rem);
+        --space-xl: clamp(2rem, 6vw, 3rem);
+        --space-2xl: clamp(3rem, 8vw, 4rem);
+        
+        /* Border radius */
+        --radius-sm: 0.375rem;
+        --radius-md: 0.5rem;
+        --radius-lg: 0.75rem;
+        --radius-xl: 1rem;
+    }
+
+    /* Reset and base styles */
+    *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--text-secondary);
+        background-color: var(--bg-primary);
+        overflow-x: hidden;
+    }
+
+    /* Container system */
+    .container {
+        width: 100%;
+        max-width: min(1200px, 95vw);
+        margin: 0 auto;
+        padding: 0 var(--space-md);
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--text-primary);
+        line-height: 1.2;
+        font-weight: 700;
+        margin-bottom: var(--space-sm);
+    }
+
+    h1 { 
+        font-size: var(--text-3xl);
+        text-align: center;
+    }
+
+    h2 { 
+        font-size: var(--text-2xl);
+        margin-bottom: var(--space-md);
+    }
+
+    h3 { 
+        font-size: var(--text-xl);
+    }
+
+    p {
+        color: var(--text-muted);
+        margin-bottom: var(--space-sm);
+        line-height: 1.6;
+        font-size: var(--text-base);
+        max-width: 65ch;
+    }
+
+    .subtitle {
+        font-size: var(--text-lg);
+        color: var(--text-muted);
+        margin-bottom: var(--space-md);
+    }
+
+    /* Header */
+    header {
+        background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+        color: var(--text-primary);
+        padding: var(--space-2xl) var(--space-md);
+        text-align: center;
+        border-radius: var(--radius-xl);
+        margin-bottom: var(--space-xl);
+    }
+
+    /* Button system */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-xs);
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+        padding: var(--space-sm) var(--space-lg);
+        text-decoration: none;
+        border-radius: var(--radius-md);
+        font-weight: 600;
+        font-size: var(--text-base);
+        border: 1px solid var(--border-color);
+        transition: all 0.2s ease;
+        cursor: pointer;
+        margin: var(--space-xs);
+        text-align: center;
+    }
+
+    .btn:hover,
+    .btn:focus {
+        background: #404040;
+        transform: translateY(-2px);
+    }
+
+    .btn-primary {
+        background: var(--accent-primary);
+        border-color: var(--accent-primary);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+        background: #005a9e;
+        border-color: #005a9e;
+    }
+
+    .btn-secondary {
+        background: var(--accent-secondary);
+        border-color: var(--accent-secondary);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus {
+        background: #1e7e34;
+        border-color: #1e7e34;
+    }
+
+    .btn-warning {
+        background: linear-gradient(135deg, var(--accent-warning), #e53e3e);
+        border-color: var(--accent-warning);
+        color: white;
+    }
+
+    .btn-warning:hover,
+    .btn-warning:focus {
+        background: linear-gradient(135deg, #e55a25, #c53030);
+        border-color: #e55a25;
+    }
+
+    .btn-portfolio {
+        background: var(--accent-portfolio);
+        border-color: var(--accent-portfolio);
+        color: white;
+    }
+
+    .btn-portfolio:hover,
+    .btn-portfolio:focus {
+        background: #545b62;
+        border-color: #545b62;
+    }
+
+    /* Tech tags */
+    .tech-tags {
+        margin: var(--space-lg) 0;
+    }
+
+    .tech-tag {
+        background: var(--accent-primary);
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: 12px;
+        font-size: var(--text-xs);
+        margin-right: var(--space-sm);
+        color: white;
+        display: inline-block;
+    }
+
+    /* Feature grid */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+        gap: var(--space-lg);
+        margin: var(--space-xl) 0;
+    }
+
+    .feature-card {
+        background: var(--bg-secondary);
+        padding: var(--space-lg);
+        border-radius: var(--radius-lg);
+        text-align: center;
+        border: 1px solid var(--border-color);
+        transition: transform 0.2s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-4px);
+    }
+
+    /* Output samples */
+    .output-sample {
+        background: var(--bg-secondary);
+        padding: var(--space-lg);
+        border-radius: var(--radius-lg);
+        border-left: 4px solid var(--accent-primary);
+        margin: var(--space-lg) 0;
+        font-family: 'Courier New', monospace;
+        font-size: var(--text-sm);
+        line-height: 1.5;
+        overflow-x: auto;
+    }
+
+    /* Project links section */
+    .project-links-section {
+        text-align: center;
+        margin: var(--space-xl) 0;
+    }
+
+    .links-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+        justify-content: center;
+        margin-top: var(--space-md);
+    }
+
+    /* Dashboard CTA */
+    .dashboard-cta {
+        text-align: center;
+        background: var(--bg-secondary);
+        padding: var(--space-xl);
+        border-radius: var(--radius-lg);
+        margin: var(--space-xl) 0;
+        border: 1px solid var(--border-color);
+    }
+
+    /* Systematic output layout */
+    .system-partition {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+        background: var(--bg-secondary);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        margin: var(--space-lg) 0;
+    }
+
+    .partition-header {
+        background: var(--bg-tertiary);
+        color: var(--accent-primary);
+        font-weight: bold;
+        padding: var(--space-md);
+        border-bottom: 2px solid var(--accent-primary);
+        font-family: 'Courier New', monospace;
+    }
+
+    .partition-section {
+        padding: var(--space-md);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .partition-section:last-child {
+        border-bottom: none;
+    }
+
+    .compact-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .compact-list li {
+        padding: var(--space-xs) 0;
+        border-bottom: 1px solid var(--bg-tertiary);
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .compact-list li:last-child {
+        border-bottom: none;
+    }
+
+    .list-bullet {
+        color: var(--accent-secondary);
+        margin-right: var(--space-sm);
+        font-weight: bold;
+    }
+
+    /* Section spacing */
+    section {
+        margin: var(--space-2xl) 0;
+    }
+
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+        body {
+            padding: var(--space-sm);
         }
 
-    def display_country_info(self, country_name):
-        """Display comprehensive information about a country's trade regulations"""
-        if country_name not in self.trade_data["countries"]:
-            print(f"Data for {country_name} not found.")
-            return
-        
-        country = self.trade_data["countries"][country_name]
-        
-        print(f"\n{'='*60}")
-        print(f"TRADE COMPLIANCE DATA: {country_name.upper()}")
-        print(f"{'='*60}")
-        
-        # General Information
-        print("\n📋 GENERAL INFORMATION:")
-        print(f"  • Official Name: {country['general']['country_name']}")
-        print(f"  • Capital: {country['general']['capital']}")
-        print(f"  • Currency: {country['general']['currency']}")
-        print(f"  • ISO Code: {country['general']['country_code_iso_3166']}")
-        print(f"  • EU Member: {'Yes' if country['general']['eu_member'] else 'No'}")
-        
-        # Trade Logistics
-        print("\n🚢 TRADE LOGISTICS:")
-        print(f"  • Primary Ports: {', '.join(country['trade_logistics']['primary_ports'])}")
-        print(f"  • Primary Airports: {', '.join(country['trade_logistics']['primary_airports'])}")
-        print(f"  • HS System: {country['trade_logistics']['hs_system']}")
-        print(f"  • Common Incoterms: {country['trade_logistics']['incoterms']}")
-        print(f"  • Ease of Doing Business Rank: {country['trade_logistics']['ease_of_doing_rank']}")
-        print(f"  • LPI Score: {country['trade_logistics']['lpi_score']}")
-        
-        # Documentation Requirements
-        print("\n📄 DOCUMENTATION REQUIREMENTS:")
-        docs = country['documentation_requirements']
-        for doc, requirement in docs.items():
-            if isinstance(requirement, bool):
-                status = "Required" if requirement else "Not Required"
-                print(f"  • {doc.replace('_', ' ').title()}: {status}")
-            else:
-                print(f"  • {doc.replace('_', ' ').title()}: {requirement}")
-        
-        # Regulatory Environment
-        print("\n⚖️ REGULATORY ENVIRONMENT:")
-        regs = country['regulatory_environment']
-        print(f"  • Customs Procedure: {regs['customs_procedure']}")
-        print(f"  • Import Tariffs: {regs['import_tariffs']}")
-        print(f"  • VAT on Imports: {regs['vat_on_imports']}")
-        print(f"  • Restricted Items: {', '.join(regs['restricted_items'])}")
-        print(f"  • Standards: {regs['standards']}")
+        .feature-grid {
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
+        }
 
-    def display_bilateral_info(self):
-        """Display bilateral trade information between Italy and India"""
-        bilateral = self.trade_data["bilateral_context"]
-        
-        print(f"\n{'='*60}")
-        print("ITALY-INDIA BILATERAL TRADE INFORMATION")
-        print(f"{'='*60}")
-        
-        print(f"\n📊 TRADE AGREEMENT:")
-        print(f"  • {bilateral['trade_agreement']}")
-        print(f"  • Preferential Documents: {bilateral['preferential_documents']}")
-        
-        print(f"\n📦 KEY TRADE GOODS - INDIA TO ITALY:")
-        for i, good in enumerate(bilateral['key_trade_goods']['india_to_italy'], 1):
-            print(f"  {i}. {good}")
-        
-        print(f"\n📦 KEY TRADE GOODS - ITALY TO INDIA:")
-        for i, good in enumerate(bilateral['key_trade_goods']['italy_to_india'], 1):
-            print(f"  {i}. {good}")
+        .links-grid {
+            flex-direction: column;
+            align-items: center;
+        }
 
-    def compare_countries(self, country1, country2):
-        """Compare trade regulations between two countries"""
-        if country1 not in self.trade_data["countries"] or country2 not in self.trade_data["countries"]:
-            print("One or both countries not found in database.")
-            return
-        
-        c1 = self.trade_data["countries"][country1]
-        c2 = self.trade_data["countries"][country2]
-        
-        print(f"\n{'='*60}")
-        print(f"COMPARISON: {country1.upper()} vs {country2.upper()}")
-        print(f"{'='*60}")
-        
-        # Compare general information
-        print("\n🌍 GENERAL COMPARISON:")
-        print(f"  {'Metric':<25} {country1:<20} {country2:<20}")
-        print(f"  {'-'*25} {'-'*20} {'-'*20}")
-        print(f"  {'Currency':<25} {c1['general']['currency']:<20} {c2['general']['currency']:<20}")
-        print(f"  {'EU Member':<25} {'Yes' if c1['general']['eu_member'] else 'No':<20} {'Yes' if c2['general']['eu_member'] else 'No':<20}")
-        
-        # Compare logistics
-        print(f"\n🚢 LOGISTICS COMPARISON:")
-        print(f"  • Ease of Business Rank: {c1['trade_logistics']['ease_of_doing_rank']} ({country1}) vs {c2['trade_logistics']['ease_of_doing_rank']} ({country2})")
-        print(f"  • LPI Score: {c1['trade_logistics']['lpi_score']} ({country1}) vs {c2['trade_logistics']['lpi_score']} ({country2})")
-        
-        # Compare VAT/Import Taxes
-        print(f"\n💰 TAX COMPARISON:")
-        vat1 = c1['regulatory_environment']['vat_on_imports']
-        vat2 = c2['regulatory_environment']['vat_on_imports']
-        print(f"  • Import VAT/Taxes: {vat1} ({country1}) vs {vat2} ({country2})")
+        .links-grid .btn {
+            width: min(100%, 300px);
+            margin: var(--space-xs) 0;
+        }
 
-    def run_demo(self):
-        """Run a complete demonstration of the trade compliance system"""
-        print("🌍 INTERNATIONAL TRADE COMPLIANCE SYSTEM")
-        print("=" * 50)
-        
-        # Display individual country information
-        self.display_country_info("Italy")
-        self.display_country_info("India")
-        
-        # Display bilateral information
-        self.display_bilateral_info()
-        
-        # Compare countries
-        self.compare_countries("Italy", "India")
-        
-        print(f"\n{'='*60}")
-        print("DEMONSTRATION COMPLETED SUCCESSFULLY!")
-        print(f"{'='*60}")
+        .dashboard-cta {
+            padding: var(--space-lg);
+        }
 
-# This part makes the code run when you execute the file
-if __name__ == "__main__":
-    trade_system = InternationalTradeCompliance()
+        .output-sample {
+            padding: var(--space-md);
+            font-size: var(--text-xs);
+        }
 
-    trade_system.run_demo()
+        /* Reduce motion for better performance */
+        @media (prefers-reduced-motion: reduce) {
+            .btn,
+            .feature-card {
+                transition: none;
+            }
+            
+            .btn:hover,
+            .feature-card:hover {
+                transform: none;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 0 var(--space-sm);
+        }
+
+        header {
+            padding: var(--space-xl) var(--space-md);
+        }
+
+        .feature-card {
+            padding: var(--space-md);
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 International Trade Compliance System</h1>
+            <p class="subtitle">Python application for analyzing trade regulations between Italy and India</p>
+            <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Data Analysis</span>
+                <span class="tech-tag">International Business</span>
+                <span class="tech-tag">Trade Compliance</span>
+            </div>
+        </header>
+
+        <section>
+            <h2>About This Project</h2>
+            <p>This Python application provides comprehensive trade compliance data for international business operations between Italy and India, including documentation requirements, logistics information, and regulatory frameworks.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🇮🇹 Italy Data</h3>
+                    <p>EU compliance standards, ports, VAT information, and documentation requirements</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🇮🇳 India Data</h3>
+                    <p>Customs procedures, import licenses, GST rates, and trade logistics</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Comparison</h3>
+                    <p>Side-by-side analysis of trade regulations and bilateral context</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-links-section">
+            <h2>Project Links</h2>
+            <div class="links-grid">
+                <a href="demo.html" class="btn btn-primary">📊 Interactive Demo</a>
+                <a href="documentation.html" class="btn">📚 Documentation</a>
+                <a href="trade_compliance.py" download class="btn btn-secondary">💾 Download Code</a>
+                <a href="https://krishnaadayma.github.io/" class="btn btn-portfolio">Back to Portfolio</a>
+            </div>
+        </section>
+
+        <section class="dashboard-cta">
+            <h2>Interactive Analytics Dashboard</h2>
+            <p>Explore our advanced data visualization platform with interactive charts and comprehensive trade analytics:</p>
+            <a href="demo.html" class="btn btn-warning" style="padding: var(--space-md) var(--space-xl);">
+                🚀 Launch Analytics Dashboard
+            </a>
+        </section>
+
+        <section>
+            <h2>Example Output</h2>
+            <div class="system-partition">
+                <div class="partition-header">
+                    🌍 INTERNATIONAL TRADE COMPLIANCE SYSTEM
+                </div>
+                <div class="partition-section">
+                    <div class="partition-header" style="background: transparent; border-bottom: 1px solid var(--border-color); padding: var(--space-sm) var(--space-md);">
+                        TRADE COMPLIANCE DATA: ITALY
+                    </div>
+                    <div style="margin-top: var(--space-md);">
+                        <div style="color: var(--accent-secondary); font-weight: bold; margin-bottom: var(--space-sm);">📋 GENERAL INFORMATION:</div>
+                        <ul class="compact-list">
+                            <li><span class="list-bullet">•</span> Official Name: Italian Republic</li>
+                            <li><span class="list-bullet">•</span> Currency: Euro (EUR)</li>
+                            <li><span class="list-bullet">•</span> EU Member: Yes</li>
+                        </ul>
+                    </div>
+                    <div style="margin-top: var(--space-md);">
+                        <div style="color: var(--accent-secondary); font-weight: bold; margin-bottom: var(--space-sm);">🚢 TRADE LOGISTICS:</div>
+                        <ul class="compact-list">
+                            <li><span class="list-bullet">•</span> Primary Ports: Genoa, Trieste, Gioia Tauro...</li>
+                            <li><span class="list-bullet">•</span> VAT on Imports: 22.0%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>How to Run</h2>
+            <p>Download the Python file and run it using:</p>
+            <div class="output-sample">
+                python trade_compliance.py
+            </div>
+            <div style="text-align: center; margin-top: var(--space-md);">
+                <a href="trade_compliance.py" download class="btn btn-secondary">
+                    💾 Download Python File
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
