@@ -3,439 +3,474 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Documentation | Trade Compliance System</title>
-<style>
-    /* ===== AUTO-OPTIMIZING CSS FOR DOCUMENTATION ===== */
-    * {
+    <title>Project Documentation | International Trade Compliance System</title>
+    <meta name="description" content="Comprehensive technical documentation for the International Trade Compliance System - Italy-India trade regulations analysis.">
+    
+    <style>
+    /* ===== OPTIMIZED CSS FOR DOCUMENTATION ===== */
+    :root {
+        /* Color system */
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --bg-tertiary: #2d2d2d;
+        --text-primary: #ffffff;
+        --text-secondary: #e0e0e0;
+        --text-muted: #b0b0b0;
+        --accent-primary: #007acc;
+        --accent-secondary: #28a745;
+        --accent-warning: #dc3545;
+        --accent-calculator: #20c997;
+        --border-color: #333;
+        
+        /* Typography scale */
+        --text-xs: clamp(0.75rem, 2vw, 0.875rem);
+        --text-sm: clamp(0.875rem, 2.5vw, 1rem);
+        --text-base: clamp(1rem, 3vw, 1.125rem);
+        --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
+        --text-xl: clamp(1.25rem, 4vw, 1.5rem);
+        --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
+        --text-3xl: clamp(1.875rem, 6vw, 2.25rem);
+        
+        /* Spacing scale */
+        --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+        --space-sm: clamp(0.75rem, 2vw, 1rem);
+        --space-md: clamp(1rem, 3vw, 1.5rem);
+        --space-lg: clamp(1.5rem, 4vw, 2rem);
+        --space-xl: clamp(2rem, 6vw, 3rem);
+        --space-2xl: clamp(3rem, 8vw, 4rem);
+        
+        /* Border radius */
+        --radius-sm: 0.375rem;
+        --radius-md: 0.5rem;
+        --radius-lg: 0.75rem;
+        --radius-xl: 1rem;
+    }
+
+    /* Reset and base styles */
+    *, *::before, *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
-    html, body {
-        width: 100%;
-        overflow-x: hidden;
-        font-family: 'Arial', sans-serif;
-        line-height: 1.6;
-        color: #e0e0e0;
-        background-color: #0a0a0a;
-    }
-
-    .container {
-        width: 100%;
-        max-width: min(1200px, 95vw);
-        margin: 0 auto;
-        padding: 0 clamp(15px, 3vw, 30px);
-    }
-
-    header {
-        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-        color: #ffffff;
-        padding: clamp(35px, 7vw, 70px) clamp(18px, 3.5vw, 35px);
-        text-align: center;
-        border-radius: clamp(7px, 1.5vw, 12px);
-        margin-bottom: clamp(20px, 4vw, 40px);
-    }
-
-    h1 { 
-        font-size: clamp(1.5rem, 4.5vw, 2.2rem); 
-        color: #ffffff; 
-        margin-bottom: clamp(8px, 1.5vw, 15px); 
-    }
-    
-    h2 { 
-        font-size: clamp(1.2rem, 3.5vw, 1.8rem); 
-        color: #ffffff; 
-        margin-bottom: clamp(8px, 1.5vw, 15px); 
-    }
-    
-    h3 { 
-        font-size: clamp(1rem, 3vw, 1.4rem); 
-        color: #ffffff; 
-        margin-bottom: clamp(6px, 1.2vw, 12px); 
-    }
-
-    p {
-        color: #b0b0b0;
-        margin-bottom: clamp(10px, 2vw, 18px);
-        line-height: 1.6;
-        font-size: clamp(0.85rem, 2.2vw, 1rem);
-        max-width: min(60ch, 95vw);
-    }
-
-    .btn {
-        display: inline-block;
-        background: #404040;
-        color: #ffffff;
-        padding: clamp(9px, 2.2vw, 12px) clamp(16px, 3vw, 24px);
-        text-decoration: none;
-        border-radius: clamp(4px, 1vw, 6px);
-        font-weight: bold;
-        transition: all 0.3s ease;
-        border: 1px solid #555;
-        margin: clamp(3px, 1vw, 6px);
-        text-align: center;
-        font-size: clamp(0.8rem, 2vw, 0.95rem);
-    }
-
-    .btn:hover {
-        background: #505050;
-        transform: translateY(-2px);
-    }
-
-    .btn-primary {
-        background: #007acc;
-        border: 1px solid #007acc;
-    }
-
-    .btn-primary:hover {
-        background: #005a9e;
-        border: 1px solid #005a9e;
-    }
-
-    .section {
-        background: #1a1a1a;
-        padding: clamp(20px, 4vw, 35px);
-        border-radius: clamp(6px, 1.5vw, 10px);
-        margin-bottom: clamp(18px, 3.5vw, 30px);
-        border: 1px solid #333;
-    }
-
-    .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-        gap: clamp(12px, 2.5vw, 20px);
-        margin: clamp(15px, 3vw, 25px) 0;
-    }
-
-    .feature-card {
-        background: #2d2d2d;
-        padding: clamp(15px, 3vw, 25px);
-        border-radius: clamp(5px, 1.2vw, 8px);
-        border: 1px solid #404040;
-    }
-
-    .nav-links {
-        text-align: center;
-        margin: clamp(20px, 4vw, 35px) 0;
-    }
-
-    .section-title {
-        font-size: clamp(1.3rem, 4vw, 1.8rem);
-        margin-bottom: clamp(15px, 3vw, 25px);
-        color: #ffffff;
-        border-bottom: clamp(1px, 0.3vw, 2px) solid #333;
-        padding-bottom: clamp(8px, 1.5vw, 12px);
-    }
-
-    .subsection {
-        margin: clamp(12px, 2.5vw, 20px) 0;
-        padding: clamp(15px, 3vw, 25px);
-        background: #2d2d2d;
-        border-radius: clamp(4px, 1vw, 6px);
-        border-left: clamp(3px, 1vw, 5px) solid #007acc;
-    }
-
-    /* Calculator Styles */
-    .calculator {
-        background: #2d2d2d;
-        padding: clamp(18px, 3.5vw, 30px);
-        border-radius: clamp(6px, 1.5vw, 10px);
-        margin: clamp(15px, 3vw, 25px) 0;
-        border: 1px solid #404040;
-    }
-
-    .calculator-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-        gap: clamp(12px, 2.5vw, 20px);
-        margin: clamp(15px, 3vw, 25px) 0;
-    }
-
-    .calculator-input {
-        background: #1a1a1a;
-        padding: clamp(12px, 2.5vw, 20px);
-        border-radius: clamp(4px, 1vw, 6px);
-        border: 1px solid #404040;
-    }
-
-    /* Mobile-specific adjustments */
-    @media (max-width: 768px) {
-        body {
-            padding: 10px;
-        }
-
-        .nav-links .btn {
-            display: block;
-            width: 100%;
-            margin: clamp(5px, 1vw, 8px) 0;
-        }
-
-        .feature-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    @media (max-width: 480px) {
-        body {
-            padding: 8px;
-        }
-
-        .section {
-            padding: clamp(15px, 3vw, 25px);
-        }
-    }
-</style>
-    <style>
-    /* ===== UNIVERSAL ANIMATIONS & MOBILE OPTIMIZATIONS ===== */
-    /* Smooth scrolling */
     html {
         scroll-behavior: smooth;
     }
 
-    /* Fade in animation for page load */
     body {
-        opacity: 0;
-        animation: fadeIn 0.8s ease-out forwards;
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--text-secondary);
+        background-color: var(--bg-primary);
+        overflow-x: hidden;
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+    /* Container system */
+    .container {
+        width: 100%;
+        max-width: min(1200px, 95vw);
+        margin: 0 auto;
+        padding: 0 var(--space-md);
     }
 
-    /* Enhanced button animations */
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--text-primary);
+        line-height: 1.2;
+        font-weight: 700;
+        margin-bottom: var(--space-sm);
+    }
+
+    h1 { 
+        font-size: var(--text-3xl);
+        text-align: center;
+    }
+
+    h2 { 
+        font-size: var(--text-2xl);
+        margin-bottom: var(--space-md);
+    }
+
+    h3 { 
+        font-size: var(--text-xl);
+    }
+
+    h4 { 
+        font-size: var(--text-lg);
+        color: var(--accent-secondary);
+    }
+
+    p {
+        color: var(--text-muted);
+        margin-bottom: var(--space-sm);
+        line-height: 1.6;
+        font-size: var(--text-base);
+        max-width: 65ch;
+    }
+
+    .subtitle {
+        font-size: var(--text-lg);
+        color: var(--text-muted);
+        margin-bottom: var(--space-md);
+    }
+
+    /* Header */
+    header {
+        background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+        color: var(--text-primary);
+        padding: var(--space-2xl) var(--space-md);
+        text-align: center;
+        border-radius: var(--radius-xl);
+        margin-bottom: var(--space-xl);
+    }
+
+    /* Button system */
     .btn {
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-xs);
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+        padding: var(--space-sm) var(--space-lg);
+        text-decoration: none;
+        border-radius: var(--radius-md);
+        font-weight: 600;
+        font-size: var(--text-base);
+        border: 1px solid var(--border-color);
+        transition: all 0.2s ease;
+        cursor: pointer;
+        margin: var(--space-xs);
+        text-align: center;
+    }
+
+    .btn:hover,
+    .btn:focus {
+        background: #404040;
+        transform: translateY(-2px);
+    }
+
+    .btn-primary {
+        background: var(--accent-primary);
+        border-color: var(--accent-primary);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+        background: #005a9e;
+        border-color: #005a9e;
+    }
+
+    .btn-calculator {
+        background: var(--accent-calculator);
+        border-color: var(--accent-calculator);
+        color: white;
+    }
+
+    .btn-calculator:hover,
+    .btn-calculator:focus {
+        background: #199d7a;
+        border-color: #199d7a;
+    }
+
+    /* Navigation */
+    .nav-links {
+        text-align: center;
+        margin: var(--space-xl) 0;
+    }
+
+    /* Section system */
+    .section {
+        background: var(--bg-secondary);
+        padding: var(--space-xl);
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--space-lg);
+        border: 1px solid var(--border-color);
+    }
+
+    .section-title {
+        font-size: var(--text-2xl);
+        margin-bottom: var(--space-lg);
+        color: var(--text-primary);
+        border-bottom: 2px solid var(--accent-primary);
+        padding-bottom: var(--space-sm);
+    }
+
+    /* Subsection */
+    .subsection {
+        margin: var(--space-lg) 0;
+        padding: var(--space-lg);
+        background: var(--bg-tertiary);
+        border-radius: var(--radius-md);
+        border-left: 4px solid var(--accent-primary);
+    }
+
+    /* Feature grid */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+        gap: var(--space-lg);
+        margin: var(--space-lg) 0;
+    }
+
+    .feature-card {
+        background: var(--bg-secondary);
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        transition: transform 0.2s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-4px);
+    }
+
+    /* Calculator styles */
+    .calculator {
+        background: var(--bg-tertiary);
+        padding: var(--space-xl);
+        border-radius: var(--radius-lg);
+        margin: var(--space-lg) 0;
+        border: 1px solid var(--border-color);
+    }
+
+    .calculator-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+        gap: var(--space-md);
+        margin: var(--space-lg) 0;
+    }
+
+    .calculator-input {
+        background: var(--bg-secondary);
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+    }
+
+    .calculator-input label {
+        display: block;
+        color: var(--text-primary);
+        font-weight: 600;
+        margin-bottom: var(--space-xs);
+        font-size: var(--text-sm);
+    }
+
+    .calculator-input input,
+    .calculator-input select {
+        width: 100%;
+        padding: var(--space-sm);
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        color: var(--text-secondary);
+        font-size: var(--text-base);
+    }
+
+    .calculator-result {
+        background: var(--bg-secondary);
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+        border-left: 4px solid var(--accent-secondary);
+        margin-top: var(--space-lg);
+    }
+
+    .result-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-sm) 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .result-item:last-child {
+        border-bottom: none;
+    }
+
+    .result-value {
+        color: var(--accent-secondary);
+        font-weight: 600;
+        font-size: var(--text-base);
+    }
+
+    /* Architecture diagram */
+    .architecture-diagram {
+        background: var(--bg-tertiary);
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+        margin: var(--space-lg) 0;
+        text-align: center;
+        border: 1px solid var(--border-color);
+    }
+
+    .architecture-step {
+        background: var(--bg-secondary);
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        margin: var(--space-md) 0;
+        border-left: 4px solid var(--accent-primary);
+    }
+
+    /* Process steps */
+    .process-steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+        gap: var(--space-md);
+        margin: var(--space-lg) 0;
+    }
+
+    .process-step {
+        background: var(--bg-secondary);
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+        border-left: 4px solid;
+        text-align: left;
+    }
+
+    .step-1 { border-left-color: var(--accent-primary); }
+    .step-2 { border-left-color: var(--accent-secondary); }
+    .step-3 { border-left-color: var(--accent-warning); }
+
+    /* Tables */
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: var(--space-lg) 0;
+        background: var(--bg-secondary);
+        border-radius: var(--radius-md);
         overflow: hidden;
     }
 
-    .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    .data-table th,
+    .data-table td {
+        padding: var(--space-md);
+        border: 1px solid var(--border-color);
+        text-align: left;
     }
 
-    /* Card hover effects */
-    .card, .feature-card, .skill-card, .project-card, .experience-item {
-        transition: all 0.3s ease;
+    .data-table th {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+        font-weight: 600;
     }
 
-    .card:hover, .feature-card:hover, .skill-card:hover, 
-    .project-card:hover, .experience-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    .data-table tr:nth-child(even) {
+        background: var(--bg-tertiary);
     }
 
-    /* Mobile swipe support */
+    /* Research papers */
+    .paper-card {
+        background: var(--bg-secondary);
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+        margin: var(--space-md) 0;
+        border-left: 4px solid var(--accent-secondary);
+        border: 1px solid var(--border-color);
+    }
+
+    .paper-title {
+        color: var(--text-primary);
+        font-size: var(--text-lg);
+        font-weight: 600;
+        margin-bottom: var(--space-xs);
+    }
+
+    .paper-authors {
+        color: var(--accent-primary);
+        font-style: italic;
+        margin-bottom: var(--space-sm);
+        font-size: var(--text-sm);
+    }
+
+    .paper-abstract {
+        color: var(--text-muted);
+        line-height: 1.6;
+        font-size: var(--text-base);
+    }
+
+    /* Code blocks */
+    .code-block {
+        background: var(--bg-primary);
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        font-family: 'Courier New', monospace;
+        font-size: var(--text-sm);
+        color: var(--accent-secondary);
+        margin: var(--space-sm) 0;
+        overflow-x: auto;
+    }
+
+    /* Mobile optimizations */
     @media (max-width: 768px) {
         body {
-            -webkit-overflow-scrolling: touch;
+            padding: var(--space-sm);
         }
-        
-        .btn-group, .project-links {
+
+        .nav-links {
+            display: flex;
             flex-direction: column;
+            gap: var(--space-sm);
         }
-        
-        .btn-group .btn, .project-links .btn {
+
+        .nav-links .btn {
             width: 100%;
-            margin: 5px 0;
-        }
-    }
-
-    /* Reduced motion support */
-    @media (prefers-reduced-motion: reduce) {
-        * {
-            animation: none !important;
-            transition: none !important;
-        }
-    }
-
-    /* ===== TEXT & LAYOUT FIXES FOR COMPACT SYSTEMATIC DESIGN ===== */
-    
-    /* Fix text overflow and create systematic layout */
-    .output-content, .system-output, .compact-text {
-        font-family: 'Courier New', monospace;
-        line-height: 1.4;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: pre-wrap;
-        max-width: 100%;
-        background: #1a1a1a;
-        padding: 20px;
-        border-radius: 8px;
-        border: 1px solid #333;
-        margin: 15px 0;
-    }
-
-    /* Systematic partition layout */
-    .system-partition {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 0;
-        background: #1a1a1a;
-        border-radius: 8px;
-        border: 1px solid #333;
-        overflow: hidden;
-        margin: 20px 0;
-    }
-
-    .partition-section {
-        padding: 15px 20px;
-        border-bottom: 1px solid #333;
-    }
-
-    .partition-section:last-child {
-        border-bottom: none;
-    }
-
-    .partition-header {
-        background: #2d2d2d;
-        color: #007acc;
-        font-weight: bold;
-        padding: 12px 20px;
-        border-bottom: 2px solid #007acc;
-    }
-
-    /* Compact list styling */
-    .compact-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .compact-list li {
-        padding: 8px 0;
-        border-bottom: 1px solid #2d2d2d;
-        display: flex;
-        align-items: flex-start;
-    }
-
-    .compact-list li:last-child {
-        border-bottom: none;
-    }
-
-    .list-bullet {
-        color: #28a745;
-        margin-right: 10px;
-        font-weight: bold;
-    }
-
-    /* Fix for the specific dashboard text */
-    .dashboard-content {
-        background: #1a1a1a;
-        padding: 20px;
-        border-radius: 8px;
-        border: 1px solid #333;
-        font-family: 'Courier New', monospace;
-        line-height: 1.5;
-    }
-
-    .dashboard-section {
-        margin-bottom: 20px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #333;
-    }
-
-    .dashboard-section:last-child {
-        margin-bottom: 0;
-        padding-bottom: 0;
-        border-bottom: none;
-    }
-
-    .dashboard-title {
-        color: #007acc;
-        font-weight: bold;
-        margin-bottom: 12px;
-        font-size: 1.1em;
-    }
-
-    .feature-item {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 8px;
-        padding: 5px 0;
-    }
-
-    .feature-bullet {
-        color: #28a745;
-        margin-right: 10px;
-        font-weight: bold;
-    }
-
-    /* Mobile optimization for compact layout */
-    @media (max-width: 768px) {
-        .output-content, .system-output, .compact-text {
-            padding: 15px;
-            font-size: 0.9em;
-            line-height: 1.4;
+            margin: var(--space-xs) 0;
         }
 
-        .system-partition {
-            margin: 15px 0;
+        .feature-grid,
+        .process-steps,
+        .calculator-grid {
+            grid-template-columns: 1fr;
         }
 
-        .partition-section {
-            padding: 12px 15px;
+        .section {
+            padding: var(--space-lg);
         }
 
-        .partition-header {
-            padding: 10px 15px;
+        .subsection {
+            padding: var(--space-md);
         }
 
-        .dashboard-content {
-            padding: 15px;
+        .data-table {
+            font-size: var(--text-sm);
         }
 
-        .compact-list li {
-            padding: 6px 0;
-            font-size: 0.9em;
+        .data-table th,
+        .data-table td {
+            padding: var(--space-sm);
         }
 
-        .feature-item {
-            margin-bottom: 6px;
-            font-size: 0.9em;
+        /* Reduce motion for better performance */
+        @media (prefers-reduced-motion: reduce) {
+            .btn,
+            .feature-card {
+                transition: none;
+            }
+            
+            .btn:hover,
+            .feature-card:hover {
+                transform: none;
+            }
         }
     }
 
     @media (max-width: 480px) {
-        .output-content, .system-output, .compact-text {
-            padding: 12px;
-            font-size: 0.85em;
+        .container {
+            padding: 0 var(--space-sm);
         }
 
-        .partition-section {
-            padding: 10px 12px;
+        header {
+            padding: var(--space-xl) var(--space-md);
         }
 
-        .dashboard-content {
-            padding: 12px;
+        .calculator {
+            padding: var(--space-lg);
         }
     }
-</style>
-
-
-        // Simple swipe detection
-        let startX = 0;
-        document.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-        });
-        
-        document.addEventListener('touchend', e => {
-            const endX = e.changedTouches[0].clientX;
-            const diff = startX - endX;
-            
-            if (Math.abs(diff) > 50) { // 50px threshold
-                document.body.style.transform = `translateX(${diff > 0 ? -10 : 10}px)`;
-                setTimeout(() => {
-                    document.body.style.transform = 'translateX(0)';
-                }, 200);
-            }
-        });
-    });
-</script>
+    </style>
 </head>
-</head>
+
 <body>
     <div class="container">
         <header>
@@ -483,7 +518,7 @@
             <h2 class="section-title">🔄 Trade Cost Calculator</h2>
             
             <div class="calculator">
-                <h3 style="color: #28a745; margin-bottom: 20px; text-align: center;">Calculate Import Costs & Duties</h3>
+                <h3 style="color: var(--accent-calculator); margin-bottom: var(--space-lg); text-align: center;">Calculate Import Costs & Duties</h3>
                 
                 <div class="calculator-grid">
                     <div class="calculator-input">
@@ -516,12 +551,12 @@
                     </div>
                 </div>
                 
-                <div style="text-align: center; margin: 20px 0;">
+                <div style="text-align: center; margin: var(--space-lg) 0;">
                     <button class="btn btn-calculator" onclick="calculateTradeCosts()">Calculate Total Costs</button>
                 </div>
                 
                 <div class="calculator-result" id="calculatorResult" style="display: none;">
-                    <h4 style="color: #28a745; margin-bottom: 15px;">Cost Breakdown Analysis</h4>
+                    <h4 style="color: var(--accent-secondary); margin-bottom: var(--space-md);">Cost Breakdown Analysis</h4>
                     <div class="result-item">
                         <span>Product Value:</span>
                         <span class="result-value" id="resultProductValue">$10,000</span>
@@ -538,9 +573,9 @@
                         <span>Shipping & Insurance:</span>
                         <span class="result-value" id="resultShipping">$500</span>
                     </div>
-                    <div class="result-item" style="background: #1a1a1a; border-left: 4px solid #dc3545;">
+                    <div class="result-item" style="background: var(--bg-primary); border-left: 4px solid var(--accent-warning);">
                         <span style="font-weight: bold;">Total Landed Cost:</span>
-                        <span class="result-value" id="resultTotal" style="color: #dc3545; font-size: 1.3rem;">$13,900</span>
+                        <span class="result-value" id="resultTotal" style="color: var(--accent-warning); font-size: var(--text-lg);">$13,900</span>
                     </div>
                 </div>
             </div>
@@ -554,15 +589,21 @@
                 <h3>System Architecture & Design</h3>
                 <p>The International Trade Compliance System is built on a modular, scalable architecture that separates data management, analysis logic, and presentation layers for maximum maintainability and extensibility.</p>
                 
-                <div style="background: #2d2d2d; padding: 25px; border-radius: 8px; margin: 20px 0; text-align: center;">
-                    <h4 style="color: #28a745; margin-bottom: 20px;">🏗️ System Architecture Overview</h4>
-                    <div style="display: inline-block; background: #1a1a1a; padding: 20px; border-radius: 6px; border: 2px solid #404040;">
-                        <div style="color: #007acc; font-weight: bold; margin: 10px 0;">📊 DATA LAYER</div>
-                        <div style="color: #b0b0b0;">↓ Structured Country Databases</div>
-                        <div style="color: #007acc; font-weight: bold; margin: 10px 0;">⚙️ LOGIC LAYER</div>
-                        <div style="color: #b0b0b0;">↓ Analysis & Comparison Engines</div>
-                        <div style="color: #007acc; font-weight: bold; margin: 10px 0;">🎨 PRESENTATION LAYER</div>
-                        <div style="color: #b0b0b0;">↓ Console Output + Web Interface</div>
+                <div class="architecture-diagram">
+                    <h4 style="color: var(--accent-secondary); margin-bottom: var(--space-lg);">🏗️ System Architecture Overview</h4>
+                    <div style="display: inline-block; background: var(--bg-secondary); padding: var(--space-lg); border-radius: var(--radius-md); border: 2px solid var(--border-color);">
+                        <div class="architecture-step">
+                            <div style="color: var(--accent-primary); font-weight: bold;">📊 DATA LAYER</div>
+                            <div style="color: var(--text-muted); margin-top: var(--space-xs);">↓ Structured Country Databases</div>
+                        </div>
+                        <div class="architecture-step">
+                            <div style="color: var(--accent-primary); font-weight: bold;">⚙️ LOGIC LAYER</div>
+                            <div style="color: var(--text-muted); margin-top: var(--space-xs);">↓ Analysis & Comparison Engines</div>
+                        </div>
+                        <div class="architecture-step">
+                            <div style="color: var(--accent-primary); font-weight: bold;">🎨 PRESENTATION LAYER</div>
+                            <div style="color: var(--text-muted); margin-top: var(--space-xs);">↓ Console Output + Web Interface</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -595,223 +636,129 @@
             </div>
         </div>
 
-<!-- Implementation Guide -->
-<div class="section">
-    <h2 class="section-title">Implementation Guide</h2>
-    
-    <div class="subsection">
-        <h3>System Requirements & Environment</h3>
-        
-        <div style="background: #2d2d2d; padding: 25px; border-radius: 8px; margin: 20px 0;">
-            <h4 style="color: #28a745; margin-bottom: 15px;">📋 Technical Prerequisites</h4>
+        <!-- Implementation Guide -->
+        <div class="section">
+            <h2 class="section-title">Implementation Guide</h2>
             
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h4>🐍 Python Environment</h4>
-                    <p><strong>Version:</strong> Python 3.8 or higher</p>
-                    <p><strong>Libraries:</strong> Standard library only (no external dependencies)</p>
-                    <p><strong>Compatibility:</strong> Windows, macOS, Linux</p>
-                </div>
+            <div class="subsection">
+                <h3>System Requirements & Environment</h3>
                 
-                <div class="feature-card">
-                    <h4>💻 System Resources</h4>
-                    <p><strong>Memory:</strong> Minimum 4GB RAM recommended</p>
-                    <p><strong>Storage:</strong> 50MB available space</p>
-                    <p><strong>Terminal:</strong> Command line interface access</p>
+                <div style="background: var(--bg-tertiary); padding: var(--space-lg); border-radius: var(--radius-md); margin: var(--space-lg) 0;">
+                    <h4 style="color: var(--accent-secondary); margin-bottom: var(--space-md);">📋 Technical Prerequisites</h4>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4>🐍 Python Environment</h4>
+                            <p><strong>Version:</strong> Python 3.8 or higher</p>
+                            <p><strong>Libraries:</strong> Standard library only (no external dependencies)</p>
+                            <p><strong>Compatibility:</strong> Windows, macOS, Linux</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <h4>💻 System Resources</h4>
+                            <p><strong>Memory:</strong> Minimum 4GB RAM recommended</p>
+                            <p><strong>Storage:</strong> 50MB available space</p>
+                            <p><strong>Terminal:</strong> Command line interface access</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <h4>🌐 Web Interface</h4>
+                            <p><strong>Browser:</strong> Chrome, Firefox, Safari, Edge</p>
+                            <p><strong>JavaScript:</strong> Enabled for interactive features</p>
+                            <p><strong>Connectivity:</strong> Internet for Chart.js CDN</p>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            
+            <div class="subsection">
+                <h3>Quick Start Deployment</h3>
                 
-                <div class="feature-card">
-                    <h4>🌐 Web Interface</h4>
-                    <p><strong>Browser:</strong> Chrome, Firefox, Safari, Edge</p>
-                    <p><strong>JavaScript:</strong> Enabled for interactive features</p>
-                    <p><strong>Connectivity:</strong> Internet for Chart.js CDN</p>
+                <div style="background: var(--bg-tertiary); padding: var(--space-lg); border-radius: var(--radius-md); margin: var(--space-lg) 0;">
+                    <h4 style="color: var(--accent-primary); margin-bottom: var(--space-lg);">🚀 Step-by-Step Setup Process</h4>
+                    
+                    <div class="process-steps">
+                        <div class="process-step step-1">
+                            <div style="color: var(--accent-primary); font-weight: bold; font-size: var(--text-lg); margin-bottom: var(--space-sm);">Step 1: Download</div>
+                            <div style="color: var(--text-muted);">
+                                • Download the trade_compliance.py file<br>
+                                • Save to your preferred directory<br>
+                                • Ensure file permissions allow execution
+                            </div>
+                        </div>
+                        
+                        <div class="process-step step-2">
+                            <div style="color: var(--accent-secondary); font-weight: bold; font-size: var(--text-lg); margin-bottom: var(--space-sm);">Step 2: Verify</div>
+                            <div style="color: var(--text-muted);">
+                                • Confirm Python installation<br>
+                                • Check system requirements<br>
+                                • Validate file integrity
+                            </div>
+                        </div>
+                        
+                        <div class="process-step step-3">
+                            <div style="color: var(--accent-warning); font-weight: bold; font-size: var(--text-lg); margin-bottom: var(--space-sm);">Step 3: Execute</div>
+                            <div style="color: var(--text-muted);">
+                                • Open terminal/command prompt<br>
+                                • Navigate to file directory<br>
+                                • Run the application
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--bg-secondary); padding: var(--space-lg); border-radius: var(--radius-md); margin-top: var(--space-lg); border: 1px solid var(--border-color);">
+                        <div style="color: var(--accent-secondary); font-weight: bold; margin-bottom: var(--space-sm);">🎯 Execution Command</div>
+                        <div class="code-block">
+                            $ python trade_compliance.py
+                        </div>
+                        <div style="color: var(--text-muted); margin-top: var(--space-sm); font-size: var(--text-sm);">
+                            <strong>Expected Output:</strong> System initializes and displays comprehensive trade analysis menu
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h3>Usage Instructions</h3>
+                
+                <div style="background: var(--bg-tertiary); padding: var(--space-lg); border-radius: var(--radius-md); margin: var(--space-lg) 0;">
+                    <h4 style="color: var(--accent-secondary); margin-bottom: var(--space-md);">📖 Operational Guide</h4>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Usage</th>
+                                <th>Output</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Country Analysis</strong></td>
+                                <td>Automatically displays Italy and India data</td>
+                                <td>Comprehensive trade regulations overview</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Comparative Analysis</strong></td>
+                                <td>Built-in comparison engine</td>
+                                <td>Side-by-side metrics and insights</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bilateral Context</strong></td>
+                                <td>Integrated trade flow analysis</td>
+                                <td>Import/export patterns and opportunities</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Web Interface</strong></td>
+                                <td>Open demo.html in browser</td>
+                                <td>Interactive charts and visualizations</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="subsection">
-        <h3>Quick Start Deployment</h3>
-        
-        <div style="background: #2d2d2d; padding: 25px; border-radius: 8px; margin: 20px 0;">
-            <h4 style="color: #007acc; margin-bottom: 20px;">🚀 Step-by-Step Setup Process</h4>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 25px;">
-                <div style="background: #1a1a1a; padding: 20px; border-radius: 6px; border-left: 4px solid #007acc;">
-                    <div style="color: #007acc; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px;">Step 1: Download</div>
-                    <div style="color: #b0b0b0;">
-                        • Download the trade_compliance.py file<br>
-                        • Save to your preferred directory<br>
-                        • Ensure file permissions allow execution
-                    </div>
-                </div>
-                
-                <div style="background: #1a1a1a; padding: 20px; border-radius: 6px; border-left: 4px solid #28a745;">
-                    <div style="color: #28a745; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px;">Step 2: Verify</div>
-                    <div style="color: #b0b0b0;">
-                        • Confirm Python installation<br>
-                        • Check system requirements<br>
-                        • Validate file integrity
-                    </div>
-                </div>
-                
-                <div style="background: #1a1a1a; padding: 20px; border-radius: 6px; border-left: 4px solid #dc3545;">
-                    <div style="color: #dc3545; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px;">Step 3: Execute</div>
-                    <div style="color: #b0b0b0;">
-                        • Open terminal/command prompt<br>
-                        • Navigate to file directory<br>
-                        • Run the application
-                    </div>
-                </div>
-            </div>
-            
-            <div style="background: #1a1a1a; padding: 20px; border-radius: 6px; border: 1px solid #404040;">
-                <div style="color: #28a745; font-weight: bold; margin-bottom: 10px;">🎯 Execution Command</div>
-                <div style="color: #b0b0b0; font-family: 'Courier New', monospace; background: #0a0a0a; padding: 15px; border-radius: 4px;">
-                    $ python trade_compliance.py
-                </div>
-                <div style="color: #b0b0b0; margin-top: 10px; font-size: 0.9rem;">
-                    <strong>Expected Output:</strong> System initializes and displays comprehensive trade analysis menu
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="subsection">
-        <h3>Usage Instructions</h3>
-        
-        <div style="background: #2d2d2d; padding: 25px; border-radius: 8px; margin: 20px 0;">
-            <h4 style="color: #28a745; margin-bottom: 15px;">📖 Operational Guide</h4>
-            
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Usage</th>
-                        <th>Output</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Country Analysis</strong></td>
-                        <td>Automatically displays Italy and India data</td>
-                        <td>Comprehensive trade regulations overview</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Comparative Analysis</strong></td>
-                        <td>Built-in comparison engine</td>
-                        <td>Side-by-side metrics and insights</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Bilateral Context</strong></td>
-                        <td>Integrated trade flow analysis</td>
-                        <td>Import/export patterns and opportunities</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Web Interface</strong></td>
-                        <td>Open demo.html in browser</td>
-                        <td>Interactive charts and visualizations</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    
-    <div class="subsection">
-        <h3>System Extension Framework</h3>
-        
-        <div style="background: #2d2d2d; padding: 25px; border-radius: 8px; margin: 20px 0;">
-            <h4 style="color: #007acc; margin-bottom: 15px;">🔄 Scalable Architecture for Expansion</h4>
-            
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h4>🌍 Add New Countries</h4>
-                    <p><strong>Process:</strong> Follow standardized data templates</p>
-                    <p><strong>Data Structure:</strong> Consistent hierarchical format</p>
-                    <p><strong>Validation:</strong> Automated integrity checks</p>
-                    <div style="color: #28a745; font-size: 0.9rem; margin-top: 10px;">
-                        ✅ Modular country integration<br>
-                        ✅ Automatic analysis inclusion<br>
-                        ✅ Seamless UI integration
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <h4>📈 Extend Analytics</h4>
-                    <p><strong>Framework:</strong> Plugin-based analysis modules</p>
-                    <p><strong>Integration:</strong> Standardized data interfaces</p>
-                    <p><strong>Output:</strong> Unified presentation layer</p>
-                    <div style="color: #28a745; font-size: 0.9rem; margin-top: 10px;">
-                        ✅ Custom metric development<br>
-                        ✅ Comparative engine support<br>
-                        ✅ Visualization compatibility
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <h4>🎨 Enhance Interfaces</h4>
-                    <p><strong>Architecture:</strong> Separation of concerns</p>
-                    <p><strong>Technology:</strong> Standard web stack</p>
-                    <p><strong>Customization:</strong> Theme and layout flexibility</p>
-                    <div style="color: #28a745; font-size: 0.9rem; margin-top: 10px;">
-                        ✅ Responsive design framework<br>
-                        ✅ Chart library integration<br>
-                        ✅ User experience optimization
-                    </div>
-                </div>
-            </div>
-            
-            <div style="background: #1a1a1a; padding: 20px; border-radius: 6px; margin-top: 20px; border-left: 4px solid #28a745;">
-                <div style="color: #28a745; font-weight: bold; margin-bottom: 10px;">🔧 Extension Workflow</div>
-                <div style="color: #b0b0b0;">
-                    <strong>1. Data Modeling</strong> → Define country data structure<br>
-                    <strong>2. Integration</strong> → Add to main data registry<br>
-                    <strong>3. Analysis</strong> → Leverage existing comparison engines<br>
-                    <strong>4. Presentation</strong> → Automatic UI generation<br>
-                    <strong>5. Validation</strong> → System integrity verification
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="subsection">
-        <h3>Troubleshooting & Support</h3>
-        
-        <div style="background: #2d2d2d; padding: 25px; border-radius: 8px; margin: 20px 0;">
-            <h4 style="color: #dc3545; margin-bottom: 15px;">🔍 Common Issues & Solutions</h4>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
-                <div style="background: #1a1a1a; padding: 15px; border-radius: 6px;">
-                    <strong style="color: #dc3545;">Python Not Found</strong>
-                    <div style="color: #b0b0b0; margin-top: 8px; font-size: 0.9rem;">
-                        • Verify Python installation<br>
-                        • Check system PATH variable<br>
-                        • Use 'python --version' to test
-                    </div>
-                </div>
-                
-                <div style="background: #1a1a1a; padding: 15px; border-radius: 6px;">
-                    <strong style="color: #dc3545;">File Execution Error</strong>
-                    <div style="color: #b0b0b0; margin-top: 8px; font-size: 0.9rem;">
-                        • Confirm file permissions<br>
-                        • Check file integrity<br>
-                        • Verify directory location
-                    </div>
-                </div>
-                
-                <div style="background: #1a1a1a; padding: 15px; border-radius: 6px;">
-                    <strong style="color: #dc3545;">Web Interface Issues</strong>
-                    <div style="color: #b0b0b0; margin-top: 8px; font-size: 0.9rem;">
-                        • Enable JavaScript<br>
-                        • Check browser compatibility<br>
-                        • Verify internet connection
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-        
+
         <!-- Research Papers & References -->
         <div class="section">
             <h2 class="section-title">Academic Research & References</h2>
@@ -832,14 +779,16 @@
                 </div>
             </div>
         </div>
-<!-- Footer Navigation -->
-<div class="nav-links">
-    <a href="https://krishnaadayma.github.io/" class="btn">← Back to Portfolio</a>
-    <a href="index.html" class="btn">🏠 Project Home</a>
-    <a href="demo.html" class="btn btn-primary">📊 Interactive Demo</a>
-    <a href="trade_compliance.py" download class="btn">💾 Download Code</a>
-</div>
-        
+
+        <!-- Footer Navigation -->
+        <div class="nav-links">
+            <a href="https://krishnaadayma.github.io/" class="btn">← Back to Portfolio</a>
+            <a href="index.html" class="btn">🏠 Project Home</a>
+            <a href="demo.html" class="btn btn-primary">📊 Interactive Demo</a>
+            <a href="trade_compliance.py" download class="btn">💾 Download Code</a>
+        </div>
+    </div>
+
     <script>
         // Trade Cost Calculator Function
         function calculateTradeCosts() {
@@ -893,6 +842,20 @@
         // Initialize calculator on page load
         document.addEventListener('DOMContentLoaded', function() {
             calculateTradeCosts();
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
