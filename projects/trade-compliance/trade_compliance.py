@@ -667,7 +667,77 @@
                     }
                 });
             });
-            
+            // Mock TradeCompliance class for frontend demonstration
+class TradeCompliance {
+    constructor(config) {
+        this.country = config.country;
+        this.productCategory = config.productCategory;
+        this.updateFrequency = config.updateFrequency;
+    }
+
+    calculateCosts(params) {
+        // Mock calculation based on input parameters
+        const baseCost = params.shipmentValue * 0.02; // 2% base compliance cost
+        let additionalCosts = 0;
+        
+        if (this.country === 'italy') {
+            additionalCosts += params.shipmentValue * 0.005; // Italy specific costs
+        }
+        
+        if (this.productCategory === 'electronics') {
+            additionalCosts += params.shipmentValue * 0.003; // Electronics specific costs
+        }
+        
+        return {
+            totalCost: baseCost + additionalCosts,
+            baseComplianceFee: baseCost,
+            countrySpecificFees: additionalCosts,
+            currency: 'EUR',
+            breakdown: {
+                documentation: baseCost * 0.4,
+                regulatoryFees: baseCost * 0.3,
+                inspection: baseCost * 0.2,
+                miscellaneous: baseCost * 0.1
+            }
+        };
+    }
+}
+
+// Demo functions
+function runDemo() {
+    try {
+        // Initialize analyzer
+        const analyzer = new TradeCompliance({
+            country: 'italy',
+            productCategory: 'electronics',
+            updateFrequency: 'realtime'
+        });
+
+        // Calculate costs
+        const costs = analyzer.calculateCosts({
+            shipmentValue: 50000,
+            productType: 'consumer_goods'
+        });
+
+        // Display results
+        const outputDiv = document.getElementById('demoOutput');
+        const outputContent = document.getElementById('outputContent');
+        
+        outputContent.textContent = JSON.stringify(costs, null, 2);
+        outputDiv.style.display = 'block';
+        
+        // Scroll to results
+        outputDiv.scrollIntoView({ behavior: 'smooth' });
+        
+    } catch (error) {
+        alert('Error running demo: ' + error.message);
+    }
+}
+
+function resetDemo() {
+    document.getElementById('demoOutput').style.display = 'none';
+    document.getElementById('outputContent').textContent = '';
+}
             // Initial check for scroll animations
             handleScrollAnimations();
             
@@ -675,5 +745,36 @@
             window.addEventListener('scroll', handleScrollAnimations);
         });
     </script>
+    <section class="fade-in">
+    <h2>Quick Start Example</h2>
+    <p>Here's how to initialize and use the trade compliance analyzer:</p>
+    
+    <div class="output-sample">
+// Initialize trade compliance analyzer
+const analyzer = new TradeCompliance({
+    country: 'italy',
+    productCategory: 'electronics',
+    updateFrequency: 'realtime'
+});
+
+// Calculate compliance costs
+const costs = analyzer.calculateCosts({
+    shipmentValue: 50000,
+    productType: 'consumer_goods'
+});
+
+console.log('Compliance Costs:', costs);
+    </div>
+
+    <div class="demo-output" id="demoOutput" style="margin-top: var(--space-md); padding: var(--space-md); background: var(--bg-secondary); border-radius: var(--radius-md); display: none;">
+        <h4>Demo Output:</h4>
+        <pre id="outputContent"></pre>
+    </div>
+
+    <div style="text-align: center; margin-top: var(--space-md);">
+        <button onclick="runDemo()" class="btn btn-primary">▶ Run Demo</button>
+        <button onclick="resetDemo()" class="btn">🔄 Reset</button>
+    </div>
+</section>
 </body>
 </html>
