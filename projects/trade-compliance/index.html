@@ -6,7 +6,7 @@
     <title>International Trade Compliance System | Krishna Dayma</title>
     <meta name="description" content="Python application analyzing trade regulations between Italy and India">
     <style>
-        /* Match your portfolio's exact styling */
+        /* Analytics Dashboard Styling */
         * {
             margin: 0;
             padding: 0;
@@ -14,85 +14,151 @@
         }
         
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e8e8e8;
             line-height: 1.6;
             min-height: 100vh;
             padding: 0;
         }
         
-        /* Main container matching portfolio width and spacing */
-        .main-container {
+        .dashboard-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 2rem;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
-        .content-wrapper {
+        /* Header Section */
+        .dashboard-header {
             text-align: center;
-            width: 100%;
-            background: rgba(26, 26, 26, 0.8);
-            padding: 4rem 3rem;
-            border-radius: 16px;
-            border: 1px solid #333;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #007acc 0%, #00d4ff 100%);
+        .main-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-weight: 700;
-            line-height: 1.2;
+        }
+        
+        .title-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: block;
         }
         
         .subtitle {
-            font-size: 1.3rem;
-            color: #b0b0b0;
-            margin-bottom: 3rem;
+            font-size: 1.4rem;
+            color: #a0a0c0;
+            margin-bottom: 2rem;
             font-weight: 300;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
         
-        .tech-tags {
+        /* Tech Stack */
+        .tech-stack {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 1rem;
-            margin: 3rem 0;
+            margin: 2rem 0;
         }
         
-        .tech-tag {
-            background: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
-            color: white;
-            padding: 0.7rem 1.5rem;
+        .tech-pill {
+            background: linear-gradient(135deg, rgba(0, 114, 255, 0.15) 0%, rgba(0, 198, 255, 0.15) 100%);
+            color: #00c6ff;
+            padding: 0.8rem 1.8rem;
             border-radius: 25px;
             font-size: 0.95rem;
             font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
+            border: 1px solid rgba(0, 198, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
         
-        .tech-tag:hover {
-            transform: translateY(-2px);
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 198, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        
+        .feature-desc {
+            color: #b0b0d0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Action Section */
+        .action-section {
+            text-align: center;
+            margin: 4rem 0 2rem 0;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .action-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+        
+        .action-subtitle {
+            color: #a0a0c0;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .button-group {
             display: flex;
             justify-content: center;
             gap: 1.5rem;
-            margin-top: 2.5rem;
             flex-wrap: wrap;
         }
         
@@ -100,114 +166,207 @@
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 2.5rem;
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-weight: 600;
             font-size: 1.1rem;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            min-width: 200px;
+            justify-content: center;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
             color: white;
+            box-shadow: 0 8px 25px rgba(0, 114, 255, 0.3);
         }
         
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(40, 167, 69, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 114, 255, 0.4);
         }
         
         .btn-secondary {
             background: rgba(255, 255, 255, 0.05);
-            color: #e0e0e0;
-            border: 2px solid #444;
+            color: #e8e8e8;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
         
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.1);
-            border-color: #007acc;
+            border-color: #00c6ff;
             transform: translateY(-3px);
         }
         
-        /* Match portfolio responsive design */
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: #a0a0c0;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .main-container {
-                padding: 2rem 1rem;
+            .dashboard-container {
+                padding: 1rem;
             }
             
-            .content-wrapper {
-                padding: 3rem 2rem;
-                margin: 1rem;
+            .dashboard-header {
+                padding: 2rem 1.5rem;
+                margin-bottom: 2rem;
             }
             
-            h1 {
+            .main-title {
                 font-size: 2.2rem;
+            }
+            
+            .title-icon {
+                font-size: 2.8rem;
             }
             
             .subtitle {
                 font-size: 1.1rem;
-                margin-bottom: 2rem;
             }
             
-            .tech-tags {
-                gap: 0.75rem;
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .action-section {
+                padding: 2rem 1.5rem;
                 margin: 2rem 0;
-            }
-            
-            .tech-tag {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.9rem;
             }
             
             .button-group {
                 flex-direction: column;
                 align-items: center;
-                gap: 1rem;
             }
             
             .btn {
                 width: 100%;
                 max-width: 280px;
-                justify-content: center;
-                padding: 1rem 2rem;
+            }
+            
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
             }
         }
         
         @media (max-width: 480px) {
-            .content-wrapper {
-                padding: 2.5rem 1.5rem;
-            }
-            
-            h1 {
+            .main-title {
                 font-size: 1.8rem;
             }
             
-            .subtitle {
-                font-size: 1rem;
+            .title-icon {
+                font-size: 2.2rem;
+            }
+            
+            .stats-bar {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <div class="content-wrapper">
-            <h1>🌍 International Trade Compliance System</h1>
-            <p class="subtitle">Python application for analyzing trade regulations between Italy and India</p>
+    <div class="dashboard-container">
+        <!-- Header Section -->
+        <header class="dashboard-header">
+            <span class="title-icon">🌍</span>
+            <h1 class="main-title">International Trade Compliance System</h1>
+            <p class="subtitle">Advanced Python analytics platform for Italy-India trade regulation analysis and compliance monitoring</p>
             
-            <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Data Analysis</span>
-                <span class="tech-tag">International Business</span>
-                <span class="tech-tag">Trade Compliance</span>
+            <div class="tech-stack">
+                <span class="tech-pill">Python Analytics</span>
+                <span class="tech-pill">Data Visualization</span>
+                <span class="tech-pill">Trade Regulations</span>
+                <span class="tech-pill">Compliance Monitoring</span>
+            </div>
+        </header>
+        
+        <!-- Features Grid -->
+        <section class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">🇮🇹</span>
+                <h3 class="feature-title">Italy Trade Data</h3>
+                <p class="feature-desc">Complete EU compliance standards, port logistics, VAT regulations, and export documentation requirements</p>
             </div>
             
-            <div class="button-group">
-                <a href="demo.html" class="btn btn-primary">📊 View Demo</a>
-                <a href="https://krishnaadayma.github.io/" class="btn btn-secondary">← Back to Portfolio</a>
+            <div class="feature-card">
+                <span class="feature-icon">🇮🇳</span>
+                <h3 class="feature-title">India Trade Data</h3>
+                <p class="feature-desc">Customs procedures, import licensing, GST framework, and comprehensive trade logistics analysis</p>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">📊</span>
+                <h3 class="feature-title">Analytics Dashboard</h3>
+                <p class="feature-desc">Interactive data visualization, comparative analysis, and real-time compliance monitoring</p>
+            </div>
+        </section>
+        
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Trade Regulations</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Countries Analyzed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Compliance Coverage</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Data Monitoring</div>
             </div>
         </div>
+        
+        <!-- Action Section -->
+        <section class="action-section">
+            <h2 class="action-title">Ready to Explore Trade Analytics?</h2>
+            <p class="action-subtitle">Access our interactive dashboard for comprehensive trade compliance insights and data visualization</p>
+            
+            <div class="button-group">
+                <a href="demo.html" class="btn btn-primary">🚀 Launch Analytics Dashboard</a>
+                <a href="https://krishnaadayma.github.io/" class="btn btn-secondary">← Back to Portfolio</a>
+            </div>
+        </section>
     </div>
 </body>
 </html>
