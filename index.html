@@ -439,8 +439,169 @@
             transition: none !important;
         }
     }
-</style>
 
+    /* ===== TEXT & LAYOUT FIXES FOR COMPACT SYSTEMATIC DESIGN ===== */
+    
+    /* Fix text overflow and create systematic layout */
+    .output-content, .system-output, .compact-text {
+        font-family: 'Courier New', monospace;
+        line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+        max-width: 100%;
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #333;
+        margin: 15px 0;
+    }
+
+    /* Systematic partition layout */
+    .system-partition {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+        background: #1a1a1a;
+        border-radius: 8px;
+        border: 1px solid #333;
+        overflow: hidden;
+        margin: 20px 0;
+    }
+
+    .partition-section {
+        padding: 15px 20px;
+        border-bottom: 1px solid #333;
+    }
+
+    .partition-section:last-child {
+        border-bottom: none;
+    }
+
+    .partition-header {
+        background: #2d2d2d;
+        color: #007acc;
+        font-weight: bold;
+        padding: 12px 20px;
+        border-bottom: 2px solid #007acc;
+    }
+
+    /* Compact list styling */
+    .compact-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .compact-list li {
+        padding: 8px 0;
+        border-bottom: 1px solid #2d2d2d;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .compact-list li:last-child {
+        border-bottom: none;
+    }
+
+    .list-bullet {
+        color: #28a745;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    /* Fix for the specific dashboard text */
+    .dashboard-content {
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #333;
+        font-family: 'Courier New', monospace;
+        line-height: 1.5;
+    }
+
+    .dashboard-section {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #333;
+    }
+
+    .dashboard-section:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .dashboard-title {
+        color: #007acc;
+        font-weight: bold;
+        margin-bottom: 12px;
+        font-size: 1.1em;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 8px;
+        padding: 5px 0;
+    }
+
+    .feature-bullet {
+        color: #28a745;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    /* Mobile optimization for compact layout */
+    @media (max-width: 768px) {
+        .output-content, .system-output, .compact-text {
+            padding: 15px;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .system-partition {
+            margin: 15px 0;
+        }
+
+        .partition-section {
+            padding: 12px 15px;
+        }
+
+        .partition-header {
+            padding: 10px 15px;
+        }
+
+        .dashboard-content {
+            padding: 15px;
+        }
+
+        .compact-list li {
+            padding: 6px 0;
+            font-size: 0.9em;
+        }
+
+        .feature-item {
+            margin-bottom: 6px;
+            font-size: 0.9em;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .output-content, .system-output, .compact-text {
+            padding: 12px;
+            font-size: 0.85em;
+        }
+
+        .partition-section {
+            padding: 10px 12px;
+        }
+
+        .dashboard-content {
+            padding: 12px;
+        }
+    }
+</style>
 <script>
     // Smooth interactions without breaking existing functionality
     document.addEventListener('DOMContentLoaded', function() {
@@ -634,6 +795,7 @@
     </footer>
 </body>
 </html>
+
 
 
 
