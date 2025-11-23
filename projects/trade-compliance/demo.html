@@ -3,462 +3,438 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trade Compliance Demo | Krishna Dayma</title>
+    <title>🌍 Trade Analytics Dashboard | Interactive Data Visualization</title>
+    <meta name="description" content="Interactive trade analytics dashboard with real-time data visualization for Italy-India bilateral trade intelligence.">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <style>
-    /* ===== AUTO-OPTIMIZING CSS FOR DEMO PAGE ===== */
-    * {
+    /* ===== EPIC CSS FOR INTERACTIVE DASHBOARD ===== */
+    :root {
+        /* Epic Color System */
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --bg-tertiary: #2d2d2d;
+        --text-primary: #ffffff;
+        --text-secondary: #e0e0e0;
+        --text-muted: #b0b0b0;
+        --accent-italy: #28a745;
+        --accent-india: #dc3545;
+        --accent-bilateral: #007acc;
+        --accent-compare: #6f42c1;
+        --accent-reset: #6c757d;
+        --accent-export: #20c997;
+        --accent-import: #fd7e14;
+        --border-glow: rgba(0, 122, 204, 0.3);
+        
+        /* Legendary Typography Scale */
+        --text-xs: clamp(0.75rem, 2vw, 0.875rem);
+        --text-sm: clamp(0.875rem, 2.5vw, 1rem);
+        --text-base: clamp(1rem, 3vw, 1.125rem);
+        --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
+        --text-xl: clamp(1.25rem, 4vw, 1.5rem);
+        --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
+        --text-3xl: clamp(1.875rem, 6vw, 2.25rem);
+        
+        /* Epic Spacing System */
+        --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+        --space-sm: clamp(0.75rem, 2vw, 1rem);
+        --space-md: clamp(1rem, 3vw, 1.5rem);
+        --space-lg: clamp(1.5rem, 4vw, 2rem);
+        --space-xl: clamp(2rem, 6vw, 3rem);
+        --space-2xl: clamp(3rem, 8vw, 4rem);
+        
+        /* Legendary Effects */
+        --shadow-glow: 0 0 20px rgba(0, 122, 204, 0.3);
+        --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.5);
+        --gradient-primary: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        --gradient-italy: linear-gradient(135deg, #28a745, #20c997);
+        --gradient-india: linear-gradient(135deg, #dc3545, #fd7e14);
+    }
+
+    /* Epic Reset */
+    *, *::before, *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
-    html, body {
-        width: 100%;
-        overflow-x: hidden;
-        font-family: 'Arial', sans-serif;
-        line-height: 1.6;
-        color: #e0e0e0;
-        background-color: #0a0a0a;
+    html {
+        scroll-behavior: smooth;
     }
 
+    body {
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--text-secondary);
+        background: var(--bg-primary);
+        overflow-x: hidden;
+        background-image: 
+            radial-gradient(circle at 10% 20%, rgba(0, 122, 204, 0.05) 0%, transparent 20%),
+            radial-gradient(circle at 90% 80%, rgba(220, 53, 69, 0.05) 0%, transparent 20%);
+    }
+
+    /* Legendary Container */
     .container {
         width: 100%;
-        max-width: min(1200px, 95vw);
+        max-width: min(1400px, 98vw);
         margin: 0 auto;
-        padding: 0 clamp(15px, 3vw, 30px);
+        padding: 0 var(--space-md);
     }
 
+    /* Epic Header */
     header {
-        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-        color: #ffffff;
-        padding: clamp(35px, 7vw, 70px) clamp(18px, 3.5vw, 35px);
+        background: var(--gradient-primary);
+        color: var(--text-primary);
+        padding: var(--space-2xl) var(--space-md);
         text-align: center;
-        border-radius: clamp(7px, 1.5vw, 12px);
-        margin-bottom: clamp(20px, 4vw, 40px);
+        border-radius: var(--space-lg);
+        margin-bottom: var(--space-xl);
+        border: 1px solid var(--border-glow);
+        position: relative;
+        overflow: hidden;
+    }
+
+    header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        animation: epicShimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes epicShimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
     }
 
     h1 { 
-        font-size: clamp(1.5rem, 4.5vw, 2.2rem); 
-        color: #ffffff; 
-        margin-bottom: clamp(8px, 1.5vw, 15px); 
-    }
-    
-    h2 { 
-        font-size: clamp(1.2rem, 3.5vw, 1.8rem); 
-        color: #ffffff; 
-        margin-bottom: clamp(8px, 1.5vw, 15px); 
+        font-size: var(--text-3xl);
+        background: linear-gradient(135deg, var(--text-primary), var(--accent-bilateral));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: var(--space-sm);
+        font-weight: 800;
     }
 
-    p {
-        color: #b0b0b0;
-        margin-bottom: clamp(10px, 2vw, 18px);
-        line-height: 1.6;
-        font-size: clamp(0.85rem, 2.2vw, 1rem);
-        max-width: min(60ch, 95vw);
+    .subtitle {
+        font-size: var(--text-lg);
+        color: var(--text-muted);
+        margin-bottom: var(--space-xs);
     }
 
-    .btn {
-        display: inline-block;
-        background: #404040;
-        color: #ffffff;
-        padding: clamp(9px, 2.2vw, 12px) clamp(16px, 3vw, 24px);
-        text-decoration: none;
-        border-radius: clamp(4px, 1vw, 6px);
-        font-weight: bold;
-        transition: all 0.3s ease;
-        border: 1px solid #555;
-        margin: clamp(3px, 1vw, 6px);
+    /* Legendary Navigation */
+    .nav-container {
         text-align: center;
-        font-size: clamp(0.8rem, 2vw, 0.95rem);
+        margin-bottom: var(--space-xl);
+    }
+
+    .nav-buttons {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+        background: var(--bg-secondary);
+        padding: var(--space-md);
+        border-radius: var(--space-lg);
+        border: 1px solid var(--border-glow);
+        box-shadow: var(--shadow-glow);
+    }
+
+    /* Epic Button System */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-xs);
+        padding: var(--space-sm) var(--space-lg);
+        text-decoration: none;
+        border-radius: var(--space-md);
+        font-weight: 600;
+        font-size: var(--text-base);
+        border: 2px solid transparent;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .btn:hover::before {
+        left: 100%;
     }
 
     .btn:hover {
-        background: #505050;
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-hover);
     }
 
-    .btn-italy {
-        background: #28a745;
-        border: 1px solid #28a745;
+    .btn-portfolio {
+        background: var(--accent-reset);
+        color: var(--text-primary);
     }
 
-    .btn-italy:hover {
-        background: #1e7e34;
-        border: 1px solid #1e7e34;
+    .btn-home {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+        border: 2px solid var(--border-glow);
     }
 
-    .btn-india {
-        background: #dc3545;
-        border: 1px solid #dc3545;
+    .btn-docs {
+        background: var(--accent-bilateral);
+        color: var(--text-primary);
     }
 
-    .btn-india:hover {
-        background: #c82333;
-        border: 1px solid #c82333;
-    }
-
+    /* Legendary Controls */
     .demo-controls {
-        background: #1a1a1a;
-        padding: clamp(18px, 3.5vw, 30px);
-        border-radius: clamp(6px, 1.5vw, 10px);
-        margin-bottom: clamp(15px, 3vw, 25px);
-        border: 1px solid #333;
-    }
-
-    .btn-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: clamp(8px, 1.5vw, 12px);
-        margin-top: clamp(12px, 2.5vw, 20px);
-    }
-
-    .output-container {
-        background: #1a1a1a;
-        padding: clamp(18px, 3.5vw, 30px);
-        border-radius: clamp(6px, 1.5vw, 10px);
-        border: 1px solid #333;
-        min-height: clamp(300px, 50vh, 500px);
-    }
-
-    .chart-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-        gap: clamp(12px, 2.5vw, 20px);
-        margin: clamp(18px, 3.5vw, 30px) 0;
-    }
-
-    .chart-item {
-        background: #1a1a1a;
-        padding: clamp(15px, 3vw, 25px);
-        border-radius: clamp(5px, 1.2vw, 8px);
-        border: 1px solid #333;
+        background: var(--bg-secondary);
+        padding: var(--space-xl);
+        border-radius: var(--space-lg);
+        margin-bottom: var(--space-lg);
+        border: 1px solid var(--border-glow);
+        box-shadow: var(--shadow-glow);
+        position: relative;
     }
 
     .controls-title {
-        font-size: clamp(1.1rem, 3vw, 1.4rem);
-        margin-bottom: clamp(10px, 2vw, 16px);
-        color: #ffffff;
+        font-size: var(--text-2xl);
+        margin-bottom: var(--space-md);
+        color: var(--text-primary);
+        text-align: center;
     }
 
-    /* Mobile-specific adjustments */
+    .btn-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+        gap: var(--space-sm);
+        margin-top: var(--space-lg);
+    }
+
+    .btn-italy {
+        background: var(--gradient-italy);
+        color: white;
+        border: 2px solid var(--accent-italy);
+    }
+
+    .btn-india {
+        background: var(--gradient-india);
+        color: white;
+        border: 2px solid var(--accent-india);
+    }
+
+    .btn-compare {
+        background: linear-gradient(135deg, var(--accent-compare), #8b5cf6);
+        color: white;
+        border: 2px solid var(--accent-compare);
+    }
+
+    .btn-bilateral {
+        background: linear-gradient(135deg, var(--accent-bilateral), #0ea5e9);
+        color: white;
+        border: 2px solid var(--accent-bilateral);
+    }
+
+    .btn-reset {
+        background: var(--accent-reset);
+        color: white;
+        border: 2px solid var(--accent-reset);
+    }
+
+    /* Epic Output Container */
+    .output-container {
+        background: var(--bg-secondary);
+        padding: var(--space-xl);
+        border-radius: var(--space-lg);
+        border: 1px solid var(--border-glow);
+        box-shadow: var(--shadow-glow);
+        min-height: 60vh;
+        position: relative;
+    }
+
+    .output-content {
+        font-family: 'Courier New', monospace;
+        line-height: 1.6;
+        background: var(--bg-primary);
+        padding: var(--space-lg);
+        border-radius: var(--space-md);
+        border: 1px solid var(--border-glow);
+        margin-bottom: var(--space-lg);
+        min-height: 200px;
+    }
+
+    /* Legendary Chart System */
+    .chart-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+        gap: var(--space-lg);
+        margin: var(--space-lg) 0;
+    }
+
+    .chart-item {
+        background: var(--bg-primary);
+        padding: var(--space-lg);
+        border-radius: var(--space-md);
+        border: 1px solid var(--border-glow);
+        transition: transform 0.3s ease;
+    }
+
+    .chart-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-glow);
+    }
+
+    .chart-title {
+        font-size: var(--text-lg);
+        color: var(--text-primary);
+        margin-bottom: var(--space-md);
+        text-align: center;
+        font-weight: 600;
+    }
+
+    /* Epic Data Styling */
+    .data-highlight {
+        color: var(--accent-bilateral);
+        font-weight: 700;
+    }
+
+    .positive {
+        color: var(--accent-italy);
+        font-weight: 700;
+    }
+
+    .negative {
+        color: var(--accent-india);
+        font-weight: 700;
+    }
+
+    /* Legendary Footer */
+    .back-link {
+        display: inline-block;
+        margin-top: var(--space-xl);
+        color: var(--accent-bilateral);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+        color: var(--text-primary);
+    }
+
+    /* Epic Mobile Optimizations */
     @media (max-width: 768px) {
         body {
-            padding: 8px;
+            padding: var(--space-sm);
+        }
+
+        .nav-buttons {
+            flex-direction: column;
+            width: 100%;
         }
 
         .btn-group {
-            flex-direction: column;
-        }
-
-        .btn-group .btn {
-            width: 100%;
-            margin: clamp(4px, 1vw, 6px) 0;
+            grid-template-columns: 1fr;
         }
 
         .chart-grid {
             grid-template-columns: 1fr;
         }
-    }
 
-    @media (max-width: 480px) {
-        body {
-            padding: 6px;
+        .output-container {
+            padding: var(--space-lg);
         }
 
-        .demo-controls, .output-container {
-            padding: clamp(12px, 2.5vw, 20px);
-        }
-    }
-<style>
-        
-    /* ===== UNIVERSAL ANIMATIONS & MOBILE OPTIMIZATIONS ===== */
-    /* Smooth scrolling */
-    html {
-        scroll-behavior: smooth;
-    }
-
-    /* Fade in animation for page load */
-    body {
-        opacity: 0;
-        animation: fadeIn 0.8s ease-out forwards;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Enhanced button animations */
-    .btn {
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-
-    /* Card hover effects */
-    .card, .feature-card, .skill-card, .project-card, .experience-item {
-        transition: all 0.3s ease;
-    }
-
-    .card:hover, .feature-card:hover, .skill-card:hover, 
-    .project-card:hover, .experience-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-
-    /* Mobile swipe support */
-    @media (max-width: 768px) {
-        body {
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .btn-group, .project-links {
-            flex-direction: column;
-        }
-        
-        .btn-group .btn, .project-links .btn {
-            width: 100%;
-            margin: 5px 0;
-        }
-    }
-
-    /* Reduced motion support */
-    @media (prefers-reduced-motion: reduce) {
-        * {
-            animation: none !important;
-            transition: none !important;
-        }
-    }
-
-    /* ===== TEXT & LAYOUT FIXES FOR COMPACT SYSTEMATIC DESIGN ===== */
-    
-    /* Fix text overflow and create systematic layout */
-    .output-content, .system-output, .compact-text {
-        font-family: 'Courier New', monospace;
-        line-height: 1.4;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: pre-wrap;
-        max-width: 100%;
-        background: #1a1a1a;
-        padding: 20px;
-        border-radius: 8px;
-        border: 1px solid #333;
-        margin: 15px 0;
-    }
-
-    /* Systematic partition layout */
-    .system-partition {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 0;
-        background: #1a1a1a;
-        border-radius: 8px;
-        border: 1px solid #333;
-        overflow: hidden;
-        margin: 20px 0;
-    }
-
-    .partition-section {
-        padding: 15px 20px;
-        border-bottom: 1px solid #333;
-    }
-
-    .partition-section:last-child {
-        border-bottom: none;
-    }
-
-    .partition-header {
-        background: #2d2d2d;
-        color: #007acc;
-        font-weight: bold;
-        padding: 12px 20px;
-        border-bottom: 2px solid #007acc;
-    }
-
-    /* Compact list styling */
-    .compact-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .compact-list li {
-        padding: 8px 0;
-        border-bottom: 1px solid #2d2d2d;
-        display: flex;
-        align-items: flex-start;
-    }
-
-    .compact-list li:last-child {
-        border-bottom: none;
-    }
-
-    .list-bullet {
-        color: #28a745;
-        margin-right: 10px;
-        font-weight: bold;
-    }
-
-    /* Fix for the specific dashboard text */
-    .dashboard-content {
-        background: #1a1a1a;
-        padding: 20px;
-        border-radius: 8px;
-        border: 1px solid #333;
-        font-family: 'Courier New', monospace;
-        line-height: 1.5;
-    }
-
-    .dashboard-section {
-        margin-bottom: 20px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #333;
-    }
-
-    .dashboard-section:last-child {
-        margin-bottom: 0;
-        padding-bottom: 0;
-        border-bottom: none;
-    }
-
-    .dashboard-title {
-        color: #007acc;
-        font-weight: bold;
-        margin-bottom: 12px;
-        font-size: 1.1em;
-    }
-
-    .feature-item {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 8px;
-        padding: 5px 0;
-    }
-
-    .feature-bullet {
-        color: #28a745;
-        margin-right: 10px;
-        font-weight: bold;
-    }
-
-    /* Mobile optimization for compact layout */
-    @media (max-width: 768px) {
-        .output-content, .system-output, .compact-text {
-            padding: 15px;
-            font-size: 0.9em;
-            line-height: 1.4;
-        }
-
-        .system-partition {
-            margin: 15px 0;
-        }
-
-        .partition-section {
-            padding: 12px 15px;
-        }
-
-        .partition-header {
-            padding: 10px 15px;
-        }
-
-        .dashboard-content {
-            padding: 15px;
-        }
-
-        .compact-list li {
-            padding: 6px 0;
-            font-size: 0.9em;
-        }
-
-        .feature-item {
-            margin-bottom: 6px;
-            font-size: 0.9em;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .output-content, .system-output, .compact-text {
-            padding: 12px;
-            font-size: 0.85em;
-        }
-
-        .partition-section {
-            padding: 10px 12px;
-        }
-
-        .dashboard-content {
-            padding: 12px;
-        }
-    }
-</style>
-
-<script>
-  
-        // Add ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to { transform: scale(4); opacity: 0; }
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
             }
-        `;
-        document.head.appendChild(style);
-
-        // Simple swipe detection
-        let startX = 0;
-        document.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-        });
-        
-        document.addEventListener('touchend', e => {
-            const endX = e.changedTouches[0].clientX;
-            const diff = startX - endX;
             
-            if (Math.abs(diff) > 50) { // 50px threshold
-                document.body.style.transform = `translateX(${diff > 0 ? -10 : 10}px)`;
-                setTimeout(() => {
-                    document.body.style.transform = 'translateX(0)';
-                }, 200);
+            .btn:hover,
+            .chart-item:hover {
+                transform: none;
             }
-        });
-    });
-</script>
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 0 var(--space-sm);
+        }
+
+        header {
+            padding: var(--space-xl) var(--space-md);
+        }
+
+        .demo-controls,
+        .output-container {
+            padding: var(--space-md);
+        }
+    }
+
+    /* Epic Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--accent-bilateral);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-export);
+    }
+    </style>
 </head>
-</head>
+
 <body>
     <div class="container">
+        <!-- Epic Header -->
         <header>
             <h1>🌍 Trade Compliance Analytics Dashboard</h1>
             <p class="subtitle">Interactive Data Visualization & Market Analysis</p>
             <p>Italy-India Bilateral Trade Intelligence Platform</p>
         </header>
-         </header>
 
-    <!-- Add this new navigation section -->
-    <div style="text-align: center; margin-bottom: 30px;">
-        <div style="background: #1a1a1a; padding: 15px; border-radius: 8px; border: 1px solid #333; display: inline-block;">
-            <a href="https://krishnaadayma.github.io/" class="btn" style="background: #6c757d; border: 1px solid #6c757d;">
-    ← Back to Portfolio
-            </a>
-            <a href="index.html" class="btn">
-                🏠 Project Home
-            </a>
-            <a href="documentation.html" class="btn btn-primary">
-                📚 Documentation
-            </a>
+        <!-- Legendary Navigation -->
+        <div class="nav-container">
+            <div class="nav-buttons">
+                <a href="https://krishnaadayma.github.io/" class="btn btn-portfolio">
+                    ← Back to Portfolio
+                </a>
+                <a href="index.html" class="btn btn-home">
+                    🏠 Project Home
+                </a>
+                <a href="documentation.html" class="btn btn-docs">
+                    📚 Documentation
+                </a>
+            </div>
         </div>
-    </div>
 
-    <div class="demo-controls">
-        <h2 class="controls-title">Explore Trade Intelligence</h2>
-        <p>Click to visualize comprehensive trade data and market analytics:</p>
+        <!-- Epic Controls -->
+        <div class="demo-controls">
+            <h2 class="controls-title">Explore Trade Intelligence</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: var(--space-lg);">
+                Click to visualize comprehensive trade data and market analytics:
+            </p>
             
             <div class="btn-group">
                 <button class="btn btn-italy" onclick="showItaly()">
@@ -470,56 +446,53 @@
                 <button class="btn btn-compare" onclick="showComparison()">
                     📊 Compare Markets
                 </button>
-                <button class="btn" onclick="showBilateral()">
+                <button class="btn btn-bilateral" onclick="showBilateral()">
                     🤝 Bilateral Trade
                 </button>
-                <button class="btn" onclick="clearOutput()" style="background: #6c757d; border: 1px solid #6c757d;">
+                <button class="btn btn-reset" onclick="clearOutput()">
                     🔄 Reset View
                 </button>
             </div>
         </div>
 
+        <!-- Legendary Output Area -->
         <div class="output-container">
             <div class="output-content" id="output">
-📈 TRADE INTELLIGENCE DASHBOARD
-================================
-
-Welcome to the Trade Analytics Platform!
-
-This interactive dashboard provides:
-• Quantitative market analysis
-• Data visualization through interactive charts
-• Comparative economic metrics
-• Bilateral trade flow analysis
-• Strategic investment insights
-
-👆 Select an analysis category above to begin exploring comprehensive trade data between Italy and India.
-
-🔍 Features:
-• Real-time chart visualizations
-• Export/import flow analysis
-• Market growth projections
-• Sector-specific opportunities
+                <div style="text-align: center; padding: var(--space-xl);">
+                    <div style="font-size: var(--text-2xl); color: var(--accent-bilateral); margin-bottom: var(--space-md);">
+                        📈 TRADE INTELLIGENCE DASHBOARD
+                    </div>
+                    <div style="color: var(--text-muted); line-height: 1.8;">
+                        Welcome to the Trade Analytics Platform!<br><br>
+                        This interactive dashboard provides real-time insights into Italy-India trade relations<br>
+                        with advanced data visualization and comparative analysis.
+                    </div>
+                </div>
             </div>
             
             <div id="chartsContainer"></div>
         </div>
 
-        <a href="index.html" class="back-link">
-    ← Back to Project Home
-</a>
+        <!-- Epic Footer -->
+        <div style="text-align: center; margin-top: var(--space-xl);">
+            <a href="index.html" class="back-link">
+                ← Back to Project Home
+            </a>
+        </div>
     </div>
 
     <script>
-        // Chart colors for consistent styling
+        // Legendary Chart Configuration
         const chartColors = {
             italy: '#28a745',
             india: '#dc3545',
             bilateral: '#007acc',
             export: '#20c997',
-            import: '#fd7e14'
+            import: '#fd7e14',
+            compare: '#6f42c1'
         };
 
+        // Epic Chart Factory
         function createChart(canvasId, config) {
             const ctx = document.getElementById(canvasId).getContext('2d');
             return new Chart(ctx, {
@@ -527,13 +500,15 @@ This interactive dashboard provides:
                 data: config.data,
                 options: {
                     responsive: true,
+                    maintainAspectRatio: true,
                     plugins: {
                         legend: {
                             position: 'top',
                             labels: {
                                 color: '#e0e0e0',
                                 font: {
-                                    family: 'Arial'
+                                    family: 'system-ui',
+                                    size: 12
                                 }
                             }
                         },
@@ -541,47 +516,64 @@ This interactive dashboard provides:
                             display: true,
                             color: '#e0e0e0',
                             font: {
-                                family: 'Arial',
-                                size: 14
+                                family: 'system-ui',
+                                size: 14,
+                                weight: '600'
                             }
                         }
                     },
                     scales: {
                         x: {
-                            ticks: { color: '#e0e0e0' },
+                            ticks: { color: '#b0b0b0' },
                             grid: { color: '#333' }
                         },
                         y: {
-                            ticks: { color: '#e0e0e0' },
+                            ticks: { color: '#b0b0b0' },
                             grid: { color: '#333' }
                         }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutQuart'
                     }
                 }
             });
         }
 
+        // Legendary Italy Analytics
         function showItaly() {
             const output = `
-ITALY - COMPREHENSIVE TRADE ANALYTICS
-======================================
-
-📊 ECONOMIC OVERVIEW:
-• GDP: <span class="data-highlight">$2.1 trillion</span> (8th largest globally)
-• GDP Growth: <span class="positive">+0.7%</span> (2023)
-• GDP per Capita: <span class="data-highlight">$35,000</span>
-• Inflation: <span class="negative">5.9%</span> (2023)
-
-🏭 KEY INDUSTRY PERFORMANCE:
-• Luxury Goods: <span class="data-highlight">$120B</span> industry
-• Machinery Exports: <span class="data-highlight">$85B</span> (2nd in EU)
-• Food & Wine: <span class="data-highlight">$55B</span> exports
-• Pharmaceuticals: <span class="data-highlight">$32B</span> market
-
-🚢 LOGISTICS EXCELLENCE:
-• Port Quality: <span class="data-highlight">4.2/5</span> (World Bank)
-• Customs Clearance: <span class="data-highlight">24 hours</span> average
-• LPI Score: <span class="data-highlight">3.8/5</span> (Global Rank: 19)
-            `;
+<div style="padding: var(--space-md);">
+    <div style="font-size: var(--text-xl); color: var(--accent-italy); margin-bottom: var(--space-md); text-align: center;">
+        🇮🇹 ITALY - COMPREHENSIVE TRADE ANALYTICS
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-md);">
+        <div style="background: var(--bg-primary); padding: var(--space-md); border-radius: var(--space-sm); border: 1px solid var(--border-glow);">
+            <div style="color: var(--accent-export); font-weight: 600; margin-bottom: var(--space-sm);">📊 ECONOMIC OVERVIEW</div>
+            <div>• GDP: <span class="data-highlight">$2.1 trillion</span> (8th globally)</div>
+            <div>• Growth: <span class="positive">+0.7%</span> (2023)</div>
+            <div>• GDP/Capita: <span class="data-highlight">$35,000</span></div>
+            <div>• Inflation: <span class="negative">5.9%</span></div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: var(--space-md); border-radius: var(--space-sm); border: 1px solid var(--border-glow);">
+            <div style="color: var(--accent-export); font-weight: 600; margin-bottom: var(--space-sm);">🏭 KEY INDUSTRIES</div>
+            <div>• Luxury Goods: <span class="data-highlight">$120B</span></div>
+            <div>• Machinery: <span class="data-highlight">$85B</span> exports</div>
+            <div>• Food & Wine: <span class="data-highlight">$55B</span></div>
+            <div>• Pharmaceuticals: <span class="data-highlight">$32B</span></div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: var(--space-md); border-radius: var(--space-sm); border: 1px solid var(--border-glow);">
+            <div style="color: var(--accent-export); font-weight: 600; margin-bottom: var(--space-sm);">🚢 LOGISTICS</div>
+            <div>• Port Quality: <span class="data-highlight">4.2/5</span></div>
+            <div>• Customs: <span class="data-highlight">24 hours</span></div>
+            <div>• LPI Score: <span class="data-highlight">3.8/5</span></div>
+            <div>• Global Rank: <span class="data-highlight">19</span></div>
+        </div>
+    </div>
+</div>`;
             
             document.getElementById('output').innerHTML = output;
             
@@ -626,28 +618,40 @@ ITALY - COMPREHENSIVE TRADE ANALYTICS
             });
         }
 
+        // Legendary India Analytics
         function showIndia() {
             const output = `
-INDIA - COMPREHENSIVE TRADE ANALYTICS
-======================================
-
-📊 ECONOMIC OVERVIEW:
-• GDP: <span class="data-highlight">$3.7 trillion</span> (5th largest globally)
-• GDP Growth: <span class="positive">+7.2%</span> (2023)
-• GDP per Capita: <span class="data-highlight">$2,600</span>
-• Inflation: <span class="positive">4.7%</span> (2023)
-
-🏭 KEY INDUSTRY PERFORMANCE:
-• IT Services: <span class="data-highlight">$245B</span> exports
-• Pharmaceuticals: <span class="data-highlight">$25B</span> exports
-• Textiles: <span class="data-highlight">$44B</span> industry
-• Automotive: <span class="data-highlight">4.5M</span> vehicles annually
-
-🚢 LOGISTICS & INFRASTRUCTURE:
-• Port Capacity: <span class="data-highlight">15M+ TEUs</span> total
-• Customs Clearance: <span class="data-highlight">85 hours</span> average
-• Logistics Cost: <span class="data-highlight">14%</span> of GDP
-            `;
+<div style="padding: var(--space-md);">
+    <div style="font-size: var(--text-xl); color: var(--accent-india); margin-bottom: var(--space-md); text-align: center;">
+        🇮🇳 INDIA - COMPREHENSIVE TRADE ANALYTICS
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-md);">
+        <div style="background: var(--bg-primary); padding: var(--space-md); border-radius: var(--space-sm); border: 1px solid var(--border-glow);">
+            <div style="color: var(--accent-export); font-weight: 600; margin-bottom: var(--space-sm);">📊 ECONOMIC OVERVIEW</div>
+            <div>• GDP: <span class="data-highlight">$3.7 trillion</span> (5th globally)</div>
+            <div>• Growth: <span class="positive">+7.2%</span> (2023)</div>
+            <div>• GDP/Capita: <span class="data-highlight">$2,600</span></div>
+            <div>• Inflation: <span class="positive">4.7%</span></div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: var(--space-md); border-radius: var(--space-sm); border: 1px solid var(--border-glow);">
+            <div style="color: var(--accent-export); font-weight: 600; margin-bottom: var(--space-sm);">🏭 KEY INDUSTRIES</div>
+            <div>• IT Services: <span class="data-highlight">$245B</span></div>
+            <div>• Pharmaceuticals: <span class="data-highlight">$25B</span> exports</div>
+            <div>• Textiles: <span class="data-highlight">$44B</span></div>
+            <div>• Automotive: <span class="data-highlight">4.5M</span> units</div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: var(--space-md); border-radius: var(--space-sm); border: 1px solid var(--border-glow);">
+            <div style="color: var(--accent-export); font-weight: 600; margin-bottom: var(--space-sm);">🚢 LOGISTICS</div>
+            <div>• Port Capacity: <span class="data-highlight">15M+ TEUs</span></div>
+            <div>• Customs: <span class="data-highlight">85 hours</span></div>
+            <div>• Logistics Cost: <span class="data-highlight">14% GDP</span></div>
+            <div>• Infrastructure: <span class="positive">Rapid Growth</span></div>
+        </div>
+    </div>
+</div>`;
             
             document.getElementById('output').innerHTML = output;
             
@@ -692,25 +696,42 @@ INDIA - COMPREHENSIVE TRADE ANALYTICS
             });
         }
 
+        // Epic Comparison View
         function showComparison() {
             const output = `
-ITALY vs INDIA - COMPREHENSIVE COMPARISON
-==========================================
-
-📊 MACROECONOMIC COMPARISON:
-• GDP: Italy <span class="data-highlight">$2.1T</span> vs India <span class="data-highlight">$3.7T</span>
-• GDP per Capita: Italy <span class="data-highlight">$35K</span> vs India <span class="data-highlight">$2.6K</span>
-• Growth Rate: Italy <span class="negative">0.7%</span> vs India <span class="positive">7.2%</span>
-
-🏭 INDUSTRY STRUCTURE:
-• Manufacturing: Italy <span class="data-highlight">16%</span> vs India <span class="data-highlight">17%</span>
-• Services: Italy <span class="data-highlight">70%</span> vs India <span class="data-highlight">55%</span>
-• Agriculture: Italy <span class="data-highlight">2%</span> vs India <span class="data-highlight">16%</span>
-
-🚢 TRADE PERFORMANCE:
-• Exports: Italy <span class="data-highlight">$670B</span> vs India <span class="data-highlight">$450B</span>
-• Trade Balance: Italy <span class="positive">+$55B</span> vs India <span class="negative">-$270B</span>
-            `;
+<div style="padding: var(--space-md);">
+    <div style="font-size: var(--text-xl); color: var(--accent-compare); margin-bottom: var(--space-md); text-align: center;">
+        📊 ITALY vs INDIA - COMPREHENSIVE COMPARISON
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md);">
+        <div style="background: var(--bg-primary); padding: var(--space-md); border-radius: var(--space-sm); border: 1px solid var(--accent-italy);">
+            <div style="color: var(--accent-italy); font-weight: 600; margin-bottom: var(--space-sm); text-align: center;">🇮🇹 ITALY</div>
+            <div>• GDP: <span class="data-highlight">$2.1T</span></div>
+            <div>• GDP/Capita: <span class="data-highlight">$35K</span></div>
+            <div>• Growth: <span class="negative">0.7%</span></div>
+            <div>• Exports: <span class="data-highlight">$670B</span></div>
+            <div>• Balance: <span class="positive">+$55B</span></div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: var(--space-md); border-radius: var(--space-sm); border: 1px solid var(--accent-india);">
+            <div style="color: var(--accent-india); font-weight: 600; margin-bottom: var(--space-sm); text-align: center;">🇮🇳 INDIA</div>
+            <div>• GDP: <span class="data-highlight">$3.7T</span></div>
+            <div>• GDP/Capita: <span class="data-highlight">$2.6K</span></div>
+            <div>• Growth: <span class="positive">7.2%</span></div>
+            <div>• Exports: <span class="data-highlight">$450B</span></div>
+            <div>• Balance: <span class="negative">-$270B</span></div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: var(--space-md); border-radius: var(--space-sm); border: 1px solid var(--accent-bilateral);">
+            <div style="color: var(--accent-bilateral); font-weight: 600; margin-bottom: var(--space-sm); text-align: center;">🏭 SECTOR DISTRIBUTION</div>
+            <div>• Services: <span class="data-highlight">70%</span> vs <span class="data-highlight">55%</span></div>
+            <div>• Manufacturing: <span class="data-highlight">16%</span> vs <span class="data-highlight">17%</span></div>
+            <div>• Agriculture: <span class="data-highlight">2%</span> vs <span class="data-highlight">16%</span></div>
+            <div>• Construction: <span class="data-highlight">6%</span> vs <span class="data-highlight">8%</span></div>
+        </div>
+    </div>
+</div>`;
             
             document.getElementById('output').innerHTML = output;
             
@@ -830,25 +851,40 @@ ITALY vs INDIA - COMPREHENSIVE COMPARISON
             }, 100);
         }
 
+        // Legendary Bilateral View
         function showBilateral() {
             const output = `
-ITALY-INDIA BILATERAL TRADE ANALYTICS
-=======================================
-
-📈 TRADE PERFORMANCE 2023:
-• Total Trade: <span class="data-highlight">$15.2B</span>
-• Italian Exports: <span class="data-highlight">$8.1B</span>
-• Indian Exports: <span class="data-highlight">$7.1B</span>
-• Trade Balance: <span class="positive">Italy +$1.0B</span>
-
-🏭 INVESTMENT FLOWS:
-• Italian FDI in India: <span class="data-highlight">$3.2B</span> cumulative
-• Indian FDI in Italy: <span class="data-highlight">$1.8B</span> cumulative
-
-🚀 GROWTH PROJECTIONS:
-• 2025 Target: <span class="data-highlight">$20B</span> bilateral trade
-• High-Potential Growth: Green Tech, Digital Services
-            `;
+<div style="padding: var(--space-md);">
+    <div style="font-size: var(--text-xl); color: var(--accent-bilateral); margin-bottom: var(--space-md); text-align: center;">
+        🤝 ITALY-INDIA BILATERAL TRADE ANALYTICS
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-md);">
+        <div style="background: var(--bg-primary); padding: var(--space-md); border-radius: var(--space-sm); border: 1px solid var(--border-glow);">
+            <div style="color: var(--accent-export); font-weight: 600; margin-bottom: var(--space-sm);">📈 TRADE PERFORMANCE 2023</div>
+            <div>• Total Trade: <span class="data-highlight">$15.2B</span></div>
+            <div>• Italy → India: <span class="data-highlight">$8.1B</span></div>
+            <div>• India → Italy: <span class="data-highlight">$7.1B</span></div>
+            <div>• Balance: <span class="positive">Italy +$1.0B</span></div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: var(--space-md); border-radius: var(--space-sm); border: 1px solid var(--border-glow);">
+            <div style="color: var(--accent-export); font-weight: 600; margin-bottom: var(--space-sm);">🏭 INVESTMENT FLOWS</div>
+            <div>• Italian FDI: <span class="data-highlight">$3.2B</span></div>
+            <div>• Indian FDI: <span class="data-highlight">$1.8B</span></div>
+            <div>• Joint Ventures: <span class="data-highlight">250+</span></div>
+            <div>• Growth Rate: <span class="positive">12% YoY</span></div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: var(--space-md); border-radius: var(--space-sm); border: 1px solid var(--border-glow);">
+            <div style="color: var(--accent-export); font-weight: 600; margin-bottom: var(--space-sm);">🚀 GROWTH PROJECTIONS</div>
+            <div>• 2025 Target: <span class="data-highlight">$20B</span></div>
+            <div>• High-Potential: Green Tech</div>
+            <div>• Digital Services</div>
+            <div>• Renewable Energy</div>
+        </div>
+    </div>
+</div>`;
             
             document.getElementById('output').innerHTML = output;
             
@@ -897,30 +933,28 @@ ITALY-INDIA BILATERAL TRADE ANALYTICS
             });
         }
 
+        // Epic Reset Function
         function clearOutput() {
             document.getElementById('output').innerHTML = `
-📈 TRADE INTELLIGENCE DASHBOARD
-================================
-
-Welcome to the Trade Analytics Platform!
-
-This interactive dashboard provides:
-• Quantitative market analysis
-• Data visualization through interactive charts
-• Comparative economic metrics
-• Bilateral trade flow analysis
-• Strategic investment insights
-
-👆 Select an analysis category above to begin exploring comprehensive trade data between Italy and India.
-
-🔍 Features:
-• Real-time chart visualizations
-• Export/import flow analysis
-• Market growth projections
-• Sector-specific opportunities
+                <div style="text-align: center; padding: var(--space-xl);">
+                    <div style="font-size: var(--text-2xl); color: var(--accent-bilateral); margin-bottom: var(--space-md);">
+                        📈 TRADE INTELLIGENCE DASHBOARD
+                    </div>
+                    <div style="color: var(--text-muted); line-height: 1.8;">
+                        Welcome to the Trade Analytics Platform!<br><br>
+                        This interactive dashboard provides real-time insights into Italy-India trade relations<br>
+                        with advanced data visualization and comparative analysis.
+                    </div>
+                </div>
             `;
             document.getElementById('chartsContainer').innerHTML = '';
         }
+
+        // Legendary Initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any initialization code here
+            console.log('🚀 Epic Trade Dashboard Loaded!');
+        });
     </script>
 </body>
 </html>
