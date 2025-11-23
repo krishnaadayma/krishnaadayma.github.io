@@ -161,6 +161,104 @@
             margin-top: 30px;
             border-radius: 10px;
         }
+        /* Projects Section Styles */
+        #projects {
+            padding: 80px 0;
+            background: #0a0a0a;
+        }
+
+        .project-card {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #007acc;
+            border: 1px solid #333;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            color: #007acc;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .project-card p {
+            color: #b0b0b0;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-features {
+            margin-bottom: 20px;
+        }
+
+        .feature-tag {
+            background: #2d2d2d;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-right: 10px;
+            color: #aaaaaa;
+            display: inline-block;
+            margin-bottom: 8px;
+            border: 1px solid #404040;
+        }
+
+        .project-links {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background: #007acc;
+            color: white;
+            border: 1px solid #007acc;
+        }
+
+        .btn-primary:hover {
+            background: #005a9e;
+            border: 1px solid #005a9e;
+        }
+
+        .btn-secondary {
+            background: #28a745;
+            color: white;
+            border: 1px solid #28a745;
+        }
+
+        .btn-secondary:hover {
+            background: #1e7e34;
+            border: 1px solid #1e7e34;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #007acc;
+            border: 2px solid #007acc;
+        }
+
+        .btn-outline:hover {
+            background: #007acc;
+            color: white;
+        }
+
+        .tech-stack {
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: #0056b3;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            margin-right: 8px;
+            color: white;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -190,7 +288,6 @@
             </div>
         </div>
     </section>
-
     <!-- Skills Section -->
     <section id="skills">
         <div class="container">
@@ -213,6 +310,40 @@
                     <p>Multilingual: English, Hindi, Italian</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            
+            <!-- Trade Compliance Project Card -->
+            <div class="project-card">
+                <h3>🌍 International Trade Compliance System</h3>
+                <p>Python application analyzing trade regulations between Italy and India, including documentation requirements, logistics, and bilateral trade context.</p>
+                
+                <div class="project-features">
+                    <span class="feature-tag">Country Trade Data</span>
+                    <span class="feature-tag">Documentation Analysis</span>
+                    <span class="feature-tag">Bilateral Comparison</span>
+                </div>
+                
+                <div class="project-links">
+                    <a href="projects/trade-compliance/" class="btn btn-primary">View Project</a>
+                    <a href="projects/trade-compliance/trade_compliance.py" download class="btn btn-secondary">Download Code</a>
+                    <a href="projects/trade-compliance/README.md" class="btn btn-outline">Documentation</a>
+                </div>
+                
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Data Analysis</span>
+                    <span class="tech-tag">International Business</span>
+                    <span class="tech-tag">Trade Compliance</span>
+                </div>
+            </div>
+            <!-- End of Trade Compliance Project -->
+            
         </div>
     </section>
 
@@ -248,6 +379,19 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-info">
+                <p>Email: krishna.saq@gmail.com</p>
+                <p>Mobile: +39 375 632 0447</p>
+                <p>Location: Bologna, Italy</p>
+                <p>LinkedIn: linkedin.com/in/krishnaadayma</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -256,3 +400,4 @@
     </footer>
 </body>
 </html>
+
