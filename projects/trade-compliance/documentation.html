@@ -4,369 +4,677 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trade Compliance Documentation</title>
+    <meta name="description" content="Complete technical guide and implementation resources for Trade Compliance Analysis">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ===== OPTIMIZED CSS FRAMEWORK ===== */
         :root {
-            --primary-bg: #F5F5DC;
-            --card-bg: #FFFFFF;
-            --accent-color: #8B4513;
-            --secondary-color: #A0522D;
-            --text-color: #333333;
-            --light-text: #666666;
-            --border-color: #D2B48C;
-            --shadow: 0 8px 32px rgba(139, 69, 19, 0.1);
+            /* Color system */
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --text-muted: #b0b0b0;
+            --accent-primary: #007acc;
+            --accent-secondary: #28a745;
+            --accent-warning: #ff6b00;
+            --border-color: #333;
+            --gradient-primary: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            --gradient-accent: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
+            
+            /* Typography scale */
+            --text-xs: clamp(0.75rem, 2vw, 0.875rem);
+            --text-sm: clamp(0.875rem, 2.5vw, 1rem);
+            --text-base: clamp(1rem, 3vw, 1.125rem);
+            --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
+            --text-xl: clamp(1.25rem, 4vw, 1.5rem);
+            --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
+            --text-3xl: clamp(1.875rem, 6vw, 2.25rem);
+            
+            /* Spacing scale */
+            --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+            --space-sm: clamp(0.75rem, 2vw, 1rem);
+            --space-md: clamp(1rem, 3vw, 1.5rem);
+            --space-lg: clamp(1.5rem, 4vw, 2rem);
+            --space-xl: clamp(2rem, 6vw, 3rem);
+            --space-2xl: clamp(3rem, 8vw, 4rem);
+            
+            /* Border radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.3);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.4);
+            --shadow-glow: 0 0 20px rgba(0, 122, 204, 0.3);
+            
+            /* Animation */
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+            --transition-slow: 0.5s ease;
         }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--text-color);
+
+        /* Reset and base styles */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
+            color: var(--text-secondary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
         }
-        
+
+        /* Focus styles for accessibility */
+        :focus-visible {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        /* Skip link for keyboard navigation */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-primary);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 1000;
+            border-radius: var(--radius-sm);
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Container system */
         .container {
-            max-width: 1200px;
+            width: 100%;
+            max-width: min(1200px, 95vw);
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 var(--space-md);
         }
-        
-        .header {
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary);
+            line-height: 1.2;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        h1 { 
+            font-size: var(--text-3xl);
             text-align: center;
-            padding: 40px 20px;
-            background: var(--card-bg);
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
+        }
+
+        h2 { 
+            font-size: var(--text-2xl);
+            margin-bottom: var(--space-md);
+        }
+
+        h3 { 
+            font-size: var(--text-xl);
+            color: var(--accent-primary);
+        }
+
+        h4 { 
+            font-size: var(--text-lg);
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: var(--space-sm);
+            line-height: 1.6;
+            font-size: var(--text-base);
+            max-width: 65ch;
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-primary);
+            color: var(--text-primary);
+            padding: var(--space-2xl) var(--space-md);
+            text-align: center;
+            border-radius: var(--radius-xl);
+            margin-bottom: var(--space-xl);
+            position: relative;
+            overflow: hidden;
             border: 1px solid var(--border-color);
         }
-        
+
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: var(--accent-color);
+            animation: fadeInUp 0.8s ease-out;
         }
-        
+
+        .header p {
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
         .nav-buttons {
             display: flex;
-            gap: 15px;
+            gap: var(--space-sm);
             justify-content: center;
-            margin-top: 20px;
+            margin-top: var(--space-lg);
             flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
-        
+
+        /* Button system */
         .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            background: var(--accent-color);
-            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            padding: var(--space-sm) var(--space-lg);
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: 2px solid var(--accent-color);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--text-base);
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-fast);
             cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .btn:hover {
-            background: transparent;
-            color: var(--accent-color);
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left var(--transition-medium);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            background: #404040;
             transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
-        
+
+        .btn-primary {
+            background: var(--gradient-accent);
+            border-color: var(--accent-primary);
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background: #005a9e;
+            border-color: #005a9e;
+            box-shadow: var(--shadow-glow);
+        }
+
         .btn-outline {
             background: transparent;
-            color: var(--accent-color);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
         }
-        
-        .btn-outline:hover {
-            background: var(--accent-color);
+
+        .btn-outline:hover,
+        .btn-outline:focus {
+            background: var(--accent-primary);
             color: white;
         }
-        
+
+        /* Content grid */
         .content-grid {
             display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: 1fr minmax(350px, 400px);
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
         }
-        
+
         .main-content, .sidebar {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
+            background: var(--bg-secondary);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
         }
-        
+
         h2 {
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border-color);
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid var(--accent-primary);
+            position: relative;
         }
-        
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--accent-primary);
+        }
+
         h3 {
-            color: var(--secondary-color);
-            margin: 25px 0 15px 0;
+            color: var(--accent-primary);
+            margin: var(--space-xl) 0 var(--space-md) 0;
         }
-        
+
+        /* Specification grid */
         .spec-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-lg) 0;
         }
-        
+
         .spec-card {
-            background: var(--primary-bg);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid var(--accent-color);
+            background: var(--bg-tertiary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--accent-primary);
+            transition: transform var(--transition-medium);
         }
-        
+
+        .spec-card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Calculator */
         .calculator {
-            background: var(--accent-color);
-            padding: 25px;
-            border-radius: 15px;
+            background: var(--gradient-accent);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
             color: white;
-            margin: 25px 0;
+            margin: var(--space-lg) 0;
+            transition: transform var(--transition-medium);
         }
-        
+
+        .calculator:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
         .calculator h3 {
             color: white;
-            margin-bottom: 20px;
+            margin-bottom: var(--space-md);
         }
-        
+
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: var(--space-md);
         }
-        
+
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
+            margin-bottom: var(--space-xs);
+            font-weight: 600;
+            color: white;
         }
-        
+
         input, select {
             width: 100%;
-            padding: 12px;
+            padding: var(--space-sm);
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            font-size: var(--text-base);
+            background: var(--bg-primary);
+            color: var(--text-primary);
             border: 1px solid var(--border-color);
+            transition: border-color var(--transition-fast);
         }
-        
+
+        input:focus, select:focus {
+            border-color: var(--accent-primary);
+            outline: none;
+        }
+
         .result {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            margin-top: var(--space-md);
             text-align: center;
+            backdrop-filter: blur(10px);
         }
-        
+
         .result-number {
-            font-size: 2em;
+            font-size: var(--text-3xl);
             font-weight: bold;
-            margin: 10px 0;
+            margin: var(--space-sm) 0;
+            color: white;
         }
-        
+
+        /* Code block */
         .code-block {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
+            background: #1a1a1a;
+            color: var(--text-secondary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            margin: var(--space-lg) 0;
             font-family: 'Courier New', monospace;
             overflow-x: auto;
+            border-left: 4px solid var(--accent-primary);
+            font-size: var(--text-sm);
+            line-height: 1.5;
+            white-space: pre;
+            word-wrap: break-word;
         }
-        
-        .footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: var(--light-text);
-            margin-top: 40px;
-            border-top: 1px solid var(--border-color);
+
+        /* Lists */
+        ul, ol {
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
+            padding-left: var(--space-lg);
         }
-        
+
+        li {
+            margin-bottom: var(--space-xs);
+            line-height: 1.6;
+        }
+
+        /* Quick links */
         .quick-links {
             list-style: none;
             padding: 0;
+            margin: var(--space-lg) 0;
         }
-        
+
         .quick-links li {
-            margin: 12px 0;
-            padding: 10px;
-            background: var(--primary-bg);
-            border-radius: 8px;
-            transition: background 0.3s ease;
+            margin: var(--space-sm) 0;
+            padding: var(--space-sm);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+            border: 1px solid transparent;
         }
-        
+
         .quick-links li:hover {
-            background: var(--border-color);
+            background: var(--bg-primary);
+            border-color: var(--accent-primary);
+            transform: translateX(4px);
         }
-        
+
         .quick-links a {
-            color: var(--accent-color);
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
         }
-        
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: var(--space-xl) var(--space-md);
+            color: var(--text-muted);
+            margin-top: var(--space-2xl);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile optimizations */
         @media (max-width: 968px) {
             .content-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-buttons .btn {
+                width: min(100%, 300px);
+                margin: var(--space-xs) 0;
+            }
+
+            .main-content, .sidebar {
+                padding: var(--space-lg);
+            }
+
+            /* Reduce motion for better performance */
+            @media (prefers-reduced-motion: reduce) {
+                .btn,
+                .spec-card,
+                .calculator,
+                .quick-links li {
+                    transition: none;
+                }
+                
+                .btn:hover,
+                .spec-card:hover,
+                .calculator:hover,
+                .quick-links li:hover {
+                    transform: none;
+                }
+                
+                .btn::before {
+                    display: none;
+                }
+                
+                html {
+                    scroll-behavior: auto;
+                }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--space-sm);
+            }
+
+            header {
+                padding: var(--space-xl) var(--space-md);
+            }
+
+            .spec-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calculator {
+                padding: var(--space-md);
             }
         }
     </style>
 </head>
 <body>
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <div class="container">
-        <div class="header">
+        <header class="fade-in">
             <h1>📚 Trade Compliance Documentation</h1>
             <p>Complete technical guide and implementation resources</p>
             <div class="nav-buttons">
                 <a href="index.html" class="btn btn-outline">🏠 Main Page</a>
                 <a href="demo.html" class="btn btn-outline">📊 Interactive Dashboard</a>
-                <a href="#calculator" class="btn">🧮 Cost Calculator</a>
+                <a href="#calculator" class="btn btn-primary">🧮 Cost Calculator</a>
             </div>
-        </div>
+        </header>
 
-        <div class="content-grid">
-            <div class="main-content">
-                <section id="overview">
-                    <h2>🌍 Project Overview</h2>
-                    <p>This platform provides comprehensive trade compliance analysis for Italy-India bilateral trade, featuring advanced analytics, cost calculations, and regulatory tracking.</p>
-                    
-                    <div class="spec-grid">
-                        <div class="spec-card">
-                            <h4>Data Sources</h4>
-                            <p>WTO, EU Commission, Indian Customs, Trade Maps</p>
+        <main id="main-content">
+            <div class="content-grid">
+                <div class="main-content">
+                    <section id="overview" class="fade-in">
+                        <h2>🌍 Project Overview</h2>
+                        <p>This platform provides comprehensive trade compliance analysis for Italy-India bilateral trade, featuring advanced analytics, cost calculations, and regulatory tracking.</p>
+                        
+                        <div class="spec-grid">
+                            <div class="spec-card">
+                                <h4>Data Sources</h4>
+                                <p>WTO, EU Commission, Indian Customs, Trade Maps</p>
+                            </div>
+                            <div class="spec-card">
+                                <h4>Update Frequency</h4>
+                                <p>Real-time + Quarterly regulatory updates</p>
+                            </div>
+                            <div class="spec-card">
+                                <h4>Coverage</h4>
+                                <p>500+ product categories, 150+ regulations</p>
+                            </div>
                         </div>
-                        <div class="spec-card">
-                            <h4>Update Frequency</h4>
-                            <p>Real-time + Quarterly regulatory updates</p>
-                        </div>
-                        <div class="spec-card">
-                            <h4>Coverage</h4>
-                            <p>500+ product categories, 150+ regulations</p>
-                        </div>
-                    </div>
-                </section>
+                    </section>
 
-                <section id="architecture">
-                    <h2>🏗️ System Architecture</h2>
-                    <h3>Data Layer</h3>
-                    <ul>
-                        <li>MySQL database for structured trade data</li>
-                        <li>MongoDB for unstructured regulatory documents</li>
-                        <li>Redis cache for performance optimization</li>
-                    </ul>
-                    
-                    <h3>API Layer</h3>
-                    <ul>
-                        <li>RESTful APIs for data access</li>
-                        <li>WebSocket connections for real-time updates</li>
-                        <li>OAuth 2.0 authentication</li>
-                    </ul>
-                    
-                    <h3>Presentation Layer</h3>
-                    <ul>
-                        <li>Responsive HTML/CSS/JavaScript frontend</li>
-                        <li>Chart.js for data visualization</li>
-                        <li>Progressive Web App capabilities</li>
-                    </ul>
-                </section>
+                    <section id="architecture" class="fade-in">
+                        <h2>🏗️ System Architecture</h2>
+                        <h3>Data Layer</h3>
+                        <ul>
+                            <li>MySQL database for structured trade data</li>
+                            <li>MongoDB for unstructured regulatory documents</li>
+                            <li>Redis cache for performance optimization</li>
+                        </ul>
+                        
+                        <h3>API Layer</h3>
+                        <ul>
+                            <li>RESTful APIs for data access</li>
+                            <li>WebSocket connections for real-time updates</li>
+                            <li>OAuth 2.0 authentication</li>
+                        </ul>
+                        
+                        <h3>Presentation Layer</h3>
+                        <ul>
+                            <li>Responsive HTML/CSS/JavaScript frontend</li>
+                            <li>Chart.js for data visualization</li>
+                            <li>Progressive Web App capabilities</li>
+                        </ul>
+                    </section>
 
-                <section id="implementation">
-                    <h2>⚙️ Implementation Guide</h2>
-                    
-                    <h3>Quick Start</h3>
-                    <div class="code-block">
-// Initialize trade compliance analyzer<br>
-const analyzer = new TradeCompliance({<br>
-&nbsp;&nbsp;country: 'italy',<br>
-&nbsp;&nbsp;productCategory: 'electronics',<br>
-&nbsp;&nbsp;updateFrequency: 'realtime'<br>
-});<br><br>
-
-// Calculate compliance costs<br>
-const costs = analyzer.calculateCosts({<br>
-&nbsp;&nbsp;shipmentValue: 50000,<br>
-&nbsp;&nbsp;productType: 'consumer_goods'<br>
+                    <section id="implementation" class="fade-in">
+                        <h2>⚙️ Implementation Guide</h2>
+                        
+                        <h3>Quick Start</h3>
+                        <div class="code-block">// Initialize trade compliance analyzer
+const analyzer = new TradeCompliance({
+    country: 'italy',
+    productCategory: 'electronics', 
+    updateFrequency: 'realtime'
 });
-                    </div>
-                    
-                    <h3>Integration Steps</h3>
-                    <ol>
-                        <li>Clone the repository and install dependencies</li>
-                        <li>Configure API endpoints and authentication</li>
-                        <li>Initialize database with sample trade data</li>
-                        <li>Set up regulatory update webhooks</li>
-                        <li>Deploy frontend to your web server</li>
-                    </ol>
-                </section>
+
+// Calculate compliance costs
+const costs = analyzer.calculateCosts({
+    shipmentValue: 50000,
+    productType: 'consumer_goods'
+});</div>
+                        
+                        <h3>Integration Steps</h3>
+                        <ol>
+                            <li>Clone the repository and install dependencies</li>
+                            <li>Configure API endpoints and authentication</li>
+                            <li>Initialize database with sample trade data</li>
+                            <li>Set up regulatory update webhooks</li>
+                            <li>Deploy frontend to your web server</li>
+                        </ol>
+                    </section>
+                </div>
+
+                <div class="sidebar">
+                    <section id="calculator" class="fade-in">
+                        <h2>🧮 Trade Cost Calculator</h2>
+                        <div class="calculator">
+                            <h3>Estimate Compliance Costs</h3>
+                            <div class="form-group">
+                                <label for="shipmentValue">Shipment Value (€)</label>
+                                <input type="number" id="shipmentValue" placeholder="50000" min="1000" max="1000000">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="productType">Product Category</label>
+                                <select id="productType">
+                                    <option value="electronics">Electronics</option>
+                                    <option value="textiles">Textiles</option>
+                                    <option value="machinery">Machinery</option>
+                                    <option value="chemicals">Chemicals</option>
+                                    <option value="food">Food Products</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="destination">Destination Country</label>
+                                <select id="destination">
+                                    <option value="italy">Italy → India</option>
+                                    <option value="india">India → Italy</option>
+                                </select>
+                            </div>
+                            
+                            <button class="btn" onclick="calculateCosts()" style="background: white; color: var(--accent-primary); width: 100%; font-weight: 600;">
+                                Calculate Costs
+                            </button>
+                            
+                            <div class="result" id="result" style="display: none;">
+                                <h3>Estimated Compliance Costs</h3>
+                                <div class="result-number" id="totalCost">€0</div>
+                                <div id="breakdown"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="fade-in">
+                        <h2>📋 Quick Links</h2>
+                        <ul class="quick-links">
+                            <li><a href="demo.html">📊 Live Analytics Dashboard</a></li>
+                            <li><a href="index.html">🏠 Main Project Page</a></li>
+                            <li><a href="https://krishnaadayma.github.io/">🎓 Back to Portfolio</a></li>
+                        </ul>
+                    </section>
+                </div>
             </div>
+        </main>
 
-            <div class="sidebar">
-                <section id="calculator">
-                    <h2>🧮 Trade Cost Calculator</h2>
-                    <div class="calculator">
-                        <h3>Estimate Compliance Costs</h3>
-                        <div class="form-group">
-                            <label for="shipmentValue">Shipment Value (€)</label>
-                            <input type="number" id="shipmentValue" placeholder="50000" min="1000" max="1000000">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="productType">Product Category</label>
-                            <select id="productType">
-                                <option value="electronics">Electronics</option>
-                                <option value="textiles">Textiles</option>
-                                <option value="machinery">Machinery</option>
-                                <option value="chemicals">Chemicals</option>
-                                <option value="food">Food Products</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="destination">Destination Country</label>
-                            <select id="destination">
-                                <option value="italy">Italy → India</option>
-                                <option value="india">India → Italy</option>
-                            </select>
-                        </div>
-                        
-                        <button class="btn" onclick="calculateCosts()" style="background: white; color: var(--accent-color); width: 100%;">
-                            Calculate Costs
-                        </button>
-                        
-                        <div class="result" id="result" style="display: none;">
-                            <h3>Estimated Compliance Costs</h3>
-                            <div class="result-number" id="totalCost">€0</div>
-                            <div id="breakdown"></div>
-                        </div>
-                    </div>
-                </section>
-
-                <section style="margin-top: 30px;">
-                    <h2>📋 Quick Links</h2>
-                    <ul class="quick-links">
-                        <li><a href="demo.html">📊 Live Analytics Dashboard</a></li>
-                        <li><a href="index.html">🏠 Main Project Page</a></li>
-                        <li><a href="../index.html">🎓 Back to Portfolio</a></li>
-                    </ul>
-                </section>
+        <footer class="footer">
+            <div class="container">
+                <p>Trade Compliance Documentation &copy; 2024 | Technical Implementation Guide</p>
             </div>
-        </div>
-    </div>
-
-    <div class="footer">
-        <div class="container">
-            <p>Trade Compliance Documentation &copy; 2024 | Technical Implementation Guide</p>
-        </div>
+        </footer>
     </div>
 
     <script>
+        // Cost calculator functionality
         function calculateCosts() {
             const shipmentValue = parseFloat(document.getElementById('shipmentValue').value) || 50000;
             const productType = document.getElementById('productType').value;
@@ -390,7 +698,7 @@ const costs = analyzer.calculateCosts({<br>
             
             document.getElementById('totalCost').textContent = `€${totalCost.toLocaleString('en-US', {maximumFractionDigits: 0})}`;
             document.getElementById('breakdown').innerHTML = `
-                <div style="text-align: left; margin-top: 15px; font-size: 0.9em;">
+                <div style="text-align: left; margin-top: var(--space-sm); font-size: var(--text-sm);">
                     <div>Tariffs: €${tariffCost.toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
                     <div>Compliance: €${complianceCost.toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
                     <div>Documentation: €${documentationCost.toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
@@ -399,7 +707,45 @@ const costs = analyzer.calculateCosts({<br>
             document.getElementById('result').style.display = 'block';
         }
         
-        window.addEventListener('load', calculateCosts);
+        // Scroll animation functionality
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Calculate initial costs
+            calculateCosts();
+            
+            // Initial check for scroll animations
+            handleScrollAnimations();
+            
+            // Add scroll event listener for animations
+            window.addEventListener('scroll', handleScrollAnimations);
+        });
     </script>
 </body>
 </html>
