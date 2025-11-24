@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ===== "SUITS" GLOBAL ECONOMIC DASHBOARD THEME ===== */
+    /* ===== "SUITS" GLOBAL ECONOMIC DASHBOARD THEME V2 ===== */
     :root {
       --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
       --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
@@ -19,18 +19,18 @@
     }
     
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    body{ margin:0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-secondary); line-height: 1.6; padding: 2rem; -webkit-font-smoothing: antialiased; }
-    .container{ max-width: 1200px; margin: 0 auto; }
+    body{ margin:0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-secondary); line-height: 1.6; padding: 2rem; -webkit-font-smoothing: antialiased; position: relative; }
+    #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.08; }
+    .container{ max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
     
-    header{ background: var(--bg-secondary); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--border-color); margin-bottom: 2rem; text-align: center; box-shadow: var(--shadow); }
+    header{ background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--border-color); margin-bottom: 2rem; text-align: center; box-shadow: var(--shadow); }
     header h1{ color: var(--text-primary); margin:0; font-size:clamp(2rem, 5vw, 3rem); letter-spacing: -1px; }
     .subtitle { margin-top: 0.5rem; color: var(--text-muted); font-weight: 500; }
     
-    .card { background: var(--bg-secondary); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border-color); margin-bottom: 2rem; }
+    .card { background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border-color); margin-bottom: 2rem; }
     .card h2 { margin: 0 0 1.5rem; color: var(--accent-primary); font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
     .card p { color: var(--text-secondary); max-width: 75ch; }
 
-    /* Dashboard & Chart Styling */
     .dashboard-section { margin-bottom: 3rem; }
     .chart-container { display: flex; flex-direction: column; gap: 0.75rem; }
     .chart-bar-item { display: grid; grid-template-columns: 100px 1fr auto; align-items: center; gap: 1rem; font-size: 0.9rem; }
@@ -39,13 +39,11 @@
     .bar { background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary)); height: 24px; width: 0; border-radius: 4px; transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); }
     .bar-value { font-weight: 600; color: var(--text-muted); }
 
-    /* Buttons */
     .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
     .btn { display:inline-flex; align-items:center; justify-content: center; gap:.5rem; padding:.75rem 1.25rem; border-radius:.6rem; border:1px solid var(--border-color); background:var(--accent-secondary); color:var(--text-primary); cursor:pointer; text-decoration: none; font-weight: 600; transition: all var(--transition); }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
     .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
     
-    /* Animation */
     .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
@@ -53,6 +51,7 @@
   </style>
 </head>
 <body>
+  <canvas id="bg-canvas"></canvas>
   <div class="container">
     <header>
       <h1>Global Economic Briefing</h1>
@@ -63,21 +62,11 @@
       <div class="card">
         <h2>MACROECONOMIC OVERVIEW</h2>
         <p class="fade-in">This dashboard provides a comparative visualization of key economic indicators for the world's top 10 economic superpowers. Data is simulated for Q4 2025 to reflect projected trends in global markets. All values are normalized for comparative analysis.</p>
-
-        <div class="dashboard-section fade-in">
-          <h3>Projected GDP (USD Trillions)</h3>
-          <div id="gdp-chart" class="chart-container"></div>
-        </div>
-
-        <div class="dashboard-section fade-in">
-          <h3>Projected YoY GDP Growth (%)</h3>
-          <div id="growth-chart" class="chart-container"></div>
-        </div>
+        <div class="dashboard-section fade-in"><h3>Projected GDP (USD Trillions)</h3><div id="gdp-chart" class="chart-container"></div></div>
+        <div class="dashboard-section fade-in"><h3>Projected YoY GDP Growth (%)</h3><div id="growth-chart" class="chart-container"></div></div>
       </div>
-
       <div class="card fade-in">
-        <h2>ACTION PANEL</h2>
-        <p>Return to the main portfolio or the interactive analysis tool.</p>
+        <h2>ACTION PANEL</h2><p>Return to the main portfolio or the interactive analysis tool.</p>
         <div class="btn-group">
             <a class="btn btn-primary" href="../../index.html" title="Return to Main Portfolio">🏠 Return to Main Portfolio</a>
             <a class="btn" href="index.html" title="Interactive Analysis Dashboard">▶️ Go to Interactive Analysis</a>
@@ -86,58 +75,75 @@
       </div>
     </main>
 
-    <footer>
-      <div>&copy; 2024 Krishna Dayma | Project Dossier KD-GTA-002</div>
-    </footer>
+    <footer><div>&copy; 2024 Krishna Dayma | Project Dossier KD-GTA-002</div></footer>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // --- SIMULATED DATA AS OF Q4 2025 ---
-      const COUNTRIES_DATA = [
-        { id: 'usa', name: 'USA', gdp: 28.8, growth: 2.1 },
-        { id: 'china', name: 'China', gdp: 20.5, growth: 4.5 },
-        { id: 'germany', name: 'Germany', gdp: 4.9, growth: 1.5 },
-        { id: 'japan', name: 'Japan', gdp: 4.5, growth: 1.2 },
-        { id: 'india', name: 'India', gdp: 4.2, growth: 6.8 },
-        { id: 'uk', name: 'UK', gdp: 3.8, growth: 1.8 },
-        { id: 'france', name: 'France', gdp: 3.3, growth: 1.4 },
-        { id: 'italy', name: 'Italy', gdp: 2.4, growth: 1.1 },
-        { id: 'brazil', name: 'Brazil', gdp: 2.2, growth: 2.5 },
-        { id: 'canada', name: 'Canada', gdp: 2.1, growth: 2.0 }
-      ].sort((a, b) => b.gdp - a.gdp);
+      // Background Cubes
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
 
+      const cubes = [];
+      const cubeCount = 50;
+      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      
+      for (let i = 0; i < cubeCount; i++) {
+        const material = new THREE.MeshBasicMaterial({ color: 0xAAAAAA, wireframe: true, transparent: true, opacity: Math.random() * 0.5 + 0.1 });
+        const cube = new THREE.Mesh(geometry, material);
+        cube.position.set((Math.random() - 0.5) * 30, (Math.random() - 0.5) * 30, (Math.random() - 0.5) * 30);
+        cube.rotation.set(Math.random(), Math.random(), Math.random());
+        cube.userData.rotationSpeed = { x: (Math.random() - 0.5) * 0.005, y: (Math.random() - 0.5) * 0.005 };
+        scene.add(cube);
+        cubes.push(cube);
+      }
+      camera.position.z = 15;
+
+      function animateCubes() {
+          requestAnimationFrame(animateCubes);
+          cubes.forEach(cube => {
+              cube.rotation.x += cube.userData.rotationSpeed.x;
+              cube.rotation.y += cube.userData.rotationSpeed.y;
+          });
+          renderer.render(scene, camera);
+      }
+      animateCubes();
+      window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // --- SIMULATED DATA & CHARTS ---
+      const COUNTRIES_DATA = [ { id: 'usa', name: 'USA', gdp: 28.8, growth: 2.1 }, { id: 'china', name: 'China', gdp: 20.5, growth: 4.5 }, { id: 'germany', name: 'Germany', gdp: 4.9, growth: 1.5 }, { id: 'japan', name: 'Japan', gdp: 4.5, growth: 1.2 }, { id: 'india', name: 'India', gdp: 4.2, growth: 6.8 }, { id: 'uk', name: 'UK', gdp: 3.8, growth: 1.8 }, { id: 'france', name: 'France', gdp: 3.3, growth: 1.4 }, { id: 'italy', name: 'Italy', gdp: 2.4, growth: 1.1 }, { id: 'brazil', name: 'Brazil', gdp: 2.2, growth: 2.5 }, { id: 'canada', name: 'Canada', gdp: 2.1, growth: 2.0 } ].sort((a, b) => b.gdp - a.gdp);
       const gdpChartEl = document.getElementById('gdp-chart');
       const growthChartEl = document.getElementById('growth-chart');
       const maxGdp = Math.max(...COUNTRIES_DATA.map(c => c.gdp));
       const maxGrowth = Math.max(...COUNTRIES_DATA.map(c => c.growth));
 
       function renderChart(container, data, dataKey, maxValue, unit = '') {
-        container.innerHTML = '';
-        data.forEach(country => {
-          const value = country[dataKey];
-          const percentageWidth = (value / maxValue) * 100;
-          const item = document.createElement('div');
-          item.className = 'chart-bar-item';
-          item.innerHTML = `
-            <div class="bar-label">${country.name}</div>
-            <div class="bar-wrapper"><div class="bar" data-width="${percentageWidth}%"></div></div>
-            <div class="bar-value">${value.toFixed(1)}${unit}</div>
-          `;
-          container.appendChild(item);
-        });
+          container.innerHTML = '';
+          data.forEach(country => {
+              const item = document.createElement('div');
+              item.className = 'chart-bar-item';
+              item.innerHTML = `<div class="bar-label">${country.name}</div><div class="bar-wrapper"><div class="bar" data-width="${(country[dataKey] / maxValue) * 100}%"></div></div><div class="bar-value">${country[dataKey].toFixed(1)}${unit}</div>`;
+              container.appendChild(item);
+          });
       }
 
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            if (entry.target.classList.contains('dashboard-section')) {
-              entry.target.querySelectorAll('.bar').forEach(bar => { bar.style.width = bar.dataset.width; });
-            }
-            observer.unobserve(entry.target);
-          }
-        });
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                  if (entry.target.classList.contains('dashboard-section')) {
+                      entry.target.querySelectorAll('.bar').forEach(bar => { bar.style.width = bar.dataset.width; });
+                  }
+                  observer.unobserve(entry.target);
+              }
+          });
       }, { threshold: 0.25 });
 
       renderChart(gdpChartEl, COUNTRIES_DATA, 'gdp', maxGdp, 'T');
