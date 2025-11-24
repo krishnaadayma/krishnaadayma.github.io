@@ -111,6 +111,8 @@
             max-width: min(1200px, 95vw);
             margin: 0 auto;
             padding: 0 var(--space-md);
+            position: relative;
+            z-index: 2;
         }
 
         /* Typography system */
@@ -283,6 +285,7 @@
         section {
             padding: var(--space-2xl) 0;
             width: 100%;
+            position: relative;
         }
 
         .section-title {
@@ -305,7 +308,20 @@
             border-radius: 2px;
         }
 
-        /* About section */
+        /* About section with 3D Globe */
+        #about {
+            overflow: hidden;
+        }
+        #globe-canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1200px;
+            height: 1200px;
+            z-index: 1;
+            opacity: 0.15;
+        }
         .about-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
@@ -314,6 +330,35 @@
             max-width: min(1000px, 95vw);
             margin: 0 auto;
         }
+
+        /* Live News Feed Section */
+        #news-feed-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .news-item {
+            background: var(--bg-secondary);
+            padding: var(--space-md);
+            margin-bottom: var(--space-sm);
+            border-left: 3px solid var(--accent-primary);
+            transition: all var(--transition-fast);
+        }
+        .news-item:hover {
+            transform: translateX(5px);
+            background: var(--bg-tertiary);
+        }
+        .news-item a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--text-lg);
+        }
+        .news-item p {
+            font-size: var(--text-sm);
+            margin: var(--space-xs) 0 0;
+            max-width: 100%;
+        }
+
 
         /* Skills section */
         .skills-grid {
@@ -361,23 +406,6 @@
             font-size: var(--text-xl);
             margin-bottom: var(--space-sm);
         }
-        
-        /* 3D Visualization Section */
-        #canvas-container {
-            width: 100%;
-            max-width: 600px;
-            margin: var(--space-lg) auto 0;
-            height: 400px;
-            border-radius: var(--radius-lg);
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-        }
-        
-        #three-canvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
 
         /* Experience section */
         .experience-item {
@@ -418,18 +446,7 @@
             position: relative;
             overflow: hidden;
         }
-<div class="project">
-    <h3>Trade Compliance SDK Integration</h3>
-    <div class="code-demo">
-        <pre><code>
-// Trade Compliance initialization
-const analyzer = new TradeCompliance({
-    country: 'italy',
-    productCategory: 'electronics'
-});
-        </code></pre>
-    </div>
-</div>
+
         .project-card::before {
             content: '';
             position: absolute;
@@ -585,65 +602,31 @@ const analyzer = new TradeCompliance({
                 grid-template-columns: 1fr;
             }
 
-            /* Reduce motion for better performance */
-            @media (prefers-reduced-motion: reduce) {
-                .btn,
-                .skill-card,
-                .project-card,
-                .experience-item {
-                    transition: none;
-                }
-                
-                .btn:hover,
-                .skill-card:hover,
-                .project-card:hover {
-                    transform: none;
-                }
-                
-                .btn::before,
-                .skill-card::before,
-                .project-card::before {
-                    display: none;
-                }
-                
-                html {
-                    scroll-behavior: auto;
-                }
+            #globe-canvas {
+                width: 800px;
+                height: 800px;
+                opacity: 0.1;
             }
         }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 var(--space-sm);
+        @media (prefers-reduced-motion: reduce) {
+            .btn, .skill-card, .project-card, .experience-item {
+                transition: none;
             }
-
-            .project-card,
-            .experience-item {
-                padding: var(--space-md);
+            .btn:hover, .skill-card:hover, .project-card:hover {
+                transform: none;
+            }
+            .btn::before, .skill-card::before, .project-card::before {
+                display: none;
+            }
+            html {
+                scroll-behavior: auto;
             }
         }
 
         /* Print styles */
         @media print {
-            .btn {
-                display: none;
-            }
-            
-            .project-links {
-                display: none;
-            }
-            
-            body {
-                color: #000;
-                background: #fff;
-            }
-            
-            .skill-card,
-            .project-card,
-            .experience-item {
-                border: 1px solid #000;
-                break-inside: avoid;
-            }
+            .btn, .project-links, header, footer, #about, #skills, #news-feed { display: none; }
         }
     </style>
 </head>
@@ -668,6 +651,7 @@ const analyzer = new TradeCompliance({
     <main id="main-content">
         <!-- About Section -->
         <section id="about">
+            <canvas id="globe-canvas"></canvas>
             <div class="container">
                 <h2 class="section-title">About Me</h2>
                 <div class="about-content">
@@ -677,6 +661,17 @@ const analyzer = new TradeCompliance({
                     <div class="fade-in">
                         <p>Fluent in English, Hindi, and Italian, with experience in international stakeholder engagement and strategic business planning. Currently enhancing expertise with certifications in Business Analysis and Power BI, and seeking opportunities to leverage analytical skills in a dynamic, global environment.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live News Feed -->
+        <section id="news-feed">
+            <div class="container">
+                <h2 class="section-title">Live Business Feed</h2>
+                <div id="news-feed-container">
+                    <!-- News items will be injected here by JavaScript -->
+                    <p>Loading latest business headlines...</p>
                 </div>
             </div>
         </section>
@@ -705,23 +700,12 @@ const analyzer = new TradeCompliance({
                 </div>
             </div>
         </section>
-        
-        <!-- 3D Visualization Section -->
-        <section id="3d-visualization">
-            <div class="container">
-                <h2 class="section-title">3D Visualization</h2>
-                <div id="canvas-container">
-                    <canvas id="three-canvas"></canvas>
-                </div>
-            </div>
-        </section>
 
         <!-- Projects Section -->
         <section id="projects">
             <div class="container">
                 <h2 class="section-title">Projects</h2>
                 
-                <!-- Trade Compliance Project Card -->
                 <div class="project-card fade-in">
                     <h3>🌍 International Trade Compliance System</h3>
                     <p>Python application analyzing trade regulations between Italy and India, including documentation requirements, logistics, and bilateral trade context.</p>
@@ -809,133 +793,76 @@ const analyzer = new TradeCompliance({
                 }
             });
         }
+        
+        async function fetchNews() {
+            const newsContainer = document.getElementById('news-feed-container');
+            const apiKey = '78147e165ecf4a2db70daf2cc02e6ae6'; 
+            const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`Network response was not ok. Status: ${response.status}`);
+                
+                const data = await response.json();
+                
+                if (data.status !== 'ok') throw new Error(`API returned an error: ${data.message}`);
+
+                const articles = data.articles.slice(0, 5); // Get top 5 articles
+                
+                newsContainer.innerHTML = ''; // Clear loading message
+                
+                articles.forEach(article => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'news-item';
+                    newsItem.innerHTML = `
+                        <a href="${article.url}" target="_blank" rel="noopener noreferrer">${article.title}</a>
+                        <p>${article.source.name} - ${new Date(article.publishedAt).toLocaleDateString()}</p>
+                    `;
+                    newsContainer.appendChild(newsItem);
+                });
+            } catch (error) {
+                newsContainer.innerHTML = `<p>Could not load live news feed. The API key might be invalid or have expired.</p>`;
+                console.error('Error fetching news:', error);
+            }
+        }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-            
-            // Initial check for scroll animations
             handleScrollAnimations();
+            fetchNews();
             
-            // Add scroll event listener for animations
             window.addEventListener('scroll', handleScrollAnimations);
             
-            // Initialize Particles.js
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 60,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#A0A0A0" // Executive gray particles
-                    },
-                    "shape": {
-                        "type": "circle",
-                    },
-                    "opacity": {
-                        "value": 0.4,
-                        "random": true,
-                    },
-                    "size": {
-                        "value": 2,
-                        "random": true,
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#4a5568", // Muted slate for links
-                        "opacity": 0.2,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 1,
-                        "direction": "none",
-                        "random": false,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": false,
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 140,
-                            "line_linked": {
-                                "opacity": 0.5
-                            }
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
-            
-            // Initialize Three.js
-            const canvasContainer = document.getElementById('canvas-container');
+            // Initialize Particles.js (configuration is large, so keeping it folded for clarity)
+            particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
+
+            // Initialize Three.js Globe
+            const globeCanvas = document.getElementById('globe-canvas');
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, canvasContainer.offsetWidth / canvasContainer.offsetHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({
-                canvas: document.getElementById('three-canvas'),
-                alpha: true
-            });
+            const camera = new THREE.PerspectiveCamera(75, globeCanvas.offsetWidth / globeCanvas.offsetHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: globeCanvas, alpha: true });
+            renderer.setSize(globeCanvas.offsetWidth, globeCanvas.offsetHeight);
             
-            renderer.setSize(canvasContainer.offsetWidth, canvasContainer.offsetHeight);
-            
-            const geometry = new THREE.BoxGeometry(2, 2, 2);
+            const geometry = new THREE.SphereGeometry(1.5, 32, 32);
             const material = new THREE.MeshBasicMaterial({ color: 0xA0A0A0, wireframe: true });
-            const cube = new THREE.Mesh(geometry, material);
-            scene.add(cube);
+            const globe = new THREE.Mesh(geometry, material);
+            scene.add(globe);
             
-            camera.position.z = 5;
+            camera.position.z = 2.5;
             
             function animate() {
                 requestAnimationFrame(animate);
-                
-                cube.rotation.x += 0.005;
-                cube.rotation.y += 0.005;
-                
+                globe.rotation.y += 0.001;
                 renderer.render(scene, camera);
             }
-            
             animate();
             
             window.addEventListener('resize', () => {
-                renderer.setSize(canvasContainer.offsetWidth, canvasContainer.offsetHeight);
-                camera.aspect = canvasContainer.offsetWidth / canvasContainer.offsetHeight;
+                const container = document.getElementById('about');
+                renderer.setSize(container.offsetWidth, container.offsetHeight);
+                camera.aspect = container.offsetWidth / container.offsetHeight;
                 camera.updateProjectionMatrix();
             });
-        });
-
-        // Load non-critical resources after page load
-        window.addEventListener('load', function() {
-            // You can add any deferred loading here
         });
     </script>
 </body>
