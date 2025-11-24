@@ -6,6 +6,10 @@ on:
     - cron: '*/5 * * * *'
   workflow_dispatch: # Allows manual running
 
+# THIS IS THE CRITICAL FIX: Granting write permissions to the bot
+permissions:
+  contents: write
+
 jobs:
   fetch-news:
     runs-on: ubuntu-latest
@@ -19,7 +23,6 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        # We now need 'rss-parser' instead of 'node-fetch'
         run: npm install rss-parser
 
       - name: Fetch and process news
