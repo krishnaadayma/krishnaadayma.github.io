@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ===== "SUITS" EXECUTIVE DOSSIER THEME V3 ===== */
+    /* ===== "SUITS" EXECUTIVE DOSSIER THEME V4 ===== */
     :root {
       --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
       --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
@@ -19,8 +19,9 @@
     }
     
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    body{ margin:0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-secondary); line-height: 1.6; padding: 2rem; -webkit-font-smoothing: antialiased; }
-    .container{ max-width: 1200px; margin: 0 auto; }
+    body{ margin:0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-secondary); line-height: 1.6; padding: 2rem; -webkit-font-smoothing: antialiased; position: relative; }
+    #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.1; }
+    .container{ max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
     
     header{ background: var(--bg-secondary); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--border-color); margin-bottom: 2rem; text-align: center; box-shadow: var(--shadow); }
     header h1{ color: var(--text-primary); margin:0; font-size:clamp(2rem, 5vw, 3rem); letter-spacing: -1px; }
@@ -29,7 +30,7 @@
     .main-grid { display: grid; grid-template-columns: 1fr 380px; gap: 2rem; align-items: start; }
     @media (max-width: 1024px){ .main-grid { grid-template-columns: 1fr; } }
     
-    .card { background: var(--bg-secondary); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border-color); }
+    .card { background: rgba(30, 30, 30, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border-color); }
     .card h2 { margin: 0 0 1rem; color: var(--accent-primary); font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
     .card p, .card li { color: var(--text-secondary); max-width: 70ch; }
     .card ul { list-style-position: inside; padding-left: 0.5rem; }
@@ -68,6 +69,7 @@
   </style>
 </head>
 <body>
+  <canvas id="bg-canvas"></canvas>
   <div class="container">
     <header>
       <h1>Project Dossier: Global Trade Analysis Engine</h1>
@@ -77,35 +79,13 @@
     <main class="main-grid">
       <div class="card">
         <h2>PROJECT BRIEFING</h2>
-        
-        <div class="briefing-section">
-          <h3>Objective</h3>
-          <p>To engineer a predictive analytics engine that simulates the total landed cost and logistical complexities for trade routes between the world's top 10 economies.</p>
-        </div>
-
-        <div class="briefing-section">
-            <h3>Project Details</h3>
-            <div class="details-grid">
-                <div class="detail-item"><div class="label">FILE ID</div><div class="value">KD-GTA-002</div></div>
-                <div class="detail-item"><div class="label">STATUS</div><div class="value">OPERATIONAL</div></div>
-                <div class="detail-item"><div class="label">TECHNOLOGY</div><div class="value">JavaScript, HTML/CSS</div></div>
-            </div>
-        </div>
-
-        <div class="briefing-section">
-          <h3>Key Features</h3>
-          <ul>
-            <li>Multi-Factor Cost Analysis: Dynamically calculates duties, taxes, shipping, and insurance.</li>
-            <li>Global Trade Logic: Models complex trade dynamics by incorporating bilateral Free Trade Agreements (FTAs).</li>
-            <li>Logistical Time & Cost Simulation: Differentiates between Air and Sea freight for realistic time/cost trade-offs.</li>
-            <li>Executive Dashboard Display: Presents results in a clear, actionable dashboard format for quick decision-making.</li>
-          </ul>
-        </div>
+        <div class="briefing-section"><h3>Objective</h3><p>To engineer a predictive analytics engine that simulates the total landed cost and logistical complexities for trade routes between the world's top 10 economies.</p></div>
+        <div class="briefing-section"><h3>Project Details</h3><div class="details-grid"><div class="detail-item"><div class="label">FILE ID</div><div class="value">KD-GTA-002</div></div><div class="detail-item"><div class="label">STATUS</div><div class="value">OPERATIONAL</div></div><div class="detail-item"><div class="label">TECHNOLOGY</div><div class="value">JavaScript, HTML/CSS</div></div></div></div>
+        <div class="briefing-section"><h3>Key Features</h3><ul><li>Multi-Factor Cost Analysis: Dynamically calculates duties, taxes, shipping, and insurance.</li><li>Global Trade Logic: Models complex trade dynamics by incorporating bilateral Free Trade Agreements (FTAs).</li><li>Logistical Time & Cost Simulation: Differentiates between Air and Sea freight for realistic time/cost trade-offs.</li><li>Executive Dashboard Display: Presents results in a clear, actionable dashboard format for quick decision-making.</li></ul></div>
       </div>
 
-         <aside class="card">
-        <h2>ACTION PANEL</h2>
-        <p>Return to the main portfolio or access project assets and documentation.</p>
+      <aside class="card">
+        <h2>ACTION PANEL</h2><p>Return to the main portfolio or access project assets and documentation.</p>
         <div class="btn-group" style="flex-direction: column;">
             <a class="btn btn-primary" href="../../index.html" title="Return to Main Portfolio">🏠 Return to Main Portfolio</a>
             <a class="btn" href="app.js" download>💾 Access Client-Side Logic (JS)</a>
@@ -113,41 +93,90 @@
             <a class="btn btn-outline" href="demo.html">📊 View Economic Briefing</a>
         </div>
       </aside>
+
       <div class="card" style="grid-column: 1 / -1;">
         <h2>INTERACTIVE ANALYSIS DASHBOARD</h2>
         <form onsubmit="return false;" class="calculator-grid">
-          <div><label for="origin">Origin Country</label><select id="origin"></select></div>
-          <div><label for="destination">Destination Country</label><select id="destination"></select></div>
-          <div><label for="category">Product Category</label>
-            <select id="category">
-              <option value="electronics">Electronics</option><option value="machinery">Machinery</option><option value="automotive">Automotive</option>
-              <option value="pharmaceuticals">Pharmaceuticals</option><option value="textiles">Textiles</option><option value="food">Food</option>
-            </select>
-          </div>
-          <div><label for="value">Shipment Value</label><input id="value" type="number" min="0" value="50000" /></div>
-          <div><label for="insurance">Insurance Cost</label><input id="insurance" type="number" min="0" value="300" /></div>
+          <div><label for="origin">Origin Country</label><select id="origin"></select></div><div><label for="destination">Destination Country</label><select id="destination"></select></div>
+          <div><label for="category">Product Category</label><select id="category"><option value="electronics">Electronics</option><option value="machinery">Machinery</option><option value="automotive">Automotive</option><option value="pharmaceuticals">Pharmaceuticals</option><option value="textiles">Textiles</option><option value="food">Food</option></select></div>
+          <div><label for="value">Shipment Value</label><input id="value" type="number" min="0" value="50000" /></div><div><label for="insurance">Insurance Cost</label><input id="insurance" type="number" min="0" value="300" /></div>
           <div><label for="shipping-mode">Shipping Mode</label><select id="shipping-mode"><option value="sea">Sea Freight</option><option value="air">Air Freight</option></select></div>
         </form>
-        <div class="btn-group">
-            <button class="btn btn-primary" id="analyzeBtn" type="button">▶️ Run Analysis</button>
-        </div>
-        
-        <div id="processing-overlay">
-          <div class="spinner"></div>
-          <div id="processing-status">Initializing...</div>
-        </div>
-
-        <div id="results-dashboard">
-          <!-- Results will be dynamically inserted here -->
-        </div>
+        <div class="btn-group"><button class="btn btn-primary" id="analyzeBtn" type="button">▶️ Run Analysis</button></div>
+        <div id="processing-overlay"><div class="spinner"></div><div id="processing-status">Initializing...</div></div>
+        <div id="results-dashboard"></div>
       </div>
     </main>
 
-    <footer>
-      <div>&copy; 2024 Krishna Dayma | Project Dossier KD-GTA-002</div>
-    </footer>
+    <footer><div>&copy; 2024 Krishna Dayma | Project Dossier KD-GTA-002</div></footer>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="app.js" defer></script>
+  <script>
+    // 3D Plexus Background
+    document.addEventListener('DOMContentLoaded', () => {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        const particles = [];
+        const particleCount = 80;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount; i++) {
+            const x = (Math.random() - 0.5) * 20;
+            const y = (Math.random() - 0.5) * 20;
+            const z = (Math.random() - 0.5) * 20;
+            positions[i * 3] = x;
+            positions[i * 3 + 1] = y;
+            positions[i * 3 + 2] = z;
+            particles.push(new THREE.Vector3(x, y, z));
+        }
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const material = new THREE.PointsMaterial({ color: 0xAAAAAA, size: 0.1 });
+        const points = new THREE.Points(geometry, material);
+        scene.add(points);
+
+        const linesGeometry = new THREE.BufferGeometry();
+        const lineMaterial = new THREE.LineBasicMaterial({ color: 0x4a5568, transparent: true, opacity: 0.3 });
+        const lines = new THREE.LineSegments(linesGeometry, lineMaterial);
+        scene.add(lines);
+
+        camera.position.z = 10;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const linePositions = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles[i].x += (Math.random() - 0.5) * 0.01;
+                particles[i].y += (Math.random() - 0.5) * 0.01;
+                particles[i].z += (Math.random() - 0.5) * 0.01;
+                points.geometry.attributes.position.setXYZ(i, particles[i].x, particles[i].y, particles[i].z);
+
+                for (let j = i + 1; j < particleCount; j++) {
+                    const dist = particles[i].distanceTo(particles[j]);
+                    if (dist < 2.5) {
+                        linePositions.push(particles[i].x, particles[i].y, particles[i].z);
+                        linePositions.push(particles[j].x, particles[j].y, particles[j].z);
+                    }
+                }
+            }
+            points.geometry.attributes.position.needsUpdate = true;
+            lines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+            points.rotation.y += 0.0005;
+            lines.rotation.y += 0.0005;
+            renderer.render(scene, camera);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    });
+  </script>
 </body>
 </html>
