@@ -16,51 +16,40 @@
             --accent-primary: #A0A0A0; --accent-secondary: #4a5568; --accent-warning: #888888;
             --border-color: #2C2C2C; --live-red: #ff4d4d;
             --gradient-primary: linear-gradient(135deg, #1E1E1E 0%, #121212 100%);
-            --text-base: clamp(1rem, 3vw, 1.125rem); --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
-            --text-xl: clamp(1.25rem, 4vw, 1.5rem); --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
-            --text-3xl: clamp(1.875rem, 6vw, 2.25rem); --text-4xl: clamp(2.25rem, 8vw, 3rem);
-            --space-sm: clamp(0.75rem, 2vw, 1rem); --space-md: clamp(1rem, 3vw, 1.5rem);
-            --space-lg: clamp(1.5rem, 4vw, 2rem); --space-xl: clamp(2rem, 6vw, 3rem);
-            --space-2xl: clamp(3rem, 8vw, 4rem);
-            --radius-md: 0.5rem; --radius-lg: 0.75rem;
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.5); --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
-            --transition-fast: 0.2s ease; --transition-medium: 0.3s ease;
+            --text-base: clamp(1rem, 3vw, 1.125rem);
+            --space-md: clamp(1rem, 3vw, 1.5rem); --space-lg: clamp(1.5rem, 4vw, 2rem);
+            --radius-lg: 0.75rem;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; font-size: 16px; }
         body { font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; color: var(--text-secondary); background-color: var(--bg-primary); overflow-x: hidden; }
         .container { width: 100%; max-width: min(1200px, 95vw); margin: 0 auto; padding: 0 var(--space-md); position: relative; z-index: 2; }
-        h1, h2, h3, h4 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: var(--space-sm); text-align: center;}
-        h1 { font-size: var(--text-4xl); } h2 { font-size: var(--text-3xl); } h3 { font-size: var(--text-2xl); color: var(--accent-primary); } h4 { font-size: var(--text-xl); }
-        p { color: var(--text-muted); margin-bottom: var(--space-sm); line-height: 1.6; font-size: var(--text-base); max-width: 65ch; }
-        ul, ol { padding-left: 1.25rem; }
-        header { background: var(--gradient-primary); padding: var(--space-2xl) 0; margin-bottom: var(--space-xl); position: relative; overflow: hidden; border-bottom: 1px solid var(--border-color); }
+        h1, h2, h3, h4 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: var(--space-md); text-align: center;}
+        h1 { font-size: clamp(2.25rem, 8vw, 3rem); } h2 { font-size: clamp(1.875rem, 6vw, 2.25rem); } h3 { font-size: clamp(1.5rem, 5vw, 1.875rem); color: var(--accent-primary); }
+        p { color: var(--text-muted); margin-bottom: var(--space-md); line-height: 1.6; font-size: var(--text-base); max-width: 65ch; }
+        ul { padding-left: 1.25rem; }
+        header { background: var(--gradient-primary); padding: clamp(3rem, 8vw, 4rem) 0; margin-bottom: clamp(2rem, 6vw, 3rem); position: relative; overflow: hidden; border-bottom: 1px solid var(--border-color); }
         #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; }
         .header-content { position: relative; z-index: 1; animation: fadeIn 1s ease-out; text-align: center; }
         .header-content p { margin-left: auto; margin-right: auto; }
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--bg-tertiary); color: var(--text-primary); padding: var(--space-sm) var(--space-lg); text-decoration: none; border-radius: var(--radius-md); font-weight: 600; border: 1px solid var(--border-color); transition: all var(--transition-fast); cursor: pointer; }
-        .btn:hover, .btn:focus { background: #404040; transform: translateY(-2px); box-shadow: var(--shadow-md); }
-        .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
-        section { padding: var(--space-2xl) 0; width: 100%; position: relative; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-primary); margin: var(--space-sm) auto 0; border-radius: 2px; }
-        .card { background: var(--bg-secondary); padding: var(--space-lg); border-radius: var(--radius-lg); border: 1px solid var(--border-color); transition: transform var(--transition-medium), box-shadow var(--transition-medium); display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--bg-tertiary); color: var(--text-primary); padding: var(--space-md) var(--space-lg); text-decoration: none; border-radius: var(--radius-lg); font-weight: 600; border: 1px solid var(--border-color); transition: all 0.2s ease; cursor: pointer; }
+        .btn:hover { background: #404040; transform: translateY(-2px); }
+        .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; font-weight: 700; }
+        section { padding: clamp(3rem, 8vw, 4rem) 0; width: 100%; position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-primary); margin: var(--space-md) auto 0; border-radius: 2px; }
+        .card { background: var(--bg-secondary); padding: var(--space-lg); border-radius: var(--radius-lg); border: 1px solid var(--border-color); display: flex; flex-direction: column; }
         .card h3, .card p { text-align: left; }
         .card > *:last-child { margin-top: auto; }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: var(--space-lg); max-width: min(1200px, 95vw); margin: 0 auto; }
         .item-card { border-left: 4px solid var(--accent-primary); max-width: min(900px, 95vw); margin: var(--space-md) auto; text-align: left; }
         .item-card h3, .item-card p, .item-card ul { text-align: left; margin-left: 0;}
-        .project-links { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: 1.5rem; justify-content: flex-start; }
-        .language-item { margin-bottom: 1.5rem; }
-        .language-item p { margin-bottom: 0.5rem; font-weight: 600; color: var(--text-primary); }
-        .progress-bar-bg { background-color: var(--bg-tertiary); border-radius: 4px; overflow: hidden; height: 1rem; }
-        .progress-bar { background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary)); height: 100%; width: 0; border-radius: 4px; transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        .project-links { display: flex; flex-wrap: wrap; gap: var(--space-md); margin-top: 1.5rem; justify-content: flex-start; }
         .checklist { list-style: none; padding-left: 0; }
         .checklist li { position: relative; padding-left: 2rem; margin-bottom: 1rem; text-align: left; }
         .checklist li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-primary); font-weight: 700; font-size: 1.25rem; top: -0.25rem; }
-        .live-indicator { display: none; width: 10px; height: 10px; background-color: var(--live-red); border-radius: 50%; margin-right: 12px; animation: pulse 1.5s infinite; }
+        .live-indicator { display: inline-block; width: 10px; height: 10px; background-color: var(--live-red); border-radius: 50%; margin-right: 12px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); } }
-        footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: var(--space-xl) var(--space-md); margin-top: var(--space-2xl); border-top: 1px solid var(--border-color); }
+        footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: clamp(2rem, 6vw, 3rem) var(--space-md); margin-top: clamp(3rem, 8vw, 4rem); border-top: 1px solid var(--border-color); }
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
     </style>
@@ -98,12 +87,12 @@
                 <div class="grid-container">
                     <div class="card fade-in">
                         <h3 style="display: flex; align-items: center;">
-                            <span id="live-indicator" class="live-indicator"></span>
-                            <span id="insights-title">Bilateral Economic Intelligence</span>
+                            <span class="live-indicator"></span>
+                            <span>Bilateral Economic Intelligence</span>
                         </h3>
-                        <p>A live intelligence feed tracking the latest economic news for the Italy-India corridor, demonstrating dynamic data integration.</p>
+                        <p>A live intelligence feed tracking economic news for the Italy-India corridor, powered by a 24/7 automated GitHub Action.</p>
                         <div id="insights-container" style="margin-top: auto; padding-top: var(--space-md);">
-                            <p style="text-align:left;">Accessing intelligence feeds...</p>
+                            <p style="text-align:left;">Initializing live feed...</p>
                         </div>
                     </div>
                     <div class="card fade-in">
@@ -120,37 +109,21 @@
         <section id="experience">
             <div class="container">
                 <h2 class="section-title">Professional Experience</h2>
-                <div class="item-card fade-in"><h3>HR & Communications Intern</h3><p><strong>University of Parma, Parma, Italy</strong> | Mar 2025 - Jun 2025</p><ul><li>Orchestrated the university's flagship "Open Day" recruitment event, managing strategic communications and logistics for an audience of over 6,000 national and international students.</li><li>Developed and implemented specialized onboarding programs that significantly improved campus integration and navigation for new students.</li></ul></div>
-                <div class="item-card fade-in"><h3>Junior Business & Marketing Analyst</h3><p><strong>Shubh Labh Pvt Ltd., Bombay, India</strong> | May 2024 - Dec 2024</p><ul><li>Executed data-driven marketing strategies that yielded an 8% uplift in customer engagement and business reach across key channels.</li><li>Engineered and deployed process improvements in marketing operations, resulting in a 15% increase in team productivity and a measurable reduction in client investment risk.</li></ul></div>
+                <div class="item-card fade-in"><h3>HR & Communications Intern</h3><p><strong>University of Parma, Parma, Italy</strong> | Mar 2025 - Jun 2025</p><ul><li>Orchestrated the university's flagship "Open Day" recruitment event for over 6,000 students.</li><li>Developed specialized onboarding programs that improved campus integration.</li></ul></div>
+                <div class="item-card fade-in"><h3>Junior Business & Marketing Analyst</h3><p><strong>Shubh Labh Pvt Ltd., Bombay, India</strong> | May 2024 - Dec 2024</p><ul><li>Drove an 8% uplift in customer engagement via data-driven marketing strategies.</li><li>Engineered process improvements that boosted team productivity by 15%.</li></ul></div>
             </div>
         </section>
-
+        
         <section id="education">
             <div class="container">
-                <h2 class="section-title">Academic Background</h2>
-                <div class="item-card fade-in"><h3>Laurea Magistrale in International Business and Development</h3><p><strong>University of Parma, Parma, Italy</strong> | 2022 – 2025</p><p>This two-year Master's program, taught entirely in English, provided a deep dive into international economics, global marketing strategies, and development economics. The curriculum emphasized team-based project work and hands-on experience through internships and exchange opportunities, equipping me with advanced analytical, managerial, and intercultural skills for the global job market.</p></div>
-                <div class="item-card fade-in"><h3>Laurea triennale in Commerce</h3><p><strong>Swami Ramanand Teerth Marathwada University, Maharashtra, India</strong> | 2018 – 2021</p><p>A comprehensive three-year program that built a strong foundation in core commercial disciplines. The curriculum covered essential knowledge in accounting, applied statistics, business economics, and mercantile law, preparing me with the analytical skills necessary for a career in finance, management, and corporate strategy.</p></div>
+                 <h2 class="section-title">Academic Background</h2>
+                <div class="item-card fade-in"><h3>Laurea Magistrale in International Business and Development</h3><p><strong>University of Parma, Parma, Italy</strong> | 2022 – 2025</p></div>
+                <div class="item-card fade-in"><h3>Laurea triennale in Commerce</h3><p><strong>Swami Ramanand Teerth Marathwada University, India</strong> | 2018 – 2021</p></div>
             </div>
-        </section>
-
-        <section id="certifications">
-            <div class="container"><h2 class="section-title">Certifications & Advanced Training</h2><div class="card" style="max-width: 900px; margin: 0 auto;"><ul class="checklist"><li>Financial accounting and management - Politecnico di Milano</li><li>Investment Risk Management - Coursera</li><li>Business analysis and project management - Coursera</li></ul></div></div>
-        </section>
-
-        <section id="languages">
-            <div class="container"><h2 class="section-title">Language Proficiency</h2><div class="card" style="max-width: 900px; margin: 0 auto;"><div class="language-item"><p>English</p><div class="progress-bar-bg"><div class="progress-bar" data-width="100%"></div></div></div><div class="language-item"><p>Hindi</p><div class="progress-bar-bg"><div class="progress-bar" data-width="100%"></div></div></div><div class="language-item"><p>Italian</p><div class="progress-bar-bg"><div class="progress-bar" data-width="85%"></div></div></div></div></div>
-        </section>
-
-        <section id="interests">
-            <div class="container"><h2 class="section-title">Interests & Focus Areas</h2><div class="card" style="max-width: 900px; margin: 0 auto;"><ul class="checklist"><li>Market Analysis of Technological Trends</li><li>Financial Education & Literacy</li><li>Intercultural Networking & Communication</li><li>International Business Strategy</li></ul></div></div>
-        </section>
-
-        <section id="contact">
-            <div class="container" style="text-align: center;"><h2 class="section-title">Contact</h2><p style="margin-left:auto; margin-right:auto;">Email: krishna.saq@gmail.com</p><p style="margin-left:auto; margin-right:auto;">Mobile: +39 375 632 0447</p><p style="margin-left:auto; margin-right:auto;">Location: Bologna, Italy</p><p style="margin-left:auto; margin-right:auto;">LinkedIn: <a href="https://linkedin.com/in/krishnaadayma" style="color: var(--accent-primary);">linkedin.com/in/krishnaadayma</a></p></div>
         </section>
     </main>
     
-    <footer><div class="container"><p>&copy; 2024 Krishna Dayma. All rights reserved.</p></div></footer>
+    <footer class="container"><p>&copy; 2024 Krishna Dayma. All rights reserved.</p></footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -158,59 +131,43 @@
         document.addEventListener('DOMContentLoaded', function() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => { 
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        const bar = entry.target.querySelector('.progress-bar');
-                        if (bar) { bar.style.width = bar.dataset.width; }
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
                 });
             }, { threshold: 0.2 });
-
-            document.querySelectorAll('.fade-in, .language-item').forEach(el => observer.observe(el));
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
             
+            // --- INVINCIBLE LIVE NEWS FEED ---
             const insightsContainer = document.getElementById('insights-container');
-            const liveIndicator = document.getElementById('live-indicator');
-            const insightsTitle = document.getElementById('insights-title');
-            
-            const RSS_BASE = 'https://api.rss2json.com/v1/api.json?rss_url=';
-            const italyFeed = `${RSS_BASE}https://news.google.com/rss/search?q=italy+economy+business&hl=en-US&gl=US&ceid=US:en`;
-            const indiaFeed = `${RSS_BASE}https://news.google.com/rss/search?q=india+economy+business&hl=en-US&gl=US&ceid=US:en`;
+            const liveIndicator = document.querySelector('.live-indicator');
 
-            async function fetchAndCombineFeeds() {
-                try {
-                    const [italyResponse, indiaResponse] = await Promise.all([ fetch(italyFeed), fetch(indiaFeed) ]);
-                    if (!italyResponse.ok || !indiaResponse.ok) throw new Error('Network response was not ok.');
-                    
-                    const italyData = await italyResponse.json();
-                    const indiaData = await indiaResponse.json();
-                    if (italyData.status !== 'ok' || indiaData.status !== 'ok') throw new Error('API status was not ok.');
-                    
-                    const combinedItems = [...(italyData.items || []), ...(indiaData.items || [])];
-                    if (combinedItems.length === 0) throw new Error('No news items found from feeds.');
-                    
-                    combinedItems.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+            fetch('news.json')
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok.');
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && data.length > 0) {
+                        insightsContainer.innerHTML = '';
+                        if(liveIndicator) liveIndicator.style.display = 'inline-block';
+                        
+                        data.slice(0, 3).forEach(item => {
+                            const insightEl = document.createElement('div');
+                            const title = item.title.replace(/<[^>]*>/g, "");
+                            const sourceName = item.author || "Google News";
+                            insightEl.innerHTML = `<p style="margin:0;"><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">${title}</a><br><span style="font-size: 0.8rem; color: var(--text-muted);">Source: ${sourceName}</span></p>`;
+                            insightsContainer.appendChild(insightEl);
+                        });
+                    } else {
+                        throw new Error('News data is empty.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to load local news file:', error);
+                    insightsContainer.innerHTML = '<p style="text-align:left;">Intelligence feed is currently being updated. Please check back shortly.</p>';
+                    if(liveIndicator) liveIndicator.style.display = 'none';
+                });
 
-                    insightsContainer.innerHTML = '';
-                    liveIndicator.style.display = 'inline-block';
-                    
-                    combinedItems.slice(0, 3).forEach(item => {
-                        const insightEl = document.createElement('div');
-                        const title = item.title.replace(/<[^>]*>/g, "");
-                        const sourceName = item.author || "Google News";
-                        insightEl.innerHTML = `<p style="margin:0;"><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">${title}</a><br><span style="font-size: 0.8rem; color: var(--text-muted);">Source: ${sourceName} | ${new Date(item.pubDate).toLocaleDateString()}</span></p>`;
-                        insightsContainer.appendChild(insightEl);
-                    });
-
-                } catch (error) {
-                    console.error('Bilateral news fetch failed. Error:', error);
-                    insightsTitle.textContent = "Intelligence Feed";
-                    liveIndicator.style.display = 'none';
-                    insightsContainer.innerHTML = '<p style="text-align:left;">Live intelligence feed is currently unavailable.</p>';
-                }
-            }
-            
-            fetchAndCombineFeeds();
-
+            // Particles.js & Three.js Globe
             particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
             const globeCanvas = document.getElementById('globe-canvas');
             if (globeCanvas) {
