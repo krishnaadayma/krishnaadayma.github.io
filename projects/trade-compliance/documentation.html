@@ -9,48 +9,53 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{ --bg:#0a0a0a; --card:#1a1a1a; --text:#e0e0e0; --muted:#b0b0b0; --accent:#007acc; --radius:0.75rem; }
+    :root{ --bg:#07080a; --card:#101214; --text:#e6eef3; --muted:#9fb0bd; --accent:#0ea5ff; --radius:0.8rem; --shadow: 0 10px 30px rgba(2,6,23,0.6);}
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text);padding:24px}
-    .container{max-width:1100px;margin:0 auto;padding:0 16px}
-    header{background:linear-gradient(135deg,#1a1a1a,#2d2d2d);padding:32px;border-radius:1rem;border:1px solid #333;text-align:center}
-    .header-content{display:flex;flex-direction:column;align-items:center;gap:8px}
-    h1{margin:0;font-size:clamp(1.6rem,4vw,2.2rem)}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#06070a,#0f1113);color:var(--text);padding:36px}
+    .container{max-width:1000px;margin:0 auto;padding:0 18px}
+    header{background:linear-gradient(135deg,#0f1724,#111827);padding:32px;border-radius:1rem;border:1px solid rgba(255,255,255,0.03);text-align:center;box-shadow:var(--shadow)}
+    h1{margin:0;font-size:clamp(1.5rem,4vw,2.2rem)}
     .subtitle{color:var(--muted);margin:0}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:.6rem;border:1px solid #333;background:transparent;color:var(--accent);text-decoration:none}
-    .card{background:var(--card);padding:18px;border-radius:var(--radius);border:1px solid #333;margin-top:20px}
-    pre{background:#0f0f0f;padding:12px;border-radius:8px;color:var(--text);font-family:monospace}
-    a.download{margin-top:12px;display:inline-block}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:.6rem;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--accent);text-decoration:none}
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.02);margin-top:20px}
+    .muted{color:var(--muted)}
+    .cli-hidden{display:none;background:linear-gradient(180deg,#061018,#08121a);padding:14px;border-radius:8px;margin-top:10px;border:1px solid rgba(255,255,255,0.02);font-family:ui-monospace,monospace;color:var(--muted)}
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="header-content">
-        <h1>📚 Project Documentation</h1>
-        <p class="subtitle">International Trade Compliance System — Technical docs & usage</p>
-        <div style="margin-top:12px">
-          <a class="btn" href="../index.html">← Back to Project Home</a>
-          <a class="btn" href="demo.html">📊 Interactive Demo</a>
-          <a class="btn" href="trade_compliance.py" download>💾 Download Python</a>
-        </div>
+      <h1>📚 Project Documentation</h1>
+      <p class="subtitle">International Trade Compliance System — Technical docs & usage</p>
+      <div style="margin-top:12px">
+        <a class="btn" href="index.html">← Back to Project Home</a>
+        <a class="btn" href="demo.html">📊 Interactive Demo</a>
+        <a class="btn" href="trade_compliance.py" download>💾 Download Python</a>
       </div>
     </header>
 
     <main>
       <div class="card">
         <h2>Quick Start</h2>
-        <p class="subtitle">Run the Python CLI or use the interactive demo in your browser.</p>
-        <pre>$ python projects/trade-compliance/trade_compliance.py --help</pre>
-        <p>Examples:</p>
-        <pre>$ python projects/trade-compliance/trade_compliance.py --destination italy --category textiles --value 10000 --shipping 500
+        <p class="muted">Run the Python CLI or use the interactive demo in your browser. Code examples are hidden by default — click "Show examples" to reveal.</p>
 
-$ python projects/trade-compliance/trade_compliance.py --batch --csv results.csv</pre>
+        <div style="margin-top:12px">
+          <button id="show-examples" class="btn">Show examples</button>
+          <div id="examples" class="cli-hidden" aria-hidden="true">
+<pre>
+$ python projects/trade-compliance/trade_compliance.py --help
+
+$ python projects/trade-compliance/trade_compliance.py --destination italy --category textiles --value 10000 --shipping 500
+
+$ python projects/trade-compliance/trade_compliance.py --batch --csv results.csv
+</pre>
+          </div>
+        </div>
       </div>
 
       <div class="card">
         <h2>Implementation Overview</h2>
-        <p>The repository contains:</p>
+        <p class="muted">The repository contains:</p>
         <ul>
           <li><strong>index.html</strong> — project landing page + interactive calculator (JS)</li>
           <li><strong>app.js</strong> — client-side calculator model</li>
@@ -68,6 +73,12 @@ Examples:
   python trade_compliance.py --destination italy --category electronics --value 50000 --shipping 500
   python trade_compliance.py --batch --csv demo_results.csv
         </pre>
+        <p class="muted">All calculations use example rates. Replace with authoritative rates in production.</p>
+      </div>
+
+      <div class="card">
+        <h2>CLI Reference</h2>
+        <p class="muted">Usage: (examples hidden, reveal with the button above)</p>
       </div>
     </main>
 
@@ -75,5 +86,18 @@ Examples:
       © 2024 Krishna Dayma
     </footer>
   </div>
+
+  <script>
+    document.getElementById('show-examples').addEventListener('click', function () {
+      const box = document.getElementById('examples');
+      const isHidden = box.style.display === '' || box.style.display === 'none';
+      box.style.display = isHidden ? 'block' : 'none';
+      box.setAttribute('aria-hidden', String(!isHidden));
+      this.textContent = isHidden ? 'Hide examples' : 'Show examples';
+    });
+    // hide by default
+    document.getElementById('examples').style.display = 'none';
+    document.getElementById('examples').setAttribute('aria-hidden', 'true');
+  </script>
 </body>
 </html>

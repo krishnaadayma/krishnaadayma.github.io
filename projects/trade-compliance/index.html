@@ -10,76 +10,107 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0a0a0a;--card:#1a1a1a;--muted:#b0b0b0;--text:#e0e0e0;
-      --accent:#007acc;--accent2:#28a745;--warn:#ff6b00;
-      --radius:0.75rem;--gap:1rem;
-      --container-max:1100px;
+      --bg:#0a0a0a;--card:#101010;--muted:#bfc6cb;--text:#e6eef3;
+      --accent:#0ea5ff;--accent2:#38bdf8;--accent3:#60a5fa;--warn:#ff8a3d;
+      --radius:0.9rem;--gap:1rem;--container-max:1100px;
+      --shadow: 0 8px 30px rgba(2,6,23,0.6);
     }
     *{box-sizing:border-box}
     body{
       margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background:var(--bg);color:var(--text);line-height:1.5;padding:24px;
+      background:linear-gradient(180deg,#07080a 0%, #0f1113 100%);
+      color:var(--text);line-height:1.5;padding:36px;
+      -webkit-font-smoothing:antialiased;
     }
-    .container{max-width:var(--container-max);margin:0 auto;padding:0 16px}
-    header{background:linear-gradient(135deg,#1a1a1a,#2d2d2d);border-radius:1rem;padding:32px;border:1px solid #333;margin-bottom:28px;text-align:center}
-    .header-content{display:flex;flex-direction:column;align-items:center;gap:8px;max-width:940px;margin:0 auto}
-    .header-content h1{margin:0;font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.05}
+    .container{max-width:var(--container-max);margin:0 auto;padding:0 18px}
+    header{
+      background:linear-gradient(135deg,#0f1724 0%, #111827 100%);
+      border-radius:1.2rem;padding:36px;border:1px solid rgba(255,255,255,0.03);
+      margin-bottom:28px;text-align:center;box-shadow:var(--shadow);
+    }
+    .header-content{
+      display:flex;flex-direction:column;align-items:center;gap:8px;max-width:980px;margin:0 auto;
+    }
+    .header-content h1{margin:0;font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.02;letter-spacing:-0.5px}
     .subtitle{margin:0;color:var(--muted);font-size:clamp(1rem,2.5vw,1.125rem)}
-    .tech-tags{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;justify-content:center}
-    .tech-tag{background:var(--accent);color:white;padding:6px 10px;border-radius:999px;font-size:.85rem}
+    .tech-tags{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+    .tech-tag{
+      background:linear-gradient(90deg,var(--accent2),var(--accent3));
+      color:#022; padding:6px 12px;border-radius:999px;font-size:.85rem;font-weight:600;
+      box-shadow: 0 4px 14px rgba(14,165,255,0.08);
+    }
+
     /* controls */
     .controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:18px}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;border-radius:.6rem;border:1px solid #333;background:transparent;color:var(--accent);cursor:pointer;text-decoration:none}
-    .btn-primary{background:linear-gradient(135deg,#007acc,#005a9e);color:white;border-color:#005a9e}
-    .btn-warning{background:linear-gradient(135deg,#ff8a3d,#e05a00);color:white;border-color:#e05a00}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .95rem;border-radius:.6rem;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--accent);cursor:pointer;text-decoration:none;font-weight:600}
+    .btn-primary{background:linear-gradient(135deg,var(--accent),#0077cc);color:white;border-color:rgba(0,0,0,0.2);box-shadow:0 6px 18px rgba(2,6,23,0.5)}
+    .btn-warning{background:linear-gradient(135deg,#ffb078,#ff8a3d);color:#2d0f00;border-color:rgba(0,0,0,0.1)}
+    .btn-muted{background:transparent;color:var(--muted)}
+    .btn:focus{outline:2px solid rgba(14,165,255,0.12);outline-offset:2px}
+
     /* layout */
-    .grid{display:grid;grid-template-columns:1fr 420px;gap:24px}
-    @media (max-width:900px){.grid{grid-template-columns:1fr}}
-    .card{background:var(--card);padding:18px;border-radius:var(--radius);border:1px solid #333}
+    .grid{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start}
+    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);padding:20px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.02)}
     h2{margin:0 0 12px 0}
-    label{display:block;color:var(--text);margin-bottom:6px;font-weight:600}
-    input[type=number],select{width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:#0a0a0a;color:var(--text)}
+    label{display:block;color:var(--text);margin-bottom:6px;font-weight:700}
+    input[type=number],select{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);font-size:1rem}
     .calculator-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
     @media (max-width:600px){.calculator-grid{grid-template-columns:1fr}}
-    .result-pre{background:#0f0f0f;padding:12px;border-radius:8px;border:1px solid #222;color:var(--text);font-family:monospace;white-space:pre-wrap}
+    .result-pre{background:linear-gradient(180deg,#061018,#08131a);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);color:var(--text);font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;white-space:pre-wrap;min-height:120px}
     .small{font-size:.95rem;color:var(--muted)}
     footer{margin-top:28px;text-align:center;color:var(--muted)}
+
+    /* nice separators */
+    .muted-sep{height:1px;background:linear-gradient(90deg,transparent,#1a2936,transparent);margin:18px 0;border-radius:2px}
+
+    /* code toggle */
+    .code-toggle{margin-top:8px}
+    .code-toggle button{font-size:.9rem}
+    .cli-sample{margin-top:10px;background:linear-gradient(180deg,#061018,#08121a);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);color:var(--muted);font-family:ui-monospace,monospace;display:none}
+
+    /* aside extras */
+    .aside-actions{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+    .outline-btn{background:transparent;border:1px dashed rgba(255,255,255,0.03);padding:10px;border-radius:8px;color:var(--muted)}
+
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="header-content">
+      <div class="header-content" role="banner">
         <h1>🌍 International Trade Compliance System</h1>
-        <p class="subtitle">Python & JS implementations · Italy ↔ India trade cost calculator</p>
+        <p class="subtitle">Polished demo — Italy ↔ India trade cost calculator (Python & JS)</p>
         <div class="tech-tags" aria-hidden="true">
           <span class="tech-tag">Python</span>
           <span class="tech-tag">JavaScript</span>
           <span class="tech-tag">Data Analysis</span>
           <span class="tech-tag">Trade Compliance</span>
         </div>
-        <div class="controls" style="margin-top:16px">
-          <a class="btn" href="documentation.html"><span>📄</span>Documentation</a>
-          <a class="btn btn-primary" href="demo.html"><span>📊</span>Interactive Demo</a>
-          <a class="btn" id="download-py" href="trade_compliance.py" download><span>💾</span>Download Python</a>
+
+        <div class="controls" aria-hidden="true">
+          <a class="btn btn-muted" href="documentation.html" title="Documentation">📄 Documentation</a>
+          <a class="btn btn-primary" href="demo.html" title="Interactive demo">📊 Interactive Demo</a>
+          <a class="btn" id="download-py" href="trade_compliance.py" download title="Download Python">💾 Download Python</a>
         </div>
       </div>
     </header>
 
-    <main class="grid">
-      <section class="card">
-        <h2>🔄 Trade Cost Calculator</h2>
-        <div class="calculator-grid" style="margin-bottom:12px">
+    <main class="grid" role="main">
+      <section class="card" aria-labelledby="calculator-heading">
+        <h2 id="calculator-heading">🔄 Trade Cost Calculator</h2>
+
+        <form onsubmit="return false;" class="calculator-grid" aria-describedby="calculator-help" style="margin-bottom:12px">
           <div>
             <label for="destination">Destination</label>
-            <select id="destination">
+            <select id="destination" aria-label="Destination country">
               <option value="italy">Italy</option>
               <option value="india">India</option>
             </select>
           </div>
           <div>
             <label for="origin">Origin</label>
-            <select id="origin">
+            <select id="origin" aria-label="Origin country">
               <option value="india">India</option>
               <option value="italy">Italy</option>
             </select>
@@ -103,36 +134,47 @@
             <label for="shipping">Shipping Cost</label>
             <input id="shipping" type="number" min="0" value="500" />
           </div>
-          <div style="align-self:end;display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn btn-primary" id="calcBtn">Calculate</button>
-            <button class="btn" id="demoBtn">Run Demo</button>
-            <button class="btn btn-warning" id="exportBtn">Export JSON</button>
+          <div style="align-self:end;display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-primary" id="calcBtn" type="button">Calculate</button>
+            <button class="btn outline-btn" id="demoBtn" type="button">Run Demo</button>
+            <button class="btn btn-warning" id="exportBtn" type="button">Export JSON</button>
           </div>
+        </form>
+
+        <div id="result" style="display:block" aria-live="polite" aria-atomic="true">
+          <div class="small">Result</div>
+          <pre id="resultPre" class="result-pre" aria-label="Calculation result"></pre>
         </div>
 
-        <div id="result" style="display:block">
-          <div class="small">Result</div>
-          <pre id="resultPre" class="result-pre" aria-live="polite"></pre>
-        </div>
+        <div class="muted-sep" aria-hidden="true"></div>
+        <div class="small" id="calculator-help">Want to run example commands locally? Use the Documentation link above and download the Python script.</div>
       </section>
 
-      <aside class="card">
-        <h2>Python Engine (summary)</h2>
-        <p class="small">Download the Python file to run the same calculations on your machine. The Python script supports a CLI, batch demo and JSON/CSV exports.</p>
-        <div style="margin-top:12px">
+      <aside class="card" aria-labelledby="python-heading">
+        <h2 id="python-heading">Python Engine (summary)</h2>
+        <p class="small">Download the Python file to run the same calculations on your machine. The script supports CLI, batch demo and JSON/CSV exports.</p>
+
+        <div class="aside-actions">
           <a class="btn" href="trade_compliance.py" download>💾 Download trade_compliance.py</a>
+          <a class="btn outline-btn" href="documentation.html">📚 Read docs</a>
         </div>
 
-        <hr style="margin:16px 0;border:none;border-top:1px solid #222">
+        <div class="muted-sep" aria-hidden="true"></div>
 
-        <h3 style="margin-top:8px">Quick examples</h3>
-        <div class="small" style="margin-top:8px">
-          Run CLI demo:
-          <div class="result-pre" style="margin-top:8px;font-size:.9rem">$ python trade_compliance.py</div>
-          Single scenario:
-          <div class="result-pre" style="margin-top:8px;font-size:.9rem">$ python trade_compliance.py --destination italy --category textiles --value 10000 --shipping 500</div>
+        <h3 style="margin-top:8px">Quick examples (hidden)</h3>
+        <div class="code-toggle">
+          <button class="btn btn-muted" id="show-cli">Show CLI examples</button>
+          <pre class="cli-sample" id="cli-sample" aria-hidden="true" tabindex="-1">
+(Examples hidden by default)
+Run CLI demo:
+$ python projects/trade-compliance/trade_compliance.py
+
+Single scenario:
+$ python projects/trade-compliance/trade_compliance.py --destination italy --category textiles --value 10000 --shipping 500
+          </pre>
         </div>
       </aside>
+
     </main>
 
     <footer>
@@ -141,5 +183,22 @@
   </div>
 
   <script src="app.js" defer></script>
+  <script>
+    // Toggle CLI examples so code isn't visible by default
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.getElementById('show-cli');
+      const pre = document.getElementById('cli-sample');
+      btn.addEventListener('click', () => {
+        const isHidden = pre.style.display === '' || pre.style.display === 'none';
+        pre.style.display = isHidden ? 'block' : 'none';
+        pre.setAttribute('aria-hidden', String(!isHidden));
+        btn.textContent = isHidden ? 'Hide CLI examples' : 'Show CLI examples';
+      });
+
+      // Improve focus: hide the example by default
+      pre.style.display = 'none';
+      pre.setAttribute('aria-hidden', 'true');
+    });
+  </script>
 </body>
 </html>
