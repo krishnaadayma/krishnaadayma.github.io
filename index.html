@@ -14,9 +14,8 @@
             --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
             --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
             --accent-primary: #A0A0A0; --accent-secondary: #4a5568; --accent-warning: #888888;
-            --border-color: #2C2C2C;
+            --border-color: #2C2C2C; --live-red: #ff4d4d;
             --gradient-primary: linear-gradient(135deg, #1E1E1E 0%, #121212 100%);
-            --gradient-accent: linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%);
             --text-base: clamp(1rem, 3vw, 1.125rem); --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
             --text-xl: clamp(1.25rem, 4vw, 1.5rem); --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
             --text-3xl: clamp(1.875rem, 6vw, 2.25rem); --text-4xl: clamp(2.25rem, 8vw, 3rem);
@@ -25,12 +24,11 @@
             --space-2xl: clamp(3rem, 8vw, 4rem);
             --radius-md: 0.5rem; --radius-lg: 0.75rem;
             --shadow-md: 0 4px 6px rgba(0,0,0,0.5); --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
-            --shadow-glow: 0 0 20px rgba(160, 160, 160, 0.3);
             --transition-fast: 0.2s ease; --transition-medium: 0.3s ease;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; font-size: 16px; }
-        body { font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; color: var(--text-secondary); background-color: var(--bg-primary); overflow-x: hidden; text-rendering: optimizeSpeed; }
+        body { font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; color: var(--text-secondary); background-color: var(--bg-primary); overflow-x: hidden; }
         .container { width: 100%; max-width: min(1200px, 95vw); margin: 0 auto; padding: 0 var(--space-md); position: relative; z-index: 2; }
         h1, h2, h3, h4 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: var(--space-sm); text-align: center;}
         h1 { font-size: var(--text-4xl); } h2 { font-size: var(--text-3xl); } h3 { font-size: var(--text-2xl); color: var(--accent-primary); } h4 { font-size: var(--text-xl); }
@@ -58,8 +56,9 @@
         .checklist { list-style: none; padding-left: 0; }
         .checklist li { position: relative; padding-left: 2rem; margin-bottom: 1rem; text-align: left; }
         .checklist li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-primary); font-weight: 700; font-size: 1.25rem; top: -0.25rem; }
+        .live-indicator { display: none; width: 10px; height: 10px; background-color: var(--live-red); border-radius: 50%; margin-right: 12px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); } }
         footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: var(--space-xl) var(--space-md); margin-top: var(--space-2xl); border-top: 1px solid var(--border-color); }
-        .footer-text { margin: 0 auto; max-width: none; }
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
     </style>
@@ -81,7 +80,10 @@
 
         <section id="insights">
             <div class="container">
-                <h2 class="section-title">Global Insights Dossier</h2>
+                <h2 class="section-title" style="display: flex; align-items: center; justify-content: center;">
+                    <span id="live-indicator" class="live-indicator"></span>
+                    <span id="insights-title">Bilateral Economic Intelligence: Italy-India</span>
+                </h2>
                 <div id="insights-container" class="grid-container">
                     <p style="text-align:center; margin: 0 auto; grid-column: 1 / -1;">Accessing intelligence feeds...</p>
                 </div>
@@ -137,7 +139,7 @@
         </section>
     </main>
     
-    <footer><div class="container"><p class="footer-text">&copy; 2024 Krishna Dayma. All rights reserved.</p></div></footer>
+    <footer><div class="container"><p>&copy; 2024 Krishna Dayma. All rights reserved.</p></div></footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -155,35 +157,20 @@
 
             document.querySelectorAll('.fade-in, .language-item').forEach(el => observer.observe(el));
             
-            // --- INVINCIBLE LIVE INSIGHTS WITH RANDOMIZED FALLBACK ---
             const insightsContainer = document.getElementById('insights-container');
-            const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.reuters.com%2Fbusiness%2Frss';
+            const liveIndicator = document.getElementById('live-indicator');
+            const insightsTitle = document.getElementById('insights-title');
             
-            // EXPANDED "INTELLIGENCE DOSSIER" FALLBACK
-            const staticInsights = [
-                { title: 'AI-Driven Logistics', description: 'Global supply chains are realizing a 5-10% efficiency increase via AI-driven logistics and predictive analytics.' },
-                { title: 'Cross-Border E-commerce', description: 'The Southeast Asian e-commerce market grew by over 25% last fiscal year, driven by mobile commerce.' },
-                { title: 'Italy-India Trade Relations', description: 'Trade between Italy and India is projected to grow 15% annually, led by machinery and pharmaceuticals.' },
-                { title: 'ESG Investment Trends', description: 'Companies with high ESG scores are outperforming peers by 3-5%, indicating a major shift in investment strategy.' },
-                { title: 'Blockchain in Supply Chains', description: 'Adoption of blockchain for supply chain transparency is projected to reduce disputes by up to 45% in the next three years.' },
-                { title: 'Emerging Markets: FinTech', description: 'FinTech adoption in emerging markets is accelerating, with mobile payment volume expected to triple by 2028.' },
-                { title: 'Impact of Carbon Tariffs', description: 'New cross-border carbon tariffs are expected to shift manufacturing priorities towards sustainable energy sources.' },
-                { title: 'The Future of Remote Work', description: 'Data shows a permanent shift towards hybrid work models, impacting commercial real estate and urban development.' },
-                { title: 'Geopolitical Risk Analysis', description: 'Heightened geopolitical tensions are forcing companies to diversify supply chains away from single-source dependencies.' },
-                { title: 'Semiconductor Industry Outlook', description: 'The global semiconductor industry is facing a consolidation phase, with increased M&A activity expected.' },
-                { title: 'Green Energy Investments', description: 'Investment in renewable energy projects has surpassed fossil fuel investments for the first time, signaling a new economic era.' },
-                { title: 'Luxury Goods Market Shift', description: 'The luxury market is pivoting towards "quiet luxury" and sustainable materials, driven by Gen Z consumer values.' },
-                { title: 'Cybersecurity in International Trade', description: 'A significant increase in cybersecurity spending is noted among firms engaging in international trade to protect sensitive data.' },
-                { title: 'Agricultural Tech (AgriTech)', description: 'Venture capital funding in AgriTech has increased by 40% year-over-year, focusing on vertical farming and crop efficiency.' },
-                { title: 'The Pharmaceutical Pipeline', description: 'Patent expirations for several blockbuster drugs are expected to open the market to generics, impacting Big Pharma revenues.' },
-                { title: 'Global Shipping Lane Analysis', description: 'New arctic shipping lanes, opening due to climate change, are poised to reduce Asia-Europe transit times by up to 15 days.' }
-            ];
+            const RSS_BASE = 'https://api.rss2json.com/v1/api.json?rss_url=';
+            const italyFeed = `${RSS_BASE}https://news.google.com/rss/search?q=italy+economy+business&hl=en-US&gl=US&ceid=US:en`;
+            const indiaFeed = `${RSS_BASE}https://news.google.com/rss/search?q=india+economy+business&hl=en-US&gl=US&ceid=US:en`;
+
+            const staticInsights = [ { title: 'AI-Driven Logistics', description: 'Global supply chains are realizing a 5-10% efficiency increase via AI-driven logistics and predictive analytics.' }, { title: 'Cross-Border E-commerce', description: 'The Southeast Asian e-commerce market grew by over 25% last fiscal year, driven by mobile commerce.' }, { title: 'Italy-India Trade Relations', description: 'Trade between Italy and India is projected to grow 15% annually, led by machinery and pharmaceuticals.' }, { title: 'ESG Investment Trends', description: 'Companies with high ESG scores are outperforming peers by 3-5%, indicating a major shift in investment strategy.' } ];
 
             function renderStaticInsights() {
+                insightsTitle.textContent = "Curated Intelligence Dossier"; // Change title for fallback
                 insightsContainer.innerHTML = '';
-                // Randomize the static list
                 const shuffled = staticInsights.sort(() => 0.5 - Math.random());
-                // Get a slice of 4 random items
                 let selected = shuffled.slice(0, 4);
 
                 selected.forEach(item => {
@@ -195,32 +182,41 @@
                 });
             }
 
-            fetch(rssUrl)
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok.');
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.status === 'ok' && data.items && data.items.length > 0) {
-                        insightsContainer.innerHTML = '';
-                        data.items.slice(0, 4).forEach(item => {
-                            const insightEl = document.createElement('div');
-                            insightEl.className = 'card fade-in';
-                            const title = item.title.replace(/<[^>]*>/g, "");
-                            insightEl.innerHTML = `<h4><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none;">${title}</a></h4><p>Source: Reuters | ${new Date(item.pubDate).toLocaleDateString()}</p>`;
-                            insightsContainer.appendChild(insightEl);
-                            observer.observe(insightEl);
-                        });
-                    } else {
-                        renderStaticInsights();
-                    }
-                })
-                .catch(error => {
-                    console.error('Live news fetch failed, rendering randomized static fallback. Error:', error);
-                    renderStaticInsights();
-                });
+            async function fetchAndCombineFeeds() {
+                try {
+                    const [italyResponse, indiaResponse] = await Promise.all([ fetch(italyFeed), fetch(indiaFeed) ]);
+                    if (!italyResponse.ok || !indiaResponse.ok) throw new Error('Network response was not ok.');
+                    
+                    const italyData = await italyResponse.json();
+                    const indiaData = await indiaResponse.json();
+                    if (italyData.status !== 'ok' || indiaData.status !== 'ok') throw new Error('API status was not ok.');
+                    
+                    const combinedItems = [...(italyData.items || []), ...(indiaData.items || [])];
+                    if (combinedItems.length === 0) throw new Error('No news items found.');
+                    
+                    combinedItems.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
-            // Particles.js & Three.js Globe
+                    insightsContainer.innerHTML = '';
+                    liveIndicator.style.display = 'inline-block'; // Show the live dot!
+                    
+                    combinedItems.slice(0, 4).forEach(item => {
+                        const insightEl = document.createElement('div');
+                        insightEl.className = 'card fade-in';
+                        const title = item.title.replace(/<[^>]*>/g, "");
+                        const sourceName = item.author || "Google News";
+                        insightEl.innerHTML = `<h4><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none;">${title}</a></h4><p>Source: ${sourceName} | ${new Date(item.pubDate).toLocaleDateString()}</p>`;
+                        insightsContainer.appendChild(insightEl);
+                        observer.observe(insightEl);
+                    });
+
+                } catch (error) {
+                    console.error('Bilateral news fetch failed, rendering static fallback. Error:', error);
+                    renderStaticInsights();
+                }
+            }
+            
+            fetchAndCombineFeeds();
+
             particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
             const globeCanvas = document.getElementById('globe-canvas');
             if (globeCanvas) {
