@@ -9,21 +9,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== EXECUTIVE PALETTE CSS FRAMEWORK ===== */
+        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK ===== */
         :root {
-            /* Executive Color System */
+            /* Executive Gray Color System */
             --bg-primary: #121212; /* Deep charcoal */
             --bg-secondary: #1E1E1E; /* Lighter charcoal for cards */
             --bg-tertiary: #2a2a2a;
             --text-primary: #EAEAEA; /* Soft, elegant off-white */
             --text-secondary: #CCCCCC;
             --text-muted: #999999;
-            --accent-primary: #B89B68; /* Sophisticated gold */
+            --accent-primary: #A0A0A0; /* Crisp executive gray */
             --accent-secondary: #4a5568; /* Muted slate */
-            --accent-warning: #c0a062;
+            --accent-warning: #888888;
             --border-color: #2C2C2C; /* Dark, subtle border */
             --gradient-primary: linear-gradient(135deg, #1E1E1E 0%, #121212 100%);
-            --gradient-accent: linear-gradient(135deg, #c0a062 0%, #B89B68 100%);
+            --gradient-accent: linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%);
             
             /* Typography scale (unchanged) */
             --text-xs: clamp(0.75rem, 2vw, 0.875rem);
@@ -53,7 +53,7 @@
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.6);
             --shadow-md: 0 4px 6px rgba(0,0,0,0.5);
             --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
-            --shadow-glow: 0 0 20px rgba(184, 155, 104, 0.3); /* Gold glow */
+            --shadow-glow: 0 0 20px rgba(160, 160, 160, 0.3); /* Subtle gray glow */
             
             /* Animation */
             --transition-fast: 0.2s ease;
@@ -242,15 +242,15 @@
 
         .btn-primary {
             background: var(--gradient-accent);
-            border-color: #a58a58;
+            border-color: #888888;
             color: #121212;
             font-weight: 700;
         }
 
         .btn-primary:hover,
         .btn-primary:focus {
-            background: #a58a58;
-            border-color: #a58a58;
+            background: #888888;
+            border-color: #888888;
             box-shadow: var(--shadow-glow);
         }
 
@@ -420,7 +420,7 @@ const analyzer = new TradeCompliance({
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(184, 155, 104, 0.05) 0%, rgba(165, 138, 88, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(160, 160, 160, 0.05) 0%, rgba(140, 140, 140, 0.05) 100%);
             opacity: 0;
             transition: opacity var(--transition-medium);
         }
@@ -474,7 +474,7 @@ const analyzer = new TradeCompliance({
         }
 
         .tech-tag {
-            background: rgba(184, 155, 104, 0.15);
+            background: rgba(160, 160, 160, 0.15);
             padding: var(--space-xs) var(--space-sm);
             border-radius: 12px;
             font-size: var(--text-xs);
@@ -813,7 +813,7 @@ const analyzer = new TradeCompliance({
                         }
                     },
                     "color": {
-                        "value": "#B89B68" // Gold particles
+                        "value": "#A0A0A0" // Executive gray particles
                     },
                     "shape": {
                         "type": "circle",
