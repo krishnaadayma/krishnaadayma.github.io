@@ -1,780 +1,345 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>International Trade Compliance System | Krishna Dayma</title>
-    <meta name="description" content="Python application analyzing trade regulations between Italy and India with comprehensive compliance data and interactive analytics.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-    /* ===== OPTIMIZED CSS FOR TRADE COMPLIANCE ===== */
-    :root {
-        /* Color system */
-        --bg-primary: #0a0a0a;
-        --bg-secondary: #1a1a1a;
-        --bg-tertiary: #2d2d2d;
-        --text-primary: #ffffff;
-        --text-secondary: #e0e0e0;
-        --text-muted: #b0b0b0;
-        --accent-primary: #007acc;
-        --accent-secondary: #28a745;
-        --accent-warning: #ff6b35;
-        --accent-portfolio: #6c757d;
-        --border-color: #333;
-        --gradient-primary: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-        --gradient-accent: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
-        
-        /* Typography scale */
-        --text-xs: clamp(0.75rem, 2vw, 0.875rem);
-        --text-sm: clamp(0.875rem, 2.5vw, 1rem);
-        --text-base: clamp(1rem, 3vw, 1.125rem);
-        --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
-        --text-xl: clamp(1.25rem, 4vw, 1.5rem);
-        --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
-        --text-3xl: clamp(1.875rem, 6vw, 2.25rem);
-        
-        /* Spacing scale */
-        --space-xs: clamp(0.5rem, 1vw, 0.75rem);
-        --space-sm: clamp(0.75rem, 2vw, 1rem);
-        --space-md: clamp(1rem, 3vw, 1.5rem);
-        --space-lg: clamp(1.5rem, 4vw, 2rem);
-        --space-xl: clamp(2rem, 6vw, 3rem);
-        --space-2xl: clamp(3rem, 8vw, 4rem);
-        
-        /* Border radius */
-        --radius-sm: 0.375rem;
-        --radius-md: 0.5rem;
-        --radius-lg: 0.75rem;
-        --radius-xl: 1rem;
-        
-        /* Animation */
-        --transition-fast: 0.2s ease;
-        --transition-medium: 0.3s ease;
-        --transition-slow: 0.5s ease;
-        --shadow-glow: 0 0 20px rgba(0, 122, 204, 0.3);
-    }
-
-    /* Reset and base styles */
-    *, *::before, *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        line-height: 1.6;
-        color: var(--text-secondary);
-        background-color: var(--bg-primary);
-        overflow-x: hidden;
-    }
-
-    /* Container system */
-    .container {
-        width: 100%;
-        max-width: min(1200px, 95vw);
-        margin: 0 auto;
-        padding: 0 var(--space-md);
-    }
-
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-        color: var(--text-primary);
-        line-height: 1.2;
-        font-weight: 700;
-        margin-bottom: var(--space-sm);
-    }
-
-    h1 { 
-        font-size: var(--text-3xl);
-        text-align: center;
-    }
-
-    h2 { 
-        font-size: var(--text-2xl);
-        margin-bottom: var(--space-md);
-    }
-
-    h3 { 
-        font-size: var(--text-xl);
-    }
-
-    p {
-        color: var(--text-muted);
-        margin-bottom: var(--space-sm);
-        line-height: 1.6;
-        font-size: var(--text-base);
-        max-width: 65ch;
-    }
-
-    .subtitle {
-        font-size: var(--text-lg);
-        color: var(--text-muted);
-        margin-bottom: var(--space-md);
-    }
-
-    /* Header */
-    header {
-        background: var(--gradient-primary);
-        color: var(--text-primary);
-        padding: var(--space-2xl) var(--space-md);
-        text-align: center;
-        border-radius: var(--radius-xl);
-        margin-bottom: var(--space-xl);
-        position: relative;
-        overflow: hidden;
-        border: 1px solid var(--border-color);
-    }
-
-    .header-content h1 {
-        animation: fadeInUp 0.8s ease-out;
-    }
-
-    .header-content .subtitle {
-        animation: fadeInUp 0.8s ease-out 0.2s both;
-    }
-
-    .header-content .tech-tags {
-        animation: fadeInUp 0.8s ease-out 0.4s both;
-    }
-
-    /* Button system */
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: var(--space-xs);
-        background: var(--bg-tertiary);
-        color: var(--text-primary);
-        padding: var(--space-sm) var(--space-lg);
-        text-decoration: none;
-        border-radius: var(--radius-md);
-        font-weight: 600;
-        font-size: var(--text-base);
-        border: 1px solid var(--border-color);
-        transition: all var(--transition-fast);
-        cursor: pointer;
-        margin: var(--space-xs);
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .btn::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-        transition: left var(--transition-medium);
-    }
-
-    .btn:hover::before {
-        left: 100%;
-    }
-
-    .btn:hover,
-    .btn:focus {
-        background: #404040;
-        transform: translateY(-2px);
-    }
-
-    .btn-primary {
-        background: var(--gradient-accent);
-        border-color: var(--accent-primary);
-    }
-
-    .btn-primary:hover,
-    .btn-primary:focus {
-        background: #005a9e;
-        border-color: #005a9e;
-        box-shadow: var(--shadow-glow);
-    }
-
-    .btn-secondary {
-        background: var(--accent-secondary);
-        border-color: var(--accent-secondary);
-    }
-
-    .btn-secondary:hover,
-    .btn-secondary:focus {
-        background: #1e7e34;
-        border-color: #1e7e34;
-    }
-
-    .btn-warning {
-        background: linear-gradient(135deg, var(--accent-warning), #e53e3e);
-        border-color: var(--accent-warning);
-        color: white;
-    }
-
-    .btn-warning:hover,
-    .btn-warning:focus {
-        background: linear-gradient(135deg, #e55a25, #c53030);
-        border-color: #e55a25;
-        box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
-    }
-
-    .btn-portfolio {
-        background: var(--accent-portfolio);
-        border-color: var(--accent-portfolio);
-        color: white;
-    }
-
-    .btn-portfolio:hover,
-    .btn-portfolio:focus {
-        background: #545b62;
-        border-color: #545b62;
-    }
-
-    /* Tech tags */
-    .tech-tags {
-        margin: var(--space-lg) 0;
-    }
-
-    .tech-tag {
-        background: var(--accent-primary);
-        padding: var(--space-xs) var(--space-sm);
-        border-radius: 12px;
-        font-size: var(--text-xs);
-        margin-right: var(--space-sm);
-        color: white;
-        display: inline-block;
-        transition: transform var(--transition-fast);
-    }
-
-    .tech-tag:hover {
-        transform: scale(1.05);
-    }
-
-    /* Feature grid */
-    .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-        gap: var(--space-lg);
-        margin: var(--space-xl) 0;
-    }
-
-    .feature-card {
-        background: var(--bg-secondary);
-        padding: var(--space-lg);
-        border-radius: var(--radius-lg);
-        text-align: center;
-        border: 1px solid var(--border-color);
-        transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .feature-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: var(--gradient-accent);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform var(--transition-medium);
-    }
-
-    .feature-card:hover::before {
-        transform: scaleX(1);
-    }
-
-    .feature-card:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-glow);
-    }
-
-    /* Output samples */
-    .output-sample {
-        background: var(--bg-secondary);
-        padding: var(--space-lg);
-        border-radius: var(--radius-lg);
-        border-left: 4px solid var(--accent-primary);
-        margin: var(--space-lg) 0;
-        font-family: 'Courier New', monospace;
-        font-size: var(--text-sm);
-        line-height: 1.5;
-        overflow-x: auto;
-        transition: transform var(--transition-medium);
-    }
-
-    .output-sample:hover {
-        transform: translateY(-4px);
-    }
-
-    /* Project links section */
-    .project-links-section {
-        text-align: center;
-        margin: var(--space-xl) 0;
-    }
-
-    .links-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-sm);
-        justify-content: center;
-        margin-top: var(--space-md);
-    }
-
-    /* Dashboard CTA */
-    .dashboard-cta {
-        text-align: center;
-        background: var(--bg-secondary);
-        padding: var(--space-xl);
-        border-radius: var(--radius-lg);
-        margin: var(--space-xl) 0;
-        border: 1px solid var(--border-color);
-        transition: transform var(--transition-medium);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .dashboard-cta::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(0,122,204,0.05) 0%, rgba(0,90,158,0.05) 100%);
-        opacity: 0;
-        transition: opacity var(--transition-medium);
-    }
-
-    .dashboard-cta:hover::before {
-        opacity: 1;
-    }
-
-    .dashboard-cta:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-glow);
-    }
-
-    /* Systematic output layout */
-    .system-partition {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 0;
-        background: var(--bg-secondary);
-        border-radius: var(--radius-lg);
-        border: 1px solid var(--border-color);
-        overflow: hidden;
-        margin: var(--space-lg) 0;
-        transition: transform var(--transition-medium);
-    }
-
-    .system-partition:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-glow);
-    }
-
-    .partition-header {
-        background: var(--bg-tertiary);
-        color: var(--accent-primary);
-        font-weight: bold;
-        padding: var(--space-md);
-        border-bottom: 2px solid var(--accent-primary);
-        font-family: 'Courier New', monospace;
-    }
-
-    .partition-section {
-        padding: var(--space-md);
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .partition-section:last-child {
-        border-bottom: none;
-    }
-
-    .compact-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .compact-list li {
-        padding: var(--space-xs) 0;
-        border-bottom: 1px solid var(--bg-tertiary);
-        display: flex;
-        align-items: flex-start;
-        transition: color var(--transition-fast);
-    }
-
-    .compact-list li:hover {
-        color: var(--text-primary);
-    }
-
-    .compact-list li:last-child {
-        border-bottom: none;
-    }
-
-    .list-bullet {
-        color: var(--accent-secondary);
-        margin-right: var(--space-sm);
-        font-weight: bold;
-    }
-
-    /* Section spacing */
-    section {
-        margin: var(--space-2xl) 0;
-    }
-
-    /* Animations */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-
-    /* Scroll animations */
-    .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* Mobile optimizations */
-    @media (max-width: 768px) {
-        body {
-            padding: var(--space-sm);
-        }
-
-        .feature-grid {
-            grid-template-columns: 1fr;
-            gap: var(--space-md);
-        }
-
-        .links-grid {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .links-grid .btn {
-            width: min(100%, 300px);
-            margin: var(--space-xs) 0;
-        }
-
-        .dashboard-cta {
-            padding: var(--space-lg);
-        }
-
-        .output-sample {
-            padding: var(--space-md);
-            font-size: var(--text-xs);
-        }
-
-        /* Reduce motion for better performance */
-        @media (prefers-reduced-motion: reduce) {
-            .btn,
-            .feature-card,
-            .output-sample,
-            .dashboard-cta,
-            .system-partition {
-                transition: none;
-            }
-            
-            .btn:hover,
-            .feature-card:hover,
-            .output-sample:hover,
-            .dashboard-cta:hover,
-            .system-partition:hover {
-                transform: none;
-            }
-            
-            .btn::before,
-            .feature-card::before,
-            .dashboard-cta::before {
-                display: none;
-            }
-            
-            html {
-                scroll-behavior: auto;
-            }
-        }
-    }
-
-    @media (max-width: 480px) {
-        .container {
-            padding: 0 var(--space-sm);
-        }
-
-        header {
-            padding: var(--space-xl) var(--space-md);
-        }
-
-        .feature-card {
-            padding: var(--space-md);
-        }
-    }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <h1>🌍 International Trade Compliance System</h1>
-                <p class="subtitle">Python application for analyzing trade regulations between Italy and India</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Data Analysis</span>
-                    <span class="tech-tag">International Business</span>
-                    <span class="tech-tag">Trade Compliance</span>
-                </div>
-            </div>
-        </header>
-
-        <section class="fade-in">
-            <h2>About This Project</h2>
-            <p>This Python application provides comprehensive trade compliance data for international business operations between Italy and India, including documentation requirements, logistics information, and regulatory frameworks.</p>
-            
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>🇮🇹 Italy Data</h3>
-                    <p>EU compliance standards, ports, VAT information, and documentation requirements</p>
-                </div>
-                <div class="feature-card">
-                    <h3>🇮🇳 India Data</h3>
-                    <p>Customs procedures, import licenses, GST rates, and trade logistics</p>
-                </div>
-                <div class="feature-card">
-                    <h3>📊 Comparison</h3>
-                    <p>Side-by-side analysis of trade regulations and bilateral context</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="project-links-section fade-in">
-            <h2>Project Links</h2>
-            <div class="links-grid">
-                <a href="demo.html" class="btn btn-primary">📊 Interactive Demo</a>
-                <a href="documentation.html" class="btn">📚 Documentation</a>
-                <a href="trade_compliance.py" download class="btn btn-secondary">💾 Download Code</a>
-                <a href="https://krishnaadayma.github.io/" class="btn btn-portfolio">← Back to Portfolio</a>
-            </div>
-        </section>
-
-        <section class="dashboard-cta fade-in">
-            <h2>Interactive Analytics Dashboard</h2>
-            <p>Explore our advanced data visualization platform with interactive charts and comprehensive trade analytics:</p>
-            <a href="demo.html" class="btn btn-warning" style="padding: var(--space-md) var(--space-xl);">
-                🚀 Launch Analytics Dashboard
-            </a>
-        </section>
-
-        <section class="fade-in">
-            <h2>Example Output</h2>
-            <div class="system-partition">
-                <div class="partition-header">
-                    🌍 INTERNATIONAL TRADE COMPLIANCE SYSTEM
-                </div>
-                <div class="partition-section">
-                    <div class="partition-header" style="background: transparent; border-bottom: 1px solid var(--border-color); padding: var(--space-sm) var(--space-md);">
-                        TRADE COMPLIANCE DATA: ITALY
-                    </div>
-                    <div style="margin-top: var(--space-md);">
-                        <div style="color: var(--accent-secondary); font-weight: bold; margin-bottom: var(--space-sm);">📋 GENERAL INFORMATION:</div>
-                        <ul class="compact-list">
-                            <li><span class="list-bullet">•</span> Official Name: Italian Republic</li>
-                            <li><span class="list-bullet">•</span> Currency: Euro (EUR)</li>
-                            <li><span class="list-bullet">•</span> EU Member: Yes</li>
-                        </ul>
-                    </div>
-                    <div style="margin-top: var(--space-md);">
-                        <div style="color: var(--accent-secondary); font-weight: bold; margin-bottom: var(--space-sm);">🚢 TRADE LOGISTICS:</div>
-                        <ul class="compact-list">
-                            <li><span class="list-bullet">•</span> Primary Ports: Genoa, Trieste, Gioia Tauro...</li>
-                            <li><span class="list-bullet">•</span> VAT on Imports: 22.0%</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="fade-in">
-            <h2>How to Run</h2>
-            <p>Download the Python file and run it using:</p>
-            <div class="output-sample">
-                python trade_compliance.py
-            </div>
-            <div style="text-align: center; margin-top: var(--space-md);">
-                <a href="trade_compliance.py" download class="btn btn-secondary">
-                    💾 Download Python File
-                </a>
-            </div>
-        </section>
-    </div>
-
-    <script>
-        // Scroll animation functionality
-        function handleScrollAnimations() {
-            const elements = document.querySelectorAll('.fade-in');
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-            // Mock TradeCompliance class for frontend demonstration
-class TradeCompliance {
-    constructor(config) {
-        this.country = config.country;
-        this.productCategory = config.productCategory;
-        this.updateFrequency = config.updateFrequency;
-    }
-
-    calculateCosts(params) {
-        // Mock calculation based on input parameters
-        const baseCost = params.shipmentValue * 0.02; // 2% base compliance cost
-        let additionalCosts = 0;
-        
-        if (this.country === 'italy') {
-            additionalCosts += params.shipmentValue * 0.005; // Italy specific costs
-        }
-        
-        if (this.productCategory === 'electronics') {
-            additionalCosts += params.shipmentValue * 0.003; // Electronics specific costs
-        }
-        
-        return {
-            totalCost: baseCost + additionalCosts,
-            baseComplianceFee: baseCost,
-            countrySpecificFees: additionalCosts,
-            currency: 'EUR',
-            breakdown: {
-                documentation: baseCost * 0.4,
-                regulatoryFees: baseCost * 0.3,
-                inspection: baseCost * 0.2,
-                miscellaneous: baseCost * 0.1
-            }
-        };
-    }
+#!/usr/bin/env python3
+"""
+trade_compliance.py
+
+Clean, self-contained Trade Compliance module and CLI.
+
+Replaces previous accidental HTML content stored in this file.
+This script provides:
+- TradeCompliance dataclass that computes:
+  - import duty, tax (VAT/GST), shipping, total landed cost
+  - base compliance fee and a heuristic clearance-time estimate
+- Batch/demo runner to generate multiple sample reports
+- CLI to calculate a single scenario and optionally export JSON/CSV
+- Input validation and helpful --help usage
+- No external dependencies (uses stdlib only)
+
+Copy-paste this entire file into projects/trade-compliance/trade_compliance.py
+"""
+
+from __future__ import annotations
+import argparse
+import csv
+import json
+import logging
+from dataclasses import dataclass
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, Any, Iterable, List, Optional
+
+# ---------------------------
+# Configuration / Constants
+# ---------------------------
+
+# Example/demo duty rates keyed by (destination_country, product_category)
+DUTY_RATES: Dict[tuple, float] = {
+    ("italy", "textiles"): 0.10,
+    ("italy", "machinery"): 0.07,
+    ("italy", "pharmaceuticals"): 0.05,
+    ("italy", "automotive"): 0.08,
+    ("italy", "food"): 0.15,
+    ("india", "textiles"): 0.08,
+    ("india", "machinery"): 0.04,
+    ("india", "pharmaceuticals"): 0.03,
+    ("india", "automotive"): 0.06,
+    ("india", "food"): 0.12,
+    # fallback categories intentionally omitted; fallback handled below
 }
 
-// Demo functions
-function runDemo() {
-    try {
-        // Initialize analyzer
-        const analyzer = new TradeCompliance({
-            country: 'italy',
-            productCategory: 'electronics',
-            updateFrequency: 'realtime'
-        });
-
-        // Calculate costs
-        const costs = analyzer.calculateCosts({
-            shipmentValue: 50000,
-            productType: 'consumer_goods'
-        });
-
-        // Display results
-        const outputDiv = document.getElementById('demoOutput');
-        const outputContent = document.getElementById('outputContent');
-        
-        outputContent.textContent = JSON.stringify(costs, null, 2);
-        outputDiv.style.display = 'block';
-        
-        // Scroll to results
-        outputDiv.scrollIntoView({ behavior: 'smooth' });
-        
-    } catch (error) {
-        alert('Error running demo: ' + error.message);
-    }
+# Example tax rates (VAT/GST) applied for imports into destination country
+TAX_RATES: Dict[str, float] = {
+    "italy": 0.22,  # VAT example
+    "india": 0.18,  # GST example
 }
 
-function resetDemo() {
-    document.getElementById('demoOutput').style.display = 'none';
-    document.getElementById('outputContent').textContent = '';
-}
-            // Initial check for scroll animations
-            handleScrollAnimations();
-            
-            // Add scroll event listener for animations
-            window.addEventListener('scroll', handleScrollAnimations);
-        });
-    </script>
-    <section class="fade-in">
-    <h2>Quick Start Example</h2>
-    <p>Here's how to initialize and use the trade compliance analyzer:</p>
-    
-    <div class="output-sample">
-// Initialize trade compliance analyzer
-const analyzer = new TradeCompliance({
-    country: 'italy',
-    productCategory: 'electronics',
-    updateFrequency: 'realtime'
-});
+CURRENCY_MAP: Dict[str, str] = {"italy": "EUR", "india": "INR"}
 
-// Calculate compliance costs
-const costs = analyzer.calculateCosts({
-    shipmentValue: 50000,
-    productType: 'consumer_goods'
-});
+DEFAULT_DUTY: float = 0.05  # fallback duty rate if none specified
+COMPLIANCE_FEE_RATE: float = 0.02  # 2% base compliance fee (demo)
+LOG_FORMAT: str = "%(asctime)s - %(levelname)s - %(message)s"
 
-console.log('Compliance Costs:', costs);
-    </div>
+# ---------------------------
+# Utilities
+# ---------------------------
 
-    <div class="demo-output" id="demoOutput" style="margin-top: var(--space-md); padding: var(--space-md); background: var(--bg-secondary); border-radius: var(--radius-md); display: none;">
-        <h4>Demo Output:</h4>
-        <pre id="outputContent"></pre>
-    </div>
 
-    <div style="text-align: center; margin-top: var(--space-md);">
-        <button onclick="runDemo()" class="btn btn-primary">▶ Run Demo</button>
-        <button onclick="resetDemo()" class="btn">🔄 Reset</button>
-    </div>
-</section>
-</body>
-</html>
+def safe_round(value: float, ndigits: int = 2) -> float:
+    """Round a float safely to avoid negative zero etc."""
+    return round(float(value), ndigits)
+
+
+def validate_non_negative(value: str) -> float:
+    """argparse type: ensure float and non-negative."""
+    try:
+        f = float(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(f"Invalid number: {value}") from exc
+    if f < 0:
+        raise argparse.ArgumentTypeError(f"Value must be non-negative: {value}")
+    return f
+
+
+def now_iso() -> str:
+    """UTC ISO timestamp (Z)"""
+    return datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+
+
+# ---------------------------
+# Core Data Model
+# ---------------------------
+
+
+@dataclass
+class TradeCompliance:
+    """
+    Data model for a single trade compliance calculation.
+
+    Fields:
+      - destination: country where goods are imported into (e.g., 'italy' or 'india')
+      - origin: origin country string for context
+      - product_category: category string; used to lookup duty rate
+      - shipment_value: declared value of the shipment (numeric)
+      - shipping_cost: shipping & insurance (numeric)
+      - currency: currency code (optional override)
+    """
+
+    destination: str = "italy"
+    origin: str = "india"
+    product_category: str = "electronics"
+    shipment_value: float = 0.0
+    shipping_cost: float = 0.0
+    currency: Optional[str] = None
+
+    def __post_init__(self) -> None:
+        self.destination = (self.destination or "italy").strip().lower()
+        self.origin = (self.origin or "india").strip().lower()
+        self.product_category = (self.product_category or "electronics").strip().lower()
+        if self.currency is None:
+            self.currency = CURRENCY_MAP.get(self.destination, "USD")
+
+    def duty_rate(self) -> float:
+        """Lookup duty rate for (destination, product_category) or return DEFAULT_DUTY."""
+        return float(DUTY_RATES.get((self.destination, self.product_category), DEFAULT_DUTY))
+
+    def tax_rate(self) -> float:
+        """Lookup tax (VAT/GST) rate for destination, defaulting to 0.0 if unknown."""
+        return float(TAX_RATES.get(self.destination, 0.0))
+
+    def estimate_clearance_hours(self, import_duty: float, tax_rate: float) -> int:
+        """
+        Heuristic clearance time estimator (demo only).
+        - base 24 hours
+        - increases with duty level and tax rate and product sensitivity
+        Returns integer hours.
+        """
+        base_hours = 24.0
+        # duty as proportion of shipment value (percent)
+        if self.shipment_value > 0:
+            duty_pct = (import_duty / self.shipment_value) * 100.0
+        else:
+            duty_pct = 0.0
+        base_hours += min(max(duty_pct * 0.5, 0.0), 120.0)  # scale factor
+        base_hours += tax_rate * 24.0
+
+        # category sensitivities (examples)
+        if self.product_category in {"pharmaceuticals", "automotive"}:
+            base_hours += 24.0
+        elif self.product_category in {"machinery"}:
+            base_hours += 12.0
+        elif self.product_category in {"electronics"}:
+            base_hours += 4.0
+
+        # clamp to 4..240
+        hours = int(max(4.0, min(base_hours, 240.0)))
+        return hours
+
+    def calculate_costs(self) -> Dict[str, Any]:
+        """Compute import duty, tax, compliance fee, total landed cost and return breakdown dict."""
+        sv = float(self.shipment_value or 0.0)
+        sc = float(self.shipping_cost or 0.0)
+        dr = self.duty_rate()
+        tr = self.tax_rate()
+
+        import_duty = sv * dr
+        taxable_value = sv + import_duty + sc
+        tax = taxable_value * tr
+        total_landed_cost = sv + import_duty + tax + sc
+        compliance_fee = sv * COMPLIANCE_FEE_RATE
+        clearance_hours = self.estimate_clearance_hours(import_duty=import_duty, tax_rate=tr)
+
+        result = {
+            "timestamp": now_iso(),
+            "origin": self.origin,
+            "destination": self.destination,
+            "product_category": self.product_category,
+            "currency": self.currency,
+            "shipment_value": safe_round(sv, 2),
+            "shipping_cost": safe_round(sc, 2),
+            "duty_rate": safe_round(dr, 4),
+            "import_duty": safe_round(import_duty, 2),
+            "tax_rate": safe_round(tr, 4),
+            "tax": safe_round(tax, 2),
+            "base_compliance_fee": safe_round(compliance_fee, 2),
+            "total_landed_cost": safe_round(total_landed_cost, 2),
+            "estimated_clearance_hours": clearance_hours,
+        }
+        return result
+
+    def to_pretty_text(self) -> str:
+        """Return a human-friendly multi-line string of the result."""
+        r = self.calculate_costs()
+        lines = [
+            "Trade Compliance Cost Breakdown",
+            "-" * 36,
+            f"Origin:             {r['origin']}",
+            f"Destination:        {r['destination']}",
+            f"Product category:   {r['product_category']}",
+            f"Currency:           {r['currency']}",
+            f"Shipment value:     {r['shipment_value']:,}",
+            f"Shipping cost:      {r['shipping_cost']:,}",
+            f"Duty rate:          {r['duty_rate'] * 100:.2f}%",
+            f"Import duty:        {r['import_duty']:,}",
+            f"Tax rate:           {r['tax_rate'] * 100:.2f}%",
+            f"Tax:                {r['tax']:,}",
+            f"Compliance fee:     {r['base_compliance_fee']:,}",
+            f"Total landed cost:  {r['total_landed_cost']:,}",
+            f"Est. clearance (h): {r['estimated_clearance_hours']}h",
+            "-" * 36,
+        ]
+        return "\n".join(lines)
+
+
+# ---------------------------
+# Batch / Demo helpers
+# ---------------------------
+
+
+def generate_demo_scenarios() -> List[TradeCompliance]:
+    """Return a set of example TradeCompliance scenarios for batch runs or demos."""
+    scenarios = [
+        TradeCompliance(destination="italy", origin="india", product_category="textiles", shipment_value=10000, shipping_cost=500),
+        TradeCompliance(destination="italy", origin="india", product_category="machinery", shipment_value=50000, shipping_cost=1500),
+        TradeCompliance(destination="india", origin="italy", product_category="pharmaceuticals", shipment_value=20000, shipping_cost=800),
+        TradeCompliance(destination="india", origin="italy", product_category="food", shipment_value=5000, shipping_cost=300),
+        TradeCompliance(destination="italy", origin="india", product_category="electronics", shipment_value=75000, shipping_cost=2000),
+    ]
+    return scenarios
+
+
+def export_json(path: Path, data: Any, pretty: bool = True) -> None:
+    """Write JSON data to path."""
+    indent = 2 if pretty else None
+    with path.open("w", encoding="utf-8") as fh:
+        json.dump(data, fh, indent=indent, ensure_ascii=False)
+    logging.info("Wrote JSON to %s", path)
+
+
+def export_csv(path: Path, rows: Iterable[Dict[str, Any]]) -> None:
+    """Export an iterable of dicts to CSV (columns inferred from first row)."""
+    rows = list(rows)
+    if not rows:
+        logging.warning("No rows to write to CSV: %s", path)
+        return
+    fieldnames = list(rows[0].keys())
+    with path.open("w", encoding="utf-8", newline="") as fh:
+        writer = csv.DictWriter(fh, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
+    logging.info("Wrote CSV to %s", path)
+
+
+# ---------------------------
+# CLI
+# ---------------------------
+
+
+def build_parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(description="Trade Compliance demo CLI")
+    p.add_argument("--destination", "-d", choices=["italy", "india"], default="italy",
+                   help="Destination country (imports into this country)")
+    p.add_argument("--origin", "-o", default="india",
+                   help="Origin country (context only)")
+    p.add_argument("--category", "-c",
+                   choices=["textiles", "machinery", "pharmaceuticals", "automotive", "food", "electronics"],
+                   default="electronics", help="Product category")
+    p.add_argument("--value", "-v", type=validate_non_negative, default=50000.0,
+                   help="Declared shipment value (numeric)")
+    p.add_argument("--shipping", "-s", type=validate_non_negative, default=500.0,
+                   help="Shipping & insurance cost")
+    p.add_argument("--json", action="store_true", help="Output JSON to stdout")
+    p.add_argument("--csv", type=str, default=None, help="Write CSV file (batch/demo only). Provide path.")
+    p.add_argument("--output", "-O", type=str, default=None, help="Write JSON output to file (path)")
+    p.add_argument("--batch", action="store_true", help="Run demo batch scenarios and export results")
+    p.add_argument("--pretty", action="store_true", help="Pretty-print JSON (when --json or --output used)")
+    p.add_argument("--verbose", "-V", action="store_true", help="Enable verbose logging")
+    return p
+
+
+def cli_main(argv: Optional[List[str]] = None) -> int:
+    args = build_parser().parse_args(argv)
+
+    logging.basicConfig(level=logging.INFO if not args.verbose else logging.DEBUG, format=LOG_FORMAT)
+
+    if args.batch:
+        logging.info("Running demo batch scenarios")
+        scenarios = generate_demo_scenarios()
+        results = [s.calculate_costs() for s in scenarios]
+
+        # export CSV if requested
+        if args.csv:
+            export_csv(Path(args.csv), results)
+
+        # export JSON if requested via --output or print to stdout via --json
+        if args.output:
+            export_json(Path(args.output), results, pretty=args.pretty)
+        if args.json and not args.output:
+            print(json.dumps(results, indent=2 if args.pretty else None, ensure_ascii=False))
+        return 0
+
+    # Single scenario run
+    tc = TradeCompliance(
+        destination=args.destination,
+        origin=args.origin,
+        product_category=args.category,
+        shipment_value=float(args.value),
+        shipping_cost=float(args.shipping),
+    )
+
+    if args.json:
+        out = tc.calculate_costs()
+        print(json.dumps(out, indent=2 if args.pretty else None, ensure_ascii=False))
+        if args.output:
+            export_json(Path(args.output), out, pretty=args.pretty)
+    else:
+        # print pretty report
+        print(tc.to_pretty_text())
+        if args.output:
+            export_json(Path(args.output), tc.calculate_costs(), pretty=args.pretty)
+
+    return 0
+
+
+# ---------------------------
+# Module test / Example runtime
+# ---------------------------
+
+
+def _demo_run_print() -> None:
+    """Run a quick demo (used when module executed without args)."""
+    logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
+    scenarios = generate_demo_scenarios()
+    for s in scenarios:
+        print(s.to_pretty_text())
+
+
+if __name__ == "__main__":
+    # If executed directly with no flags, run a demo batch and show output.
+    import sys
+
+    if len(sys.argv) == 1:
+        # No CLI args -> run demo summaries
+        _demo_run_print()
+        raise SystemExit(0)
+
+    raise SystemExit(cli_main())
