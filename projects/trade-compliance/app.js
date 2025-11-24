@@ -1,175 +1,180 @@
-/* app.js
-   Pure client-side TradeCompliance model and UI glue.
-   Copy this file into projects/trade-compliance/app.js
-*/
-
 (() => {
   "use strict";
 
-  // Lookup data (demo values)
-  const DUTY_RATES = {
-    "italy,textiles": 0.10,
-    "italy,machinery": 0.07,
-    "italy,pharmaceuticals": 0.05,
-    "italy,automotive": 0.08,
-    "italy,food": 0.15,
-    "italy,electronics": 0.06,
-    "india,textiles": 0.08,
-    "india,machinery": 0.04,
-    "india,pharmaceuticals": 0.03,
-    "india,automotive": 0.06,
-    "india,food": 0.12,
-    "india,electronics": 0.05
+  // --- EXPANDED DATASET FOR TOP 10 GLOBAL ECONOMIES ---
+  const COUNTRIES = [
+    { id: 'usa', name: 'USA' }, { id: 'china', name: 'China' }, { id: 'japan', name: 'Japan' },
+    { id: 'germany', name: 'Germany' }, { id: 'uk', name: 'UK' }, { id: 'france', name: 'France' },
+    { id: 'india', name: 'India' }, { id: 'italy', name: 'Italy' }, { id: 'brazil', name: 'Brazil' },
+    { id: 'canada', name: 'Canada' }
+  ];
+  const CURRENCIES = { usa: 'USD', china: 'CNY', japan: 'JPY', germany: 'EUR', uk: 'GBP', france: 'EUR', india: 'INR', italy: 'EUR', brazil: 'BRL', canada: 'CAD' };
+  const TAX_RATES = { usa: 0.10, china: 0.13, japan: 0.10, germany: 0.19, uk: 0.20, france: 0.20, india: 0.18, italy: 0.22, brazil: 0.25, canada: 0.05 };
+  const BASE_DUTY_RATES = {
+    electronics: 0.05, machinery: 0.07, automotive: 0.10, pharmaceuticals: 0.03, textiles: 0.12, food: 0.15
   };
-  const TAX_RATES = { italy: 0.22, india: 0.18 };
-  const CURRENCY = { italy: "EUR", india: "INR" };
-  const DEFAULT_DUTY = 0.05;
-  const COMPLIANCE_RATE = 0.02;
+  // Free Trade Agreements (FTAs) reduce duty rates. Value is the new multiplier. 0 = no duty.
+  const TRADE_AGREEMENTS = {
+    'canada-usa': 0, 'usa-canada': 0, // USMCA
+    'germany-france': 0, 'germany-italy': 0, 'france-germany': 0, 'france-italy': 0, 'italy-france': 0, 'italy-germany': 0, // EU
+    'uk-japan': 0.5, 'japan-uk': 0.5 // UK-Japan CEPA
+  };
 
-  // Utility
-  function round(v, n = 2) { return Math.round((v + Number.EPSILON) * Math.pow(10, n)) / Math.pow(10, n); }
-  function formatMoney(v, currency = "") {
-    try { return `${currency} ${Number(v).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; }
-    catch { return `${currency} ${v}`; }
-  }
-
-  // Model
-  class TradeCompliance {
-    constructor(destination = "italy", origin = "india", category = "electronics", value = 0, shipping = 0) {
-      this.destination = String(destination).toLowerCase();
-      this.origin = String(origin).toLowerCase();
-      this.category = String(category).toLowerCase();
+  // --- MODEL ---
+  class GlobalTradeModel {
+    constructor(origin, destination, category, value, insurance, shippingMode) {
+      this.origin = origin;
+      this.destination = destination;
+      this.category = category;
       this.value = Number(value) || 0;
-      this.shipping = Number(shipping) || 0;
+      this.insurance = Number(insurance) || 0;
+      this.shippingMode = shippingMode;
     }
 
-    dutyRate() { return DUTY_RATES[`${this.destination},${this.category}`] ?? DEFAULT_DUTY; }
-    taxRate() { return TAX_RATES[this.destination] ?? 0.0; }
-    currency() { return CURRENCY[this.destination] ?? "USD"; }
-
-    estimateClearanceHours(importDuty, taxRate) {
-      let base = 24.0;
-      if (this.value > 0) {
-        const dutyPct = (importDuty / this.value) * 100.0;
-        base += Math.min(Math.max(dutyPct * 0.5, 0), 120);
+    getDutyRate() {
+      const agreementKey = `${this.origin}-${this.destination}`;
+      const baseRate = BASE_DUTY_RATES[this.category] ?? 0.08;
+      
+      if (TRADE_AGREEMENTS.hasOwnProperty(agreementKey)) {
+        return baseRate * TRADE_AGREEMENTS[agreementKey];
       }
-      base += taxRate * 24.0;
-      if (["pharmaceuticals", "automotive"].includes(this.category)) base += 24;
-      else if (this.category === "machinery") base += 12;
-      else if (this.category === "electronics") base += 4;
-      return Math.max(4, Math.min(Math.round(base), 240));
+      return baseRate;
     }
+    
+    calculate() {
+      const dutyRate = this.getDutyRate();
+      const taxRate = TAX_RATES[this.destination] ?? 0.15;
+      const currency = CURRENCIES[this.destination] ?? 'USD';
 
-    calculateCosts() {
-      const dr = this.dutyRate();
-      const tr = this.taxRate();
-      const importDuty = this.value * dr;
-      const taxable = this.value + importDuty + this.shipping;
-      const tax = taxable * tr;
-      const complianceFee = this.value * COMPLIANCE_RATE;
-      const total = this.value + importDuty + tax + this.shipping;
-      const clearanceHours = this.estimateClearanceHours(importDuty, tr);
+      // Shipping cost & time vary by mode
+      const shippingBaseCost = this.value * (this.shippingMode === 'air' ? 0.12 : 0.06);
+      const shippingCost = shippingBaseCost + (Math.random() * 100); // Add variability
+      const clearanceHours = 24 + (this.shippingMode === 'air' ? 24 : 72) + (dutyRate * 100) + (this.value / 5000);
+
+      const importDuty = this.value * dutyRate;
+      const taxableValue = this.value + shippingCost + this.insurance;
+      const tax = (taxableValue + importDuty) * taxRate;
+      const totalLandedCost = this.value + shippingCost + this.insurance + importDuty + tax;
+
       return {
-        currency: this.currency(),
-        shipmentValue: round(this.value, 2),
-        shippingCost: round(this.shipping, 2),
-        dutyRate: dr,
-        importDuty: round(importDuty, 2),
-        taxRate: tr,
-        tax: round(tax, 2),
-        complianceFee: round(complianceFee, 2),
-        totalLandedCost: round(total, 2),
-        clearanceHours
+        origin: this.origin,
+        destination: this.destination,
+        currency: currency,
+        shipmentValue: this.value,
+        totalLandedCost: totalLandedCost,
+        importDuty: importDuty,
+        tax: tax,
+        logisticsCost: shippingCost + this.insurance,
+        dutyRate: dutyRate,
+        taxRate: taxRate,
+        clearanceHours: Math.round(clearanceHours),
+        hasFta: TRADE_AGREEMENTS.hasOwnProperty(`${this.origin}-${this.destination}`)
       };
     }
-
-    toPrettyText() {
-      const c = this.calculateCosts();
-      return [
-        "🌍 TRADE COMPLIANCE CALCULATION",
-        "================================",
-        `Origin:             ${this.origin.toUpperCase()}`,
-        `Destination:        ${this.destination.toUpperCase()}`,
-        `Product Category:   ${this.category.toUpperCase()}`,
-        `Currency:           ${c.currency}`,
-        "",
-        "📊 COST BREAKDOWN:",
-        "--------------------------------",
-        `Shipment Value:     ${formatMoney(c.shipmentValue, c.currency)}`,
-        `Shipping Cost:      ${formatMoney(c.shippingCost, c.currency)}`,
-        `Duty Rate:          ${(c.dutyRate * 100).toFixed(2)}%`,
-        `Import Duty:        ${formatMoney(c.importDuty, c.currency)}`,
-        `Tax Rate:           ${(c.taxRate * 100).toFixed(2)}%`,
-        `Tax:                ${formatMoney(c.tax, c.currency)}`,
-        `Compliance Fee:     ${formatMoney(c.complianceFee, c.currency)}`,
-        "",
-        "💵 TOTAL LANDED COST:",
-        "--------------------------------",
-        `Total Cost:         ${formatMoney(c.totalLandedCost, c.currency)}`,
-        "",
-        "⏱️  LOGISTICS:",
-        "--------------------------------",
-        `Est. Clearance:     ${c.clearanceHours} hours`,
-        "================================"
-      ].join("\n");
-    }
   }
 
-  // UI
+  // --- UI & APPLICATION LOGIC ---
   function el(id) { return document.getElementById(id); }
 
-  function renderResult(text) {
-    const pre = el("resultPre");
-    pre.textContent = String(text);
+  function populateDropdowns() {
+    const originSelect = el('origin');
+    const destSelect = el('destination');
+    COUNTRIES.forEach(country => {
+      originSelect.add(new Option(country.name, country.id));
+      destSelect.add(new Option(country.name, country.id));
+    });
+    // Set default values that are not the same
+    originSelect.value = 'usa';
+    destSelect.value = 'germany';
   }
 
-  function calculateFromForm() {
-    const destination = el("destination").value;
-    const origin = el("origin").value;
-    const category = el("category").value;
-    const value = parseFloat(el("value").value || "0");
-    const shipping = parseFloat(el("shipping").value || "0");
-    const model = new TradeCompliance(destination, origin, category, value, shipping);
-    renderResult(model.toPrettyText());
-    return model;
+  function runAnalysis() {
+    const origin = el('origin').value;
+    const destination = el('destination').value;
+    if (origin === destination) {
+        alert("Origin and Destination countries cannot be the same.");
+        return;
+    }
+
+    const category = el('category').value;
+    const value = el('value').value;
+    const insurance = el('insurance').value;
+    const shippingMode = el('shipping-mode').value;
+
+    const model = new GlobalTradeModel(origin, destination, category, value, insurance, shippingMode);
+    
+    // --- ANIMATION & PROCESSING LOGIC ---
+    const analyzeBtn = el('analyzeBtn');
+    const processingOverlay = el('processing-overlay');
+    const processingStatus = el('processing-status');
+    const resultsDashboard = el('results-dashboard');
+    
+    analyzeBtn.disabled = true;
+    resultsDashboard.style.display = 'none';
+    processingOverlay.style.display = 'block';
+
+    const statuses = ["Connecting to global trade network...", "Analyzing tariff codes...", "Verifying trade agreements...", "Calculating logistics matrix...", "Finalizing analysis..."];
+    let statusIndex = 0;
+    
+    const statusInterval = setInterval(() => {
+        if(statusIndex < statuses.length) {
+            processingStatus.textContent = statuses[statusIndex++];
+        } else {
+            clearInterval(statusInterval);
+        }
+    }, 600);
+
+    setTimeout(() => {
+        clearInterval(statusInterval);
+        processingOverlay.style.display = 'none';
+        const results = model.calculate();
+        renderDashboard(results);
+        analyzeBtn.disabled = false;
+    }, 3500); // Simulate 3.5 seconds of processing
   }
 
-  function runDemo() {
-    const scenarios = [
-      new TradeCompliance("italy", "india", "textiles", 10000, 500),
-      new TradeCompliance("italy", "india", "machinery", 50000, 1500),
-      new TradeCompliance("india", "italy", "pharmaceuticals", 20000, 800)
-    ];
-    let out = "";
-    scenarios.forEach((s, i) => { out += `SCENARIO ${i+1}\n${s.toPrettyText()}\n\n`; });
-    renderResult(out.trim());
+  function formatMoney(value, currency) {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: currency, minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
   }
 
-  function exportJSON(model) {
-    const data = model ? model.calculateCosts() : (new TradeCompliance(el("destination").value, el("origin").value, el("category").value, el("value").value, el("shipping").value)).calculateCosts();
-    data.origin = el("origin").value;
-    data.destination = el("destination").value;
-    data.product_category = el("category").value;
-    data.timestamp = new Date().toISOString();
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "trade_compliance_export.json";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+  function renderDashboard(data) {
+    const dashboard = el('results-dashboard');
+    dashboard.innerHTML = `
+      <div class="metric-card" style="grid-column: 1 / -1;">
+        <div class="label">Total Landed Cost</div>
+        <div class="value total-cost">${formatMoney(data.totalLandedCost, data.currency)}</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Import Duty</div>
+        <div class="value">${formatMoney(data.importDuty, data.currency)}</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Taxes (VAT/GST)</div>
+        <div class="value">${formatMoney(data.tax, data.currency)}</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Logistics & Insurance</div>
+        <div class="value">${formatMoney(data.logisticsCost, data.currency)}</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Duty Rate</div>
+        <div class="value">${(data.dutyRate * 100).toFixed(1)}% ${data.hasFta ? ' (FTA Applied)' : ''}</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Est. Clearance</div>
+        <div class="value">~${data.clearanceHours} hrs</div>
+      </div>
+       <div class="metric-card">
+        <div class="label">Shipment Value</div>
+        <div class="value">${formatMoney(data.shipmentValue, data.currency)}</div>
+      </div>
+    `;
+    dashboard.style.display = 'grid';
   }
 
   function wire() {
-    const calcBtn = el("calcBtn");
-    const demoBtn = el("demoBtn");
-    const exportBtn = el("exportBtn");
-    calcBtn.addEventListener("click", () => calculateFromForm());
-    demoBtn.addEventListener("click", runDemo);
-    exportBtn.addEventListener("click", () => exportJSON(null));
-
-    // initial render
-    calculateFromForm();
+    populateDropdowns();
+    el('analyzeBtn').addEventListener('click', runAnalysis);
   }
 
   document.addEventListener("DOMContentLoaded", wire);
