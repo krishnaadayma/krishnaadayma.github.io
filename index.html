@@ -50,22 +50,29 @@
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); } }
         footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: var(--space-xl) 0; margin-top: var(--space-2xl); border-top: 1px solid var(--border-color); }
         
-        /* --- CUSTOM TRANSLATION TOGGLE (BULLETPROOF) --- */
-        #custom-translate-widget {
-            position: fixed; top: 1rem; right: 1.5rem; z-index: 9999;
-            background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);
-        }
-        #custom-translate-widget a {
-            color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem;
-            padding: 0.2rem; transition: color var(--transition-fast);
-        }
-        #custom-translate-widget a.active, #custom-translate-widget a:hover {
-            color: var(--text-primary);
-        }
-        #custom-translate-widget span { color: var(--border-color); margin: 0 0.2rem; }
-        body > .skiptranslate { display: none !important; }
-        html.translated-ltr, html.translated-rtl { margin-top: 0 !important; }
-        body { top: 0 !important; }
+        /* --- CUSTOM TRANSLATION TOGGLE V2 (BULLETPROOF) --- */
+#custom-translate-widget {
+    position: fixed; top: 1rem; right: 1.5rem; z-index: 9999;
+    background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);
+}
+#custom-translate-widget a {
+    color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+    padding: 0.2rem; transition: color var(--transition-fast);
+    outline: none; /* THIS IS THE FIX: Removes the ugly browser glow */
+}
+#custom-translate-widget a:focus {
+    outline: none; /* Extra rule to ensure focus glow is also removed */
+}
+#custom-translate-widget a.active, #custom-translate-widget a:hover {
+    color: var(--text-primary);
+}
+#custom-translate-widget span {
+    color: var(--border-color); margin: 0 0.2rem;
+}
+/* Hide Google's default UI */
+body > .skiptranslate { display: none !important; }
+html.translated-ltr, html.translated-rtl { margin-top: 0 !important; }
+body { top: 0 !important; }
     </style>
 </head>
 <body>
@@ -243,3 +250,4 @@
     </script>
 </body>
 </html>
+
