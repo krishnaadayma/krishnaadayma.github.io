@@ -1,1002 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Trade Compliance Dashboard</title>
-    <meta name="description" content="Real-time analytics and comparison between Italy and India trade compliance metrics">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* ===== OPTIMIZED CSS FRAMEWORK ===== */
-        :root {
-            /* Color system */
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --bg-tertiary: #2d2d2d;
-            --text-primary: #ffffff;
-            --text-secondary: #e0e0e0;
-            --text-muted: #b0b0b0;
-            --accent-primary: #007acc;
-            --accent-secondary: #28a745;
-            --accent-warning: #ff6b00;
-            --border-color: #333;
-            --gradient-primary: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            --gradient-accent: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
-            
-            /* Country colors */
-            --italy-color: #007acc;
-            --india-color: #28a745;
-            
-            /* Typography scale */
-            --text-xs: clamp(0.75rem, 2vw, 0.875rem);
-            --text-sm: clamp(0.875rem, 2.5vw, 1rem);
-            --text-base: clamp(1rem, 3vw, 1.125rem);
-            --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
-            --text-xl: clamp(1.25rem, 4vw, 1.5rem);
-            --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
-            --text-3xl: clamp(1.875rem, 6vw, 2.25rem);
-            
-            /* Spacing scale */
-            --space-xs: clamp(0.5rem, 1vw, 0.75rem);
-            --space-sm: clamp(0.75rem, 2vw, 1rem);
-            --space-md: clamp(1rem, 3vw, 1.5rem);
-            --space-lg: clamp(1.5rem, 4vw, 2rem);
-            --space-xl: clamp(2rem, 6vw, 3rem);
-            --space-2xl: clamp(3rem, 8vw, 4rem);
-            
-            /* Border radius */
-            --radius-sm: 0.375rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            
-            /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.3);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.4);
-            --shadow-glow: 0 0 20px rgba(0, 122, 204, 0.3);
-            
-            /* Animation */
-            --transition-fast: 0.2s ease;
-            --transition-medium: 0.3s ease;
-            --transition-slow: 0.5s ease;
-        }
-
-        /* Reset and base styles */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            background-color: var(--bg-primary);
-            overflow-x: hidden;
-            padding: var(--space-sm);
-        }
-
-        /* Focus styles for accessibility */
-        :focus-visible {
-            outline: 2px solid var(--accent-primary);
-            outline-offset: 2px;
-        }
-
-        /* Skip link for keyboard navigation */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent-primary);
-            color: white;
-            padding: 8px;
-            text-decoration: none;
-            z-index: 1000;
-            border-radius: var(--radius-sm);
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* Container system */
-        .container {
-            width: 100%;
-            max-width: min(1400px, 95vw);
-            margin: 0 auto;
-            padding: 0 var(--space-md);
-        }
-
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--text-primary);
-            line-height: 1.2;
-            font-weight: 700;
-            margin-bottom: var(--space-sm);
-        }
-
-        h1 { 
-            font-size: var(--text-3xl);
-            text-align: center;
-        }
-
-        h2 { 
-            font-size: var(--text-2xl);
-            margin-bottom: var(--space-md);
-        }
-
-        h3 { 
-            font-size: var(--text-xl);
-            color: var(--accent-primary);
-        }
-
-        h4 { 
-            font-size: var(--text-lg);
-        }
-
-        p {
-            color: var(--text-muted);
-            margin-bottom: var(--space-sm);
-            line-height: 1.6;
-            font-size: var(--text-base);
-            max-width: 65ch;
-        }
-
-        /* Header */
-        header {
-            background: var(--gradient-primary);
-            color: var(--text-primary);
-            padding: var(--space-2xl) var(--space-md);
-            text-align: center;
-            border-radius: var(--radius-xl);
-            margin-bottom: var(--space-xl);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .header h1 {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .header p {
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-sm);
-            margin: var(--space-lg) 0;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        /* Button system */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-xs);
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            padding: var(--space-sm) var(--space-lg);
-            text-decoration: none;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            font-size: var(--text-base);
-            border: 1px solid var(--border-color);
-            transition: all var(--transition-fast);
-            cursor: pointer;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left var(--transition-medium);
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:hover,
-        .btn:focus {
-            background: #404040;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-primary {
-            background: var(--gradient-accent);
-            border-color: var(--accent-primary);
-        }
-
-        .btn-primary:hover,
-        .btn-primary:focus {
-            background: #005a9e;
-            border-color: #005a9e;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--accent-primary);
-            border-color: var(--accent-primary);
-        }
-
-        .btn-outline:hover,
-        .btn-outline:focus {
-            background: var(--accent-primary);
-            color: white;
-        }
-
-        .btn-warning {
-            background: var(--accent-warning);
-            border-color: var(--accent-warning);
-            color: white;
-        }
-
-        .btn-warning:hover,
-        .btn-warning:focus {
-            background: #e05a00;
-            border-color: #e05a00;
-        }
-
-        /* Dashboard grid */
-        .dashboard {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-xl);
-            margin-bottom: var(--space-2xl);
-        }
-
-        .country-section, .comparison-section {
-            background: var(--bg-secondary);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-            transition: transform var(--transition-medium);
-        }
-
-        .country-section:hover {
-            transform: translateY(-4px);
-        }
-
-        .comparison-section {
-            grid-column: 1 / -1;
-        }
-
-        /* Country headers */
-        .country-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: var(--space-lg);
-            padding-bottom: var(--space-md);
-            border-bottom: 2px solid;
-        }
-
-        .italy-header { 
-            border-color: var(--italy-color); 
-        }
-
-        .india-header { 
-            border-color: var(--india-color); 
-        }
-
-        .country-flag {
-            font-size: 2.5em;
-            margin-right: var(--space-md);
-        }
-
-        .country-title {
-            font-size: var(--text-xl);
-            font-weight: bold;
-            color: var(--text-primary);
-        }
-
-        .country-subtitle {
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: var(--text-sm);
-        }
-
-        /* Chart containers */
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin: var(--space-lg) 0;
-            background: var(--bg-tertiary);
-            border-radius: var(--radius-md);
-            padding: var(--space-md);
-            border: 1px solid var(--border-color);
-        }
-
-        /* Stats grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-md);
-            margin-top: var(--space-lg);
-        }
-
-        .stat-card {
-            background: var(--bg-tertiary);
-            padding: var(--space-lg);
-            border-radius: var(--radius-md);
-            text-align: center;
-            border-left: 4px solid;
-            transition: transform var(--transition-medium);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .italy-stat { 
-            border-color: var(--italy-color); 
-        }
-
-        .india-stat { 
-            border-color: var(--india-color); 
-        }
-
-        .stat-number {
-            font-size: var(--text-2xl);
-            font-weight: bold;
-            margin-bottom: var(--space-xs);
-            color: var(--text-primary);
-        }
-
-        /* Comparison section */
-        .comparison-charts {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-xl);
-            margin: var(--space-lg) 0;
-        }
-
-        .advantages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-            gap: var(--space-lg);
-            margin-top: var(--space-xl);
-        }
-
-        .advantage-card {
-            background: var(--bg-tertiary);
-            padding: var(--space-lg);
-            border-radius: var(--radius-md);
-            border-left: 4px solid;
-            transition: transform var(--transition-medium);
-        }
-
-        .advantage-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .advantage-italy {
-            border-color: var(--italy-color);
-        }
-
-        .advantage-india {
-            border-color: var(--india-color);
-        }
-
-        .advantage-tips {
-            border-color: var(--accent-primary);
-        }
-
-        .advantage-card h4 {
-            margin-bottom: var(--space-sm);
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-        }
-
-        .advantage-card ul {
-            color: var(--text-muted);
-            padding-left: var(--space-md);
-        }
-
-        .advantage-card li {
-            margin-bottom: var(--space-xs);
-            line-height: 1.5;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: var(--space-xl) var(--space-md);
-            color: var(--text-muted);
-            margin-top: var(--space-2xl);
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 968px) {
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-
-            .comparison-charts {
-                grid-template-columns: 1fr;
-            }
-
-            .controls {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .controls .btn {
-                width: min(100%, 300px);
-                margin: var(--space-xs) 0;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            /* Reduce motion for better performance */
-            @media (prefers-reduced-motion: reduce) {
-                .btn,
-                .country-section,
-                .stat-card,
-                .advantage-card {
-                    transition: none;
-                }
-                
-                .btn:hover,
-                .country-section:hover,
-                .stat-card:hover,
-                .advantage-card:hover {
-                    transform: none;
-                }
-                
-                .btn::before {
-                    display: none;
-                }
-                
-                html {
-                    scroll-behavior: auto;
-                }
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 var(--space-sm);
-            }
-
-            header {
-                padding: var(--space-xl) var(--space-md);
-            }
-
-            .country-section,
-            .comparison-section {
-                padding: var(--space-lg);
-            }
-
-            .country-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: var(--space-sm);
-            }
-
-            .country-flag {
-                font-size: 2em;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Batch Analysis Demo: Trade Engine | Krishna Dayma</title>
+  <meta name="description" content="A batch analysis simulation for the Global Trade Analysis Engine project." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== "SUITS" EXECUTIVE DOSSIER THEME (Demo Page) ===== */
+    :root {
+      --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
+      --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
+      --text-success: #7ee081; --accent-primary: #A0A0A0; --accent-secondary: #4a5568; 
+      --border-color: #2C2C2C; --radius: 0.8rem; --shadow: 0 8px 30px rgba(0,0,0,0.6);
+      --transition: 0.2s ease;
+    }
+    
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body{ margin:0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-secondary); line-height: 1.6; padding: 2rem; -webkit-font-smoothing: antialiased; }
+    .container{ max-width: 1200px; margin: 0 auto; }
+    
+    header{ background: var(--bg-secondary); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--border-color); margin-bottom: 2rem; text-align: center; box-shadow: var(--shadow); }
+    header h1{ color: var(--text-primary); margin:0; font-size:clamp(2rem, 5vw, 3rem); letter-spacing: -1px; }
+    .subtitle { margin-top: 0.5rem; color: var(--text-muted); font-weight: 500; }
+    
+    .card { background: var(--bg-secondary); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border-color); margin-bottom: 2rem; }
+    .card h2 { margin: 0 0 1rem; color: var(--accent-primary); font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
+    .card p { color: var(--text-secondary); max-width: 75ch; }
+
+    /* Demo Specifics */
+    #demo-output {
+      background: #0D0D0D; padding: 1.5rem; border-radius: 0.5rem;
+      border: 1px solid var(--border-color); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+      white-space: pre-wrap; color: var(--text-secondary); font-size: 0.9rem;
+      min-height: 300px; margin-top: 1.5rem; counter-reset: line;
+      overflow-x: auto;
+    }
+    #demo-output .log-line { display: block; }
+    #demo-output .log-line::before {
+        content: counter(line);
+        counter-increment: line;
+        color: var(--accent-secondary);
+        display: inline-block;
+        width: 3em;
+        text-align: right;
+        margin-right: 1em;
+        border-right: 1px solid var(--border-color);
+        padding-right: 1em;
+    }
+    .log-line.success { color: var(--text-success); font-weight: 600; }
+    .log-line.info { color: var(--accent-primary); }
+
+    /* Buttons */
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .btn { display:inline-flex; align-items:center; justify-content: center; gap:.5rem; padding:.75rem 1.25rem; border-radius:.6rem; border:1px solid var(--border-color); background:var(--accent-secondary); color:var(--text-primary); cursor:pointer; text-decoration: none; font-weight: 600; transition: all var(--transition); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+    .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
+    .btn:disabled { cursor: not-allowed; background: var(--bg-tertiary); color: var(--text-muted); transform: none; box-shadow: none; }
+
+    footer{ margin-top: 2rem; padding-top: 2rem; text-align:center; color:var(--text-muted); border-top: 1px solid var(--border-color); }
+  </style>
 </head>
 <body>
-    <!-- Simple calculator removed: demo page displays charts only. Complex calculator remains on index.html -->
+  <div class="container">
+    <header>
+      <h1>Batch Analysis Simulation</h1>
+      <p class="subtitle">PROJECT: GLOBAL TRADE ANALYSIS ENGINE (KD-GTA-002)</p>
+    </header>
 
-    <!-- Skip link for accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <main>
+      <div class="card">
+        <h2>AUTOMATED SCENARIO TESTING</h2>
+        <p>This simulation runs a predefined set of scenarios through the Global Trade Analysis Engine. It demonstrates the model's ability to handle various trade routes, product categories, and logistical complexities, including the application of Free Trade Agreements (FTAs).</p>
+        <div class="btn-group">
+            <button class="btn btn-primary" id="runDemoBtn">▶️ Initiate Batch Analysis</button>
+        </div>
+        <pre id="demo-output"></pre>
+      </div>
 
-    <div class="container">
-        <header class="fade-in">
-            <h1>📊 Interactive Trade Compliance Dashboard</h1>
-            <p>Real-time analytics and comparison between Italy and India trade compliance metrics</p>
+      <div class="card">
+        <h2>ACTION PANEL</h2>
+        <p>Return to the main portfolio or the interactive dashboard.</p>
+        <div class="btn-group">
+            <a class="btn btn-primary" href="../../index.html" title="Return to Main Portfolio">🏠 Return to Main Portfolio</a>
+            <a class="btn" href="index.html" title="Interactive Dashboard">▶️ Go to Interactive Dashboard</a>
+            <a class="btn" href="documentation.html" title="Technical Documentation">📄 Review Technical Documentation</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div>&copy; 2024 Krishna Dayma | Project Dossier KD-GTA-002</div>
+    </footer>
+  </div>
+
+  <script>
+    // Self-contained logic for the demo page, using a simplified model from app.js
+    document.addEventListener('DOMContentLoaded', () => {
+        const runDemoBtn = document.getElementById('runDemoBtn');
+        const outputEl = document.getElementById('demo-output');
+
+        const TAX_RATES = { usa: 0.10, china: 0.13, japan: 0.10, germany: 0.19, uk: 0.20, france: 0.20, india: 0.18, italy: 0.22, brazil: 0.25, canada: 0.05 };
+        const BASE_DUTY_RATES = { electronics: 0.05, machinery: 0.07, automotive: 0.10, pharmaceuticals: 0.03, textiles: 0.12, food: 0.15 };
+        const TRADE_AGREEMENTS = { 'canada-usa': 0, 'usa-canada': 0, 'germany-france': 0, 'france-germany': 0, 'uk-japan': 0.5, 'japan-uk': 0.5 };
+
+        const demoScenarios = [
+            { origin: 'china', destination: 'usa', category: 'electronics', value: 75000, insurance: 400, shippingMode: 'sea' },
+            { origin: 'germany', destination: 'france', category: 'automotive', value: 120000, insurance: 800, shippingMode: 'sea' },
+            { origin: 'japan', destination: 'uk', category: 'machinery', value: 250000, insurance: 1500, shippingMode: 'air' },
+            { origin: 'india', destination: 'italy', category: 'textiles', value: 30000, insurance: 200, shippingMode: 'air' }
+        ];
+
+        function calculateLandedCost(scenario) {
+            const agreementKey = `${scenario.origin}-${scenario.destination}`;
+            const baseRate = BASE_DUTY_RATES[scenario.category] ?? 0.08;
+            const dutyRate = TRADE_AGREEMENTS.hasOwnProperty(agreementKey) ? baseRate * TRADE_AGREEMENTS[agreementKey] : baseRate;
+            const taxRate = TAX_RATES[scenario.destination] ?? 0.15;
+            const shippingBaseCost = scenario.value * (scenario.shippingMode === 'air' ? 0.12 : 0.06);
+            const importDuty = scenario.value * dutyRate;
+            const taxableValue = scenario.value + shippingBaseCost + scenario.insurance;
+            const tax = (taxableValue + importDuty) * taxRate;
+            return scenario.value + shippingBaseCost + scenario.insurance + importDuty + tax;
+        }
+
+        function logToConsole(message, type = '') {
+            const line = document.createElement('span');
+            line.className = `log-line ${type}`;
+            line.textContent = message;
+            outputEl.appendChild(line);
+        }
+
+        async function runDemo() {
+            runDemoBtn.disabled = true;
+            outputEl.innerHTML = '';
             
-            <div class="controls">
-                <a href="index.html" class="btn btn-outline">🏠 Main Page</a>
-                <a href="documentation.html" class="btn btn-outline">📚 Documentation</a>
-                <button class="btn btn-primary" onclick="resetCharts()">🔄 Reset Charts</button>
-                <button class="btn btn-warning" onclick="exportData()">📥 Export Data</button>
-            </div>
-        </header>
-
-        <main id="main-content">
-            <div class="dashboard">
-                <!-- Italy Section -->
-                <div class="country-section fade-in" id="italy">
-                    <div class="country-header italy-header">
-                        <div style="display: flex; align-items: center;">
-                            <div class="country-flag">🇮🇹</div>
-                            <div>
-                                <div class="country-title">Italy Trade Compliance</div>
-                                <div class="country-subtitle">EU Regulations</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="chart-container">
-                        <canvas id="italyTariffChart"></canvas>
-                    </div>
-                    
-                    <div class="chart-container">
-                        <canvas id="italyComplianceChart"></canvas>
-                    </div>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-card italy-stat">
-                            <div class="stat-number">92%</div>
-                            <div>Compliance Rate</div>
-                        </div>
-                        <div class="stat-card italy-stat">
-                            <div class="stat-number">€1.2M</div>
-                            <div>Annual Savings</div>
-                        </div>
-                        <div class="stat-card italy-stat">
-                            <div class="stat-number">48h</div>
-                            <div>Avg. Clearance</div>
-                        </div>
-                        <div class="stat-card italy-stat">
-                            <div class="stat-number">78</div>
-                            <div>Regulations</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- India Section -->
-                <div class="country-section fade-in" id="india">
-                    <div class="country-header india-header">
-                        <div style="display: flex; align-items: center;">
-                            <div class="country-flag">🇮🇳</div>
-                            <div>
-                                <div class="country-title">India Trade Compliance</div>
-                                <div class="country-subtitle">DGFT Regulations</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="chart-container">
-                        <canvas id="indiaTariffChart"></canvas>
-                    </div>
-                    
-                    <div class="chart-container">
-                        <canvas id="indiaComplianceChart"></canvas>
-                    </div>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-card india-stat">
-                            <div class="stat-number">85%</div>
-                            <div>Compliance Rate</div>
-                        </div>
-                        <div class="stat-card india-stat">
-                            <div class="stat-number">€0.9M</div>
-                            <div>Annual Savings</div>
-                        </div>
-                        <div class="stat-card india-stat">
-                            <div class="stat-number">72h</div>
-                            <div>Avg. Clearance</div>
-                        </div>
-                        <div class="stat-card india-stat">
-                            <div class="stat-number">94</div>
-                            <div>Regulations</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Comparison Section -->
-                <div class="comparison-section fade-in" id="comparison">
-                    <h2 style="text-align: center;">⚖️ Italy-India Comparison</h2>
-                    <p style="text-align: center; color: var(--text-muted); margin-bottom: var(--space-xl);">Side-by-side analysis of key trade compliance metrics</p>
-                    
-                    <div class="comparison-charts">
-                        <div class="chart-container">
-                            <canvas id="comparisonBarChart"></canvas>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="comparisonRadarChart"></canvas>
-                        </div>
-                    </div>
-                    
-                    <div class="advantages-grid">
-                        <div class="advantage-card advantage-italy">
-                            <h4>🇮🇹 Italy Advantages</h4>
-                            <ul>
-                                <li>Faster customs clearance</li>
-                                <li>Lower documentation costs</li>
-                                <li>EU standardized procedures</li>
-                            </ul>
-                        </div>
-                        <div class="advantage-card advantage-india">
-                            <h4>🇮🇳 India Advantages</h4>
-                            <ul>
-                                <li>Growing market access</li>
-                                <li>Digital initiatives (e-SANAD)</li>
-                                <li>Special economic zones</li>
-                            </ul>
-                        </div>
-                        <div class="advantage-card advantage-tips">
-                            <h4>🤝 Optimization Tips</h4>
-                            <ul>
-                                <li>Use AEO certified partners</li>
-                                <li>Leverage FTA benefits</li>
-                                <li>Digital documentation</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <footer class="footer">
-            <div class="container">
-                <p>Interactive Trade Compliance Dashboard &copy; 2024 | Real-time Analytics</p>
-                <p><a href="https://krishnaadayma.github.io/" style="color: var(--accent-primary); text-decoration: none;">← Back to Portfolio</a></p>
-            </div>
-        </footer>
-    </div>
-
-    <script>
-        // Scroll animation functionality
-        function handleScrollAnimations() {
-            const elements = document.querySelectorAll('.fade-in');
+            const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
             
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
+            logToConsole('Initiating batch analysis simulation...', 'info');
+            await wait(500);
+
+            for (let i = 0; i < demoScenarios.length; i++) {
+                const scenario = demoScenarios[i];
+                logToConsole(`\nRunning Scenario ${i + 1}: ${scenario.origin.toUpperCase()} -> ${scenario.destination.toUpperCase()} (${scenario.category})`);
+                await wait(250);
                 
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
+                logToConsole('  Calculating landed cost...');
+                await wait(500);
+                
+                const totalCost = calculateLandedCost(scenario);
+                const currency = (new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 })).format(totalCost);
+                
+                logToConsole(`  SUCCESS: Estimated Total Landed Cost: ${currency}`, 'success');
+                await wait(250);
+            }
+            
+            logToConsole('\nBatch analysis complete. All scenarios processed.', 'info');
+            runDemoBtn.disabled = false;
         }
 
-        // Initialize charts with proper dark theme configuration
-        function initializeCharts() {
-            const textColor = '#e0e0e0';
-            const gridColor = '#333';
-            const mutedText = '#b0b0b0';
-
-            // Italy Tariff Structure Chart
-            new Chart(document.getElementById('italyTariffChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Basic Customs', 'VAT', 'Excise Duty', 'Other Taxes'],
-                    datasets: [{
-                        data: [45, 30, 15, 10],
-                        backgroundColor: ['#007acc', '#005a9e', '#003f6b', '#00253d'],
-                        borderWidth: 2,
-                        borderColor: '#1a1a1a'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Italy: Tariff Structure (%)',
-                            font: { size: 14, weight: 'bold' },
-                            color: textColor
-                        },
-                        legend: { 
-                            position: 'bottom',
-                            labels: { color: textColor }
-                        }
-                    }
-                }
-            });
-
-            // Italy Compliance Metrics Chart
-            new Chart(document.getElementById('italyComplianceChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Documentation', 'Customs Clearance', 'Quality Checks', 'Regulatory Compliance'],
-                    datasets: [{
-                        label: 'Days Required',
-                        data: [5, 2, 3, 4],
-                        backgroundColor: '#007acc',
-                        borderColor: '#005a9e',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Italy: Process Timeline (Days)',
-                            font: { size: 14, weight: 'bold' },
-                            color: textColor
-                        },
-                        legend: {
-                            labels: { color: textColor }
-                        }
-                    },
-                    scales: {
-                        y: { 
-                            beginAtZero: true, 
-                            max: 10,
-                            ticks: { color: mutedText },
-                            grid: { color: gridColor }
-                        },
-                        x: {
-                            ticks: { color: mutedText },
-                            grid: { color: gridColor }
-                        }
-                    }
-                }
-            });
-
-            // India Tariff Structure Chart
-            new Chart(document.getElementById('indiaTariffChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Basic Customs', 'IGST', 'Compensation Cess', 'Other Levies'],
-                    datasets: [{
-                        data: [35, 40, 15, 10],
-                        backgroundColor: ['#28a745', '#1e7e34', '#145a25', '#0c3d17'],
-                        borderWidth: 2,
-                        borderColor: '#1a1a1a'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'India: Tariff Structure (%)',
-                            font: { size: 14, weight: 'bold' },
-                            color: textColor
-                        },
-                        legend: { 
-                            position: 'bottom',
-                            labels: { color: textColor }
-                        }
-                    }
-                }
-            });
-
-            // India Compliance Metrics Chart
-            new Chart(document.getElementById('indiaComplianceChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Documentation', 'Customs Clearance', 'Quality Checks', 'Regulatory Compliance'],
-                    datasets: [{
-                        label: 'Days Required',
-                        data: [8, 4, 5, 6],
-                        backgroundColor: '#28a745',
-                        borderColor: '#1e7e34',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'India: Process Timeline (Days)',
-                            font: { size: 14, weight: 'bold' },
-                            color: textColor
-                        },
-                        legend: {
-                            labels: { color: textColor }
-                        }
-                    },
-                    scales: {
-                        y: { 
-                            beginAtZero: true, 
-                            max: 10,
-                            ticks: { color: mutedText },
-                            grid: { color: gridColor }
-                        },
-                        x: {
-                            ticks: { color: mutedText },
-                            grid: { color: gridColor }
-                        }
-                    }
-                }
-            });
-
-            // Comparison Bar Chart
-            new Chart(document.getElementById('comparisonBarChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Tariff Rate', 'Clearance Time', 'Doc Requirements', 'Compliance Cost'],
-                    datasets: [
-                        {
-                            label: 'Italy',
-                            data: [7, 2, 8, 12],
-                            backgroundColor: '#007acc'
-                        },
-                        {
-                            label: 'India',
-                            data: [12, 4, 15, 18],
-                            backgroundColor: '#28a745'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Key Metrics Comparison',
-                            font: { size: 14, weight: 'bold' },
-                            color: textColor
-                        },
-                        legend: {
-                            labels: { color: textColor }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            ticks: { color: mutedText },
-                            grid: { color: gridColor }
-                        },
-                        x: {
-                            ticks: { color: mutedText },
-                            grid: { color: gridColor }
-                        }
-                    }
-                }
-            });
-
-            // Comparison Radar Chart
-            new Chart(document.getElementById('comparisonRadarChart'), {
-                type: 'radar',
-                data: {
-                    labels: ['Ease of Compliance', 'Cost Efficiency', 'Digitalization', 'Transparency', 'Speed', 'Predictability'],
-                    datasets: [
-                        {
-                            label: 'Italy',
-                            data: [85, 80, 75, 90, 85, 88],
-                            backgroundColor: 'rgba(0, 122, 204, 0.2)',
-                            borderColor: '#007acc',
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'India',
-                            data: [70, 65, 80, 75, 70, 72],
-                            backgroundColor: 'rgba(40, 167, 69, 0.2)',
-                            borderColor: '#28a745',
-                            borderWidth: 2
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Compliance Performance Radar',
-                            font: { size: 14, weight: 'bold' },
-                            color: textColor
-                        },
-                        legend: {
-                            labels: { color: textColor }
-                        }
-                    },
-                    scales: {
-                        r: {
-                            beginAtZero: true,
-                            max: 100,
-                            ticks: { 
-                                display: false,
-                                color: mutedText
-                            },
-                            grid: { color: gridColor },
-                            angleLines: { color: gridColor },
-                            pointLabels: { color: mutedText }
-                        }
-                    }
-                }
-            });
+        if (runDemoBtn) {
+            runDemoBtn.addEventListener('click', runDemo);
         }
-
-        function resetCharts() {
-            Chart.instances.forEach(instance => instance.destroy());
-            initializeCharts();
-            alert('Charts have been reset to default values!');
-        }
-
-        function exportData() {
-            const data = {
-                italy: { complianceRate: 92, savings: 1200000, clearance: 48 },
-                india: { complianceRate: 85, savings: 900000, clearance: 72 },
-                timestamp: new Date().toISOString()
-            };
-            
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", "trade-compliance-data.json");
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
-            
-            alert('Data exported successfully!');
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-            
-            // Initialize charts
-            initializeCharts();
-            
-            // Initial check for scroll animations
-            handleScrollAnimations();
-            
-            // Add scroll event listener for animations
-            window.addEventListener('scroll', handleScrollAnimations);
-        });
-    </script>
+    });
+  </script>
 </body>
 </html>
