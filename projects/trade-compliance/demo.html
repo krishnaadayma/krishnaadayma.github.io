@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Batch Analysis Demo: Trade Engine | Krishna Dayma</title>
-  <meta name="description" content="A batch analysis simulation for the Global Trade Analysis Engine project." />
+  <title>Global Economic Dashboard | Krishna Dayma</title>
+  <meta name="description" content="An executive dashboard visualizing key economic data for the world's top 10 superpowers as of 2025." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ===== "SUITS" EXECUTIVE DOSSIER THEME (Demo Page) ===== */
+    /* ===== "SUITS" GLOBAL ECONOMIC DASHBOARD THEME ===== */
     :root {
       --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
       --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
-      --text-success: #7ee081; --accent-primary: #A0A0A0; --accent-secondary: #4a5568; 
-      --border-color: #2C2C2C; --radius: 0.8rem; --shadow: 0 8px 30px rgba(0,0,0,0.6);
-      --transition: 0.2s ease;
+      --accent-primary: #A0A0A0; --accent-secondary: #4a5568; --border-color: #2C2C2C;
+      --radius: 0.8rem; --shadow: 0 8px 30px rgba(0,0,0,0.6);
+      --transition: 0.3s ease;
     }
     
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,38 +27,27 @@
     .subtitle { margin-top: 0.5rem; color: var(--text-muted); font-weight: 500; }
     
     .card { background: var(--bg-secondary); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border-color); margin-bottom: 2rem; }
-    .card h2 { margin: 0 0 1rem; color: var(--accent-primary); font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
+    .card h2 { margin: 0 0 1.5rem; color: var(--accent-primary); font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
     .card p { color: var(--text-secondary); max-width: 75ch; }
 
-    /* Demo Specifics */
-    #demo-output {
-      background: #0D0D0D; padding: 1.5rem; border-radius: 0.5rem;
-      border: 1px solid var(--border-color); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
-      white-space: pre-wrap; color: var(--text-secondary); font-size: 0.9rem;
-      min-height: 300px; margin-top: 1.5rem; counter-reset: line;
-      overflow-x: auto;
-    }
-    #demo-output .log-line { display: block; }
-    #demo-output .log-line::before {
-        content: counter(line);
-        counter-increment: line;
-        color: var(--accent-secondary);
-        display: inline-block;
-        width: 3em;
-        text-align: right;
-        margin-right: 1em;
-        border-right: 1px solid var(--border-color);
-        padding-right: 1em;
-    }
-    .log-line.success { color: var(--text-success); font-weight: 600; }
-    .log-line.info { color: var(--accent-primary); }
+    /* Dashboard & Chart Styling */
+    .dashboard-section { margin-bottom: 3rem; }
+    .chart-container { display: flex; flex-direction: column; gap: 0.75rem; }
+    .chart-bar-item { display: grid; grid-template-columns: 100px 1fr auto; align-items: center; gap: 1rem; font-size: 0.9rem; }
+    .bar-label { font-weight: 600; color: var(--text-primary); text-align: right; }
+    .bar-wrapper { background-color: var(--bg-tertiary); border-radius: 4px; overflow: hidden; }
+    .bar { background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary)); height: 24px; width: 0; border-radius: 4px; transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); }
+    .bar-value { font-weight: 600; color: var(--text-muted); }
 
     /* Buttons */
     .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
     .btn { display:inline-flex; align-items:center; justify-content: center; gap:.5rem; padding:.75rem 1.25rem; border-radius:.6rem; border:1px solid var(--border-color); background:var(--accent-secondary); color:var(--text-primary); cursor:pointer; text-decoration: none; font-weight: 600; transition: all var(--transition); }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
     .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
-    .btn:disabled { cursor: not-allowed; background: var(--bg-tertiary); color: var(--text-muted); transform: none; box-shadow: none; }
+    
+    /* Animation */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
 
     footer{ margin-top: 2rem; padding-top: 2rem; text-align:center; color:var(--text-muted); border-top: 1px solid var(--border-color); }
   </style>
@@ -66,26 +55,32 @@
 <body>
   <div class="container">
     <header>
-      <h1>Batch Analysis Simulation</h1>
-      <p class="subtitle">PROJECT: GLOBAL TRADE ANALYSIS ENGINE (KD-GTA-002)</p>
+      <h1>Global Economic Dashboard</h1>
+      <p class="subtitle">MACROECONOMIC ANALYSIS AS OF Q4 2025</p>
     </header>
 
     <main>
       <div class="card">
-        <h2>AUTOMATED SCENARIO TESTING</h2>
-        <p>This simulation runs a predefined set of scenarios through the Global Trade Analysis Engine. It demonstrates the model's ability to handle various trade routes, product categories, and logistical complexities, including the application of Free Trade Agreements (FTAs).</p>
-        <div class="btn-group">
-            <button class="btn btn-primary" id="runDemoBtn">▶️ Initiate Batch Analysis</button>
+        <h2>MACROECONOMIC OVERVIEW</h2>
+        <p class="fade-in">This dashboard provides a comparative visualization of key economic indicators for the world's top 10 economic superpowers. Data is simulated for Q4 2025 to reflect projected trends in global markets. All values are normalized for comparative analysis.</p>
+
+        <div class="dashboard-section fade-in">
+          <h3>Projected GDP (USD Trillions)</h3>
+          <div id="gdp-chart" class="chart-container"></div>
         </div>
-        <pre id="demo-output"></pre>
+
+        <div class="dashboard-section fade-in">
+          <h3>Projected YoY GDP Growth (%)</h3>
+          <div id="growth-chart" class="chart-container"></div>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="card fade-in">
         <h2>ACTION PANEL</h2>
-        <p>Return to the main portfolio or the interactive dashboard.</p>
+        <p>Return to the main portfolio or the interactive analysis tool.</p>
         <div class="btn-group">
             <a class="btn btn-primary" href="../../index.html" title="Return to Main Portfolio">🏠 Return to Main Portfolio</a>
-            <a class="btn" href="index.html" title="Interactive Dashboard">▶️ Go to Interactive Dashboard</a>
+            <a class="btn" href="index.html" title="Interactive Dashboard">▶️ Go to Interactive Analysis</a>
             <a class="btn" href="documentation.html" title="Technical Documentation">📄 Review Technical Documentation</a>
         </div>
       </div>
@@ -97,72 +92,70 @@
   </div>
 
   <script>
-    // Self-contained logic for the demo page, using a simplified model from app.js
     document.addEventListener('DOMContentLoaded', () => {
-        const runDemoBtn = document.getElementById('runDemoBtn');
-        const outputEl = document.getElementById('demo-output');
+      // --- SIMULATED DATA AS OF Q4 2025 ---
+      const COUNTRIES_DATA = [
+        { id: 'usa', name: 'USA', gdp: 28.8, growth: 2.1, primaryExport: 'Technology' },
+        { id: 'china', name: 'China', gdp: 20.5, growth: 4.5, primaryExport: 'Manufacturing' },
+        { id: 'germany', name: 'Germany', gdp: 4.9, growth: 1.5, primaryExport: 'Automotive' },
+        { id: 'japan', name: 'Japan', gdp: 4.5, growth: 1.2, primaryExport: 'Electronics' },
+        { id: 'india', name: 'India', gdp: 4.2, growth: 6.8, primaryExport: 'Services & IT' },
+        { id: 'uk', name: 'UK', gdp: 3.8, growth: 1.8, primaryExport: 'Financial Services' },
+        { id: 'france', name: 'France', gdp: 3.3, growth: 1.4, primaryExport: 'Aerospace' },
+        { id: 'italy', name: 'Italy', gdp: 2.4, growth: 1.1, primaryExport: 'Luxury Goods' },
+        { id: 'brazil', name: 'Brazil', gdp: 2.2, growth: 2.5, primaryExport: 'Commodities' },
+        { id: 'canada', name: 'Canada', gdp: 2.1, growth: 2.0, primaryExport: 'Natural Resources' }
+      ].sort((a, b) => b.gdp - a.gdp);
 
-        const TAX_RATES = { usa: 0.10, china: 0.13, japan: 0.10, germany: 0.19, uk: 0.20, france: 0.20, india: 0.18, italy: 0.22, brazil: 0.25, canada: 0.05 };
-        const BASE_DUTY_RATES = { electronics: 0.05, machinery: 0.07, automotive: 0.10, pharmaceuticals: 0.03, textiles: 0.12, food: 0.15 };
-        const TRADE_AGREEMENTS = { 'canada-usa': 0, 'usa-canada': 0, 'germany-france': 0, 'france-germany': 0, 'uk-japan': 0.5, 'japan-uk': 0.5 };
+      const gdpChartEl = document.getElementById('gdp-chart');
+      const growthChartEl = document.getElementById('growth-chart');
 
-        const demoScenarios = [
-            { origin: 'china', destination: 'usa', category: 'electronics', value: 75000, insurance: 400, shippingMode: 'sea' },
-            { origin: 'germany', destination: 'france', category: 'automotive', value: 120000, insurance: 800, shippingMode: 'sea' },
-            { origin: 'japan', destination: 'uk', category: 'machinery', value: 250000, insurance: 1500, shippingMode: 'air' },
-            { origin: 'india', destination: 'italy', category: 'textiles', value: 30000, insurance: 200, shippingMode: 'air' }
-        ];
+      const maxGdp = Math.max(...COUNTRIES_DATA.map(c => c.gdp));
+      const maxGrowth = Math.max(...COUNTRIES_DATA.map(c => c.growth));
 
-        function calculateLandedCost(scenario) {
-            const agreementKey = `${scenario.origin}-${scenario.destination}`;
-            const baseRate = BASE_DUTY_RATES[scenario.category] ?? 0.08;
-            const dutyRate = TRADE_AGREEMENTS.hasOwnProperty(agreementKey) ? baseRate * TRADE_AGREEMENTS[agreementKey] : baseRate;
-            const taxRate = TAX_RATES[scenario.destination] ?? 0.15;
-            const shippingBaseCost = scenario.value * (scenario.shippingMode === 'air' ? 0.12 : 0.06);
-            const importDuty = scenario.value * dutyRate;
-            const taxableValue = scenario.value + shippingBaseCost + scenario.insurance;
-            const tax = (taxableValue + importDuty) * taxRate;
-            return scenario.value + shippingBaseCost + scenario.insurance + importDuty + tax;
-        }
+      // --- RENDER FUNCTIONS ---
+      function renderChart(container, data, dataKey, maxValue, unit = '') {
+        container.innerHTML = '';
+        data.forEach(country => {
+          const value = country[dataKey];
+          const percentageWidth = (value / maxValue) * 100;
 
-        function logToConsole(message, type = '') {
-            const line = document.createElement('span');
-            line.className = `log-line ${type}`;
-            line.textContent = message;
-            outputEl.appendChild(line);
-        }
+          const item = document.createElement('div');
+          item.className = 'chart-bar-item';
+          item.innerHTML = `
+            <div class="bar-label">${country.name}</div>
+            <div class="bar-wrapper">
+              <div class="bar" data-width="${percentageWidth}%"></div>
+            </div>
+            <div class="bar-value">${value.toFixed(1)}${unit}</div>
+          `;
+          container.appendChild(item);
+        });
+      }
 
-        async function runDemo() {
-            runDemoBtn.disabled = true;
-            outputEl.innerHTML = '';
+      // --- ANIMATION LOGIC ---
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
             
-            const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-            
-            logToConsole('Initiating batch analysis simulation...', 'info');
-            await wait(500);
-
-            for (let i = 0; i < demoScenarios.length; i++) {
-                const scenario = demoScenarios[i];
-                logToConsole(`\nRunning Scenario ${i + 1}: ${scenario.origin.toUpperCase()} -> ${scenario.destination.toUpperCase()} (${scenario.category})`);
-                await wait(250);
-                
-                logToConsole('  Calculating landed cost...');
-                await wait(500);
-                
-                const totalCost = calculateLandedCost(scenario);
-                const currency = (new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 })).format(totalCost);
-                
-                logToConsole(`  SUCCESS: Estimated Total Landed Cost: ${currency}`, 'success');
-                await wait(250);
+            // Trigger bar chart animation if the entry is a chart container
+            if (entry.target.classList.contains('dashboard-section')) {
+              const bars = entry.target.querySelectorAll('.bar');
+              bars.forEach(bar => {
+                bar.style.width = bar.dataset.width;
+              });
             }
-            
-            logToConsole('\nBatch analysis complete. All scenarios processed.', 'info');
-            runDemoBtn.disabled = false;
-        }
+            observer.unobserve(entry.target); // Animate only once
+          }
+        });
+      }, { threshold: 0.25 });
 
-        if (runDemoBtn) {
-            runDemoBtn.addEventListener('click', runDemo);
-        }
+      // --- INITIALIZATION ---
+      renderChart(gdpChartEl, COUNTRIES_DATA, 'gdp', maxGdp, 'T');
+      renderChart(growthChartEl, [...COUNTRIES_DATA].sort((a,b) => b.growth - a.growth), 'growth', maxGrowth, '%');
+      
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     });
   </script>
 </body>
