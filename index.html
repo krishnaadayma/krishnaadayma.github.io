@@ -796,18 +796,18 @@
         
         async function fetchNews() {
             const newsContainer = document.getElementById('news-feed-container');
-            const apiKey = '78147e165ecf4a2db70daf2cc02e6ae6'; 
-            const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`;
+            // Using a reliable RSS to JSON converter to fetch news without a client-side API key.
+            const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Ffeeds.reuters.com%2Freuters%2FbusinessNews';
 
             try {
-                const response = await fetch(url);
+                const response = await fetch(rssUrl);
                 if (!response.ok) throw new Error(`Network response was not ok. Status: ${response.status}`);
                 
                 const data = await response.json();
                 
-                if (data.status !== 'ok') throw new Error(`API returned an error: ${data.message}`);
+                if (data.status !== 'ok') throw new Error(`API returned an error.`);
 
-                const articles = data.articles.slice(0, 5); // Get top 5 articles
+                const articles = data.items.slice(0, 5); // Get top 5 articles
                 
                 newsContainer.innerHTML = ''; // Clear loading message
                 
@@ -815,13 +815,13 @@
                     const newsItem = document.createElement('div');
                     newsItem.className = 'news-item';
                     newsItem.innerHTML = `
-                        <a href="${article.url}" target="_blank" rel="noopener noreferrer">${article.title}</a>
-                        <p>${article.source.name} - ${new Date(article.publishedAt).toLocaleDateString()}</p>
+                        <a href="${article.link}" target="_blank" rel="noopener noreferrer">${article.title}</a>
+                        <p>${new Date(article.pubDate).toLocaleDateString()}</p>
                     `;
                     newsContainer.appendChild(newsItem);
                 });
             } catch (error) {
-                newsContainer.innerHTML = `<p>Could not load live news feed. The API key might be invalid or have expired.</p>`;
+                newsContainer.innerHTML = `<p>Could not load live news feed at this time.</p>`;
                 console.error('Error fetching news:', error);
             }
         }
@@ -833,7 +833,7 @@
             
             window.addEventListener('scroll', handleScrollAnimations);
             
-            // Initialize Particles.js (configuration is large, so keeping it folded for clarity)
+            // Initialize Particles.js
             particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
 
             // Initialize Three.js Globe
