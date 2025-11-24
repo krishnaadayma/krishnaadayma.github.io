@@ -2,9 +2,14 @@ name: Fetch Live News
 
 on:
   schedule:
-    # Runs every hour
-    - cron: '*/1 * * * *'
+    # Runs every 5 minutes
+    - cron: '*/5 * * * *'
   workflow_dispatch: # Allows manual running
+
+# --- ADD THIS BLOCK ---
+permissions:
+  contents: write
+# --- END OF BLOCK ---
 
 jobs:
   fetch-news:
@@ -18,16 +23,22 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Install dependencies
+        run: npm install node-fetch@2
+
       - name: Fetch and process news
         id: fetch
-        run: |
-          npm install node-fetch
-          node ./.github/workflows/fetch-script.js
+        run: node ./.github/workflows/fetch-script.js
 
       - name: Commit and push if there are changes
         run: |
           git config --global user.name 'GitHub Action Bot'
           git config --global user.email 'action@github.com'
           git add news.json
-          git diff --staged --quiet || git commit -m "Update live news feed"
-          git push
+          # Only commit and push if there are actual changes
+          if ! git diff --staged --quiet; then
+            git commit -m "Update live news feed"
+            git push
+          else
+            echo "No changes to news.json, skipping commit."
+          fi
