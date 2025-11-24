@@ -1,32 +1,42 @@
-name: Fetch Live News
+const Parser = require('rss-parser');
+const fs = require('fs');
+const path = require('path');
 
-on:
-  schedule:
-    # Runs every 5 minutes
-    - cron: '*/5 * * * *'
-  workflow_dispatch: # Allows manual running
+const parser = new Parser();
 
-jobs:
-  fetch-news:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
+// Direct Google News RSS Feed URLs. No more middleman.
+const italyFeedUrl = 'https://news.google.com/rss/search?q=italy+economy+business&hl=en-US&gl=US&ceid=US:en';
+const indiaFeedUrl = 'https://news.google.com/rss/search?q=india+economy+business&hl=en-US&gl=US&ceid=US:en';
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+async function fetchNews() {
+    try {
+        console.log('Fetching feeds directly...');
+        const [italyFeed, indiaFeed] = await Promise.all([
+            parser.parseURL(italyFeedUrl),
+            parser.parseURL(indiaFeedUrl)
+        ]);
+        console.log('Feeds fetched successfully.');
 
-      - name: Install dependencies
-        # We now need 'rss-parser' instead of 'node-fetch'
-        run: npm install rss-parser
+        const combinedItems = [...(italyFeed.items || []), ...(indiaFeed.items || [])];
+        
+        if (combinedItems.length === 0) {
+            throw new Error('No news items found after combining feeds.');
+        }
 
-      - name: Fetch and process news
-        run: node ./.github/workflows/fetch-script.js
+        // Sort by publication date, newest first
+        combinedItems.sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
+        console.log(`Found ${combinedItems.length} total items. Saving the top items.`);
 
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "BOT: Update live news feed"
-          file_pattern: news.json
+        // The file needs to be saved in the root of the repository
+        const outputPath = path.join(__dirname, '..', '..', 'news.json');
+        fs.writeFileSync(outputPath, JSON.stringify(combinedItems, null, 2));
+        
+        console.log(`Successfully saved news to ${outputPath}`);
+
+    } catch (error) {
+        console.error('An error occurred during the fetch process:', error);
+        process.exit(1); // Exit with an error code to fail the action
+    }
+}
+
+fetchNews();
