@@ -149,9 +149,9 @@
                 <h2 class="section-title">Certifications & Advanced Training</h2>
                 <div class="card fade-in">
                     <ul class="checklist">
-                        <li>Financial accounting and management - Politecnico di Milano (In course)</li>
-                        <li>Investment Risk Management - Coursera (Completed: April 2024)</li>
-                        <li>Business analysis and project management - Coursera (Expected: April 2025)</li>
+                        <li>Financial accounting and management - Politecnico di Milano</li>
+                        <li>Investment Risk Management - Coursera</li>
+                        <li>Business analysis and project management - Coursera</li>
                     </ul>
                 </div>
             </div>
@@ -202,17 +202,14 @@
                         entry.target.classList.add('visible');
                         const bar = entry.target.querySelector('.progress-bar');
                         if (bar) { bar.style.width = bar.dataset.width; }
-                        // observer.unobserve(entry.target); // Optional: uncomment to animate only once
                     }
                 });
             }, { threshold: 0.2 });
 
             document.querySelectorAll('.fade-in, .language-item').forEach(el => observer.observe(el));
             
-            // Particles.js
             particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
 
-            // Three.js Globe
             const globeCanvas = document.getElementById('globe-canvas');
             if (globeCanvas) {
                 const scene = new THREE.Scene();
