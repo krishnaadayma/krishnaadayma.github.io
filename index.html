@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK V8 (DEFINITIVE) ===== */
+        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK V9 (BULLETPROOF) ===== */
         :root {
             --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
             --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
@@ -24,13 +24,13 @@
             --space-2xl: clamp(3rem, 8vw, 4rem);
             --radius-md: 0.5rem; --radius-lg: 0.75rem;
             --shadow-md: 0 4px 6px rgba(0,0,0,0.5); --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
-            --transition-fast: 0.2s ease; --transition-medium: 0.3s ease;
+            --transition-fast: 0.2s ease;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; color: var(--text-secondary); background-color: var(--bg-primary); overflow-x: hidden; }
         .container { width: 100%; max-width: min(1200px, 95vw); margin: 0 auto; padding: 0 var(--space-md); position: relative; z-index: 2; }
-        h1, h2, h3, h4 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: var(--space-sm); text-align: center;}
+        h1, h2, h3 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: var(--space-sm); text-align: center;}
         h1 { font-size: var(--text-4xl); } h2 { font-size: var(--text-3xl); } h3 { font-size: var(--text-2xl); color: var(--accent-primary); }
         p { color: var(--text-muted); margin-bottom: var(--space-sm); line-height: 1.6; font-size: var(--text-base); max-width: 65ch; }
         header { background: var(--gradient-primary); padding: var(--space-2xl) 0; margin-bottom: var(--space-xl); position: relative; overflow: hidden; border-bottom: 1px solid var(--border-color); }
@@ -50,7 +50,7 @@
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); } }
         footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: var(--space-xl) 0; margin-top: var(--space-2xl); border-top: 1px solid var(--border-color); }
         
-        /* --- CUSTOM TRANSLATION TOGGLE (DEFINITIVE) --- */
+        /* --- CUSTOM TRANSLATION TOGGLE (BULLETPROOF) --- */
         #custom-translate-widget {
             position: fixed; top: 1rem; right: 1.5rem; z-index: 9999;
             background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);
@@ -62,11 +62,9 @@
         #custom-translate-widget a.active, #custom-translate-widget a:hover {
             color: var(--text-primary);
         }
-        #custom-translate-widget span {
-            color: var(--border-color); margin: 0 0.2rem;
-        }
-        /* Hide Google's default UI */
+        #custom-translate-widget span { color: var(--border-color); margin: 0 0.2rem; }
         body > .skiptranslate { display: none !important; }
+        html.translated-ltr, html.translated-rtl { margin-top: 0 !important; }
         body { top: 0 !important; }
     </style>
 </head>
@@ -76,9 +74,9 @@
 
     <!-- Custom EN | IT Toggle -->
     <div id="custom-translate-widget">
-        <a href="#" class="lang-en" onclick="translatePage('en'); return false;">EN</a>
+        <a href="javascript:void(0)" class="lang-en" onclick="setLanguage('en')">EN</a>
         <span>|</span>
-        <a href="#" class="lang-it" onclick="translatePage('it'); return false;">IT</a>
+        <a href="javascript:void(0)" class="lang-it" onclick="setLanguage('it')">IT</a>
     </div>
 
     <header>
@@ -92,7 +90,7 @@
             <canvas id="globe-canvas" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1200px; height: 1200px; z-index: 1; opacity: 0.1;"></canvas>
             <div class="container">
                 <h2 class="section-title">Professional Summary</h2>
-                <div class="grid-container"><div class="fade-in"><p style="text-align: center; margin: 0 auto;">A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets. Fluent in three languages and equipped with a cross-cultural perspective, I excel at optimizing processes, driving market expansion, and delivering measurable results in dynamic, international environments.</p></div></div>
+                <div class="grid-container"><p style="text-align: center; margin: 0 auto;">A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets. Fluent in three languages and equipped with a cross-cultural perspective, I excel at optimizing processes, driving market expansion, and delivering measurable results in dynamic, international environments.</p></div>
             </div>
         </section>
 
@@ -167,32 +165,29 @@
     <!-- Translation Engine Initialization -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
-          new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'it,en'}, 'google_translate_element');
+          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
         }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <!-- MAIN PAGE SCRIPTS -->
+    <!-- MAIN PAGE SCRIPTS (with BULLETPROOF translation) -->
     <script>
-        // --- CUSTOM TRANSLATE FUNCTION ---
-        function translatePage(lang) {
-            var $frame = document.querySelector('.goog-te-menu-frame');
-            if (!$frame) return;
-            var $select = $frame.contentDocument.querySelector('select.goog-te-combo');
-            if (!$select) return;
-            $select.value = lang;
-            $select.dispatchEvent(new Event('change'));
+        // --- BULLETPROOF TRANSLATE FUNCTION ---
+        function setLanguage(lang) {
+            // Set the cookie and reload
+            document.cookie = `googtrans=/en/${lang};path=/`;
+            location.reload();
         }
 
-        // --- MANAGE ACTIVE STATE FOR TRANSLATE TOGGLE ---
-        function updateActiveLanguage() {
-            var langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
-            var currentLang = 'en'; // Default to English
+        // --- Highlight active language based on cookie ---
+        function highlightActiveLanguage() {
+            let currentLang = 'en'; // Default
+            const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
             if (langCookie) {
                 currentLang = langCookie.split('/')[2];
             }
             document.querySelectorAll('#custom-translate-widget a').forEach(el => el.classList.remove('active'));
-            var activeEl = document.querySelector(`.lang-${currentLang}`);
+            const activeEl = document.querySelector(`.lang-${currentLang}`);
             if (activeEl) {
                 activeEl.classList.add('active');
             }
@@ -200,6 +195,8 @@
         
         // --- ALL OTHER SCRIPTS ---
         document.addEventListener('DOMContentLoaded', function() {
+            highlightActiveLanguage(); // Set active language on page load
+            
             const insightsContainer = document.getElementById('insights-container');
             const liveIndicator = document.querySelector('.live-indicator');
 
@@ -226,8 +223,6 @@
 
             fetchAndDisplayNews();
             setInterval(fetchAndDisplayNews, 30000);
-            updateActiveLanguage(); // Set active language on load
-            setInterval(updateActiveLanguage, 1000); // Check for changes
 
             particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
             const globeCanvas = document.getElementById('globe-canvas');
