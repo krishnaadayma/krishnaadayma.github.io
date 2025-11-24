@@ -3,225 +3,144 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Documentation | International Trade Compliance System</title>
-  <meta name="description" content="Documentation for the International Trade Compliance System - Italy & India" />
+  <title>Technical Documentation: Trade Engine | Krishna Dayma</title>
+  <meta name="description" content="Technical documentation for the Global Trade Analysis Engine project." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{ --bg:#07080a; --card:#101214; --text:#e6eef3; --muted:#9fb0bd; --accent:#0ea5ff; --radius:0.8rem; --shadow: 0 10px 30px rgba(2,6,23,0.6);}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#06070a,#0f1113);color:var(--text);padding:36px}
-    .container{max-width:1000px;margin:0 auto;padding:0 18px}
-    header{background:linear-gradient(135deg,#0f1724,#111827);padding:32px;border-radius:1rem;border:1px solid rgba(255,255,255,0.03);text-align:center;box-shadow:var(--shadow)}
-    h1{margin:0;font-size:clamp(1.5rem,4vw,2.2rem)}
-    .subtitle{color:var(--muted);margin:0}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:.6rem;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--accent);text-decoration:none}
-    .card{background:var(--card);padding:18px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.02);margin-top:20px}
-    .muted{color:var(--muted)}
-    .vis-wrap{display:flex;flex-direction:column;gap:12px;align-items:center}
-    .vis{width:100%;max-width:880px;background:linear-gradient(180deg,#08101a,#0b1318);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
-    .vis svg{width:100%;height:auto;display:block}
-    .vis-legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;justify-content:center}
-    .vis-legend .item{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;color:var(--muted);font-weight:600;font-size:.9rem}
-    .toggle-btn{background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);padding:8px 12px;border-radius:8px;cursor:pointer}
-    pre.cli-hidden{display:none;background:linear-gradient(180deg,#061018,#08121a);padding:12px;border-radius:8px;color:var(--muted);font-family:ui-monospace,monospace;white-space:pre-wrap}
-    @media (max-width:760px){.vis{padding:10px}}
+    /* ===== "SUITS" EXECUTIVE DOSSIER THEME (Documentation) ===== */
+    :root {
+      --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
+      --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
+      --accent-primary: #A0A0A0; --accent-secondary: #4a5568; --border-color: #2C2C2C;
+      --radius: 0.8rem; --shadow: 0 8px 30px rgba(0,0,0,0.6);
+      --transition: 0.2s ease;
+    }
+    
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body{ margin:0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-secondary); line-height: 1.6; padding: 2rem; -webkit-font-smoothing: antialiased; }
+    .container{ max-width: 1200px; margin: 0 auto; }
+    
+    header{ background: var(--bg-secondary); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--border-color); margin-bottom: 2rem; text-align: center; box-shadow: var(--shadow); }
+    header h1{ color: var(--text-primary); margin:0; font-size:clamp(2rem, 5vw, 3rem); letter-spacing: -1px; }
+    .project-meta{ display: flex; justify-content: center; gap: 1.5rem; margin-top: 0.5rem; color: var(--text-muted); font-weight: 500; }
+    
+    .main-grid { display: grid; grid-template-columns: 1fr 380px; gap: 2rem; align-items: start; }
+    @media (max-width: 1024px){ .main-grid { grid-template-columns: 1fr; } }
+    
+    .card { background: var(--bg-secondary); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border-color); }
+    .card h2 { margin: 0 0 1rem; color: var(--accent-primary); font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
+    .card p, .card li { color: var(--text-secondary); max-width: 75ch; margin-bottom: 1rem; }
+    .card ul { padding-left: 1.5rem; }
+
+    /* Documentation Specifics */
+    .doc-section { margin-bottom: 2rem; }
+    .doc-section h3 { font-size: 1.25rem; color: var(--text-primary); font-weight: 600; margin: 1.5rem 0 0.5rem; }
+    
+    pre {
+      background: var(--bg-primary); padding: 1rem; border-radius: 0.5rem;
+      border: 1px solid var(--border-color); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+      white-space: pre-wrap; color: var(--text-secondary); font-size: 0.9rem;
+    }
+    code { font-family: inherit; background: var(--bg-tertiary); padding: 0.2em 0.4em; border-radius: 0.3em; }
+
+    /* Buttons */
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content: center; gap:.5rem; padding:.75rem 1.25rem; border-radius:.6rem;
+      border:1px solid var(--border-color); background:var(--accent-secondary); color:var(--text-primary);
+      cursor:pointer; text-decoration: none; font-weight: 600; transition: all var(--transition);
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+    .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
+    .btn-outline{ background:transparent; border-color: var(--accent-secondary); }
+
+    footer{ margin-top: 2rem; padding-top: 2rem; text-align:center; color:var(--text-muted); border-top: 1px solid var(--border-color); }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>📚 Project Documentation</h1>
-      <p class="subtitle">International Trade Compliance System — Visual docs & usage</p>
-      <div style="margin-top:12px">
-        <a class="btn" href="index.html">← Back to Project Home</a>
-        <a class="btn" href="demo.html">📊 Interactive Demo</a>
-        <a class="btn" href="trade_compliance.py" download>💾 Download Python</a>
+      <h1>Technical Documentation</h1>
+      <div class="project-meta">
+        <span>PROJECT: GLOBAL TRADE ANALYSIS ENGINE</span> &bull; <span>FILE ID: KD-GTA-002-DOC</span>
       </div>
     </header>
 
-    <main>
-      <div class="card">
-        <h2>Quick Start</h2>
-        <p class="muted">Run the Python CLI or use the interactive demo in your browser. Examples are available via toggles so the page stays visual-first.</p>
-
-        <div style="margin-top:12px">
-          <button id="show-examples" class="toggle-btn">Show examples</button>
-          <pre id="examples" class="cli-hidden" aria-hidden="true">
-$ python projects/trade-compliance/trade_compliance.py --help
-
-$ python projects/trade-compliance/trade_compliance.py --destination italy --category textiles --value 10000 --shipping 500
-
-$ python projects/trade-compliance/trade_compliance.py --batch --csv results.csv
-          </pre>
+    <main class="main-grid">
+      <div class="card" style="grid-column: 1 / -1;">
+        <h2>SYSTEM OVERVIEW</h2>
+        <div class="doc-section">
+          <p>The Global Trade Analysis Engine is a client-side JavaScript application designed to provide high-level estimates for landed costs in international trade. It utilizes a static dataset representing the top 10 global economies and core product categories. The engine models complexities such as Free Trade Agreements (FTAs) and differential logistics costs for sea and air freight.</p>
+          <p>The primary goal of this project is to demonstrate data modeling and interactive application development skills, not to provide financially accurate quotes for real-world shipping.</p>
         </div>
-      </div>
-
-      <!-- Implementation Overview (visual) -->
-      <div class="card" id="implementation-overview">
-        <h2>Implementation Overview — Visual</h2>
-        <div class="vis-wrap">
-          <div class="vis" role="img" aria-label="Architecture diagram: Browser loads index.html which uses app.js, and trade_compliance.py provides CLI and export">
-            <svg viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="false" focusable="false">
-              <title>Architecture: index.html ↔ app.js ↔ trade_compliance.py (download)</title>
-              <!-- boxes -->
-              <rect x="40" y="40" width="260" height="120" rx="12" fill="#0f1724" stroke="#19303f" />
-              <text x="170" y="80" text-anchor="middle" fill="#e6eef3" font-size="18" font-weight="700">index.html</text>
-              <text x="170" y="104" text-anchor="middle" fill="#9fb0bd" font-size="13">Interactive UI (browser)</text>
-
-              <rect x="370" y="40" width="260" height="120" rx="12" fill="#071026" stroke="#19303f" />
-              <text x="500" y="80" text-anchor="middle" fill="#e6eef3" font-size="18" font-weight="700">app.js</text>
-              <text x="500" y="104" text-anchor="middle" fill="#9fb0bd" font-size="13">Client model + export</text>
-
-              <rect x="700" y="40" width="260" height="120" rx="12" fill="#071026" stroke="#19303f" />
-              <text x="830" y="80" text-anchor="middle" fill="#e6eef3" font-size="18" font-weight="700">trade_compliance.py</text>
-              <text x="830" y="104" text-anchor="middle" fill="#9fb0bd" font-size="13">CLI, JSON/CSV export</text>
-
-              <!-- arrows -->
-              <defs>
-                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
-                  <path d="M0 0 L10 5 L0 10 z" fill="#8ed0ff" />
-                </marker>
-              </defs>
-
-              <line x1="300" y1="100" x2="370" y2="100" stroke="#8ed0ff" stroke-width="2.5" marker-end="url(#arrow)" />
-              <text x="335" y="90" text-anchor="middle" fill="#9fb0bd" font-size="12">UI actions →</text>
-
-              <line x1="630" y1="100" x2="700" y2="100" stroke="#8ed0ff" stroke-width="2.5" marker-end="url(#arrow)" />
-              <text x="665" y="90" text-anchor="middle" fill="#9fb0bd" font-size="12">Export / compute →</text>
-
-              <!-- download arrow -->
-              <line x1="830" y1="160" x2="830" y2="230" stroke="#9fb0bd" stroke-dasharray="4 4" stroke-width="1.6" />
-              <rect x="760" y="230" width="140" height="50" rx="8" fill="#08202a" stroke="#19303f" />
-              <text x="830" y="258" text-anchor="middle" fill="#9fb0bd" font-size="12">download/trade_compliance.py</text>
-
-              <!-- notes -->
-              <text x="170" y="172" text-anchor="middle" fill="#9fb0bd" font-size="12">Browser UI (interactive)</text>
-              <text x="500" y="172" text-anchor="middle" fill="#9fb0bd" font-size="12">Client-side logic + demo</text>
-            </svg>
-          </div>
-
-          <div class="vis-legend" aria-hidden="true">
-            <div class="item">index.html — UI</div>
-            <div class="item">app.js — client model</div>
-            <div class="item">trade_compliance.py — CLI</div>
-          </div>
-
-          <button class="toggle-btn" data-target="impl-details">Show details</button>
-          <div id="impl-details" class="cli-hidden" aria-hidden="true">
-            <p class="muted">Details (hidden by default):</p>
+        
+        <div class="doc-section">
+            <h2>DATA MODEL & LOGIC</h2>
+            <h3>Dataset</h3>
+            <p>The application's logic is powered by a static JavaScript object containing data for 10 countries. The key data points are:</p>
             <ul>
-              <li><strong>index.html</strong> — landing page and interactive calculator UI that references app.js and provides download links.</li>
-              <li><strong>app.js</strong> — client-side calculator logic, demo scenarios, and JSON export functionality.</li>
-              <li><strong>trade_compliance.py</strong> — runnable Python CLI implementing the same calculation logic, with --batch, --json and CSV export options.</li>
+                <li><strong>Country List:</strong> ISO codes and full names for the top 10 global economies.</li>
+                <li><strong>Tax Rates:</strong> A dictionary mapping each country ID to a representative Value-Added Tax (VAT) or Goods and Services Tax (GST) rate.</li>
+                <li><strong>Base Duty Rates:</strong> A baseline import duty percentage for each product category.</li>
+                <li><strong>Trade Agreements (FTAs):</strong> A dictionary that defines duty multipliers for specific trade routes (e.g., a value of `0` for EU internal trade, `0.5` for a 50% duty reduction).</li>
             </ul>
-          </div>
+
+            <h3>Calculation Flow</h3>
+            <p>The calculation logic proceeds as follows:</p>
+            <ol>
+                <li>Determine the base duty rate from the selected product category.</li>
+                <li>Check if a Free Trade Agreement exists between the origin and destination. If so, apply the FTA multiplier to the base duty rate.</li>
+                <li>Calculate shipping cost based on the selected mode (Air/Sea) and the shipment value.</li>
+                <li>Calculate import duty based on the final duty rate and shipment value.</li>
+                <li>Calculate the taxable amount (Shipment Value + Logistics Costs + Duty).</li>
+                <li>Calculate the final tax based on the destination country's tax rate.</li>
+                <li>Sum all components to produce the Total Landed Cost.</li>
+            </ol>
         </div>
-      </div>
 
-      <!-- API / CLI Reference (visual) -->
-      <div class="card" id="cli-reference">
-        <h2>API / CLI Reference — Visual</h2>
-        <div class="vis-wrap">
-          <div class="vis" role="img" aria-label="CLI flow: user runs python script, script calculates duty/tax/compliance and outputs JSON or CSV">
-            <svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="false" focusable="false">
-              <title>CLI flow: CLI → Python engine → JSON/CSV / Demo</title>
-              <!-- CLI box -->
-              <rect x="40" y="30" width="260" height="80" rx="10" fill="#0f1724" stroke="#19303f" />
-              <text x="170" y="65" text-anchor="middle" fill="#e6eef3" font-size="16" font-weight="700">Terminal / CLI</text>
-              <text x="170" y="86" text-anchor="middle" fill="#9fb0bd" font-size="12">python trade_compliance.py</text>
-
-              <!-- arrow -->
-              <line x1="300" y1="70" x2="390" y2="70" stroke="#8ed0ff" stroke-width="2.6" marker-end="url(#arrow)" />
-              
-              <!-- engine box -->
-              <rect x="390" y="20" width="360" height="120" rx="10" fill="#071026" stroke="#19303f" />
-              <text x="570" y="55" text-anchor="middle" fill="#e6eef3" font-size="16" font-weight="700">trade_compliance.py</text>
-              <text x="570" y="76" text-anchor="middle" fill="#9fb0bd" font-size="12">calculate duty, tax, clearance hours</text>
-
-              <!-- outputs -->
-              <rect x="780" y="30" width="160" height="80" rx="10" fill="#08121a" stroke="#19303f" />
-              <text x="860" y="60" text-anchor="middle" fill="#9fb0bd" font-size="13">Outputs</text>
-              <text x="860" y="78" text-anchor="middle" fill="#9fb0bd" font-size="12">JSON / CSV / Pretty text</text>
-
-              <defs>
-                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
-                  <path d="M0 0 L10 5 L0 10 z" fill="#8ed0ff" />
-                </marker>
-              </defs>
-
-              <line x1="750" y1="70" x2="780" y2="70" stroke="#8ed0ff" stroke-width="2.6" marker-end="url(#arrow)" />
-
-              <!-- demo badge -->
-              <circle cx="570" cy="170" r="22" fill="#0ea5ff" />
-              <text x="570" y="175" text-anchor="middle" fill="#021827" font-size="13" font-weight="700">DEMO</text>
-              <text x="570" y="197" text-anchor="middle" fill="#9fb0bd" font-size="12">--batch → demo.csv</text>
-            </svg>
-          </div>
-
-          <div class="vis-legend" aria-hidden="true">
-            <div class="item">CLI → Python</div>
-            <div class="item">Outputs: JSON, CSV, Pretty text</div>
-            <div class="item">--batch demo option</div>
-          </div>
-
-          <button class="toggle-btn" data-target="cli-details">Show details</button>
-          <div id="cli-details" class="cli-hidden" aria-hidden="true">
-            <p class="muted">CLI options (hidden by default):</p>
-            <pre>
-Usage:
-  python trade_compliance.py [--destination italy|india] [--category textiles|machinery|...] [--value 50000] [--shipping 500] [--json] [--output out.json] [--batch] [--csv file.csv]
-
-Examples:
-  python trade_compliance.py --destination italy --category electronics --value 50000 --shipping 500
-  python trade_compliance.py --batch --csv demo_results.csv
-            </pre>
-          </div>
+        <div class="doc-section">
+            <h2>CLIENT-SIDE APPLICATION (app.js)</h2>
+            <h3>Core Class: <code>GlobalTradeModel</code></h3>
+            <p>All calculations are encapsulated within this class. It is initialized with all user inputs from the dashboard.</p>
+            <pre><code>const model = new GlobalTradeModel(origin, destination, category, value, insurance, shippingMode);
+const results = model.calculate();</code></pre>
+            
+            <h3>Key Functions</h3>
+            <ul>
+                <li><code>populateDropdowns()</code>: Dynamically populates the origin and destination `<select>` elements from the `COUNTRIES` array on page load.</li>
+                <li><code>runAnalysis()</code>: The main event handler. It retrieves all user inputs, initiates the "processing" animation, instantiates the `GlobalTradeModel`, calls the `calculate()` method, and passes the results to `renderDashboard()`.</li>
+                <li><code>renderDashboard(data)</code>: Takes the final calculation results object and dynamically builds the HTML for the metrics cards in the results dashboard.</li>
+            </ul>
         </div>
+
+        <div class="doc-section">
+            <h2>LOCAL SETUP & USAGE</h2>
+            <p>The project is self-contained and requires no server or build process. To run locally:</p>
+            <ol>
+                <li>Download the project files (`index.html`, `app.js`, `documentation.html`).</li>
+                <li>Ensure all files are in the same directory.</li>
+                <li>Open `index.html` in any modern web browser.</li>
+            </ol>
+            <p>The core logic is located in <code>app.js</code> and can be modified to include more countries, trade agreements, or complex tariff schedules.</p>
+        </div>
+
       </div>
 
-      <div class="card">
-        <h2>Notes</h2>
-        <p class="muted">All visuals are illustrative. Calculation rates inside the code are example/demo values — replace with authoritative rates for production use.</p>
-      </div>
+      <aside class="card" style="grid-column: 1 / -1;">
+        <h2>ACTION PANEL</h2>
+        <p>Return to the main portfolio or the interactive analysis dashboard.</p>
+        <div class="btn-group">
+            <a class="btn btn-primary" href="../index.html" title="Back to Home">🏠 Return to Main Portfolio</a>
+            <a class="btn" href="index.html" title="Interactive Dashboard">▶️ Go to Interactive Dashboard</a>
+        </div>
+      </aside>
     </main>
 
-    <footer style="text-align:center;margin-top:28px;color:var(--muted)">
-      © 2024 Krishna Dayma
+    <footer>
+      <div>&copy; 2024 Krishna Dayma | Project Dossier KD-GTA-002</div>
     </footer>
   </div>
-
-  <script>
-    // toggles for hidden details
-    document.addEventListener('DOMContentLoaded', function () {
-      // examples toggle
-      const exBtn = document.getElementById('show-examples');
-      const exBox = document.getElementById('examples');
-      exBtn.addEventListener('click', () => {
-        const hidden = exBox.style.display === '' || exBox.style.display === 'none';
-        exBox.style.display = hidden ? 'block' : 'none';
-        exBox.setAttribute('aria-hidden', String(!hidden));
-        exBtn.textContent = hidden ? 'Hide examples' : 'Show examples';
-      });
-      exBox.style.display = 'none';
-      exBox.setAttribute('aria-hidden', 'true');
-
-      // generic details toggles
-      document.querySelectorAll('.toggle-btn[data-target]').forEach(btn => {
-        const targetId = btn.getAttribute('data-target');
-        const box = document.getElementById(targetId);
-        if (!box) return;
-        box.style.display = 'none';
-        box.setAttribute('aria-hidden', 'true');
-        btn.addEventListener('click', () => {
-          const hidden = box.style.display === '' || box.style.display === 'none';
-          box.style.display = hidden ? 'block' : 'none';
-          box.setAttribute('aria-hidden', String(!hidden));
-          btn.textContent = hidden ? 'Hide details' : 'Show details';
-        });
-      });
-    });
-  </script>
 </body>
 </html>
