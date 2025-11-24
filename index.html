@@ -43,8 +43,10 @@
         .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
         section { padding: var(--space-2xl) 0; width: 100%; position: relative; }
         .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-primary); margin: var(--space-sm) auto 0; border-radius: 2px; }
-        .card { background: var(--bg-secondary); padding: var(--space-lg); border-radius: var(--radius-lg); border: 1px solid var(--border-color); transition: transform var(--transition-medium), box-shadow var(--transition-medium); }
+        .card { background: var(--bg-secondary); padding: var(--space-lg); border-radius: var(--radius-lg); border: 1px solid var(--border-color); transition: transform var(--transition-medium), box-shadow var(--transition-medium); display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+        .card h3, .card p { text-align: left; }
+        .card > *:last-child { margin-top: auto; }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: var(--space-lg); max-width: min(1200px, 95vw); margin: 0 auto; }
         .item-card { border-left: 4px solid var(--accent-primary); max-width: min(900px, 95vw); margin: var(--space-md) auto; text-align: left; }
         .item-card h3, .item-card p, .item-card ul { text-align: left; margin-left: 0;}
@@ -93,22 +95,23 @@
         <section id="projects">
             <div class="container">
                 <h2 class="section-title">Key Projects</h2>
-                <div class="item-card fade-in">
-                    <h3 style="display: flex; align-items: center; justify-content: flex-start;">
-                        <span id="live-indicator" class="live-indicator"></span>
-                        <span id="insights-title">Bilateral Economic Intelligence: Italy-India</span>
-                    </h3>
-                    <p>A live, real-time intelligence feed tracking the latest economic and business news concerning the Italy-India corridor. This project demonstrates API integration and dynamic data handling.</p>
-                    <div id="insights-container" style="display: flex; flex-direction: column; gap: var(--space-md); margin-top: var(--space-md);">
-                        <p style="text-align:left;">Accessing intelligence feeds...</p>
+                <div class="grid-container">
+                    <div class="card fade-in">
+                        <h3 style="display: flex; align-items: center;">
+                            <span id="live-indicator" class="live-indicator"></span>
+                            <span id="insights-title">Bilateral Economic Intelligence</span>
+                        </h3>
+                        <p>A live intelligence feed tracking the latest economic news for the Italy-India corridor, demonstrating dynamic data integration.</p>
+                        <div id="insights-container" style="margin-top: auto; padding-top: var(--space-md);">
+                            <p style="text-align:left;">Accessing intelligence feeds...</p>
+                        </div>
                     </div>
-                </div>
-                <div class="item-card fade-in">
-                    <h3>🌍 Global Trade Analysis Engine</h3>
-                    <p>An executive project dossier showcasing a predictive analytics engine for simulating international trade costs between the world's top 10 economies.</p>
-                    <div class="project-links">
-                        <a href="projects/trade-compliance/index.html" class="btn btn-primary">Open Project Dossier</a>
-                        <a href="projects/trade-compliance/documentation.html" class="btn btn-secondary">Review Documentation</a>
+                    <div class="card fade-in">
+                        <h3>🌍 Global Trade Analysis Engine</h3>
+                        <p>An executive project dossier showcasing a predictive analytics engine for simulating international trade costs between the world's top 10 economies.</p>
+                        <div class="project-links">
+                            <a href="projects/trade-compliance/index.html" class="btn btn-primary">Open Project Dossier</a>
+                        </div>
                     </div>
                 </div>
             </div>
