@@ -129,65 +129,77 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { 
-                    if (entry.isIntersecting) entry.target.classList.add('visible');
-                });
-            }, { threshold: 0.2 });
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-            
-            // --- INVINCIBLE LIVE NEWS FEED ---
-            const insightsContainer = document.getElementById('insights-container');
-            const liveIndicator = document.querySelector('.live-indicator');
-
-            fetch('news.json')
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok.');
-                    return response.json();
-                })
-                .then(data => {
-                    if (data && data.length > 0) {
-                        insightsContainer.innerHTML = '';
-                        if(liveIndicator) liveIndicator.style.display = 'inline-block';
-                        
-                        data.slice(0, 3).forEach(item => {
-                            const insightEl = document.createElement('div');
-                            const title = item.title.replace(/<[^>]*>/g, "");
-                            const sourceName = item.author || "Google News";
-                            insightEl.innerHTML = `<p style="margin:0;"><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">${title}</a><br><span style="font-size: 0.8rem; color: var(--text-muted);">Source: ${sourceName}</span></p>`;
-                            insightsContainer.appendChild(insightEl);
-                        });
-                    } else {
-                        throw new Error('News data is empty.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Failed to load local news file:', error);
-                    insightsContainer.innerHTML = '<p style="text-align:left;">Intelligence feed is currently being updated. Please check back shortly.</p>';
-                    if(liveIndicator) liveIndicator.style.display = 'none';
-                });
-
-            // Particles.js & Three.js Globe
-            particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
-            const globeCanvas = document.getElementById('globe-canvas');
-            if (globeCanvas) {
-                const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-                const renderer = new THREE.WebGLRenderer({ canvas: globeCanvas, alpha: true });
-                const globe = new THREE.Mesh(new THREE.SphereGeometry(1.5, 32, 32), new THREE.MeshBasicMaterial({ color: 0xA0A0A0, wireframe: true }));
-                scene.add(globe);
-                camera.position.z = 2.5;
-                function animate() { requestAnimationFrame(animate); globe.rotation.y += 0.001; renderer.render(scene, camera); }
-                animate();
-                new ResizeObserver(() => {
-                    const container = document.getElementById('about');
-                    const size = Math.min(container.offsetWidth, 1200);
-                    camera.aspect = 1;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(size, size);
-                }).observe(document.getElementById('about'));
-            }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { 
+            if (entry.isIntersecting) entry.target.classList.add('visible');
         });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    
+    // --- LIVE NEWS FEED WITH 30-SECOND AUTO-REFRESH ---
+    const insightsContainer = document.getElementById('insights-container');
+    const liveIndicator = document.querySelector('.live-indicator');
+
+    function fetchAndDisplayNews() {
+        console.log('Fetching news update...');
+        fetch('news.json?cachebust=' + new Date().getTime()) // Add cache-busting parameter
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok. The news file may not exist yet.');
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.length > 0) {
+                    insightsContainer.innerHTML = ''; // Clear previous news
+                    if(liveIndicator) liveIndicator.style.display = 'inline-block';
+                    
+                    data.slice(0, 3).forEach(item => {
+                        const insightEl = document.createElement('div');
+                        // Use item.isoDate which is more reliable from rss-parser
+                        const publicationDate = item.isoDate ? new Date(item.isoDate).toLocaleDateString() : 'Recently';
+                        const title = item.title.replace(/<[^>]*>/g, "");
+                        const sourceName = item.creator || "Google News";
+                        insightEl.innerHTML = `<p style="margin:0;"><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">${title}</a><br><span style="font-size: 0.8rem; color: var(--text-muted);">Source: ${sourceName} | ${publicationDate}</span></p>`;
+                        insightsContainer.appendChild(insightEl);
+                    });
+                } else {
+                    throw new Error('News data is empty.');
+                }
+            })
+            .catch(error => {
+                console.error('Failed to load local news file:', error);
+                insightsContainer.innerHTML = '<p style="text-align:left;">Intelligence feed is currently being updated. Please check back shortly.</p>';
+                if(liveIndicator) liveIndicator.style.display = 'none';
+            });
+    }
+
+    // 1. Fetch news immediately on page load.
+    fetchAndDisplayNews();
+
+    // 2. Set an interval to re-fetch the news every 30 seconds.
+    setInterval(fetchAndDisplayNews, 30000); // 30,000 milliseconds = 30 seconds
+
+    // Particles.js & Three.js Globe (No changes needed here)
+    particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
+    const globeCanvas = document.getElementById('globe-canvas');
+    if (globeCanvas) {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: globeCanvas, alpha: true });
+        const globe = new THREE.Mesh(new THREE.SphereGeometry(1.5, 32, 32), new THREE.MeshBasicMaterial({ color: 0xA0A0A0, wireframe: true }));
+        scene.add(globe);
+        camera.position.z = 2.5;
+        function animate() { requestAnimationFrame(animate); globe.rotation.y += 0.001; renderer.render(scene, camera); }
+        animate();
+        new ResizeObserver(() => {
+            const container = document.getElementById('about');
+            const size = Math.min(container.offsetWidth, 1200);
+            camera.aspect = 1;
+            camera.updateProjectionMatrix();
+            renderer.setSize(size, size);
+        }).observe(document.getElementById('about'));
+    }
+});
     </script>
 </body>
 </html>
+
