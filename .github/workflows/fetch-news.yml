@@ -6,39 +6,31 @@ on:
     - cron: '*/5 * * * *'
   workflow_dispatch: # Allows manual running
 
-# --- ADD THIS BLOCK ---
-permissions:
-  contents: write
-# --- END OF BLOCK ---
-
 jobs:
   fetch-news:
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Check out the repository so the Action can access it
       - name: Check out repository
         uses: actions/checkout@v3
 
+      # Step 2: Set up the Node.js environment to run our script
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
+      # Step 3: Install the 'node-fetch' library that our script needs
       - name: Install dependencies
         run: npm install node-fetch@2
 
+      # Step 4: Run the script to fetch news and create/update news.json
       - name: Fetch and process news
-        id: fetch
         run: node ./.github/workflows/fetch-script.js
 
-      - name: Commit and push if there are changes
-        run: |
-          git config --global user.name 'GitHub Action Bot'
-          git config --global user.email 'action@github.com'
-          git add news.json
-          # Only commit and push if there are actual changes
-          if ! git diff --staged --quiet; then
-            git commit -m "Update live news feed"
-            git push
-          else
-            echo "No changes to news.json, skipping commit."
-          fi
+      # Step 5: Use the specialist bot to commit the file
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "BOT: Update live news feed"
+          file_pattern: news.json
