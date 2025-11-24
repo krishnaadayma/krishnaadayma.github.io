@@ -365,6 +365,67 @@
         font-style: italic;
     }
 
+    /* Cost Breakdown Visual */
+    .cost-breakdown {
+        background: var(--bg-secondary);
+        padding: var(--space-lg);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-color);
+        margin: var(--space-md) 0;
+    }
+
+    .cost-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-sm);
+        margin: var(--space-xs) 0;
+        background: var(--bg-tertiary);
+        border-radius: var(--radius-sm);
+        border-left: 4px solid var(--accent-primary);
+    }
+
+    .cost-label {
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+
+    .cost-value {
+        color: var(--accent-secondary);
+        font-weight: bold;
+    }
+
+    .total-cost {
+        background: var(--bg-primary);
+        border-left-color: var(--accent-warning);
+        font-size: var(--text-lg);
+        margin-top: var(--space-md);
+    }
+
+    /* JSON Visual */
+    .json-visual {
+        background: var(--bg-primary);
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        font-family: 'Courier New', monospace;
+        font-size: var(--text-sm);
+        color: var(--text-primary);
+        line-height: 1.4;
+    }
+
+    .json-key {
+        color: var(--accent-primary);
+    }
+
+    .json-string {
+        color: var(--accent-secondary);
+    }
+
+    .json-number {
+        color: var(--accent-warning);
+    }
+
     /* Section spacing */
     section {
         margin: var(--space-2xl) 0;
@@ -520,12 +581,13 @@
             <h2>Usage Examples</h2>
             
             <div class="feature-grid">
+                <!-- Run Demo Scenarios -->
                 <div class="feature-card">
                     <h3>🚀 Run Demo Scenarios</h3>
                     <div class="command-example">
                         $ python trade_compliance.py
                     </div>
-                    <div class="visual-output" style="margin-top: var(--space-md); font-size: var(--text-xs);">
+                    <div class="visual-output" style="margin-top: var(--space-md); font-size: var(--text-xs); height: 200px; overflow-y: auto;">
 🌍 INTERNATIONAL TRADE COMPLIANCE SYSTEM
 ========================================
 
@@ -538,66 +600,87 @@ SCENARIO 2: Italy → India (Pharmaceuticals)
 • Shipment Value: $20,000
 • Total Cost: $24,160
 • Clearance: 28 hours
+
+SCENARIO 3: India → Italy (Machinery)
+• Shipment Value: $50,000
+• Total Cost: $59,800
+• Clearance: 42 hours
                     </div>
                     <p class="command-desc">Executes pre-configured demo scenarios with formatted output</p>
                 </div>
                 
+                <!-- Calculate Specific Scenario -->
                 <div class="feature-card">
                     <h3>📊 Calculate Specific Scenario</h3>
                     <div class="command-example">
-                        $ python trade_compliance.py --destination india \<br>
-                        &nbsp;&nbsp;--category pharmaceuticals --value 15000 --shipping 600
+                        $ python trade_compliance.py --destination india --category pharmaceuticals --value 15000 --shipping 600
                     </div>
-                    <div class="visual-output" style="margin-top: var(--space-md); font-size: var(--text-xs);">
-🌍 TRADE COMPLIANCE CALCULATION
-================================
-Origin:             INDIA
-Destination:        ITALY
-Product Category:   PHARMACEUTICALS
-
-📊 COST BREAKDOWN:
---------------------------------
-Shipment Value:     $15,000.00
-Import Duty:        $750.00 (5.0%)
-Tax (VAT):          $3,507.00 (22.0%)
-Total Cost:         $19,857.00
-
-⏱️  LOGISTICS:
---------------------------------
-Est. Clearance:     32 hours
+                    <div class="cost-breakdown" style="margin-top: var(--space-md);">
+                        <div class="cost-item">
+                            <span class="cost-label">Shipment Value:</span>
+                            <span class="cost-value">$15,000.00</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">Shipping Cost:</span>
+                            <span class="cost-value">$600.00</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">Import Duty (5.0%):</span>
+                            <span class="cost-value">$750.00</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">Tax (22.0%):</span>
+                            <span class="cost-value">$3,507.00</span>
+                        </div>
+                        <div class="cost-item total-cost">
+                            <span class="cost-label">Total Landed Cost:</span>
+                            <span class="cost-value">$19,857.00</span>
+                        </div>
                     </div>
-                    <p class="command-desc">Calculates costs for specific trade parameters</p>
+                    <div style="margin-top: var(--space-sm); text-align: center;">
+                        <span style="color: var(--accent-primary); font-size: var(--text-sm);">⏱️ Estimated Clearance: 32 hours</span>
+                    </div>
+                    <p class="command-desc">Calculates detailed costs for specific trade parameters</p>
                 </div>
                 
+                <!-- Export Data -->
                 <div class="feature-card">
                     <h3>💾 Export Data</h3>
                     <div class="command-example">
                         $ python trade_compliance.py --json --pretty
                     </div>
-                    <div class="visual-output" style="margin-top: var(--space-md); font-size: var(--text-xs);">
+                    <div class="json-visual" style="margin-top: var(--space-md); height: 200px; overflow-y: auto;">
 {
-  "timestamp": "2024-01-15T10:30:00Z",
-  "origin": "india",
-  "destination": "italy",
-  "product_category": "electronics",
-  "shipment_value": 50000.00,
-  "import_duty": 3000.00,
-  "tax": 11660.00,
-  "total_landed_cost": 64660.00,
-  "currency": "EUR"
+  <span class="json-key">"timestamp"</span>: <span class="json-string">"2024-01-15T10:30:00Z"</span>,
+  <span class="json-key">"origin"</span>: <span class="json-string">"india"</span>,
+  <span class="json-key">"destination"</span>: <span class="json-string">"italy"</span>,
+  <span class="json-key">"product_category"</span>: <span class="json-string">"electronics"</span>,
+  <span class="json-key">"shipment_value"</span>: <span class="json-number">50000.00</span>,
+  <span class="json-key">"shipping_cost"</span>: <span class="json-number">500.00</span>,
+  <span class="json-key">"import_duty"</span>: <span class="json-number">3000.00</span>,
+  <span class="json-key">"tax"</span>: <span class="json-number">11660.00</span>,
+  <span class="json-key">"total_landed_cost"</span>: <span class="json-number">64660.00</span>,
+  <span class="json-key">"currency"</span>: <span class="json-string">"EUR"</span>,
+  <span class="json-key">"clearance_hours"</span>: <span class="json-number">38</span>
 }
                     </div>
-                    <p class="command-desc">Exports structured JSON data for analysis</p>
+                    <p class="command-desc">Exports structured JSON data for analysis and integration</p>
                 </div>
             </div>
 
+            <!-- Batch Processing -->
             <div style="text-align: center; margin-top: var(--space-xl);">
                 <div class="visual-output">
                     <div class="output-header">📋 BATCH PROCESSING</div>
-                    <div class="output-line">$ python trade_compliance.py --batch --csv results.csv</div>
-                    <div class="output-line" style="color: var(--accent-secondary);">→ Generates comprehensive CSV report with multiple scenarios</div>
-                    <div class="output-line" style="color: var(--accent-secondary);">→ Includes all cost components and timing estimates</div>
-                    <div class="output-line" style="color: var(--accent-secondary);">→ Ready for Excel analysis and visualization</div>
+                    <div class="command-example" style="margin: var(--space-md) 0;">
+                        $ python trade_compliance.py --batch --csv results.csv
+                    </div>
+                    <div class="output-section">
+                        <div class="output-line">✅ <span class="output-highlight">Generates comprehensive CSV report</span></div>
+                        <div class="output-line">✅ <span class="output-highlight">Includes all cost components and timing estimates</span></div>
+                        <div class="output-line">✅ <span class="output-highlight">Ready for Excel analysis and visualization</span></div>
+                        <div class="output-line">✅ <span class="output-highlight">Multiple scenarios in single export</span></div>
+                    </div>
                 </div>
             </div>
         </section>
