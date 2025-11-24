@@ -25,7 +25,7 @@
             --gradient-primary: linear-gradient(135deg, #1E1E1E 0%, #121212 100%);
             --gradient-accent: linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%);
             
-            /* Typography scale (unchanged) */
+            /* Typography scale */
             --text-xs: clamp(0.75rem, 2vw, 0.875rem);
             --text-sm: clamp(0.875rem, 2.5vw, 1rem);
             --text-base: clamp(1rem, 3vw, 1.125rem);
@@ -35,7 +35,7 @@
             --text-3xl: clamp(1.875rem, 6vw, 2.25rem);
             --text-4xl: clamp(2.25rem, 8vw, 3rem);
             
-            /* Spacing scale (unchanged) */
+            /* Spacing scale */
             --space-xs: clamp(0.5rem, 1vw, 0.75rem);
             --space-sm: clamp(0.75rem, 2vw, 1rem);
             --space-md: clamp(1rem, 3vw, 1.5rem);
@@ -43,7 +43,7 @@
             --space-xl: clamp(2rem, 6vw, 3rem);
             --space-2xl: clamp(3rem, 8vw, 4rem);
             
-            /* Border radius (unchanged) */
+            /* Border radius */
             --radius-sm: 0.375rem;
             --radius-md: 0.5rem;
             --radius-lg: 0.75rem;
@@ -53,7 +53,7 @@
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.6);
             --shadow-md: 0 4px 6px rgba(0,0,0,0.5);
             --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
-            --shadow-glow: 0 0 20px rgba(160, 160, 160, 0.3); /* Subtle gray glow */
+            --shadow-glow: 0 0 20px rgba(160, 160, 160, 0.3);
             
             /* Animation */
             --transition-fast: 0.2s ease;
@@ -61,581 +61,95 @@
             --transition-slow: 0.5s ease;
         }
 
-        /* Reset and base styles */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
+        /* Base styles */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
         body {
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            background-color: var(--bg-primary);
-            overflow-x: hidden;
-            text-rendering: optimizeSpeed;
+            line-height: 1.6; color: var(--text-secondary); background-color: var(--bg-primary);
+            overflow-x: hidden; text-rendering: optimizeSpeed;
         }
+        :focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
 
-        /* Focus styles for accessibility */
-        :focus-visible {
-            outline: 2px solid var(--accent-primary);
-            outline-offset: 2px;
-        }
-
-        /* Skip link for keyboard navigation */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent-primary);
-            color: black;
-            padding: 8px;
-            text-decoration: none;
-            z-index: 1000;
-            border-radius: var(--radius-sm);
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* Container system */
+        /* Container */
         .container {
-            width: 100%;
-            max-width: min(1200px, 95vw);
-            margin: 0 auto;
-            padding: 0 var(--space-md);
-            position: relative;
-            z-index: 2;
+            width: 100%; max-width: min(1200px, 95vw); margin: 0 auto;
+            padding: 0 var(--space-md); position: relative; z-index: 2;
         }
 
-        /* Typography system */
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--text-primary);
-            line-height: 1.2;
-            font-weight: 700;
-            margin-bottom: var(--space-sm);
-        }
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: var(--space-sm); }
+        h1 { font-size: var(--text-4xl); text-align: center; }
+        h2 { font-size: var(--text-3xl); text-align: center; }
+        h3 { font-size: var(--text-2xl); color: var(--accent-primary); }
+        h4 { font-size: var(--text-xl); }
+        p { color: var(--text-muted); margin-bottom: var(--space-sm); line-height: 1.6; font-size: var(--text-base); max-width: 65ch; }
+        strong { color: var(--text-primary); font-weight: 600; }
 
-        h1 { 
-            font-size: var(--text-4xl);
-            text-align: center;
-        }
-
-        h2 { 
-            font-size: var(--text-3xl);
-            text-align: center;
-        }
-
-        h3 { 
-            font-size: var(--text-2xl);
-            color: var(--accent-primary);
-        }
-
-        h4 { 
-            font-size: var(--text-xl);
-        }
-
-        p {
-            color: var(--text-muted);
-            margin-bottom: var(--space-sm);
-            line-height: 1.6;
-            font-size: var(--text-base);
-            max-width: 65ch;
-        }
-
-        strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Header section */
+        /* Header */
         header {
-            background: var(--gradient-primary);
-            color: var(--text-primary);
-            padding: var(--space-2xl) var(--space-md);
-            text-align: center;
-            margin-bottom: var(--space-xl);
-            position: relative;
-            overflow: hidden;
+            background: var(--gradient-primary); color: var(--text-primary); padding: var(--space-2xl) var(--space-md);
+            text-align: center; margin-bottom: var(--space-xl); position: relative; overflow: hidden;
             border-bottom: 1px solid var(--border-color);
         }
-        
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
+        #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; }
+        .header-content { position: relative; z-index: 1; }
+        .header-content h1 { margin-bottom: var(--space-sm); animation: fadeInUp 0.8s ease-out; }
+        .header-content p { font-size: var(--text-lg); max-width: min(600px, 90vw); margin: 0 auto var(--space-md); color: var(--text-secondary); animation: fadeInUp 0.8s ease-out 0.2s both; }
+        .header-content .btn { animation: fadeInUp 0.8s ease-out 0.4s both; }
 
-        .header-content h1 {
-            margin-bottom: var(--space-sm);
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .header-content p {
-            font-size: var(--text-lg);
-            max-width: min(600px, 90vw);
-            margin: 0 auto var(--space-md);
-            color: var(--text-secondary);
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        .header-content .btn {
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        /* Button system */
+        /* Buttons */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-xs);
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            padding: var(--space-sm) var(--space-lg);
-            text-decoration: none;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            font-size: var(--text-base);
-            border: 1px solid var(--border-color);
-            transition: all var(--transition-fast);
-            cursor: pointer;
-            margin: var(--space-xs);
-            min-width: max-content;
-            position: relative;
-            overflow: hidden;
+            display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); background: var(--bg-tertiary);
+            color: var(--text-primary); padding: var(--space-sm) var(--space-lg); text-decoration: none; border-radius: var(--radius-md);
+            font-weight: 600; font-size: var(--text-base); border: 1px solid var(--border-color); transition: all var(--transition-fast);
+            cursor: pointer; margin: var(--space-xs); min-width: max-content; position: relative; overflow: hidden;
         }
+        .btn:hover, .btn:focus { background: #404040; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-primary { background: var(--gradient-accent); border-color: #888888; color: #121212; font-weight: 700; }
+        .btn-primary:hover, .btn-primary:focus { background: #888888; border-color: #888888; box-shadow: var(--shadow-glow); }
+        .btn-secondary { background: var(--accent-secondary); border-color: var(--accent-secondary); color: var(--text-primary); }
+        .btn-warning { background: transparent; border-color: var(--accent-warning); color: var(--accent-warning); }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transition: left var(--transition-medium);
-        }
+        /* Sections */
+        section { padding: var(--space-2xl) 0; width: 100%; position: relative; }
+        .section-title { text-align: center; margin-bottom: var(--space-xl); color: var(--text-primary); max-width: min(800px, 90vw); margin-left: auto; margin-right: auto; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-primary); margin: var(--space-sm) auto; border-radius: 2px; }
 
-        .btn:hover::before {
-            left: 100%;
-        }
+        /* About Section with Globe */
+        #about { overflow: hidden; }
+        #globe-canvas { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1200px; height: 1200px; z-index: 1; opacity: 0.15; }
+        .about-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: var(--space-xl); max-width: min(1000px, 95vw); margin: 0 auto; }
 
-        .btn:hover,
-        .btn:focus {
-            background: #404040;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+        /* Insights Ticker */
+        #insights-container { max-width: 900px; margin: 0 auto; min-height: 350px; /* Prevent layout shift */ }
+        .insight-item {
+            background: var(--bg-secondary); padding: var(--space-md); margin-bottom: var(--space-sm);
+            border-left: 3px solid var(--accent-primary); opacity: 0;
+            transition: opacity 0.8s ease;
         }
+        .insight-item.visible { opacity: 1; }
+        .insight-item h4 { font-size: var(--text-lg); color: var(--text-primary); margin: 0 0 var(--space-xs) 0; }
+        .insight-item p { font-size: var(--text-sm); margin: 0; max-width: 100%; }
 
-        .btn-primary {
-            background: var(--gradient-accent);
-            border-color: #888888;
-            color: #121212;
-            font-weight: 700;
-        }
-
-        .btn-primary:hover,
-        .btn-primary:focus {
-            background: #888888;
-            border-color: #888888;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .btn-secondary {
-            background: var(--accent-secondary);
-            border-color: var(--accent-secondary);
-            color: var(--text-primary);
-        }
-
-        .btn-secondary:hover,
-        .btn-secondary:focus {
-            background: #3a4556;
-            border-color: #3a4556;
-        }
-
-        .btn-warning {
-            background: transparent;
-            border-color: var(--accent-warning);
-            color: var(--accent-warning);
-        }
-
-        .btn-warning:hover,
-        .btn-warning:focus {
-            background: var(--accent-warning);
-            border-color: var(--accent-warning);
-            color: #121212;
-        }
-
-        /* Section system */
-        section {
-            padding: var(--space-2xl) 0;
-            width: 100%;
-            position: relative;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: var(--space-xl);
-            color: var(--text-primary);
-            max-width: min(800px, 90vw);
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: var(--accent-primary);
-            margin: var(--space-sm) auto;
-            border-radius: 2px;
-        }
-
-        /* About section with 3D Globe */
-        #about {
-            overflow: hidden;
-        }
-        #globe-canvas {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 1200px;
-            height: 1200px;
-            z-index: 1;
-            opacity: 0.15;
-        }
-        .about-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
-            gap: var(--space-xl);
-            align-items: start;
-            max-width: min(1000px, 95vw);
-            margin: 0 auto;
-        }
-
-        /* Live News Feed Section */
-        #news-feed-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .news-item {
-            background: var(--bg-secondary);
-            padding: var(--space-md);
-            margin-bottom: var(--space-sm);
-            border-left: 3px solid var(--accent-primary);
-            transition: all var(--transition-fast);
-        }
-        .news-item:hover {
-            transform: translateX(5px);
-            background: var(--bg-tertiary);
-        }
-        .news-item a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: var(--text-lg);
-        }
-        .news-item p {
-            font-size: var(--text-sm);
-            margin: var(--space-xs) 0 0;
-            max-width: 100%;
-        }
-
-
-        /* Skills section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-            gap: var(--space-lg);
-            max-width: min(1000px, 95vw);
-            margin: 0 auto;
-        }
-
-        .skill-card {
-            background: var(--bg-secondary);
-            padding: var(--space-lg);
-            border-radius: var(--radius-lg);
-            text-align: center;
-            border: 1px solid var(--border-color);
-            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-accent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform var(--transition-medium);
-        }
-
-        .skill-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .skill-card h3 {
-            font-size: var(--text-xl);
-            margin-bottom: var(--space-sm);
-        }
-
-        /* Experience section */
-        .experience-item {
-            background: var(--bg-secondary);
-            padding: var(--space-lg);
-            margin-bottom: var(--space-md);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--accent-primary);
-            max-width: min(900px, 95vw);
-            margin-left: auto;
-            margin-right: auto;
-            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-        }
-
-        .experience-item:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .experience-item h3 {
-            font-size: var(--text-xl);
-            margin-bottom: var(--space-xs);
-        }
-
-        /* Projects section */
-        .project-card {
-            background: var(--bg-secondary);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            margin-bottom: var(--space-xl);
-            border-left: 4px solid var(--accent-primary);
-            border: 1px solid var(--border-color);
-            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-            max-width: min(1000px, 95vw);
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(160, 160, 160, 0.05) 0%, rgba(140, 140, 140, 0.05) 100%);
-            opacity: 0;
-            transition: opacity var(--transition-medium);
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .project-card h3 {
-            font-size: var(--text-2xl);
-            margin-bottom: var(--space-md);
-        }
-
-        .project-features {
-            margin-bottom: var(--space-md);
-        }
-
-        .feature-tag {
-            background: var(--bg-tertiary);
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: 20px;
-            font-size: var(--text-xs);
-            margin-right: var(--space-sm);
-            color: var(--text-muted);
-            display: inline-block;
-            margin-bottom: var(--space-xs);
-            border: 1px solid var(--border-color);
-            transition: all var(--transition-fast);
-        }
-
-        .feature-tag:hover {
-            background: var(--accent-primary);
-            color: #121212;
-            transform: translateY(-2px);
-        }
-
-        .project-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-md);
-        }
-
-        .tech-stack {
-            margin-top: var(--space-md);
-        }
-
-        .tech-tag {
-            background: rgba(160, 160, 160, 0.15);
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: 12px;
-            font-size: var(--text-xs);
-            margin-right: var(--space-sm);
-            color: var(--accent-primary);
-            display: inline-block;
-            transition: transform var(--transition-fast);
-            border: 1px solid var(--accent-primary);
-        }
-
-        .tech-tag:hover {
-            transform: scale(1.05);
-            background: var(--accent-primary);
-            color: #121212;
-        }
-
-        /* Contact section */
-        .contact-info {
-            text-align: center;
-            font-size: var(--text-base);
-            color: var(--text-muted);
-            max-width: min(500px, 95vw);
-            margin: 0 auto;
-        }
-
-        .contact-info p {
-            margin: var(--space-sm) 0;
-            font-size: var(--text-base);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--bg-secondary);
-            color: var(--text-muted);
-            text-align: center;
-            padding: var(--space-xl) 0;
-            border-top: 1px solid var(--border-color);
-            margin-top: var(--space-2xl);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 768px) {
-            body {
-                padding: var(--space-sm);
-            }
-
-            .project-links {
-                flex-direction: column;
-            }
-
-            .project-links .btn {
-                width: 100%;
-                margin: var(--space-xs) 0;
-            }
-
-            .about-content,
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            #globe-canvas {
-                width: 800px;
-                height: 800px;
-                opacity: 0.1;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .btn, .skill-card, .project-card, .experience-item {
-                transition: none;
-            }
-            .btn:hover, .skill-card:hover, .project-card:hover {
-                transform: none;
-            }
-            .btn::before, .skill-card::before, .project-card::before {
-                display: none;
-            }
-            html {
-                scroll-behavior: auto;
-            }
-        }
-
-        /* Print styles */
-        @media print {
-            .btn, .project-links, header, footer, #about, #skills, #news-feed { display: none; }
-        }
+        /* Other sections */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: var(--space-lg); max-width: min(1000px, 95vw); margin: 0 auto; }
+        .skill-card, .experience-item, .project-card { background: var(--bg-secondary); padding: var(--space-lg); border-radius: var(--radius-lg); border: 1px solid var(--border-color); transition: transform var(--transition-medium), box-shadow var(--transition-medium); }
+        .skill-card:hover, .experience-item:hover, .project-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+        .experience-item, .project-card { border-left: 4px solid var(--accent-primary); max-width: min(900px, 95vw); margin: var(--space-md) auto; }
+        .project-links { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: 1rem; }
+        
+        /* General Fade-in Animation */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        
+        /* Responsive */
+        @media (max-width: 768px) { #globe-canvas { width: 800px; height: 800px; opacity: 0.1; } }
     </style>
 </head>
 
 <body>
-    <!-- Skip link for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <!-- Header Section -->
     <header>
         <div id="particles-js"></div>
         <div class="container">
@@ -649,7 +163,6 @@
     </header>
 
     <main id="main-content">
-        <!-- About Section -->
         <section id="about">
             <canvas id="globe-canvas"></canvas>
             <div class="container">
@@ -665,204 +178,158 @@
             </div>
         </section>
 
-        <!-- Live News Feed -->
-        <section id="news-feed">
+        <section id="insights">
             <div class="container">
-                <h2 class="section-title">Live Business Feed</h2>
-                <div id="news-feed-container">
-                    <!-- News items will be injected here by JavaScript -->
-                    <p>Loading latest business headlines...</p>
+                <h2 class="section-title">Global Insights Ticker</h2>
+                <div id="insights-container">
+                    <!-- Insights will be injected here by JavaScript -->
                 </div>
             </div>
         </section>
-
-        <!-- Skills Section -->
+        
         <section id="skills">
             <div class="container">
                 <h2 class="section-title">Core Competencies</h2>
                 <div class="skills-grid">
-                    <div class="skill-card fade-in">
-                        <h3>Data Analysis</h3>
-                        <p>Excel, Data Visualization, Business Intelligence</p>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3>Business Strategy</h3>
-                        <p>International Trade, Market Research, Strategic Planning</p>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3>Process Optimization</h3>
-                        <p>Workflow Improvement, Productivity Enhancement</p>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3>Cross-Cultural Communication</h3>
-                        <p>Multilingual: English, Hindi, Italian</p>
-                    </div>
+                    <div class="skill-card fade-in"><h3>Data Analysis</h3><p>Excel, Data Visualization, Business Intelligence</p></div>
+                    <div class="skill-card fade-in"><h3>Business Strategy</h3><p>International Trade, Market Research, Strategic Planning</p></div>
+                    <div class="skill-card fade-in"><h3>Process Optimization</h3><p>Workflow Improvement, Productivity Enhancement</p></div>
+                    <div class="skill-card fade-in"><h3>Cross-Cultural Communication</h3><p>Multilingual: English, Hindi, Italian</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
         <section id="projects">
             <div class="container">
                 <h2 class="section-title">Projects</h2>
-                
                 <div class="project-card fade-in">
                     <h3>🌍 International Trade Compliance System</h3>
                     <p>Python application analyzing trade regulations between Italy and India, including documentation requirements, logistics, and bilateral trade context.</p>
-                    
-                    <div class="project-features">
-                        <span class="feature-tag">Country Trade Data</span>
-                        <span class="feature-tag">Documentation Analysis</span>
-                        <span class="feature-tag">Bilateral Comparison</span>
-                    </div>
-                    
                     <div class="project-links">
                         <a href="projects/trade-compliance/index.html" class="btn btn-primary">View Project</a>
                         <a href="projects/trade-compliance/demo.html" class="btn btn-warning">Interactive Demo</a>
                         <a href="projects/trade-compliance/documentation.html" class="btn btn-secondary">Documentation</a>
                     </div>
-                    
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Data Analysis</span>
-                        <span class="tech-tag">International Business</span>
-                        <span class="tech-tag">Trade Compliance</span>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Experience Section -->
         <section id="experience">
             <div class="container">
                 <h2 class="section-title">Professional Experience</h2>
-                
                 <div class="experience-item fade-in">
                     <h3>HR & Communications Intern</h3>
                     <p><strong>University of Parma</strong> | Mar 2024 - Jun 2024</p>
                     <p>Spearheaded the university's flagship "Open Day" for over 6,000 students, enhancing international recruitment and brand visibility. Developed strategic onboarding programs and optimized internal communication workflows, improving team productivity and engagement.</p>
                 </div>
-                
                 <div class="experience-item fade-in">
                     <h3>Junior Business & Marketing Analyst</h3>
                     <p><strong>Shubh Labh Pvt Ltd.</strong> | May 2024 - Dec 2024</p>
-                    <p>Drove data-driven growth by analyzing marketing channel performance, resulting in an <strong>8% increase</strong> in business reach and customer engagement. Implemented process improvements that enhanced operational efficiency and supported strategic decision-making.</p>
+                    <p>Drove data-driven growth by analyzing marketing channel performance, resulting in an 8% increase in business reach and customer engagement. Implemented process improvements that enhanced operational efficiency and supported strategic decision-making.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact">
-            <div class="container">
+            <div class="container" style="text-align: center;">
                 <h2 class="section-title">Contact</h2>
-                <div class="contact-info fade-in">
-                    <p>Email: krishna.saq@gmail.com</p>
-                    <p>Mobile: +39 375 632 0447</p>
-                    <p>Location: Bologna, Italy</p>
-                    <p>LinkedIn: <a href="https://linkedin.com/in/krishnaadayma" style="color: var(--accent-primary);">linkedin.com/in/krishnaadayma</a></p>
-                </div>
+                <p>Email: krishna.saq@gmail.com</p>
+                <p>Mobile: +39 375 632 0447</p>
+                <p>Location: Bologna, Italy</p>
+                <p>LinkedIn: <a href="https://linkedin.com/in/krishnaadayma" style="color: var(--accent-primary);">linkedin.com/in/krishnaadayma</a></p>
             </div>
         </section>
     </main>
-
-    <!-- Footer -->
+    
     <footer>
         <div class="container">
             <p>&copy; 2024 Krishna Dayma. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Particle.js library -->
+    <!-- Libraries -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
-    <!-- Three.js library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- Main script for animations -->
+    <!-- Main script -->
     <script>
-        // Scroll animation functionality
-        function handleScrollAnimations() {
-            const elements = document.querySelectorAll('.fade-in');
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-        
-        async function fetchNews() {
-            const newsContainer = document.getElementById('news-feed-container');
-            const rssToJsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('http://feeds.reuters.com/reuters/businessNews')}`;
-            const proxyUrl = `https://thingproxy.freeboard.io/fetch/${rssToJsonUrl}`;
-
-            try {
-                const response = await fetch(proxyUrl);
-                if (!response.ok) throw new Error(`Network response was not ok. Status: ${response.status}`);
-                
-                const data = await response.json();
-                
-                if (data.status !== 'ok') throw new Error(`API returned an error: ${data.message || 'Unknown error'}`);
-
-                const articles = data.items.slice(0, 5);
-                
-                newsContainer.innerHTML = '';
-                
-                articles.forEach(article => {
-                    const newsItem = document.createElement('div');
-                    newsItem.className = 'news-item';
-                    newsItem.innerHTML = `
-                        <a href="${article.link}" target="_blank" rel="noopener noreferrer">${article.title}</a>
-                        <p>Reuters - ${new Date(article.pubDate).toLocaleDateString()}</p>
-                    `;
-                    newsContainer.appendChild(newsItem);
-                });
-            } catch (error) {
-                newsContainer.innerHTML = `<p>Could not load live news feed at this time.</p>`;
-                console.error('Error fetching news:', error);
-            }
-        }
-
-        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            handleScrollAnimations();
-            fetchNews();
-            
-            window.addEventListener('scroll', handleScrollAnimations);
-            
-            // Initialize Particles.js
+            // --- Insights Ticker ---
+            const insights = [
+                { title: 'Trend: AI-Driven Logistics', text: 'Analysis shows global supply chains are realizing a 5-10% increase in efficiency through the adoption of AI-driven logistics and predictive analytics platforms.' },
+                { title: 'Market Analysis: Cross-Border E-commerce', text: 'The Southeast Asian cross-border e-commerce market grew by over 25% in the last fiscal year, with mobile commerce being the primary driver.' },
+                { title: 'Projection: Italy-India Trade Relations', text: 'Led by the machinery and pharmaceutical sectors, trade between Italy and India is projected to grow by 15% annually, a significant acceleration.' },
+                { title: 'Data Insight: ESG Investment', text: 'Data indicates that companies with high ESG (Environmental, Social, and Governance) scores are outperforming their peers by 3-5% on average.' },
+                { title: 'Global Shift: Remote Collaboration', text: 'Cross-cultural teams using asynchronous communication tools are reporting a 15% increase in project completion speed compared to traditional models.' },
+                { title: 'Economic Signal: Inflationary Pressures', text: 'Analysis of commodity futures suggests persistent inflationary pressures in the logistics sector, impacting global trade costs through the next two quarters.' }
+            ];
+            const insightsContainer = document.getElementById('insights-container');
+            let currentIndex = 0;
+            const itemsPerPage = 3;
+
+            function updateInsights() {
+                insightsContainer.innerHTML = '';
+                const itemsToShow = [];
+                for (let i = 0; i < itemsPerPage; i++) {
+                    itemsToShow.push(insights[(currentIndex + i) % insights.length]);
+                }
+
+                itemsToShow.forEach((item, i) => {
+                    const insightEl = document.createElement('div');
+                    insightEl.className = 'insight-item';
+                    insightEl.innerHTML = `<h4>${item.title}</h4><p>${item.text}</p>`;
+                    insightsContainer.appendChild(insightEl);
+                    setTimeout(() => insightEl.classList.add('visible'), 100 + i * 150);
+                });
+
+                currentIndex = (currentIndex + itemsPerPage) % insights.length;
+            }
+            if (insightsContainer) {
+                updateInsights();
+                setInterval(updateInsights, 8000); // Rotate insights every 8 seconds
+            }
+
+            // --- General Scroll Animations ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+            // --- Particles.js ---
             particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
 
-            // Initialize Three.js Globe
+            // --- Three.js Globe ---
             const globeCanvas = document.getElementById('globe-canvas');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, globeCanvas.offsetWidth / globeCanvas.offsetHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ canvas: globeCanvas, alpha: true });
-            renderer.setSize(globeCanvas.offsetWidth, globeCanvas.offsetHeight);
-            
-            const geometry = new THREE.SphereGeometry(1.5, 32, 32);
-            const material = new THREE.MeshBasicMaterial({ color: 0xA0A0A0, wireframe: true });
-            const globe = new THREE.Mesh(geometry, material);
-            scene.add(globe);
-            
-            camera.position.z = 2.5;
-            
-            function animate() {
-                requestAnimationFrame(animate);
-                globe.rotation.y += 0.001;
-                renderer.render(scene, camera);
+            if (globeCanvas) {
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, globeCanvas.offsetWidth / globeCanvas.offsetHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ canvas: globeCanvas, alpha: true });
+                renderer.setSize(globeCanvas.offsetWidth, globeCanvas.offsetHeight);
+                const geometry = new THREE.SphereGeometry(1.5, 32, 32);
+                const material = new THREE.MeshBasicMaterial({ color: 0xA0A0A0, wireframe: true });
+                const globe = new THREE.Mesh(geometry, material);
+                scene.add(globe);
+                camera.position.z = 2.5;
+
+                function animate() {
+                    requestAnimationFrame(animate);
+                    globe.rotation.y += 0.001;
+                    renderer.render(scene, camera);
+                }
+                animate();
+
+                new ResizeObserver(() => {
+                    const container = document.getElementById('about');
+                    camera.aspect = container.offsetWidth / container.offsetHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.offsetWidth, container.offsetHeight);
+                }).observe(document.getElementById('about'));
             }
-            animate();
-            
-            window.addEventListener('resize', () => {
-                const container = document.getElementById('about');
-                renderer.setSize(container.offsetWidth, container.offsetHeight);
-                camera.aspect = container.offsetWidth / container.offsetHeight;
-                camera.updateProjectionMatrix();
-            });
         });
     </script>
 </body>
