@@ -9,70 +9,63 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0a0a0a;--card:#101010;--muted:#bfc6cb;--text:#e6eef3;
-      --accent:#0ea5ff;--accent2:#38bdf8;--accent3:#60a5fa;--warn:#ff8a3d;
-      --radius:0.9rem;--gap:1rem;--container-max:1100px;
-      --shadow: 0 8px 30px rgba(2,6,23,0.6);
+    /* ===== EXECUTIVE GRAY PALETTE (Project Page) V2 ===== */
+    :root {
+      --bg-primary: #121212; --bg-secondary: #1E1E1E; --text-primary: #EAEAEA;
+      --text-secondary: #CCCCCC; --text-muted: #999999; --accent-primary: #A0A0A0;
+      --accent-secondary: #4a5568; --border-color: #2C2C2C;
+      --radius: 0.9rem; --shadow: 0 8px 30px rgba(0,0,0,0.5);
     }
-    *{box-sizing:border-box}
+    
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     body{
-      margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background:linear-gradient(180deg,#07080a 0%, #0f1113 100%);
-      color:var(--text);line-height:1.5;padding:36px;
-      -webkit-font-smoothing:antialiased;
+      margin:0; font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+      color: var(--text-secondary); line-height: 1.5; padding: 36px;
+      -webkit-font-smoothing: antialiased;
     }
-    .container{max-width:var(--container-max);margin:0 auto;padding:0 18px}
+    .container{ max-width: 1100px; margin: 0 auto; padding: 0 18px; }
+    
     header{
-      background:linear-gradient(135deg,#0f1724 0%, #111827 100%);
-      border-radius:1.2rem;padding:36px;border:1px solid rgba(255,255,255,0.03);
-      margin-bottom:28px;text-align:center;box-shadow:var(--shadow);
+      background: linear-gradient(135deg, #1E1E1E 0%, #121212 100%);
+      border-radius: 1.2rem; padding: 36px; border: 1px solid var(--border-color);
+      margin-bottom: 28px; text-align: center; box-shadow: var(--shadow);
     }
-    .header-content{
-      display:flex;flex-direction:column;align-items:center;gap:8px;max-width:980px;margin:0 auto;
-    }
-    .header-content h1{margin:0;font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.02;letter-spacing:-0.5px}
-    .subtitle{margin:0;color:var(--muted);font-size:clamp(1rem,2.5vw,1.125rem)}
-    .tech-tags{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+    .header-content h1{ color: var(--text-primary); margin:0; font-size:clamp(1.6rem, 4vw, 2.6rem); line-height:1.1; }
+    .subtitle{ margin: 8px 0 0; color:var(--text-muted); font-size:clamp(1rem, 2.5vw, 1.125rem); }
+    .tech-tags{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; justify-content:center; }
     .tech-tag{
-      background:linear-gradient(90deg,var(--accent2),var(--accent3));
-      color:#022; padding:6px 12px;border-radius:999px;font-size:.85rem;font-weight:600;
-      box-shadow: 0 4px 14px rgba(14,165,255,0.08);
+      background: rgba(160, 160, 160, 0.15); color: var(--accent-primary);
+      border: 1px solid var(--accent-primary); padding:6px 12px; border-radius:999px; font-size:.85rem; font-weight:600;
     }
 
-    /* controls */
-    .controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:18px}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .95rem;border-radius:.6rem;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--accent);cursor:pointer;text-decoration:none;font-weight:600}
-    .btn-primary{background:linear-gradient(135deg,var(--accent),#0077cc);color:white;border-color:rgba(0,0,0,0.2);box-shadow:0 6px 18px rgba(2,6,23,0.5)}
-    .btn-warning{background:linear-gradient(135deg,#ffb078,#ff8a3d);color:#2d0f00;border-color:rgba(0,0,0,0.1)}
-    .btn-muted{background:transparent;color:var(--muted)}
-    .btn:focus{outline:2px solid rgba(14,165,255,0.12);outline-offset:2px}
+    /* Controls & Buttons */
+    .controls{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:18px; }
+    .btn{
+      display:inline-flex; align-items:center; gap:.5rem; padding:.65rem 1rem; border-radius:.6rem;
+      border:1px solid var(--border-color); background:var(--accent-secondary); color:var(--text-primary);
+      cursor:pointer; text-decoration: none; font-weight: 600; transition: all 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.4); }
+    .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
+    .btn-warning{ background:transparent; border-color: var(--accent-primary); color: var(--accent-primary); }
+    .btn-warning:hover { background: var(--accent-primary); color: var(--bg-primary); }
+    .btn-muted{ background:transparent; color:var(--text-muted); }
+    .btn:focus-visible{ outline:2px solid rgba(160, 160, 160, 0.2); outline-offset:2px; }
 
-    /* layout */
-    .grid{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start}
-    @media (max-width:980px){.grid{grid-template-columns:1fr}}
-    .card{background:var(--card);padding:20px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.02)}
-    h2{margin:0 0 12px 0}
-    label{display:block;color:var(--text);margin-bottom:6px;font-weight:700}
-    input[type=number],select{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);font-size:1rem}
-    .calculator-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    @media (max-width:600px){.calculator-grid{grid-template-columns:1fr}}
-    .result-pre{background:linear-gradient(180deg,#061018,#08131a);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);color:var(--text);font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;white-space:pre-wrap;min-height:120px}
-    .small{font-size:.95rem;color:var(--muted)}
-    footer{margin-top:28px;text-align:center;color:var(--muted)}
-
-    /* nice separators */
-    .muted-sep{height:1px;background:linear-gradient(90deg,transparent,#1a2936,transparent);margin:18px 0;border-radius:2px}
-
-    /* code toggle */
-    .code-toggle{margin-top:8px}
-    .code-toggle button{font-size:.9rem}
-    .cli-sample{margin-top:10px;background:linear-gradient(180deg,#061018,#08121a);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);color:var(--muted);font-family:ui-monospace,monospace;display:none}
-
-    /* aside extras */
-    .aside-actions{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-    .outline-btn{background:transparent;border:1px dashed rgba(255,255,255,0.03);padding:10px;border-radius:8px;color:var(--muted)}
-
+    /* Layout */
+    .grid{ display:grid; grid-template-columns:1fr 420px; gap:28px; align-items:start; }
+    @media (max-width:980px){ .grid{grid-template-columns:1fr} }
+    .card{ background:var(--bg-secondary); padding:28px; border-radius:var(--radius); border:1px solid var(--border-color); }
+    h2{ margin:0 0 1rem 0; color: var(--accent-primary); }
+    label{ display:block; color:var(--text-primary); margin-bottom:6px; font-weight:700; }
+    input[type=number], select{ width:100%; padding:12px; border-radius:10px; border:1px solid var(--border-color); background:var(--bg-primary); color:var(--text-primary); font-size:1rem; }
+    .calculator-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
+    @media (max-width:600px){ .calculator-grid{grid-template-columns:1fr} }
+    .result-pre{ background:var(--bg-primary); padding:14px; border-radius:10px; border:1px solid var(--border-color); color:var(--text-secondary); font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .small-text{ font-size:.95rem; color:var(--text-muted); }
+    .muted-sep{ height:1px; background:linear-gradient(90deg,transparent, var(--border-color),transparent); margin:18px 0; border-radius:2px; }
+    footer{ margin-top:28px; text-align:center; color:var(--text-muted); }
   </style>
 </head>
 <body>
@@ -80,18 +73,17 @@
     <header>
       <div class="header-content" role="banner">
         <h1>🌍 International Trade Compliance System</h1>
-        <p class="subtitle">Polished demo — Italy ↔ India trade cost calculator (Python & JS)</p>
+        <p class="subtitle">A Polished Demo for Italy ↔ India Trade Cost Calculation</p>
         <div class="tech-tags" aria-hidden="true">
           <span class="tech-tag">Python</span>
           <span class="tech-tag">JavaScript</span>
           <span class="tech-tag">Data Analysis</span>
           <span class="tech-tag">Trade Compliance</span>
         </div>
-
         <div class="controls" aria-hidden="true">
-          <a class="btn btn-muted" href="documentation.html" title="Documentation">📄 Documentation</a>
-          <a class="btn btn-primary" href="demo.html" title="Interactive demo">📊 Interactive Demo</a>
-          <a class="btn" id="download-py" href="trade_compliance.py" download title="Download Python">💾 Download Python</a>
+            <a class="btn btn-muted" href="../index.html" title="Back to Home">🏠 Back to Home</a>
+            <a class="btn btn-primary" href="demo.html" title="Interactive demo">📊 Interactive Demo</a>
+            <a class="btn" href="trade_compliance.py" download title="Download Python">💾 Download Python</a>
         </div>
       </div>
     </header>
@@ -99,8 +91,7 @@
     <main class="grid" role="main">
       <section class="card" aria-labelledby="calculator-heading">
         <h2 id="calculator-heading">🔄 Trade Cost Calculator</h2>
-
-        <form onsubmit="return false;" class="calculator-grid" aria-describedby="calculator-help" style="margin-bottom:12px">
+        <form onsubmit="return false;" class="calculator-grid" style="margin-bottom:12px">
           <div>
             <label for="destination">Destination</label>
             <select id="destination" aria-label="Destination country">
@@ -136,69 +127,35 @@
           </div>
           <div style="align-self:end;display:flex;gap:10px;flex-wrap:wrap">
             <button class="btn btn-primary" id="calcBtn" type="button">Calculate</button>
-            <button class="btn outline-btn" id="demoBtn" type="button">Run Demo</button>
+            <button class="btn" id="demoBtn" type="button">Run Demo</button>
             <button class="btn btn-warning" id="exportBtn" type="button">Export JSON</button>
           </div>
         </form>
 
         <div id="result" style="display:block" aria-live="polite" aria-atomic="true">
-          <div class="small">Result</div>
+          <div class="small-text">Result</div>
           <pre id="resultPre" class="result-pre" aria-label="Calculation result"></pre>
         </div>
-
         <div class="muted-sep" aria-hidden="true"></div>
-        <div class="small" id="calculator-help">Want to run example commands locally? Use the Documentation link above and download the Python script.</div>
+        <div class="small-text">Want to run this locally? Use the documentation link on the right and download the Python script.</div>
       </section>
 
       <aside class="card" aria-labelledby="python-heading">
-        <h2 id="python-heading">Python Engine (summary)</h2>
-        <p class="small">Download the Python file to run the same calculations on your machine. The script supports CLI, batch demo and JSON/CSV exports.</p>
-
-        <div class="aside-actions">
-          <a class="btn" href="trade_compliance.py" download>💾 Download trade_compliance.py</a>
-          <a class="btn outline-btn" href="documentation.html">📚 Read docs</a>
-        </div>
-
+        <h2 id="python-heading">Python Engine</h2>
+        <p class="small-text">Download the Python file to run the same calculations on your machine. The script supports CLI arguments, batch demos, and JSON/CSV exports.</p>
         <div class="muted-sep" aria-hidden="true"></div>
-
-        <h3 style="margin-top:8px">Quick examples (hidden)</h3>
-        <div class="code-toggle">
-          <button class="btn btn-muted" id="show-cli">Show CLI examples</button>
-          <pre class="cli-sample" id="cli-sample" aria-hidden="true" tabindex="-1">
-(Examples hidden by default)
-Run CLI demo:
-$ python projects/trade-compliance/trade_compliance.py
-
-Single scenario:
-$ python projects/trade-compliance/trade_compliance.py --destination italy --category textiles --value 10000 --shipping 500
-          </pre>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+          <a class="btn" href="trade_compliance.py" download>💾 Download trade_compliance.py</a>
+          <a class="btn btn-muted" href="documentation.html">📚 Read Documentation</a>
         </div>
       </aside>
-
     </main>
 
     <footer>
-      <div class="small">© 2024 Krishna Dayma · Interactive Trade Compliance</div>
+      <div class="small-text">© 2024 Krishna Dayma · Interactive Trade Compliance</div>
     </footer>
   </div>
 
   <script src="app.js" defer></script>
-  <script>
-    // Toggle CLI examples so code isn't visible by default
-    document.addEventListener('DOMContentLoaded', function () {
-      const btn = document.getElementById('show-cli');
-      const pre = document.getElementById('cli-sample');
-      btn.addEventListener('click', () => {
-        const isHidden = pre.style.display === '' || pre.style.display === 'none';
-        pre.style.display = isHidden ? 'block' : 'none';
-        pre.setAttribute('aria-hidden', String(!isHidden));
-        btn.textContent = isHidden ? 'Hide CLI examples' : 'Show CLI examples';
-      });
-
-      // Improve focus: hide the example by default
-      pre.style.display = 'none';
-      pre.setAttribute('aria-hidden', 'true');
-    });
-  </script>
 </body>
 </html>
