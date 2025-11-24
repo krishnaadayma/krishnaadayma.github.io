@@ -52,11 +52,49 @@
         footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: clamp(2rem, 6vw, 3rem) var(--space-md); margin-top: clamp(3rem, 8vw, 4rem); border-top: 1px solid var(--border-color); }
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+        /* --- Google Translate Widget Styling --- */
+#google_translate_element {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    z-index: 1001;
+}
+/* Style the widget itself */
+.goog-te-gadget-simple {
+    background-color: var(--bg-tertiary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 0.5rem !important;
+    cursor: pointer;
+}
+.goog-te-gadget-simple span {
+    color: var(--text-secondary) !important;
+}
+.goog-te-gadget-icon {
+    display: none !important; /* Hide the Google icon */
+}
+/* This is for the dropdown menu that appears */
+.goog-te-menu-frame {
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+.goog-te-menu2 {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+.goog-te-menu2-item-selected .text, .goog-te-menu2-item:hover .text {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+}
+.goog-te-menu2-item .text {
+    color: var(--text-muted) !important;
+}
     </style>
 </head>
 <body>
     <header>
         <div id="particles-js"></div>
+        <div id="google_translate_element"></div>
         <div class="container"><div class="header-content"><h1>Krishna Dayma</h1><p>International Business & Data Analyst</p><p>Data-Driven Strategies | Cross-Cultural Communication | Process Optimization</p><a href="#contact" class="btn btn-primary">Get In Touch</a></div></div>
     </header>
 
@@ -209,7 +247,21 @@
     }
 });
     </script>
+    ... all your other scripts ...
+
+    <!-- ADD THESE TWO SCRIPT BLOCKS -->
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'it,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- END OF ADDITION -->
+
 </body>
 </html>
+</body>
+</html>
+
 
 
