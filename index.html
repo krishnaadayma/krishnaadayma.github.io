@@ -9,102 +9,67 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK ===== */
+        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK V2 ===== */
         :root {
-            /* Executive Gray Color System */
-            --bg-primary: #121212; /* Deep charcoal */
-            --bg-secondary: #1E1E1E; /* Lighter charcoal for cards */
-            --bg-tertiary: #2a2a2a;
-            --text-primary: #EAEAEA; /* Soft, elegant off-white */
-            --text-secondary: #CCCCCC;
-            --text-muted: #999999;
-            --accent-primary: #A0A0A0; /* Crisp executive gray */
-            --accent-secondary: #4a5568; /* Muted slate */
-            --accent-warning: #888888;
-            --border-color: #2C2C2C; /* Dark, subtle border */
+            /* Color System */
+            --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
+            --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
+            --accent-primary: #A0A0A0; --accent-secondary: #4a5568; --accent-warning: #888888;
+            --border-color: #2C2C2C;
             --gradient-primary: linear-gradient(135deg, #1E1E1E 0%, #121212 100%);
             --gradient-accent: linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%);
             
-            /* Typography scale */
-            --text-xs: clamp(0.75rem, 2vw, 0.875rem);
-            --text-sm: clamp(0.875rem, 2.5vw, 1rem);
-            --text-base: clamp(1rem, 3vw, 1.125rem);
-            --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
-            --text-xl: clamp(1.25rem, 4vw, 1.5rem);
-            --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
-            --text-3xl: clamp(1.875rem, 6vw, 2.25rem);
-            --text-4xl: clamp(2.25rem, 8vw, 3rem);
+            /* Typography Scale */
+            --text-xs: clamp(0.75rem, 2vw, 0.875rem); --text-sm: clamp(0.875rem, 2.5vw, 1rem);
+            --text-base: clamp(1rem, 3vw, 1.125rem); --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
+            --text-xl: clamp(1.25rem, 4vw, 1.5rem); --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
+            --text-3xl: clamp(1.875rem, 6vw, 2.25rem); --text-4xl: clamp(2.25rem, 8vw, 3rem);
             
-            /* Spacing scale */
-            --space-xs: clamp(0.5rem, 1vw, 0.75rem);
-            --space-sm: clamp(0.75rem, 2vw, 1rem);
-            --space-md: clamp(1rem, 3vw, 1.5rem);
-            --space-lg: clamp(1.5rem, 4vw, 2rem);
-            --space-xl: clamp(2rem, 6vw, 3rem);
-            --space-2xl: clamp(3rem, 8vw, 4rem);
+            /* Spacing Scale */
+            --space-xs: clamp(0.5rem, 1vw, 0.75rem); --space-sm: clamp(0.75rem, 2vw, 1rem);
+            --space-md: clamp(1rem, 3vw, 1.5rem); --space-lg: clamp(1.5rem, 4vw, 2rem);
+            --space-xl: clamp(2rem, 6vw, 3rem); --space-2xl: clamp(3rem, 8vw, 4rem);
             
-            /* Border radius */
-            --radius-sm: 0.375rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            
-            /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.6);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.5);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+            /* Border Radius & Shadows */
+            --radius-md: 0.5rem; --radius-lg: 0.75rem;
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.5); --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
             --shadow-glow: 0 0 20px rgba(160, 160, 160, 0.3);
-            
-            /* Animation */
-            --transition-fast: 0.2s ease;
-            --transition-medium: 0.3s ease;
-            --transition-slow: 0.5s ease;
+            --transition-fast: 0.2s ease; --transition-medium: 0.3s ease;
         }
 
-        /* Base styles */
+        /* Base Styles */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; font-size: 16px; }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6; color: var(--text-secondary); background-color: var(--bg-primary);
-            overflow-x: hidden; text-rendering: optimizeSpeed;
-        }
+        body { font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; color: var(--text-secondary); background-color: var(--bg-primary); overflow-x: hidden; text-rendering: optimizeSpeed; }
         :focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
 
-        /* Container */
-        .container {
-            width: 100%; max-width: min(1200px, 95vw); margin: 0 auto;
-            padding: 0 var(--space-md); position: relative; z-index: 2;
+        /* Accessibility: Skip Link */
+        .skip-link {
+            position: absolute; left: 1rem; transform: translateY(-150%);
+            background: var(--accent-primary); color: #121212; padding: var(--space-sm);
+            text-decoration: none; z-index: 9999; border-radius: var(--radius-md);
+            font-weight: 600; transition: transform 0.3s ease-in-out;
         }
+        .skip-link:focus { transform: translateY(1rem); }
 
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: var(--space-sm); }
+        /* Layout & Typography */
+        .container { width: 100%; max-width: min(1200px, 95vw); margin: 0 auto; padding: 0 var(--space-md); position: relative; z-index: 2; }
+        h1, h2, h3, h4 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: var(--space-sm); }
         h1 { font-size: var(--text-4xl); text-align: center; }
         h2 { font-size: var(--text-3xl); text-align: center; }
         h3 { font-size: var(--text-2xl); color: var(--accent-primary); }
         h4 { font-size: var(--text-xl); }
         p { color: var(--text-muted); margin-bottom: var(--space-sm); line-height: 1.6; font-size: var(--text-base); max-width: 65ch; }
-        strong { color: var(--text-primary); font-weight: 600; }
 
         /* Header */
-        header {
-            background: var(--gradient-primary); color: var(--text-primary); padding: var(--space-2xl) var(--space-md);
-            text-align: center; margin-bottom: var(--space-xl); position: relative; overflow: hidden;
-            border-bottom: 1px solid var(--border-color);
-        }
+        header { background: var(--gradient-primary); color: var(--text-primary); padding: var(--space-2xl) var(--space-md); text-align: center; margin-bottom: var(--space-xl); position: relative; overflow: hidden; border-bottom: 1px solid var(--border-color); }
         #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; }
-        .header-content { position: relative; z-index: 1; }
-        .header-content h1 { margin-bottom: var(--space-sm); animation: fadeInUp 0.8s ease-out; }
-        .header-content p { font-size: var(--text-lg); max-width: min(600px, 90vw); margin: 0 auto var(--space-md); color: var(--text-secondary); animation: fadeInUp 0.8s ease-out 0.2s both; }
-        .header-content .btn { animation: fadeInUp 0.8s ease-out 0.4s both; }
+        .header-content { position: relative; z-index: 1; animation: fadeIn 1s ease-out; }
+        .header-content h1 { margin-bottom: var(--space-sm); }
+        .header-content p { font-size: var(--text-lg); max-width: min(600px, 90vw); margin: 0 auto var(--space-md); color: var(--text-secondary); }
 
         /* Buttons */
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); background: var(--bg-tertiary);
-            color: var(--text-primary); padding: var(--space-sm) var(--space-lg); text-decoration: none; border-radius: var(--radius-md);
-            font-weight: 600; font-size: var(--text-base); border: 1px solid var(--border-color); transition: all var(--transition-fast);
-            cursor: pointer; margin: var(--space-xs); min-width: max-content; position: relative; overflow: hidden;
-        }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); background: var(--bg-tertiary); color: var(--text-primary); padding: var(--space-sm) var(--space-lg); text-decoration: none; border-radius: var(--radius-md); font-weight: 600; font-size: var(--text-base); border: 1px solid var(--border-color); transition: all var(--transition-fast); cursor: pointer; margin: var(--space-xs); }
         .btn:hover, .btn:focus { background: #404040; transform: translateY(-2px); box-shadow: var(--shadow-md); }
         .btn-primary { background: var(--gradient-accent); border-color: #888888; color: #121212; font-weight: 700; }
         .btn-primary:hover, .btn-primary:focus { background: #888888; border-color: #888888; box-shadow: var(--shadow-glow); }
@@ -113,38 +78,38 @@
 
         /* Sections */
         section { padding: var(--space-2xl) 0; width: 100%; position: relative; }
-        .section-title { text-align: center; margin-bottom: var(--space-xl); color: var(--text-primary); max-width: min(800px, 90vw); margin-left: auto; margin-right: auto; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-primary); margin: var(--space-sm) auto; border-radius: 2px; }
+        .section-title { text-align: center; margin-bottom: var(--space-xl); }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-primary); margin: var(--space-sm) auto 0; border-radius: 2px; }
 
-        /* About Section with Globe */
+        /* About Section & Globe */
         #about { overflow: hidden; }
-        #globe-canvas { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1200px; height: 1200px; z-index: 1; opacity: 0.15; }
+        #globe-canvas { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1200px; height: 1200px; z-index: 1; opacity: 0.1; }
         .about-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: var(--space-xl); max-width: min(1000px, 95vw); margin: 0 auto; }
 
         /* Insights Ticker */
-        #insights-container { max-width: 900px; margin: 0 auto; min-height: 350px; /* Prevent layout shift */ }
-        .insight-item {
-            background: var(--bg-secondary); padding: var(--space-md); margin-bottom: var(--space-sm);
-            border-left: 3px solid var(--accent-primary); opacity: 0;
-            transition: opacity 0.8s ease;
-        }
+        #insights-container { max-width: 900px; margin: 0 auto; min-height: 380px; }
+        .insight-item { background: var(--bg-secondary); padding: var(--space-md); margin-bottom: var(--space-sm); border-left: 3px solid var(--accent-primary); opacity: 0; transition: opacity 0.8s ease; }
         .insight-item.visible { opacity: 1; }
         .insight-item h4 { font-size: var(--text-lg); color: var(--text-primary); margin: 0 0 var(--space-xs) 0; }
         .insight-item p { font-size: var(--text-sm); margin: 0; max-width: 100%; }
 
-        /* Other sections */
+        /* Cards & Items */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: var(--space-lg); max-width: min(1000px, 95vw); margin: 0 auto; }
-        .skill-card, .experience-item, .project-card { background: var(--bg-secondary); padding: var(--space-lg); border-radius: var(--radius-lg); border: 1px solid var(--border-color); transition: transform var(--transition-medium), box-shadow var(--transition-medium); }
-        .skill-card:hover, .experience-item:hover, .project-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+        .card { background: var(--bg-secondary); padding: var(--space-lg); border-radius: var(--radius-lg); border: 1px solid var(--border-color); transition: transform var(--transition-medium), box-shadow var(--transition-medium); }
+        .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
         .experience-item, .project-card { border-left: 4px solid var(--accent-primary); max-width: min(900px, 95vw); margin: var(--space-md) auto; }
         .project-links { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: 1rem; }
         
+        /* Footer */
+        footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: var(--space-xl) var(--space-md); margin-top: var(--space-2xl); border-top: 1px solid var(--border-color); }
+        
         /* General Fade-in Animation */
-        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
         /* Responsive */
-        @media (max-width: 768px) { #globe-canvas { width: 800px; height: 800px; opacity: 0.1; } }
+        @media (max-width: 768px) { #globe-canvas { width: 800px; height: 800px; opacity: 0.08; } }
     </style>
 </head>
 
@@ -191,10 +156,10 @@
             <div class="container">
                 <h2 class="section-title">Core Competencies</h2>
                 <div class="skills-grid">
-                    <div class="skill-card fade-in"><h3>Data Analysis</h3><p>Excel, Data Visualization, Business Intelligence</p></div>
-                    <div class="skill-card fade-in"><h3>Business Strategy</h3><p>International Trade, Market Research, Strategic Planning</p></div>
-                    <div class="skill-card fade-in"><h3>Process Optimization</h3><p>Workflow Improvement, Productivity Enhancement</p></div>
-                    <div class="skill-card fade-in"><h3>Cross-Cultural Communication</h3><p>Multilingual: English, Hindi, Italian</p></div>
+                    <div class="card fade-in"><h3>Data Analysis</h3><p>Excel, Data Visualization, Business Intelligence</p></div>
+                    <div class="card fade-in"><h3>Business Strategy</h3><p>International Trade, Market Research, Strategic Planning</p></div>
+                    <div class="card fade-in"><h3>Process Optimization</h3><p>Workflow Improvement, Productivity Enhancement</p></div>
+                    <div class="card fade-in"><h3>Cross-Cultural Communication</h3><p>Multilingual: English, Hindi, Italian</p></div>
                 </div>
             </div>
         </section>
@@ -202,7 +167,7 @@
         <section id="projects">
             <div class="container">
                 <h2 class="section-title">Projects</h2>
-                <div class="project-card fade-in">
+                <div class="card project-card fade-in">
                     <h3>🌍 International Trade Compliance System</h3>
                     <p>Python application analyzing trade regulations between Italy and India, including documentation requirements, logistics, and bilateral trade context.</p>
                     <div class="project-links">
@@ -217,15 +182,15 @@
         <section id="experience">
             <div class="container">
                 <h2 class="section-title">Professional Experience</h2>
-                <div class="experience-item fade-in">
+                <div class="card experience-item fade-in">
                     <h3>HR & Communications Intern</h3>
                     <p><strong>University of Parma</strong> | Mar 2024 - Jun 2024</p>
-                    <p>Spearheaded the university's flagship "Open Day" for over 6,000 students, enhancing international recruitment and brand visibility. Developed strategic onboarding programs and optimized internal communication workflows, improving team productivity and engagement.</p>
+                    <p>Spearheaded the university's flagship "Open Day" for over 6,000 students, enhancing international recruitment and brand visibility.</p>
                 </div>
-                <div class="experience-item fade-in">
+                <div class="card experience-item fade-in">
                     <h3>Junior Business & Marketing Analyst</h3>
                     <p><strong>Shubh Labh Pvt Ltd.</strong> | May 2024 - Dec 2024</p>
-                    <p>Drove data-driven growth by analyzing marketing channel performance, resulting in an 8% increase in business reach and customer engagement. Implemented process improvements that enhanced operational efficiency and supported strategic decision-making.</p>
+                    <p>Drove data-driven growth by analyzing marketing channel performance, resulting in an 8% increase in business reach and customer engagement.</p>
                 </div>
             </div>
         </section>
@@ -233,10 +198,10 @@
         <section id="contact">
             <div class="container" style="text-align: center;">
                 <h2 class="section-title">Contact</h2>
-                <p>Email: krishna.saq@gmail.com</p>
-                <p>Mobile: +39 375 632 0447</p>
-                <p>Location: Bologna, Italy</p>
-                <p>LinkedIn: <a href="https://linkedin.com/in/krishnaadayma" style="color: var(--accent-primary);">linkedin.com/in/krishnaadayma</a></p>
+                <p style="margin-left: auto; margin-right: auto;">Email: krishna.saq@gmail.com</p>
+                <p style="margin-left: auto; margin-right: auto;">Mobile: +39 375 632 0447</p>
+                <p style="margin-left: auto; margin-right: auto;">Location: Bologna, Italy</p>
+                <p style="margin-left: auto; margin-right: auto;">LinkedIn: <a href="https://linkedin.com/in/krishnaadayma" style="color: var(--accent-primary);">linkedin.com/in/krishnaadayma</a></p>
             </div>
         </section>
     </main>
@@ -264,40 +229,32 @@
                 { title: 'Economic Signal: Inflationary Pressures', text: 'Analysis of commodity futures suggests persistent inflationary pressures in the logistics sector, impacting global trade costs through the next two quarters.' }
             ];
             const insightsContainer = document.getElementById('insights-container');
-            let currentIndex = 0;
-            const itemsPerPage = 3;
-
-            function updateInsights() {
-                insightsContainer.innerHTML = '';
-                const itemsToShow = [];
-                for (let i = 0; i < itemsPerPage; i++) {
-                    itemsToShow.push(insights[(currentIndex + i) % insights.length]);
-                }
-
-                itemsToShow.forEach((item, i) => {
-                    const insightEl = document.createElement('div');
-                    insightEl.className = 'insight-item';
-                    insightEl.innerHTML = `<h4>${item.title}</h4><p>${item.text}</p>`;
-                    insightsContainer.appendChild(insightEl);
-                    setTimeout(() => insightEl.classList.add('visible'), 100 + i * 150);
-                });
-
-                currentIndex = (currentIndex + itemsPerPage) % insights.length;
-            }
             if (insightsContainer) {
+                let currentIndex = 0;
+                const itemsPerPage = 3;
+
+                function updateInsights() {
+                    insightsContainer.innerHTML = '';
+                    for (let i = 0; i < itemsPerPage; i++) {
+                        const item = insights[(currentIndex + i) % insights.length];
+                        const insightEl = document.createElement('div');
+                        insightEl.className = 'insight-item';
+                        insightEl.innerHTML = `<h4>${item.title}</h4><p>${item.text}</p>`;
+                        insightsContainer.appendChild(insightEl);
+                        setTimeout(() => insightEl.classList.add('visible'), 100 + i * 150);
+                    }
+                    currentIndex = (currentIndex + itemsPerPage) % insights.length;
+                }
                 updateInsights();
-                setInterval(updateInsights, 8000); // Rotate insights every 8 seconds
+                setInterval(updateInsights, 8000);
             }
 
-            // --- General Scroll Animations ---
+            // --- Scroll Animations ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
                 });
             }, { threshold: 0.1 });
-
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
             // --- Particles.js ---
@@ -307,12 +264,9 @@
             const globeCanvas = document.getElementById('globe-canvas');
             if (globeCanvas) {
                 const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(75, globeCanvas.offsetWidth / globeCanvas.offsetHeight, 0.1, 1000);
+                const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
                 const renderer = new THREE.WebGLRenderer({ canvas: globeCanvas, alpha: true });
-                renderer.setSize(globeCanvas.offsetWidth, globeCanvas.offsetHeight);
-                const geometry = new THREE.SphereGeometry(1.5, 32, 32);
-                const material = new THREE.MeshBasicMaterial({ color: 0xA0A0A0, wireframe: true });
-                const globe = new THREE.Mesh(geometry, material);
+                const globe = new THREE.Mesh(new THREE.SphereGeometry(1.5, 32, 32), new THREE.MeshBasicMaterial({ color: 0xA0A0A0, wireframe: true }));
                 scene.add(globe);
                 camera.position.z = 2.5;
 
@@ -325,9 +279,10 @@
 
                 new ResizeObserver(() => {
                     const container = document.getElementById('about');
-                    camera.aspect = container.offsetWidth / container.offsetHeight;
+                    const size = Math.min(container.offsetWidth, 1200);
+                    camera.aspect = 1;
                     camera.updateProjectionMatrix();
-                    renderer.setSize(container.offsetWidth, container.offsetHeight);
+                    renderer.setSize(size, size);
                 }).observe(document.getElementById('about'));
             }
         });
