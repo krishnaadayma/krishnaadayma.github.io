@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK V6 (DEFINITIVE) ===== */
+        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK V7 (DEFINITIVE) ===== */
         :root {
             --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
             --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
@@ -51,44 +51,37 @@
         .item-card { border-left: 4px solid var(--accent-primary); max-width: min(900px, 95vw); margin: var(--space-md) auto; text-align: left; padding: var(--space-md); }
         .item-card h3, .item-card p, .item-card ul { text-align: left; margin-left: 0;}
         .project-links { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: 1.5rem; justify-content: flex-start; }
-        .checklist { list-style: none; padding-left: 0; }
-        .checklist li { position: relative; padding-left: 2rem; margin-bottom: 1rem; text-align: left; }
-        .checklist li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-primary); font-weight: 700; font-size: 1.25rem; top: -0.25rem; }
         .live-indicator { display: none; width: 10px; height: 10px; background-color: var(--live-red); border-radius: 50%; margin-right: 12px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); } }
         footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: var(--space-xl) 0; margin-top: var(--space-2xl); border-top: 1px solid var(--border-color); }
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* --- UPGRADED Google Translate Widget Styling V3 (DEFINITIVE) --- */
+        /* --- Google Translate Styling V4 (DEFINITIVE & SIMPLIFIED) --- */
         #google_translate_element {
-            position: fixed; /* LOCKS to viewport, highest layer */
-            top: var(--space-sm);
-            right: var(--space-md);
-            z-index: 9999; /* Highest possible z-index */
+            position: fixed;
+            top: 1rem;
+            right: 1.5rem;
+            z-index: 9999;
         }
         .goog-te-gadget-simple {
-            background-color: transparent !important; border: none !important; padding: 0.5rem !important; cursor: pointer; display: flex !important; align-items: center !important; transition: background-color var(--transition-fast); border-radius: var(--radius-md);
+            background-color: var(--bg-secondary) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: var(--radius-md) !important;
+            padding: 0.5rem !important;
+            cursor: pointer;
         }
-        .goog-te-gadget-simple:hover { background-color: var(--bg-tertiary) !important; }
-        .goog-te-gadget-simple::before {
-            content: ''; display: inline-block; width: 20px; height: 20px; margin-right: 0.5rem;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='2' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: contain; background-repeat: no-repeat; background-position: center; transition: transform var(--transition-fast);
+        .goog-te-gadget-simple span, .goog-te-gadget-simple span a {
+            color: var(--text-secondary) !important;
+            font-weight: 500 !important;
         }
-        .goog-te-gadget-simple:hover::before { transform: scale(1.1); }
-        .goog-te-gadget-simple .goog-te-menu-value span { color: var(--text-secondary) !important; font-weight: 500 !important; font-size: 0.9rem; }
-        .goog-te-gadget-simple .goog-te-menu-value span:hover { color: var(--text-primary) !important; }
-        .goog-te-gadget-icon, .goog-te-menu-value img { display: none !important; }
+        .goog-te-gadget-icon { display: none !important; }
         body > .skiptranslate { display: none !important; }
-        .goog-te-menu-frame { border-radius: var(--radius-lg) !important; box-shadow: var(--shadow-lg) !important; background: var(--bg-secondary) !important; border: 1px solid var(--border-color) !important; }
-        .goog-te-menu2-item .text { color: var(--text-muted) !important; font-weight: 500 !important; }
-        .goog-te-menu2-item-selected .text, .goog-te-menu2-item:hover .text { color: var(--text-primary) !important; font-weight: 600 !important; }
-        body { top: 0 !important; }
+        body { top: 0px !important; } /* Prevents gap */
+        .goog-te-menu-frame { border-radius: var(--radius-lg) !important; box-shadow: var(--shadow-lg) !important; }
     </style>
 </head>
 <body>
-    <!-- WIDGET MOVED HERE TO GUARANTEE IT'S ON TOP -->
     <div id="google_translate_element"></div>
 
     <header>
@@ -161,7 +154,6 @@
         <section id="contact">
             <div class="container">
                 <h2 class="section-title">Get In Touch</h2>
-                <!-- PREMIUM CONTACT SECTION -->
                 <div class="card" style="max-width: 900px; margin: 0 auto; text-align: center;">
                     <p style="text-align: center; margin-left: auto; margin-right: auto; font-size: var(--text-lg);">I am currently seeking new opportunities and am open to collaboration.</p>
                     <p><strong>Email:</strong> <a href="mailto:krishna.saq@gmail.com" style="color: var(--accent-primary);">krishna.saq@gmail.com</a></p>
@@ -172,7 +164,6 @@
         </section>
     </main>
     
-    <!-- FOOTER HTML CORRECTED -->
     <footer>
         <div class="container">
             <p>&copy; 2024 Krishna Dayma. All Rights Reserved.</p>
@@ -245,47 +236,12 @@
             }
         });
     </script>
+    <!-- SIMPLIFIED AND CORRECTED TRANSLATION SCRIPTS -->
     <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'it,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
-    }
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'it,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+        }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    ...
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <!-- ===== DEFINITIVE FIX FOR TRANSLATION DROPDOWN ===== -->
-    <script type="text/javascript">
-        function fixGoogleTranslate() {
-            var googleTranslateElement = document.getElementById('google_translate_element');
-            if (googleTranslateElement) {
-                var select = googleTranslateElement.querySelector('select.goog-te-combo');
-                if (select) {
-                    select.addEventListener('change', function() {
-                        var lang = this.value;
-                        var googtransCookie = getCookie('googtrans');
-                        if (googtransCookie && googtransCookie.slice(-2) !== lang) {
-                           // The widget will handle the change, we just need to ensure the page reloads if it doesn't.
-                           // This is a fallback.
-                        }
-                    });
-                }
-            }
-        }
-    
-        function getCookie(name) {
-            var value = "; " + document.cookie;
-            var parts = value.split("; " + name + "=");
-            if (parts.length == 2) return parts.pop().split(";").shift();
-        }
-    
-        // Run the fix after a short delay to ensure the widget is loaded
-        setTimeout(fixGoogleTranslate, 1000);
-    </script>
-    <!-- ===== END OF FIX ===== -->
-
 </body>
 </html>
-</body>
-</html>
-
