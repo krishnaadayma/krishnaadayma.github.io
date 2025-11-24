@@ -28,42 +28,21 @@
             --shadow-glow: 0 0 20px rgba(160, 160, 160, 0.3);
             --transition-fast: 0.2s ease; --transition-medium: 0.3s ease;
         }
-
-        /* Base Styles */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; font-size: 16px; }
         body { font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; color: var(--text-secondary); background-color: var(--bg-primary); overflow-x: hidden; text-rendering: optimizeSpeed; }
-        :focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
-
-        /* Accessibility: Skip Link */
-        .skip-link { position: absolute; left: 1rem; transform: translateY(-150%); background: var(--accent-primary); color: #121212; padding: var(--space-sm); text-decoration: none; z-index: 9999; border-radius: var(--radius-md); font-weight: 600; transition: transform 0.3s ease-in-out; }
-        .skip-link:focus { transform: translateY(1rem); }
-
-        /* Layout & Typography */
         .container { width: 100%; max-width: min(1200px, 95vw); margin: 0 auto; padding: 0 var(--space-md); position: relative; z-index: 2; }
         h1, h2, h3, h4 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: var(--space-sm); text-align: center;}
-        h1 { font-size: var(--text-4xl); }
-        h2 { font-size: var(--text-3xl); }
-        h3 { font-size: var(--text-2xl); color: var(--accent-primary); }
-        h4 { font-size: var(--text-xl); }
+        h1 { font-size: var(--text-4xl); } h2 { font-size: var(--text-3xl); } h3 { font-size: var(--text-2xl); color: var(--accent-primary); } h4 { font-size: var(--text-xl); }
         p { color: var(--text-muted); margin-bottom: var(--space-sm); line-height: 1.6; font-size: var(--text-base); max-width: 65ch; }
         ul, ol { padding-left: 1.25rem; }
-
-        /* Header */
         header { background: var(--gradient-primary); padding: var(--space-2xl) 0; margin-bottom: var(--space-xl); position: relative; overflow: hidden; border-bottom: 1px solid var(--border-color); }
         #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; }
         .header-content { position: relative; z-index: 1; animation: fadeIn 1s ease-out; text-align: center; }
         .header-content p { margin-left: auto; margin-right: auto; }
-
-        /* Buttons */
         .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--bg-tertiary); color: var(--text-primary); padding: var(--space-sm) var(--space-lg); text-decoration: none; border-radius: var(--radius-md); font-weight: 600; border: 1px solid var(--border-color); transition: all var(--transition-fast); cursor: pointer; }
         .btn:hover, .btn:focus { background: #404040; transform: translateY(-2px); box-shadow: var(--shadow-md); }
         .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
-        .btn-primary:hover, .btn-primary:focus { background: #888888; box-shadow: var(--shadow-glow); }
-        .btn-secondary { background: var(--accent-secondary); border-color: var(--accent-secondary); }
-        .btn-warning { background: transparent; border-color: var(--accent-warning); color: var(--accent-warning); }
-
-        /* Sections & Cards */
         section { padding: var(--space-2xl) 0; width: 100%; position: relative; }
         .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-primary); margin: var(--space-sm) auto 0; border-radius: 2px; }
         .card { background: var(--bg-secondary); padding: var(--space-lg); border-radius: var(--radius-lg); border: 1px solid var(--border-color); transition: transform var(--transition-medium), box-shadow var(--transition-medium); }
@@ -72,30 +51,20 @@
         .item-card { border-left: 4px solid var(--accent-primary); max-width: min(900px, 95vw); margin: var(--space-md) auto; text-align: left; }
         .item-card p, .item-card ul { margin-left: 0; text-align: left; }
         .project-links { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: 1rem; justify-content: flex-start; }
-        
-        /* Language Proficiency */
         .language-item { margin-bottom: 1.5rem; }
         .language-item p { margin-bottom: 0.5rem; font-weight: 600; color: var(--text-primary); }
         .progress-bar-bg { background-color: var(--bg-tertiary); border-radius: 4px; overflow: hidden; height: 1rem; }
         .progress-bar { background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary)); height: 100%; width: 0; border-radius: 4px; transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); }
-
-        /* Certifications & Interests List */
         .checklist { list-style: none; padding-left: 0; }
         .checklist li { position: relative; padding-left: 2rem; margin-bottom: 1rem; text-align: left; }
         .checklist li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-primary); font-weight: 700; font-size: 1.25rem; top: -0.25rem; }
-
-        /* Footer */
         footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: var(--space-xl) var(--space-md); margin-top: var(--space-2xl); border-top: 1px solid var(--border-color); }
         .footer-text { margin: 0 auto; max-width: none; }
-        
-        /* Animations */
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
-
 <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header>
         <div id="particles-js"></div>
         <div class="container"><div class="header-content"><h1>Krishna Dayma</h1><p>International Business & Data Analyst</p><p>Data-Driven Strategies | Cross-Cultural Communication | Process Optimization</p><a href="#contact" class="btn btn-primary">Get In Touch</a></div></div>
@@ -106,8 +75,16 @@
             <canvas id="globe-canvas" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1200px; height: 1200px; z-index: 1; opacity: 0.1;"></canvas>
             <div class="container">
                 <h2 class="section-title">Professional Summary</h2>
-                <div class="grid-container">
-                    <div class="fade-in"><p style="text-align: center; margin: 0 auto;">A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets. Fluent in three languages and equipped with a cross-cultural perspective, I excel at optimizing processes, driving market expansion, and delivering measurable results in dynamic, international environments.</p></div>
+                <div class="grid-container"><div class="fade-in"><p style="text-align: center; margin: 0 auto;">A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets. Fluent in three languages and equipped with a cross-cultural perspective, I excel at optimizing processes, driving market expansion, and delivering measurable results in dynamic, international environments.</p></div></div>
+            </div>
+        </section>
+
+        <section id="insights">
+            <div class="container">
+                <h2 class="section-title">Live Global Insights</h2>
+                <div id="insights-container" class="grid-container">
+                    <!-- Live data will be injected here -->
+                    <p style="text-align:center; margin: 0 auto;">Fetching live global business news...</p>
                 </div>
             </div>
         </section>
@@ -145,41 +122,15 @@
         </section>
 
         <section id="certifications">
-            <div class="container">
-                <h2 class="section-title">Certifications & Advanced Training</h2>
-                <div class="card fade-in">
-                    <ul class="checklist">
-                        <li>Financial accounting and management - Politecnico di Milano</li>
-                        <li>Investment Risk Management - Coursera</li>
-                        <li>Business analysis and project management - Coursera</li>
-                    </ul>
-                </div>
-            </div>
+            <div class="container"><h2 class="section-title">Certifications & Advanced Training</h2><div class="card fade-in"><ul class="checklist"><li>Financial accounting and management - Politecnico di Milano</li><li>Investment Risk Management - Coursera</li><li>Business analysis and project management - Coursera</li></ul></div></div>
         </section>
 
         <section id="languages">
-            <div class="container">
-                <h2 class="section-title">Language Proficiency</h2>
-                <div class="card fade-in">
-                    <div class="language-item"><p>English</p><div class="progress-bar-bg"><div class="progress-bar" data-width="100%"></div></div></div>
-                    <div class="language-item"><p>Hindi</p><div class="progress-bar-bg"><div class="progress-bar" data-width="100%"></div></div></div>
-                    <div class="language-item"><p>Italian</p><div class="progress-bar-bg"><div class="progress-bar" data-width="85%"></div></div></div>
-                </div>
-            </div>
+            <div class="container"><h2 class="section-title">Language Proficiency</h2><div class="card fade-in"><div class="language-item"><p>English</p><div class="progress-bar-bg"><div class="progress-bar" data-width="100%"></div></div></div><div class="language-item"><p>Hindi</p><div class="progress-bar-bg"><div class="progress-bar" data-width="100%"></div></div></div><div class="language-item"><p>Italian</p><div class="progress-bar-bg"><div class="progress-bar" data-width="85%"></div></div></div></div></div>
         </section>
 
         <section id="interests">
-            <div class="container">
-                <h2 class="section-title">Interests & Focus Areas</h2>
-                <div class="card fade-in">
-                    <ul class="checklist">
-                        <li>Market Analysis of Technological Trends</li>
-                        <li>Financial Education & Literacy</li>
-                        <li>Intercultural Networking & Communication</li>
-                        <li>International Business Strategy</li>
-                    </ul>
-                </div>
-            </div>
+            <div class="container"><h2 class="section-title">Interests & Focus Areas</h2><div class="card fade-in"><ul class="checklist"><li>Market Analysis of Technological Trends</li><li>Financial Education & Literacy</li><li>Intercultural Networking & Communication</li><li>International Business Strategy</li></ul></div></div>
         </section>
 
         <section id="contact">
@@ -189,11 +140,8 @@
     
     <footer><div class="container"><p class="footer-text">&copy; 2024 Krishna Dayma. All rights reserved.</p></div></footer>
 
-    <!-- Libraries -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <!-- Main script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const observer = new IntersectionObserver((entries) => {
@@ -208,8 +156,40 @@
 
             document.querySelectorAll('.fade-in, .language-item').forEach(el => observer.observe(el));
             
-            particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
+            // --- LIVE GLOBAL INSIGHTS ---
+            const insightsContainer = document.getElementById('insights-container');
+            const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.reuters.com%2Fbusiness%2Frss';
+            
+            fetch(rssUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'ok' && data.items) {
+                        insightsContainer.innerHTML = ''; // Clear the "fetching" message
+                        const itemsToShow = data.items.slice(0, 4); // Get the first 4 news items
+                        itemsToShow.forEach(item => {
+                            const insightEl = document.createElement('div');
+                            insightEl.className = 'card fade-in';
+                            // Sanitize title and add link
+                            const title = item.title.replace(/<[^>]*>/g, "");
+                            const link = item.link;
+                            insightEl.innerHTML = `
+                                <h4><a href="${link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none;">${title}</a></h4>
+                                <p>Source: Reuters | Published: ${new Date(item.pubDate).toLocaleDateString()}</p>
+                            `;
+                            insightsContainer.appendChild(insightEl);
+                            observer.observe(insightEl);
+                        });
+                    } else {
+                        throw new Error('Failed to fetch news or invalid data format.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching live news:', error);
+                    insightsContainer.innerHTML = '<p style="text-align:center; margin: 0 auto;">Live insights are currently unavailable. Please check back later.</p>';
+                });
 
+            // Particles.js & Three.js Globe (no changes)
+            particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
             const globeCanvas = document.getElementById('globe-canvas');
             if (globeCanvas) {
                 const scene = new THREE.Scene();
