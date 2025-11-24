@@ -1,1263 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trade Compliance Analysis - Italy & India</title>
-    <meta name="description" content="Advanced analytics platform for Italy-India bilateral trade compliance, risk assessment, and cost optimization">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* ===== OPTIMIZED CSS FRAMEWORK ===== */
-        :root {
-            /* Color system */
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --bg-tertiary: #2d2d2d;<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Trade Compliance Analysis - Italy & India</title>
-    <meta name="description" content="Advanced analytics platform for Italy-India bilateral trade compliance, risk assessment, and cost optimization">
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <style>
-        /* ===== OPTIMIZED CSS FRAMEWORK ===== */
-        :root{
-            /* Color system */
-            --bg-primary:#0a0a0a;
-            --bg-secondary:#1a1a1a;
-            --bg-tertiary:#2d2d2d;
-            --text-primary:#ffffff;
-            --text-secondary:#e0e0e0;
-            --text-muted:#b0b0b0;
-            --accent-primary:#007acc;
-            --accent-secondary:#28a745;
-            --accent-warning:#ff6b00;
-            --border-color:#333;
-            --gradient-primary:linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 100%);
-            --gradient-accent:linear-gradient(135deg,#007acc 0%,#005a9e 100%);
-
-            /* Typography scale */
-            --text-xs:clamp(0.75rem,2vw,0.875rem);
-            --text-sm:clamp(0.875rem,2.5vw,1rem);
-            --text-base:clamp(1rem,3vw,1.125rem);
-            --text-lg:clamp(1.125rem,3.5vw,1.25rem);
-            --text-xl:clamp(1.25rem,4vw,1.5rem);
-            --text-2xl:clamp(1.5rem,5vw,1.875rem);
-            --text-3xl:clamp(1.875rem,6vw,2.25rem);
-            --text-4xl:clamp(2.25rem,8vw,3rem);
-
-            /* Spacing scale */
-            --space-xs:clamp(0.5rem,1vw,0.75rem);
-            --space-sm:clamp(0.75rem,2vw,1rem);
-            --space-md:clamp(1rem,3vw,1.5rem);
-            --space-lg:clamp(1.5rem,4vw,2rem);
-            --space-xl:clamp(2rem,6vw,3rem);
-            --space-2xl:clamp(3rem,8vw,4rem);
-
-            /* Border radius */
-            --radius-sm:0.375rem;
-            --radius-md:0.5rem;
-            --radius-lg:0.75rem;
-            --radius-xl:1rem;
-
-            /* Shadows */
-            --shadow-sm:0 1px 2px rgba(0,0,0,0.4);
-            --shadow-md:0 4px 6px rgba(0,0,0,0.3);
-            --shadow-lg:0 10px 15px rgba(0,0,0,0.4);
-            --shadow-glow:0 0 20px rgba(0,122,204,0.3);
-
-            /* Animation */
-            --transition-fast:0.2s ease;
-            --transition-medium:0.3s ease;
-            --transition-slow:0.5s ease;
-        }
-
-        /* Reset and base styles */
-        *,*::before,*::after{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        html{
-            scroll-behavior:smooth;
-            font-size:16px;
-        }
-
-        body{
-            font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-            line-height:1.6;
-            color:var(--text-secondary);
-            background-color:var(--bg-primary);
-            overflow-x:hidden;
-            text-rendering:optimizeSpeed;
-        }
-
-        /* Focus styles for accessibility */
-        :focus-visible{
-            outline:2px solid var(--accent-primary);
-            outline-offset:2px;
-        }
-
-        /* Skip link for keyboard navigation */
-        .skip-link{
-            position:absolute;
-            top:-40px;
-            left:0;
-            background:var(--accent-primary);
-            color:white;
-            padding:8px;
-            text-decoration:none;
-            z-index:1000;
-            border-radius:var(--radius-sm);
-        }
-
-        .skip-link:focus{
-            top:0;
-        }
-
-        /* Container system */
-        .container{
-            width:100%;
-            max-width:min(1200px,95vw);
-            margin:0 auto;
-            padding:0 var(--space-md);
-        }
-
-        /* Typography system */
-        h1,h2,h3,h4,h5,h6{
-            color:var(--text-primary);
-            line-height:1.2;
-            font-weight:700;
-            margin-bottom:var(--space-sm);
-        }
-
-        h1{
-            font-size:var(--text-4xl);
-            text-align:center;
-        }
-
-        h2{
-            font-size:var(--text-3xl);
-            text-align:center;
-        }
-
-        h3{
-            font-size:var(--text-2xl);
-            color:var(--accent-primary);
-        }
-
-        h4{
-            font-size:var(--text-xl);
-        }
-
-        p{
-            color:var(--text-muted);
-            margin-bottom:var(--space-sm);
-            line-height:1.6;
-            font-size:var(--text-base);
-            max-width:65ch;
-        }
-
-        strong{
-            color:var(--text-primary);
-            font-weight:600;
-        }
-
-        /* Header section */
-        header{
-            background:var(--gradient-primary);
-            color:var(--text-primary);
-            padding:var(--space-2xl) var(--space-md);
-            text-align:center;
-            margin-bottom:var(--space-xl);
-            position:relative;
-            overflow:hidden;
-            border-bottom:1px solid var(--border-color);
-        }
-
-        /* NEW: header-content to align icon + text */
-        .header-content{
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:var(--space-md);
-            text-align:center;
-            flex-wrap:wrap;
-        }
-
-        .header-icon{
-            font-size:clamp(2rem,5vw,3rem);
-            line-height:1;
-            display:inline-block;
-        }
-
-        .header-content h1{
-            margin-bottom:var(--space-sm);
-            animation:fadeInUp 0.8s ease-out;
-        }
-
-        .header-content p{
-            font-size:var(--text-lg);
-            max-width:min(600px,90vw);
-            margin:0 auto var(--space-md);
-            color:var(--text-secondary);
-            animation:fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        .header-content .btn{
-            animation:fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        /* Button system */
-        .btn{
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            gap:var(--space-xs);
-            background:var(--bg-tertiary);
-            color:var(--text-primary);
-            padding:var(--space-sm) var(--space-lg);
-            text-decoration:none;
-            border-radius:var(--radius-md);
-            font-weight:600;
-            font-size:var(--text-base);
-            border:1px solid var(--border-color);
-            transition:all var(--transition-fast);
-            cursor:pointer;
-            margin:var(--space-xs);
-            min-width:max-content;
-            position:relative;
-            overflow:hidden;
-        }
-
-        .btn::before{
-            content:'';
-            position:absolute;
-            top:0;
-            left:-100%;
-            width:100%;
-            height:100%;
-            background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);
-            transition:left var(--transition-medium);
-        }
-
-        .btn:hover::before{
-            left:100%;
-        }
-
-        .btn:hover,.btn:focus{
-            background:#404040;
-            transform:translateY(-2px);
-            box-shadow:var(--shadow-md);
-        }
-
-        .btn-primary{
-            background:var(--gradient-accent);
-            border-color:var(--accent-primary);
-        }
-
-        .btn-primary:hover,.btn-primary:focus{
-            background:#005a9e;
-            border-color:#005a9e;
-            box-shadow:var(--shadow-glow);
-        }
-
-        .btn-secondary{
-            background:var(--accent-secondary);
-            border-color:var(--accent-secondary);
-        }
-
-        .btn-secondary:hover,.btn-secondary:focus{
-            background:#1e7e34;
-            border-color:#1e7e34;
-        }
-
-        .btn-warning{
-            background:var(--accent-warning);
-            border-color:var(--accent-warning);
-        }
-
-        .btn-warning:hover,.btn-warning:focus{
-            background:#e05a00;
-            border-color:#e05a00;
-        }
-
-        .btn-outline{
-            background:transparent;
-            color:var(--accent-primary);
-            border-color:var(--accent-primary);
-        }
-
-        .btn-outline:hover,.btn-outline:focus{
-            background:var(--accent-primary);
-            color:white;
-        }
-
-        /* NEW: button icon inline element to keep emoji aligned */
-        .btn .icon{
-            display:inline-block;
-            font-size:1.25rem;
-            line-height:1;
-            margin-right:0.6rem;
-            vertical-align:middle;
-        }
-
-        /* Features grid */
-        .features-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(min(350px,100%),1fr));
-            gap:var(--space-lg);
-            margin-bottom:var(--space-xl);
-        }
-
-        .feature-card{
-            background:var(--bg-secondary);
-            padding:var(--space-xl);
-            border-radius:var(--radius-lg);
-            text-align:center;
-            box-shadow:var(--shadow-md);
-            transition:transform var(--transition-medium),box-shadow var(--transition-medium);
-            border:1px solid var(--border-color);
-            position:relative;
-            overflow:hidden;
-        }
-
-        .feature-card::before{
-            content:'';
-            position:absolute;
-            top:0;
-            left:0;
-            width:100%;
-            height:4px;
-            background:var(--gradient-accent);
-            transform:scaleX(0);
-            transform-origin:left;
-            transition:transform var(--transition-medium);
-        }
-
-        .feature-card:hover::before{
-            transform:scaleX(1);
-        }
-
-        .feature-card:hover{
-            transform:translateY(-8px);
-            box-shadow:var(--shadow-lg);
-        }
-
-        .feature-icon{
-            font-size:3em;
-            margin-bottom:var(--space-md);
-        }
-
-        .feature-card h3{
-            font-size:var(--text-xl);
-            margin-bottom:var(--space-sm);
-        }
-
-        .feature-card p{
-            color:var(--text-muted);
-            margin-bottom:var(--space-md);
-        }
-
-        /* Navigation grid */
-        .navigation{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));
-            gap:var(--space-lg);
-            margin:var(--space-xl) 0;
-        }
-
-        .nav-card{
-            background:var(--bg-secondary);
-            padding:var(--space-lg);
-            border-radius:var(--radius-lg);
-            text-align:center;
-            box-shadow:var(--shadow-md);
-            border:1px solid var(--border-color);
-            transition:transform var(--transition-medium);
-        }
-
-        .nav-card:hover{
-            transform:translateY(-4px);
-            box-shadow:var(--shadow-lg);
-        }
-
-        .nav-card h3{
-            color:var(--accent-primary);
-            margin-bottom:var(--space-sm);
-        }
-
-        /* Example output section */
-        .example-output{
-            background:var(--bg-secondary);
-            padding:var(--space-xl);
-            border-radius:var(--radius-lg);
-            margin:var(--space-xl) 0;
-            box-shadow:var(--shadow-md);
-            border:1px solid var(--border-color);
-        }
-
-        .example-output h2{
-            text-align:center;
-            margin-bottom:var(--space-lg);
-            color:var(--text-primary);
-        }
-
-        .stats-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));
-            gap:var(--space-lg);
-            margin-top:var(--space-lg);
-        }
-
-        .stat-card{
-            background:var(--gradient-accent);
-            color:white;
-            padding:var(--space-lg);
-            border-radius:var(--radius-lg);
-            text-align:center;
-            transition:transform var(--transition-medium);
-        }
-
-        .stat-card:hover{
-            transform:scale(1.05);
-        }
-
-        .stat-number{
-            font-size:var(--text-3xl);
-            font-weight:bold;
-            margin-bottom:var(--space-xs);
-        }
-
-        /* Footer */
-        .footer{
-            text-align:center;
-            padding:var(--space-xl) var(--space-md);
-            color:var(--text-muted);
-            margin-top:var(--space-2xl);
-            border-top:1px solid var(--border-color);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp{
-            from{
-                opacity:0;
-                transform:translateY(20px);
-            }
-            to{
-                opacity:1;
-                transform:translateY(0);
-            }
-        }
-
-        @keyframes fadeIn{
-            from{opacity:0;}
-            to{opacity:1;}
-        }
-
-        /* Scroll animations */
-        .fade-in{
-            opacity:0;
-            transform:translateY(20px);
-            transition:opacity 0.6s ease,transform 0.6s ease;
-        }
-
-        .fade-in.visible{
-            opacity:1;
-            transform:translateY(0);
-        }
-
-        /* Mobile optimizations */
-        @media (max-width:768px){
-            body{padding:var(--space-sm);}
-
-            .features-grid,.navigation{
-                grid-template-columns:1fr;
-            }
-
-            .feature-card,.nav-card{
-                padding:var(--space-lg);
-            }
-
-            /* Reduce motion for better performance */
-            @media (prefers-reduced-motion:reduce){
-                .btn,.feature-card,.nav-card,.stat-card{
-                    transition:none;
-                }
-                .btn:hover,.feature-card:hover,.nav-card:hover,.stat-card:hover{
-                    transform:none;
-                }
-                .btn::before,.feature-card::before{
-                    display:none;
-                }
-                html{scroll-behavior:auto;}
-            }
-        }
-
-        @media (max-width:480px){
-            .container{padding:0 var(--space-sm);}
-            header{padding:var(--space-xl) var(--space-md);}
-            .feature-card,.nav-card{padding:var(--space-md);}
-        }
-
-        /* Print styles */
-        @media print{
-            .btn{display:none;}
-            body{color:#000;background:#fff;}
-            .feature-card,.nav-card,.stat-card{border:1px solid #000;break-inside:avoid;}
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>International Trade Compliance System | Krishna Dayma</title>
+  <meta name="description" content="Interactive demo and calculator for Italy-India trade compliance" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0a0a0a;--card:#1a1a1a;--muted:#b0b0b0;--text:#e0e0e0;
+      --accent:#007acc;--accent2:#28a745;--warn:#ff6b00;
+      --radius:0.75rem;--gap:1rem;
+      --container-max:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:var(--bg);color:var(--text);line-height:1.5;padding:24px;
+    }
+    .container{max-width:var(--container-max);margin:0 auto;padding:0 16px}
+    header{background:linear-gradient(135deg,#1a1a1a,#2d2d2d);border-radius:1rem;padding:32px;border:1px solid #333;margin-bottom:28px;text-align:center}
+    .header-content{display:flex;flex-direction:column;align-items:center;gap:8px;max-width:940px;margin:0 auto}
+    .header-content h1{margin:0;font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.05}
+    .subtitle{margin:0;color:var(--muted);font-size:clamp(1rem,2.5vw,1.125rem)}
+    .tech-tags{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;justify-content:center}
+    .tech-tag{background:var(--accent);color:white;padding:6px 10px;border-radius:999px;font-size:.85rem}
+    /* controls */
+    .controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:18px}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;border-radius:.6rem;border:1px solid #333;background:transparent;color:var(--accent);cursor:pointer;text-decoration:none}
+    .btn-primary{background:linear-gradient(135deg,#007acc,#005a9e);color:white;border-color:#005a9e}
+    .btn-warning{background:linear-gradient(135deg,#ff8a3d,#e05a00);color:white;border-color:#e05a00}
+    /* layout */
+    .grid{display:grid;grid-template-columns:1fr 420px;gap:24px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);border:1px solid #333}
+    h2{margin:0 0 12px 0}
+    label{display:block;color:var(--text);margin-bottom:6px;font-weight:600}
+    input[type=number],select{width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:#0a0a0a;color:var(--text)}
+    .calculator-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media (max-width:600px){.calculator-grid{grid-template-columns:1fr}}
+    .result-pre{background:#0f0f0f;padding:12px;border-radius:8px;border:1px solid #222;color:var(--text);font-family:monospace;white-space:pre-wrap}
+    .small{font-size:.95rem;color:var(--muted)}
+    footer{margin-top:28px;text-align:center;color:var(--muted)}
+  </style>
 </head>
-
 <body>
-    <!-- Skip link for accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <div class="container">
-        <header class="fade-in">
-            <div class="header-content">
-                <span class="header-icon" aria-hidden>🌍</span>
-                <div>
-                    <h1>Trade Compliance Analysis</h1>
-                    <p>Advanced analytics platform for Italy-India bilateral trade compliance, risk assessment, and cost optimization</p>
-                </div>
-            </div>
-        </header>
-
-        <main id="main-content">
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🇮🇹</div>
-                    <h3>Italy Trade Data</h3>
-                    <p>Comprehensive analysis of Italian export-import regulations, tariff structures, and compliance requirements</p>
-                    <a href="demo.html" class="btn btn-primary"><span class="icon">📊</span>Explore Italy Data</a>
-                </div>
-
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🇮🇳</div>
-                    <h3>India Trade Data</h3>
-                    <p>Detailed insights into Indian customs procedures, tax regulations, and import-export documentation</p>
-                    <a href="demo.html" class="btn btn-primary"><span class="icon">📊</span>Explore India Data</a>
-                </div>
-
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">⚖️</div>
-                    <h3>Bilateral Comparison</h3>
-                    <p>Side-by-side analysis of trade compliance requirements between Italy and India</p>
-                    <a href="demo.html" class="btn btn-primary"><span class="icon">📊</span>Compare Markets</a>
-                </div>
-            </div>
-
-            <div class="navigation">
-                <div class="nav-card fade-in">
-                    <h3>📚 Documentation</h3>
-                    <p>Technical specifications and implementation guide</p>
-                    <a href="documentation.html" class="btn btn-outline"><span class="icon">📄</span>View Documentation</a>
-                </div>
-
-                <div class="nav-card fade-in">
-                    <h3>📊 Interactive Dashboard</h3>
-                    <p>Live analytics with real-time data visualization</p>
-                    <a href="demo.html" class="btn btn-outline"><span class="icon">🚀</span>Launch Dashboard</a>
-                </div>
-
-                <div class="nav-card fade-in">
-                    <h3>🧮 Cost Calculator</h3>
-                    <p>Calculate trade compliance costs and optimize expenses</p>
-                    <a href="documentation.html#calculator" class="btn btn-outline"><span class="icon">🧮</span>Open Calculator</a>
-                </div>
-            </div>
-
-            <div class="example-output fade-in">
-                <h2>📈 Key Performance Indicators</h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">87%</div>
-                        <div>Compliance Rate</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">€2.1M</div>
-                        <div>Cost Savings</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">42%</div>
-                        <div>Process Efficiency</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">156</div>
-                        <div>Regulations Tracked</div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <footer class="footer">
-            <div class="container">
-                <p>Trade Compliance Analysis Platform &copy; 2024 | Italy-India Bilateral Trade</p>
-                <p><a href="https://krishnaadayma.github.io/" style="color: var(--accent-primary); text-decoration: none;">← Back to Portfolio</a></p>
-            </div>
-        </footer>
-    </div>
-
-    <script>
-        // Scroll animation functionality
-        function handleScrollAnimations(){
-            const elements = document.querySelectorAll('.fade-in');
-            elements.forEach(element=>{
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                if(elementTop < window.innerHeight - elementVisible){
-                    element.classList.add('visible');
-                }
-            });
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function(){
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-                anchor.addEventListener('click', function(e){
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if(target){
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                });
-            });
-
-            // Initial check for scroll animations
-            handleScrollAnimations();
-
-            // Add scroll event listener for animations
-            window.addEventListener('scroll', handleScrollAnimations);
-        });
-
-        // Load non-critical resources after page load
-        window.addEventListener('load', function(){
-            // Deferred loading place
-        });
-    </script>
-</body>
-</html>
-            --text-primary: #ffffff;
-            --text-secondary: #e0e0e0;
-            --text-muted: #b0b0b0;
-            --accent-primary: #007acc;
-            --accent-secondary: #28a745;
-            --accent-warning: #ff6b00;
-            --border-color: #333;
-            --gradient-primary: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            --gradient-accent: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
-            
-            /* Typography scale */
-            --text-xs: clamp(0.75rem, 2vw, 0.875rem);
-            --text-sm: clamp(0.875rem, 2.5vw, 1rem);
-            --text-base: clamp(1rem, 3vw, 1.125rem);
-            --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
-            --text-xl: clamp(1.25rem, 4vw, 1.5rem);
-            --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
-            --text-3xl: clamp(1.875rem, 6vw, 2.25rem);
-            --text-4xl: clamp(2.25rem, 8vw, 3rem);
-            
-            /* Spacing scale */
-            --space-xs: clamp(0.5rem, 1vw, 0.75rem);
-            --space-sm: clamp(0.75rem, 2vw, 1rem);
-            --space-md: clamp(1rem, 3vw, 1.5rem);
-            --space-lg: clamp(1.5rem, 4vw, 2rem);
-            --space-xl: clamp(2rem, 6vw, 3rem);
-            --space-2xl: clamp(3rem, 8vw, 4rem);
-            
-            /* Border radius */
-            --radius-sm: 0.375rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            
-            /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.3);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.4);
-            --shadow-glow: 0 0 20px rgba(0, 122, 204, 0.3);
-            
-            /* Animation */
-            --transition-fast: 0.2s ease;
-            --transition-medium: 0.3s ease;
-            --transition-slow: 0.5s ease;
-        }
-
-        /* Reset and base styles */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            background-color: var(--bg-primary);
-            overflow-x: hidden;
-            text-rendering: optimizeSpeed;
-        }
-
-        /* Focus styles for accessibility */
-        :focus-visible {
-            outline: 2px solid var(--accent-primary);
-            outline-offset: 2px;
-        }
-
-        /* Skip link for keyboard navigation */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent-primary);
-            color: white;
-            padding: 8px;
-            text-decoration: none;
-            z-index: 1000;
-            border-radius: var(--radius-sm);
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* Container system */
-        .container {
-            width: 100%;
-            max-width: min(1200px, 95vw);
-            margin: 0 auto;
-            padding: 0 var(--space-md);
-        }
-
-        /* Typography system */
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--text-primary);
-            line-height: 1.2;
-            font-weight: 700;
-            margin-bottom: var(--space-sm);
-        }
-
-        h1 { 
-            font-size: var(--text-4xl);
-            text-align: center;
-        }
-
-        h2 { 
-            font-size: var(--text-3xl);
-            text-align: center;
-        }
-
-        h3 { 
-            font-size: var(--text-2xl);
-            color: var(--accent-primary);
-        }
-
-        h4 { 
-            font-size: var(--text-xl);
-        }
-
-        p {
-            color: var(--text-muted);
-            margin-bottom: var(--space-sm);
-            line-height: 1.6;
-            font-size: var(--text-base);
-            max-width: 65ch;
-        }
-
-        strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Header section */
-        header {
-            background: var(--gradient-primary);
-            color: var(--text-primary);
-            padding: var(--space-2xl) var(--space-md);
-            text-align: center;
-            border-radius: var(--radius-xl);
-            margin-bottom: var(--space-xl);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .header h1 {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .header p {
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        /* Button system */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-xs);
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            padding: var(--space-sm) var(--space-lg);
-            text-decoration: none;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            font-size: var(--text-base);
-            border: 1px solid var(--border-color);
-            transition: all var(--transition-fast);
-            cursor: pointer;
-            margin: var(--space-xs);
-            min-width: max-content;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left var(--transition-medium);
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:hover,
-        .btn:focus {
-            background: #404040;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-primary {
-            background: var(--gradient-accent);
-            border-color: var(--accent-primary);
-        }
-
-        .btn-primary:hover,
-        .btn-primary:focus {
-            background: #005a9e;
-            border-color: #005a9e;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .btn-secondary {
-            background: var(--accent-secondary);
-            border-color: var(--accent-secondary);
-        }
-
-        .btn-secondary:hover,
-        .btn-secondary:focus {
-            background: #1e7e34;
-            border-color: #1e7e34;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--accent-primary);
-            border-color: var(--accent-primary);
-        }
-
-        .btn-outline:hover,
-        .btn-outline:focus {
-            background: var(--accent-primary);
-            color: white;
-        }
-
-        /* Features grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
-            gap: var(--space-lg);
-            margin-bottom: var(--space-xl);
-        }
-
-        .feature-card {
-            background: var(--bg-secondary);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-accent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform var(--transition-medium);
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .feature-icon {
-            font-size: 3em;
-            margin-bottom: var(--space-md);
-        }
-
-        .feature-card h3 {
-            font-size: var(--text-xl);
-            margin-bottom: var(--space-sm);
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            margin-bottom: var(--space-md);
-        }
-
-        /* Navigation grid */
-        .navigation {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-            gap: var(--space-lg);
-            margin: var(--space-xl) 0;
-        }
-
-        .nav-card {
-            background: var(--bg-secondary);
-            padding: var(--space-lg);
-            border-radius: var(--radius-lg);
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-            transition: transform var(--transition-medium);
-        }
-
-        .nav-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .nav-card h3 {
-            color: var(--accent-primary);
-            margin-bottom: var(--space-sm);
-        }
-
-        /* Example output section */
-        .example-output {
-            background: var(--bg-secondary);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            margin: var(--space-xl) 0;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-        }
-
-        .example-output h2 {
-            text-align: center;
-            margin-bottom: var(--space-lg);
-            color: var(--text-primary);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
-            gap: var(--space-lg);
-            margin-top: var(--space-lg);
-        }
-
-        .stat-card {
-            background: var(--gradient-accent);
-            color: white;
-            padding: var(--space-lg);
-            border-radius: var(--radius-lg);
-            text-align: center;
-            transition: transform var(--transition-medium);
-        }
-
-        .stat-card:hover {
-            transform: scale(1.05);
-        }
-
-        .stat-number {
-            font-size: var(--text-3xl);
-            font-weight: bold;
-            margin-bottom: var(--space-xs);
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: var(--space-xl) var(--space-md);
-            color: var(--text-muted);
-            margin-top: var(--space-2xl);
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 768px) {
-            body {
-                padding: var(--space-sm);
-            }
-
-            .features-grid,
-            .navigation {
-                grid-template-columns: 1fr;
-            }
-
-            .feature-card,
-            .nav-card {
-                padding: var(--space-lg);
-            }
-
-            /* Reduce motion for better performance */
-            @media (prefers-reduced-motion: reduce) {
-                .btn,
-                .feature-card,
-                .nav-card,
-                .stat-card {
-                    transition: none;
-                }
-                
-                .btn:hover,
-                .feature-card:hover,
-                .nav-card:hover,
-                .stat-card:hover {
-                    transform: none;
-                }
-                
-                .btn::before,
-                .feature-card::before {
-                    display: none;
-                }
-                
-                html {
-                    scroll-behavior: auto;
-                }
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 var(--space-sm);
-            }
-
-            header {
-                padding: var(--space-xl) var(--space-md);
-            }
-
-            .feature-card,
-            .nav-card {
-                padding: var(--space-md);
-            }
-        }
-
-        /* Print styles */
-        @media print {
-            .btn {
-                display: none;
-            }
-            
-            body {
-                color: #000;
-                background: #fff;
-            }
-            
-            .feature-card,
-            .nav-card,
-            .stat-card {
-                border: 1px solid #000;
-                break-inside: avoid;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <!-- Skip link for accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <div class="container">
-        <header class="fade-in">
-            <h1>🌍 Trade Compliance Analysis</h1>
-            <p>Advanced analytics platform for Italy-India bilateral trade compliance, risk assessment, and cost optimization</p>
-        </header>
-
-        <main id="main-content">
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🇮🇹</div>
-                    <h3>Italy Trade Data</h3>
-                    <p>Comprehensive analysis of Italian export-import regulations, tariff structures, and compliance requirements</p>
-                    <a href="demo.html" class="btn btn-primary">Explore Italy Data</a>
-                </div>
-                
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🇮🇳</div>
-                    <h3>India Trade Data</h3>
-                    <p>Detailed insights into Indian customs procedures, tax regulations, and import-export documentation</p>
-                    <a href="demo.html" class="btn btn-primary">Explore India Data</a>
-                </div>
-                
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">⚖️</div>
-                    <h3>Bilateral Comparison</h3>
-                    <p>Side-by-side analysis of trade compliance requirements between Italy and India</p>
-                    <a href="demo.html" class="btn btn-primary">Compare Markets</a>
-                </div>
-            </div>
-
-            <div class="navigation">
-                <div class="nav-card fade-in">
-                    <h3>📚 Documentation</h3>
-                    <p>Technical specifications and implementation guide</p>
-                    <a href="documentation.html" class="btn btn-outline">View Documentation</a>
-                </div>
-                
-                <div class="nav-card fade-in">
-                    <h3>📊 Interactive Dashboard</h3>
-                    <p>Live analytics with real-time data visualization</p>
-                    <a href="demo.html" class="btn btn-outline">Launch Dashboard</a>
-                </div>
-                
-                <div class="nav-card fade-in">
-                    <h3>🧮 Cost Calculator</h3>
-                    <p>Calculate trade compliance costs and optimize expenses</p>
-                    <a href="documentation.html#calculator" class="btn btn-outline">Open Calculator</a>
-                </div>
-            </div>
-
-            <div class="example-output fade-in">
-                <h2>📈 Key Performance Indicators</h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">87%</div>
-                        <div>Compliance Rate</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">€2.1M</div>
-                        <div>Cost Savings</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">42%</div>
-                        <div>Process Efficiency</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">156</div>
-                        <div>Regulations Tracked</div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <footer class="footer">
-            <div class="container">
-                <p>Trade Compliance Analysis Platform &copy; 2024 | Italy-India Bilateral Trade</p>
-                <p><a href="https://krishnaadayma.github.io/" style="color: var(--accent-primary); text-decoration: none;">← Back to Portfolio</a></p>
-            </div>
-        </footer>
-    </div>
-
-    <script>
-        // Scroll animation functionality
-        function handleScrollAnimations() {
-            const elements = document.querySelectorAll('.fade-in');
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-            
-            // Initial check for scroll animations
-            handleScrollAnimations();
-            
-            // Add scroll event listener for animations
-            window.addEventListener('scroll', handleScrollAnimations);
-        });
-
-        // Load non-critical resources after page load
-        window.addEventListener('load', function() {
-            // You can add any deferred loading here
-        });
-    </script>
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <h1>🌍 International Trade Compliance System</h1>
+        <p class="subtitle">Python & JS implementations · Italy ↔ India trade cost calculator</p>
+        <div class="tech-tags" aria-hidden="true">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Data Analysis</span>
+          <span class="tech-tag">Trade Compliance</span>
+        </div>
+        <div class="controls" style="margin-top:16px">
+          <a class="btn" href="documentation.html"><span>📄</span>Documentation</a>
+          <a class="btn btn-primary" href="demo.html"><span>📊</span>Interactive Demo</a>
+          <a class="btn" id="download-py" href="trade_compliance.py" download><span>💾</span>Download Python</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>🔄 Trade Cost Calculator</h2>
+        <div class="calculator-grid" style="margin-bottom:12px">
+          <div>
+            <label for="destination">Destination</label>
+            <select id="destination">
+              <option value="italy">Italy</option>
+              <option value="india">India</option>
+            </select>
+          </div>
+          <div>
+            <label for="origin">Origin</label>
+            <select id="origin">
+              <option value="india">India</option>
+              <option value="italy">Italy</option>
+            </select>
+          </div>
+          <div>
+            <label for="category">Product Category</label>
+            <select id="category">
+              <option value="textiles">Textiles</option>
+              <option value="machinery">Machinery</option>
+              <option value="pharmaceuticals">Pharmaceuticals</option>
+              <option value="automotive">Automotive</option>
+              <option value="food">Food</option>
+              <option value="electronics" selected>Electronics</option>
+            </select>
+          </div>
+          <div>
+            <label for="value">Shipment Value</label>
+            <input id="value" type="number" min="0" value="50000" />
+          </div>
+          <div>
+            <label for="shipping">Shipping Cost</label>
+            <input id="shipping" type="number" min="0" value="500" />
+          </div>
+          <div style="align-self:end;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-primary" id="calcBtn">Calculate</button>
+            <button class="btn" id="demoBtn">Run Demo</button>
+            <button class="btn btn-warning" id="exportBtn">Export JSON</button>
+          </div>
+        </div>
+
+        <div id="result" style="display:block">
+          <div class="small">Result</div>
+          <pre id="resultPre" class="result-pre" aria-live="polite"></pre>
+        </div>
+      </section>
+
+      <aside class="card">
+        <h2>Python Engine (summary)</h2>
+        <p class="small">Download the Python file to run the same calculations on your machine. The Python script supports a CLI, batch demo and JSON/CSV exports.</p>
+        <div style="margin-top:12px">
+          <a class="btn" href="trade_compliance.py" download>💾 Download trade_compliance.py</a>
+        </div>
+
+        <hr style="margin:16px 0;border:none;border-top:1px solid #222">
+
+        <h3 style="margin-top:8px">Quick examples</h3>
+        <div class="small" style="margin-top:8px">
+          Run CLI demo:
+          <div class="result-pre" style="margin-top:8px;font-size:.9rem">$ python trade_compliance.py</div>
+          Single scenario:
+          <div class="result-pre" style="margin-top:8px;font-size:.9rem">$ python trade_compliance.py --destination italy --category textiles --value 10000 --shipping 500</div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="small">© 2024 Krishna Dayma · Interactive Trade Compliance</div>
+    </footer>
+  </div>
+
+  <script src="app.js" defer></script>
 </body>
 </html>
