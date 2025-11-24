@@ -19,14 +19,21 @@
     .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:.6rem;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--accent);text-decoration:none}
     .card{background:var(--card);padding:18px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.02);margin-top:20px}
     .muted{color:var(--muted)}
-    .cli-hidden{display:none;background:linear-gradient(180deg,#061018,#08121a);padding:14px;border-radius:8px;margin-top:10px;border:1px solid rgba(255,255,255,0.02);font-family:ui-monospace,monospace;color:var(--muted)}
+    .vis-wrap{display:flex;flex-direction:column;gap:12px;align-items:center}
+    .vis{width:100%;max-width:880px;background:linear-gradient(180deg,#08101a,#0b1318);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .vis svg{width:100%;height:auto;display:block}
+    .vis-legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;justify-content:center}
+    .vis-legend .item{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;color:var(--muted);font-weight:600;font-size:.9rem}
+    .toggle-btn{background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);padding:8px 12px;border-radius:8px;cursor:pointer}
+    pre.cli-hidden{display:none;background:linear-gradient(180deg,#061018,#08121a);padding:12px;border-radius:8px;color:var(--muted);font-family:ui-monospace,monospace;white-space:pre-wrap}
+    @media (max-width:760px){.vis{padding:10px}}
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>📚 Project Documentation</h1>
-      <p class="subtitle">International Trade Compliance System — Technical docs & usage</p>
+      <p class="subtitle">International Trade Compliance System — Visual docs & usage</p>
       <div style="margin-top:12px">
         <a class="btn" href="index.html">← Back to Project Home</a>
         <a class="btn" href="demo.html">📊 Interactive Demo</a>
@@ -37,48 +44,146 @@
     <main>
       <div class="card">
         <h2>Quick Start</h2>
-        <p class="muted">Run the Python CLI or use the interactive demo in your browser. Code examples are hidden by default — click "Show examples" to reveal.</p>
+        <p class="muted">Run the Python CLI or use the interactive demo in your browser. Examples are available via toggles so the page stays visual-first.</p>
 
         <div style="margin-top:12px">
-          <button id="show-examples" class="btn">Show examples</button>
-          <div id="examples" class="cli-hidden" aria-hidden="true">
-<pre>
+          <button id="show-examples" class="toggle-btn">Show examples</button>
+          <pre id="examples" class="cli-hidden" aria-hidden="true">
 $ python projects/trade-compliance/trade_compliance.py --help
 
 $ python projects/trade-compliance/trade_compliance.py --destination italy --category textiles --value 10000 --shipping 500
 
 $ python projects/trade-compliance/trade_compliance.py --batch --csv results.csv
-</pre>
+          </pre>
+        </div>
+      </div>
+
+      <!-- Implementation Overview (visual) -->
+      <div class="card" id="implementation-overview">
+        <h2>Implementation Overview — Visual</h2>
+        <div class="vis-wrap">
+          <div class="vis" role="img" aria-label="Architecture diagram: Browser loads index.html which uses app.js, and trade_compliance.py provides CLI and export">
+            <svg viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="false" focusable="false">
+              <title>Architecture: index.html ↔ app.js ↔ trade_compliance.py (download)</title>
+              <!-- boxes -->
+              <rect x="40" y="40" width="260" height="120" rx="12" fill="#0f1724" stroke="#19303f" />
+              <text x="170" y="80" text-anchor="middle" fill="#e6eef3" font-size="18" font-weight="700">index.html</text>
+              <text x="170" y="104" text-anchor="middle" fill="#9fb0bd" font-size="13">Interactive UI (browser)</text>
+
+              <rect x="370" y="40" width="260" height="120" rx="12" fill="#071026" stroke="#19303f" />
+              <text x="500" y="80" text-anchor="middle" fill="#e6eef3" font-size="18" font-weight="700">app.js</text>
+              <text x="500" y="104" text-anchor="middle" fill="#9fb0bd" font-size="13">Client model + export</text>
+
+              <rect x="700" y="40" width="260" height="120" rx="12" fill="#071026" stroke="#19303f" />
+              <text x="830" y="80" text-anchor="middle" fill="#e6eef3" font-size="18" font-weight="700">trade_compliance.py</text>
+              <text x="830" y="104" text-anchor="middle" fill="#9fb0bd" font-size="13">CLI, JSON/CSV export</text>
+
+              <!-- arrows -->
+              <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0 0 L10 5 L0 10 z" fill="#8ed0ff" />
+                </marker>
+              </defs>
+
+              <line x1="300" y1="100" x2="370" y2="100" stroke="#8ed0ff" stroke-width="2.5" marker-end="url(#arrow)" />
+              <text x="335" y="90" text-anchor="middle" fill="#9fb0bd" font-size="12">UI actions →</text>
+
+              <line x1="630" y1="100" x2="700" y2="100" stroke="#8ed0ff" stroke-width="2.5" marker-end="url(#arrow)" />
+              <text x="665" y="90" text-anchor="middle" fill="#9fb0bd" font-size="12">Export / compute →</text>
+
+              <!-- download arrow -->
+              <line x1="830" y1="160" x2="830" y2="230" stroke="#9fb0bd" stroke-dasharray="4 4" stroke-width="1.6" />
+              <rect x="760" y="230" width="140" height="50" rx="8" fill="#08202a" stroke="#19303f" />
+              <text x="830" y="258" text-anchor="middle" fill="#9fb0bd" font-size="12">download/trade_compliance.py</text>
+
+              <!-- notes -->
+              <text x="170" y="172" text-anchor="middle" fill="#9fb0bd" font-size="12">Browser UI (interactive)</text>
+              <text x="500" y="172" text-anchor="middle" fill="#9fb0bd" font-size="12">Client-side logic + demo</text>
+            </svg>
+          </div>
+
+          <div class="vis-legend" aria-hidden="true">
+            <div class="item">index.html — UI</div>
+            <div class="item">app.js — client model</div>
+            <div class="item">trade_compliance.py — CLI</div>
+          </div>
+
+          <button class="toggle-btn" data-target="impl-details">Show details</button>
+          <div id="impl-details" class="cli-hidden" aria-hidden="true">
+            <p class="muted">Details (hidden by default):</p>
+            <ul>
+              <li><strong>index.html</strong> — landing page and interactive calculator UI that references app.js and provides download links.</li>
+              <li><strong>app.js</strong> — client-side calculator logic, demo scenarios, and JSON export functionality.</li>
+              <li><strong>trade_compliance.py</strong> — runnable Python CLI implementing the same calculation logic, with --batch, --json and CSV export options.</li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <div class="card">
-        <h2>Implementation Overview</h2>
-        <p class="muted">The repository contains:</p>
-        <ul>
-          <li><strong>index.html</strong> — project landing page + interactive calculator (JS)</li>
-          <li><strong>app.js</strong> — client-side calculator model</li>
-          <li><strong>trade_compliance.py</strong> — Python CLI for calculations, demo and export</li>
-        </ul>
-        <p>All calculations are demonstrative and use example rates. Replace with authoritative data when available.</p>
-      </div>
+      <!-- API / CLI Reference (visual) -->
+      <div class="card" id="cli-reference">
+        <h2>API / CLI Reference — Visual</h2>
+        <div class="vis-wrap">
+          <div class="vis" role="img" aria-label="CLI flow: user runs python script, script calculates duty/tax/compliance and outputs JSON or CSV">
+            <svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="false" focusable="false">
+              <title>CLI flow: CLI → Python engine → JSON/CSV / Demo</title>
+              <!-- CLI box -->
+              <rect x="40" y="30" width="260" height="80" rx="10" fill="#0f1724" stroke="#19303f" />
+              <text x="170" y="65" text-anchor="middle" fill="#e6eef3" font-size="16" font-weight="700">Terminal / CLI</text>
+              <text x="170" y="86" text-anchor="middle" fill="#9fb0bd" font-size="12">python trade_compliance.py</text>
 
-      <div class="card">
-        <h2>API / CLI Reference</h2>
-        <pre>Usage:
+              <!-- arrow -->
+              <line x1="300" y1="70" x2="390" y2="70" stroke="#8ed0ff" stroke-width="2.6" marker-end="url(#arrow)" />
+              
+              <!-- engine box -->
+              <rect x="390" y="20" width="360" height="120" rx="10" fill="#071026" stroke="#19303f" />
+              <text x="570" y="55" text-anchor="middle" fill="#e6eef3" font-size="16" font-weight="700">trade_compliance.py</text>
+              <text x="570" y="76" text-anchor="middle" fill="#9fb0bd" font-size="12">calculate duty, tax, clearance hours</text>
+
+              <!-- outputs -->
+              <rect x="780" y="30" width="160" height="80" rx="10" fill="#08121a" stroke="#19303f" />
+              <text x="860" y="60" text-anchor="middle" fill="#9fb0bd" font-size="13">Outputs</text>
+              <text x="860" y="78" text-anchor="middle" fill="#9fb0bd" font-size="12">JSON / CSV / Pretty text</text>
+
+              <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0 0 L10 5 L0 10 z" fill="#8ed0ff" />
+                </marker>
+              </defs>
+
+              <line x1="750" y1="70" x2="780" y2="70" stroke="#8ed0ff" stroke-width="2.6" marker-end="url(#arrow)" />
+
+              <!-- demo badge -->
+              <circle cx="570" cy="170" r="22" fill="#0ea5ff" />
+              <text x="570" y="175" text-anchor="middle" fill="#021827" font-size="13" font-weight="700">DEMO</text>
+              <text x="570" y="197" text-anchor="middle" fill="#9fb0bd" font-size="12">--batch → demo.csv</text>
+            </svg>
+          </div>
+
+          <div class="vis-legend" aria-hidden="true">
+            <div class="item">CLI → Python</div>
+            <div class="item">Outputs: JSON, CSV, Pretty text</div>
+            <div class="item">--batch demo option</div>
+          </div>
+
+          <button class="toggle-btn" data-target="cli-details">Show details</button>
+          <div id="cli-details" class="cli-hidden" aria-hidden="true">
+            <p class="muted">CLI options (hidden by default):</p>
+            <pre>
+Usage:
   python trade_compliance.py [--destination italy|india] [--category textiles|machinery|...] [--value 50000] [--shipping 500] [--json] [--output out.json] [--batch] [--csv file.csv]
 
 Examples:
   python trade_compliance.py --destination italy --category electronics --value 50000 --shipping 500
   python trade_compliance.py --batch --csv demo_results.csv
-        </pre>
-        <p class="muted">All calculations use example rates. Replace with authoritative rates in production.</p>
+            </pre>
+          </div>
+        </div>
       </div>
 
       <div class="card">
-        <h2>CLI Reference</h2>
-        <p class="muted">Usage: (examples hidden, reveal with the button above)</p>
+        <h2>Notes</h2>
+        <p class="muted">All visuals are illustrative. Calculation rates inside the code are example/demo values — replace with authoritative rates for production use.</p>
       </div>
     </main>
 
@@ -88,16 +193,35 @@ Examples:
   </div>
 
   <script>
-    document.getElementById('show-examples').addEventListener('click', function () {
-      const box = document.getElementById('examples');
-      const isHidden = box.style.display === '' || box.style.display === 'none';
-      box.style.display = isHidden ? 'block' : 'none';
-      box.setAttribute('aria-hidden', String(!isHidden));
-      this.textContent = isHidden ? 'Hide examples' : 'Show examples';
+    // toggles for hidden details
+    document.addEventListener('DOMContentLoaded', function () {
+      // examples toggle
+      const exBtn = document.getElementById('show-examples');
+      const exBox = document.getElementById('examples');
+      exBtn.addEventListener('click', () => {
+        const hidden = exBox.style.display === '' || exBox.style.display === 'none';
+        exBox.style.display = hidden ? 'block' : 'none';
+        exBox.setAttribute('aria-hidden', String(!hidden));
+        exBtn.textContent = hidden ? 'Hide examples' : 'Show examples';
+      });
+      exBox.style.display = 'none';
+      exBox.setAttribute('aria-hidden', 'true');
+
+      // generic details toggles
+      document.querySelectorAll('.toggle-btn[data-target]').forEach(btn => {
+        const targetId = btn.getAttribute('data-target');
+        const box = document.getElementById(targetId);
+        if (!box) return;
+        box.style.display = 'none';
+        box.setAttribute('aria-hidden', 'true');
+        btn.addEventListener('click', () => {
+          const hidden = box.style.display === '' || box.style.display === 'none';
+          box.style.display = hidden ? 'block' : 'none';
+          box.setAttribute('aria-hidden', String(!hidden));
+          btn.textContent = hidden ? 'Hide details' : 'Show details';
+        });
+      });
     });
-    // hide by default
-    document.getElementById('examples').style.display = 'none';
-    document.getElementById('examples').setAttribute('aria-hidden', 'true');
   </script>
 </body>
 </html>
