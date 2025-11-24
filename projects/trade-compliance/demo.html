@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Global Economic Dashboard | Krishna Dayma</title>
-  <meta name="description" content="An executive dashboard visualizing key economic data for the world's top 10 superpowers as of 2025." />
+  <title>Global Economic Briefing | Krishna Dayma</title>
+  <meta name="description" content="An executive briefing visualizing key economic data for the world's top 10 superpowers as of 2025." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -55,8 +55,8 @@
 <body>
   <div class="container">
     <header>
-      <h1>Global Economic Dashboard</h1>
-      <p class="subtitle">MACROECONOMIC ANALYSIS AS OF Q4 2025</p>
+      <h1>Global Economic Briefing</h1>
+      <p class="subtitle">A 2025 MACROECONOMIC SNAPSHOT FOR THE G10</p>
     </header>
 
     <main>
@@ -80,7 +80,7 @@
         <p>Return to the main portfolio or the interactive analysis tool.</p>
         <div class="btn-group">
             <a class="btn btn-primary" href="../../index.html" title="Return to Main Portfolio">🏠 Return to Main Portfolio</a>
-            <a class="btn" href="index.html" title="Interactive Dashboard">▶️ Go to Interactive Analysis</a>
+            <a class="btn" href="index.html" title="Interactive Analysis Dashboard">▶️ Go to Interactive Analysis</a>
             <a class="btn" href="documentation.html" title="Technical Documentation">📄 Review Technical Documentation</a>
         </div>
       </div>
@@ -95,66 +95,53 @@
     document.addEventListener('DOMContentLoaded', () => {
       // --- SIMULATED DATA AS OF Q4 2025 ---
       const COUNTRIES_DATA = [
-        { id: 'usa', name: 'USA', gdp: 28.8, growth: 2.1, primaryExport: 'Technology' },
-        { id: 'china', name: 'China', gdp: 20.5, growth: 4.5, primaryExport: 'Manufacturing' },
-        { id: 'germany', name: 'Germany', gdp: 4.9, growth: 1.5, primaryExport: 'Automotive' },
-        { id: 'japan', name: 'Japan', gdp: 4.5, growth: 1.2, primaryExport: 'Electronics' },
-        { id: 'india', name: 'India', gdp: 4.2, growth: 6.8, primaryExport: 'Services & IT' },
-        { id: 'uk', name: 'UK', gdp: 3.8, growth: 1.8, primaryExport: 'Financial Services' },
-        { id: 'france', name: 'France', gdp: 3.3, growth: 1.4, primaryExport: 'Aerospace' },
-        { id: 'italy', name: 'Italy', gdp: 2.4, growth: 1.1, primaryExport: 'Luxury Goods' },
-        { id: 'brazil', name: 'Brazil', gdp: 2.2, growth: 2.5, primaryExport: 'Commodities' },
-        { id: 'canada', name: 'Canada', gdp: 2.1, growth: 2.0, primaryExport: 'Natural Resources' }
+        { id: 'usa', name: 'USA', gdp: 28.8, growth: 2.1 },
+        { id: 'china', name: 'China', gdp: 20.5, growth: 4.5 },
+        { id: 'germany', name: 'Germany', gdp: 4.9, growth: 1.5 },
+        { id: 'japan', name: 'Japan', gdp: 4.5, growth: 1.2 },
+        { id: 'india', name: 'India', gdp: 4.2, growth: 6.8 },
+        { id: 'uk', name: 'UK', gdp: 3.8, growth: 1.8 },
+        { id: 'france', name: 'France', gdp: 3.3, growth: 1.4 },
+        { id: 'italy', name: 'Italy', gdp: 2.4, growth: 1.1 },
+        { id: 'brazil', name: 'Brazil', gdp: 2.2, growth: 2.5 },
+        { id: 'canada', name: 'Canada', gdp: 2.1, growth: 2.0 }
       ].sort((a, b) => b.gdp - a.gdp);
 
       const gdpChartEl = document.getElementById('gdp-chart');
       const growthChartEl = document.getElementById('growth-chart');
-
       const maxGdp = Math.max(...COUNTRIES_DATA.map(c => c.gdp));
       const maxGrowth = Math.max(...COUNTRIES_DATA.map(c => c.growth));
 
-      // --- RENDER FUNCTIONS ---
       function renderChart(container, data, dataKey, maxValue, unit = '') {
         container.innerHTML = '';
         data.forEach(country => {
           const value = country[dataKey];
           const percentageWidth = (value / maxValue) * 100;
-
           const item = document.createElement('div');
           item.className = 'chart-bar-item';
           item.innerHTML = `
             <div class="bar-label">${country.name}</div>
-            <div class="bar-wrapper">
-              <div class="bar" data-width="${percentageWidth}%"></div>
-            </div>
+            <div class="bar-wrapper"><div class="bar" data-width="${percentageWidth}%"></div></div>
             <div class="bar-value">${value.toFixed(1)}${unit}</div>
           `;
           container.appendChild(item);
         });
       }
 
-      // --- ANIMATION LOGIC ---
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            
-            // Trigger bar chart animation if the entry is a chart container
             if (entry.target.classList.contains('dashboard-section')) {
-              const bars = entry.target.querySelectorAll('.bar');
-              bars.forEach(bar => {
-                bar.style.width = bar.dataset.width;
-              });
+              entry.target.querySelectorAll('.bar').forEach(bar => { bar.style.width = bar.dataset.width; });
             }
-            observer.unobserve(entry.target); // Animate only once
+            observer.unobserve(entry.target);
           }
         });
       }, { threshold: 0.25 });
 
-      // --- INITIALIZATION ---
       renderChart(gdpChartEl, COUNTRIES_DATA, 'gdp', maxGdp, 'T');
       renderChart(growthChartEl, [...COUNTRIES_DATA].sort((a,b) => b.growth - a.growth), 'growth', maxGrowth, '%');
-      
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     });
   </script>
