@@ -1,0 +1,176 @@
+/* app.js
+   Pure client-side TradeCompliance model and UI glue.
+   Copy this file into projects/trade-compliance/app.js
+*/
+
+(() => {
+  "use strict";
+
+  // Lookup data (demo values)
+  const DUTY_RATES = {
+    "italy,textiles": 0.10,
+    "italy,machinery": 0.07,
+    "italy,pharmaceuticals": 0.05,
+    "italy,automotive": 0.08,
+    "italy,food": 0.15,
+    "italy,electronics": 0.06,
+    "india,textiles": 0.08,
+    "india,machinery": 0.04,
+    "india,pharmaceuticals": 0.03,
+    "india,automotive": 0.06,
+    "india,food": 0.12,
+    "india,electronics": 0.05
+  };
+  const TAX_RATES = { italy: 0.22, india: 0.18 };
+  const CURRENCY = { italy: "EUR", india: "INR" };
+  const DEFAULT_DUTY = 0.05;
+  const COMPLIANCE_RATE = 0.02;
+
+  // Utility
+  function round(v, n = 2) { return Math.round((v + Number.EPSILON) * Math.pow(10, n)) / Math.pow(10, n); }
+  function formatMoney(v, currency = "") {
+    try { return `${currency} ${Number(v).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; }
+    catch { return `${currency} ${v}`; }
+  }
+
+  // Model
+  class TradeCompliance {
+    constructor(destination = "italy", origin = "india", category = "electronics", value = 0, shipping = 0) {
+      this.destination = String(destination).toLowerCase();
+      this.origin = String(origin).toLowerCase();
+      this.category = String(category).toLowerCase();
+      this.value = Number(value) || 0;
+      this.shipping = Number(shipping) || 0;
+    }
+
+    dutyRate() { return DUTY_RATES[`${this.destination},${this.category}`] ?? DEFAULT_DUTY; }
+    taxRate() { return TAX_RATES[this.destination] ?? 0.0; }
+    currency() { return CURRENCY[this.destination] ?? "USD"; }
+
+    estimateClearanceHours(importDuty, taxRate) {
+      let base = 24.0;
+      if (this.value > 0) {
+        const dutyPct = (importDuty / this.value) * 100.0;
+        base += Math.min(Math.max(dutyPct * 0.5, 0), 120);
+      }
+      base += taxRate * 24.0;
+      if (["pharmaceuticals", "automotive"].includes(this.category)) base += 24;
+      else if (this.category === "machinery") base += 12;
+      else if (this.category === "electronics") base += 4;
+      return Math.max(4, Math.min(Math.round(base), 240));
+    }
+
+    calculateCosts() {
+      const dr = this.dutyRate();
+      const tr = this.taxRate();
+      const importDuty = this.value * dr;
+      const taxable = this.value + importDuty + this.shipping;
+      const tax = taxable * tr;
+      const complianceFee = this.value * COMPLIANCE_RATE;
+      const total = this.value + importDuty + tax + this.shipping;
+      const clearanceHours = this.estimateClearanceHours(importDuty, tr);
+      return {
+        currency: this.currency(),
+        shipmentValue: round(this.value, 2),
+        shippingCost: round(this.shipping, 2),
+        dutyRate: dr,
+        importDuty: round(importDuty, 2),
+        taxRate: tr,
+        tax: round(tax, 2),
+        complianceFee: round(complianceFee, 2),
+        totalLandedCost: round(total, 2),
+        clearanceHours
+      };
+    }
+
+    toPrettyText() {
+      const c = this.calculateCosts();
+      return [
+        "🌍 TRADE COMPLIANCE CALCULATION",
+        "================================",
+        `Origin:             ${this.origin.toUpperCase()}`,
+        `Destination:        ${this.destination.toUpperCase()}`,
+        `Product Category:   ${this.category.toUpperCase()}`,
+        `Currency:           ${c.currency}`,
+        "",
+        "📊 COST BREAKDOWN:",
+        "--------------------------------",
+        `Shipment Value:     ${formatMoney(c.shipmentValue, c.currency)}`,
+        `Shipping Cost:      ${formatMoney(c.shippingCost, c.currency)}`,
+        `Duty Rate:          ${(c.dutyRate * 100).toFixed(2)}%`,
+        `Import Duty:        ${formatMoney(c.importDuty, c.currency)}`,
+        `Tax Rate:           ${(c.taxRate * 100).toFixed(2)}%`,
+        `Tax:                ${formatMoney(c.tax, c.currency)}`,
+        `Compliance Fee:     ${formatMoney(c.complianceFee, c.currency)}`,
+        "",
+        "💵 TOTAL LANDED COST:",
+        "--------------------------------",
+        `Total Cost:         ${formatMoney(c.totalLandedCost, c.currency)}`,
+        "",
+        "⏱️  LOGISTICS:",
+        "--------------------------------",
+        `Est. Clearance:     ${c.clearanceHours} hours`,
+        "================================"
+      ].join("\n");
+    }
+  }
+
+  // UI
+  function el(id) { return document.getElementById(id); }
+
+  function renderResult(text) {
+    const pre = el("resultPre");
+    pre.textContent = String(text);
+  }
+
+  function calculateFromForm() {
+    const destination = el("destination").value;
+    const origin = el("origin").value;
+    const category = el("category").value;
+    const value = parseFloat(el("value").value || "0");
+    const shipping = parseFloat(el("shipping").value || "0");
+    const model = new TradeCompliance(destination, origin, category, value, shipping);
+    renderResult(model.toPrettyText());
+    return model;
+  }
+
+  function runDemo() {
+    const scenarios = [
+      new TradeCompliance("italy", "india", "textiles", 10000, 500),
+      new TradeCompliance("italy", "india", "machinery", 50000, 1500),
+      new TradeCompliance("india", "italy", "pharmaceuticals", 20000, 800)
+    ];
+    let out = "";
+    scenarios.forEach((s, i) => { out += `SCENARIO ${i+1}\n${s.toPrettyText()}\n\n`; });
+    renderResult(out.trim());
+  }
+
+  function exportJSON(model) {
+    const data = model ? model.calculateCosts() : (new TradeCompliance(el("destination").value, el("origin").value, el("category").value, el("value").value, el("shipping").value)).calculateCosts();
+    data.origin = el("origin").value;
+    data.destination = el("destination").value;
+    data.product_category = el("category").value;
+    data.timestamp = new Date().toISOString();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "trade_compliance_export.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  function wire() {
+    const calcBtn = el("calcBtn");
+    const demoBtn = el("demoBtn");
+    const exportBtn = el("exportBtn");
+    calcBtn.addEventListener("click", () => calculateFromForm());
+    demoBtn.addEventListener("click", runDemo);
+    exportBtn.addEventListener("click", () => exportJSON(null));
+
+    // initial render
+    calculateFromForm();
+  }
+
+  document.addEventListener("DOMContentLoaded", wire);
+})();

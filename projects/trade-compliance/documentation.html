@@ -61,6 +61,18 @@ $ python projects/trade-compliance/trade_compliance.py --batch --csv results.csv
           <li><strong>app.js</strong> — client-side calculator model</li>
           <li><strong>trade_compliance.py</strong> — Python CLI for calculations, demo and export</li>
         </ul>
+        <p>All calculations are demonstrative and use example rates. Replace with authoritative data when available.</p>
+      </div>
+
+      <div class="card">
+        <h2>API / CLI Reference</h2>
+        <pre>Usage:
+  python trade_compliance.py [--destination italy|india] [--category textiles|machinery|...] [--value 50000] [--shipping 500] [--json] [--output out.json] [--batch] [--csv file.csv]
+
+Examples:
+  python trade_compliance.py --destination italy --category electronics --value 50000 --shipping 500
+  python trade_compliance.py --batch --csv demo_results.csv
+        </pre>
         <p class="muted">All calculations use example rates. Replace with authoritative rates in production.</p>
       </div>
 
