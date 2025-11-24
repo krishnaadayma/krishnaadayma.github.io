@@ -3,7 +3,7 @@ name: Fetch Live News
 on:
   schedule:
     # Runs every hour
-    - cron: '0 * * * *'
+    - cron: '*/1 * * * *'
   workflow_dispatch: # Allows manual running
 
 jobs:
