@@ -3,156 +3,136 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>International Trade Compliance System | Krishna Dayma</title>
-  <meta name="description" content="Interactive demo and calculator for Italy-India trade compliance" />
+  <title>Project Dossier: Trade Compliance Engine | Krishna Dayma</title>
+  <meta name="description" content="An advanced project showcasing an interactive system for global trade compliance analysis." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ===== EXECUTIVE GRAY PALETTE (Project Page) V2 ===== */
+    /* ===== "SUITS" EXECUTIVE DOSSIER THEME V2 ===== */
     :root {
-      --bg-primary: #121212; --bg-secondary: #1E1E1E; --text-primary: #EAEAEA;
-      --text-secondary: #CCCCCC; --text-muted: #999999; --accent-primary: #A0A0A0;
-      --accent-secondary: #4a5568; --border-color: #2C2C2C;
-      --radius: 0.9rem; --shadow: 0 8px 30px rgba(0,0,0,0.5);
+      --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
+      --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
+      --accent-primary: #A0A0A0; --accent-secondary: #4a5568; --border-color: #2C2C2C;
+      --radius: 0.8rem; --shadow: 0 8px 30px rgba(0,0,0,0.6);
+      --transition: 0.2s ease;
     }
     
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    body{
-      margin:0; font-family: 'Inter', system-ui, sans-serif;
-      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-      color: var(--text-secondary); line-height: 1.5; padding: 36px;
-      -webkit-font-smoothing: antialiased;
-    }
-    .container{ max-width: 1100px; margin: 0 auto; padding: 0 18px; }
+    body{ margin:0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-secondary); line-height: 1.6; padding: 2rem; -webkit-font-smoothing: antialiased; }
+    .container{ max-width: 1200px; margin: 0 auto; }
     
-    header{
-      background: linear-gradient(135deg, #1E1E1E 0%, #121212 100%);
-      border-radius: 1.2rem; padding: 36px; border: 1px solid var(--border-color);
-      margin-bottom: 28px; text-align: center; box-shadow: var(--shadow);
-    }
-    .header-content h1{ color: var(--text-primary); margin:0; font-size:clamp(1.6rem, 4vw, 2.6rem); line-height:1.1; }
-    .subtitle{ margin: 8px 0 0; color:var(--text-muted); font-size:clamp(1rem, 2.5vw, 1.125rem); }
-    .tech-tags{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; justify-content:center; }
-    .tech-tag{
-      background: rgba(160, 160, 160, 0.15); color: var(--accent-primary);
-      border: 1px solid var(--accent-primary); padding:6px 12px; border-radius:999px; font-size:.85rem; font-weight:600;
-    }
+    header{ background: var(--bg-secondary); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--border-color); margin-bottom: 2rem; text-align: center; box-shadow: var(--shadow); }
+    header h1{ color: var(--text-primary); margin:0; font-size:clamp(2rem, 5vw, 3rem); letter-spacing: -1px; }
+    .project-meta{ display: flex; justify-content: center; gap: 1.5rem; margin-top: 0.5rem; color: var(--text-muted); font-weight: 500; }
+    
+    .main-grid { display: grid; grid-template-columns: 1fr 380px; gap: 2rem; align-items: start; }
+    @media (max-width: 1024px){ .main-grid { grid-template-columns: 1fr; } }
+    
+    .card { background: var(--bg-secondary); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border-color); }
+    .card h2 { margin: 0 0 1rem; color: var(--accent-primary); font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
+    .card p { color: var(--text-secondary); max-width: 70ch; }
+    
+    /* Project Briefing */
+    .briefing-section { margin-bottom: 1.5rem; }
+    .briefing-section h3 { font-size: 1.1rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
 
-    /* Controls & Buttons */
-    .controls{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:18px; }
-    .btn{
-      display:inline-flex; align-items:center; gap:.5rem; padding:.65rem 1rem; border-radius:.6rem;
-      border:1px solid var(--border-color); background:var(--accent-secondary); color:var(--text-primary);
-      cursor:pointer; text-decoration: none; font-weight: 600; transition: all 0.2s ease;
-    }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.4); }
+    /* Interactive Terminal */
+    .calculator-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+    @media (max-width: 768px){ .calculator-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px){ .calculator-grid { grid-template-columns: 1fr; } }
+    label{ display:block; color:var(--text-primary); margin-bottom: 0.5rem; font-weight: 600; }
+    input, select{ width:100%; padding: 0.8rem; border-radius: 0.5rem; border: 1px solid var(--border-color); background:var(--bg-primary); color:var(--text-primary); font-size:1rem; }
+    
+    /* Processing & Results Dashboard */
+    #processing-overlay { display: none; text-align: center; padding: 2rem; }
+    #processing-overlay .spinner { border: 4px solid var(--bg-tertiary); border-top: 4px solid var(--accent-primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 1rem; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    #processing-status { color: var(--text-muted); font-weight: 500; }
+    
+    #results-dashboard { display: none; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .metric-card { background: var(--bg-tertiary); padding: 1.25rem; border-radius: var(--radius); text-align: center; border: 1px solid var(--border-color); }
+    .metric-card .label { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .metric-card .value { font-size: 1.75rem; font-weight: 700; color: var(--text-primary); }
+    .metric-card .value.total-cost { color: var(--accent-primary); font-size: 2rem; }
+
+    /* Buttons */
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .btn { display:inline-flex; align-items:center; justify-content: center; gap:.5rem; padding:.75rem 1.25rem; border-radius:.6rem; border:1px solid var(--border-color); background:var(--accent-secondary); color:var(--text-primary); cursor:pointer; text-decoration: none; font-weight: 600; transition: all var(--transition); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
     .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
-    .btn-warning{ background:transparent; border-color: var(--accent-primary); color: var(--accent-primary); }
-    .btn-warning:hover { background: var(--accent-primary); color: var(--bg-primary); }
-    .btn-muted{ background:transparent; color:var(--text-muted); }
-    .btn:focus-visible{ outline:2px solid rgba(160, 160, 160, 0.2); outline-offset:2px; }
+    .btn-outline{ background:transparent; border-color: var(--accent-secondary); }
 
-    /* Layout */
-    .grid{ display:grid; grid-template-columns:1fr 420px; gap:28px; align-items:start; }
-    @media (max-width:980px){ .grid{grid-template-columns:1fr} }
-    .card{ background:var(--bg-secondary); padding:28px; border-radius:var(--radius); border:1px solid var(--border-color); }
-    h2{ margin:0 0 1rem 0; color: var(--accent-primary); }
-    label{ display:block; color:var(--text-primary); margin-bottom:6px; font-weight:700; }
-    input[type=number], select{ width:100%; padding:12px; border-radius:10px; border:1px solid var(--border-color); background:var(--bg-primary); color:var(--text-primary); font-size:1rem; }
-    .calculator-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
-    @media (max-width:600px){ .calculator-grid{grid-template-columns:1fr} }
-    .result-pre{ background:var(--bg-primary); padding:14px; border-radius:10px; border:1px solid var(--border-color); color:var(--text-secondary); font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-    .small-text{ font-size:.95rem; color:var(--text-muted); }
-    .muted-sep{ height:1px; background:linear-gradient(90deg,transparent, var(--border-color),transparent); margin:18px 0; border-radius:2px; }
-    footer{ margin-top:28px; text-align:center; color:var(--text-muted); }
+    footer{ margin-top: 2rem; padding-top: 2rem; text-align:center; color:var(--text-muted); border-top: 1px solid var(--border-color); }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="header-content" role="banner">
-        <h1>🌍 International Trade Compliance System</h1>
-        <p class="subtitle">A Polished Demo for Italy ↔ India Trade Cost Calculation</p>
-        <div class="tech-tags" aria-hidden="true">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">JavaScript</span>
-          <span class="tech-tag">Data Analysis</span>
-          <span class="tech-tag">Trade Compliance</span>
-        </div>
-        <div class="controls" aria-hidden="true">
-            <a class="btn btn-muted" href="../index.html" title="Back to Home">🏠 Back to Home</a>
-            <a class="btn btn-primary" href="demo.html" title="Interactive demo">📊 Interactive Demo</a>
-            <a class="btn" href="trade_compliance.py" download title="Download Python">💾 Download Python</a>
-        </div>
-      </div>
+      <h1>Project Dossier: Global Trade Analysis Engine</h1>
+      <div class="project-meta"><span>STATUS: OPERATIONAL</span> &bull; <span>FILE ID: KD-GTA-002</span></div>
     </header>
 
-    <main class="grid" role="main">
-      <section class="card" aria-labelledby="calculator-heading">
-        <h2 id="calculator-heading">🔄 Trade Cost Calculator</h2>
-        <form onsubmit="return false;" class="calculator-grid" style="margin-bottom:12px">
-          <div>
-            <label for="destination">Destination</label>
-            <select id="destination" aria-label="Destination country">
-              <option value="italy">Italy</option>
-              <option value="india">India</option>
-            </select>
-          </div>
-          <div>
-            <label for="origin">Origin</label>
-            <select id="origin" aria-label="Origin country">
-              <option value="india">India</option>
-              <option value="italy">Italy</option>
-            </select>
-          </div>
-          <div>
-            <label for="category">Product Category</label>
-            <select id="category">
-              <option value="textiles">Textiles</option>
-              <option value="machinery">Machinery</option>
-              <option value="pharmaceuticals">Pharmaceuticals</option>
-              <option value="automotive">Automotive</option>
-              <option value="food">Food</option>
-              <option value="electronics" selected>Electronics</option>
-            </select>
-          </div>
-          <div>
-            <label for="value">Shipment Value</label>
-            <input id="value" type="number" min="0" value="50000" />
-          </div>
-          <div>
-            <label for="shipping">Shipping Cost</label>
-            <input id="shipping" type="number" min="0" value="500" />
-          </div>
-          <div style="align-self:end;display:flex;gap:10px;flex-wrap:wrap">
-            <button class="btn btn-primary" id="calcBtn" type="button">Calculate</button>
-            <button class="btn" id="demoBtn" type="button">Run Demo</button>
-            <button class="btn btn-warning" id="exportBtn" type="button">Export JSON</button>
-          </div>
-        </form>
-
-        <div id="result" style="display:block" aria-live="polite" aria-atomic="true">
-          <div class="small-text">Result</div>
-          <pre id="resultPre" class="result-pre" aria-label="Calculation result"></pre>
+    <main class="main-grid">
+      <div class="card">
+        <h2>PROJECT BRIEFING</h2>
+        <div class="briefing-section">
+          <h3>Objective</h3>
+          <p>To engineer a predictive analytics engine and interactive dashboard that simulates the total landed cost and logistical complexities for international trade routes between the world's top 10 economies.</p>
         </div>
-        <div class="muted-sep" aria-hidden="true"></div>
-        <div class="small-text">Want to run this locally? Use the documentation link on the right and download the Python script.</div>
-      </section>
+        <div class="briefing-section">
+          <h3>Key Features</h3>
+          <ul>
+            <li><strong>Multi-Factor Cost Analysis:</strong> Dynamically calculates duties, taxes, shipping, and insurance.</li>
+            <li>**Global Trade Logic:** Models complex trade dynamics by incorporating bilateral Free Trade Agreements (FTAs).</li>
+            <li>**Logistical Time & Cost Simulation:** Differentiates between Air and Sea freight for realistic time/cost trade-offs.</li>
+            <li>**Executive Dashboard Display:** Presents results in a clear, actionable dashboard format for quick decision-making.</li>
+          </ul>
+        </div>
+      </div>
 
-      <aside class="card" aria-labelledby="python-heading">
-        <h2 id="python-heading">Python Engine</h2>
-        <p class="small-text">Download the Python file to run the same calculations on your machine. The script supports CLI arguments, batch demos, and JSON/CSV exports.</p>
-        <div class="muted-sep" aria-hidden="true"></div>
-        <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
-          <a class="btn" href="trade_compliance.py" download>💾 Download trade_compliance.py</a>
-          <a class="btn btn-muted" href="documentation.html">📚 Read Documentation</a>
+      <aside class="card">
+        <h2>ACTION PANEL</h2>
+        <p>Return to the main portfolio or access project assets.</p>
+        <div class="btn-group" style="flex-direction: column;">
+            <a class="btn btn-primary" href="../index.html" title="Back to Home">🏠 Return to Main Portfolio</a>
+            <a class="btn" href="app.js" download>💾 Access Client-Side Logic (JS)</a>
+            <a class="btn btn-outline" href="documentation.html">📄 Review Technical Documentation</a>
         </div>
       </aside>
+
+      <div class="card" style="grid-column: 1 / -1;">
+        <h2>INTERACTIVE ANALYSIS DASHBOARD</h2>
+        <form onsubmit="return false;" class="calculator-grid">
+          <div><label for="origin">Origin Country</label><select id="origin"></select></div>
+          <div><label for="destination">Destination Country</label><select id="destination"></select></div>
+          <div><label for="category">Product Category</label>
+            <select id="category">
+              <option value="electronics">Electronics</option><option value="machinery">Machinery</option><option value="automotive">Automotive</option>
+              <option value="pharmaceuticals">Pharmaceuticals</option><option value="textiles">Textiles</option><option value="food">Food</option>
+            </select>
+          </div>
+          <div><label for="value">Shipment Value</label><input id="value" type="number" min="0" value="50000" /></div>
+          <div><label for="insurance">Insurance Cost</label><input id="insurance" type="number" min="0" value="300" /></div>
+          <div><label for="shipping-mode">Shipping Mode</label><select id="shipping-mode"><option value="sea">Sea Freight</option><option value="air">Air Freight</option></select></div>
+        </form>
+        <div class="btn-group">
+            <button class="btn btn-primary" id="analyzeBtn" type="button">▶️ Run Analysis</button>
+        </div>
+        
+        <div id="processing-overlay">
+          <div class="spinner"></div>
+          <div id="processing-status">Initializing...</div>
+        </div>
+
+        <div id="results-dashboard">
+          <!-- Results will be dynamically inserted here -->
+        </div>
+      </div>
     </main>
 
     <footer>
-      <div class="small-text">© 2024 Krishna Dayma · Interactive Trade Compliance</div>
+      <div>&copy; 2024 Krishna Dayma | Project Dossier KD-GTA-002</div>
     </footer>
   </div>
 
