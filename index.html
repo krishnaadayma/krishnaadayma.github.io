@@ -67,7 +67,7 @@
         /* Buttons */
         .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--bg-tertiary); color: var(--text-primary); padding: var(--space-sm) var(--space-lg); text-decoration: none; border-radius: var(--radius-md); font-weight: 600; border: 1px solid var(--border-color); transition: all var(--transition-fast); cursor: pointer; }
         .btn:hover, .btn:focus { background: #404040; transform: translateY(-2px); box-shadow: var(--shadow-md); }
-        .btn-primary { background: var(--gradient-accent); border-color: #888888; color: #121212; font-weight: 700; }
+        .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
         .btn-primary:hover, .btn-primary:focus { background: #888888; box-shadow: var(--shadow-glow); }
         .btn-secondary { background: var(--accent-secondary); border-color: var(--accent-secondary); }
         .btn-warning { background: transparent; border-color: var(--accent-warning); color: var(--accent-warning); }
@@ -169,12 +169,12 @@
             <div class="container">
                 <h2 class="section-title">Projects</h2>
                 <div class="card project-card fade-in">
-                    <h3>🌍 International Trade Compliance System</h3>
-                    <p>Python application analyzing trade regulations between Italy and India, including documentation requirements, logistics, and bilateral trade context.</p>
+                    <h3>🌍 Global Trade Analysis Engine</h3>
+                    <p>An executive project dossier showcasing a predictive analytics engine for simulating international trade costs between the world's top 10 economies.</p>
                     <div class="project-links">
-                        <a href="projects/trade-compliance/index.html" class="btn btn-primary">View Project</a>
-                        <a href="projects/trade-compliance/demo.html" class="btn btn-warning">Interactive Demo</a>
-                        <a href="projects/trade-compliance/documentation.html" class="btn btn-secondary">Documentation</a>
+                        <a href="projects/trade-compliance/index.html" class="btn btn-primary">Open Project Dossier</a>
+                        <a href="projects/trade-compliance/demo.html" class="btn btn-warning">View Economic Briefing</a>
+                        <a href="projects/trade-compliance/documentation.html" class="btn btn-secondary">Review Documentation</a>
                     </div>
                 </div>
             </div>
@@ -233,7 +233,6 @@
             if (insightsContainer) {
                 let currentIndex = 0;
                 const itemsPerPage = 3;
-
                 function updateInsights() {
                     insightsContainer.innerHTML = '';
                     for (let i = 0; i < itemsPerPage; i++) {
@@ -252,9 +251,7 @@
 
             // --- Scroll Animations ---
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('visible');
-                });
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
             }, { threshold: 0.1 });
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
@@ -270,14 +267,8 @@
                 const globe = new THREE.Mesh(new THREE.SphereGeometry(1.5, 32, 32), new THREE.MeshBasicMaterial({ color: 0xA0A0A0, wireframe: true }));
                 scene.add(globe);
                 camera.position.z = 2.5;
-
-                function animate() {
-                    requestAnimationFrame(animate);
-                    globe.rotation.y += 0.001;
-                    renderer.render(scene, camera);
-                }
+                function animate() { requestAnimationFrame(animate); globe.rotation.y += 0.001; renderer.render(scene, camera); }
                 animate();
-
                 new ResizeObserver(() => {
                     const container = document.getElementById('about');
                     const size = Math.min(container.offsetWidth, 1200);
