@@ -47,8 +47,8 @@
         .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: var(--space-lg); max-width: min(1200px, 95vw); margin: 0 auto; }
         .item-card { border-left: 4px solid var(--accent-primary); max-width: min(900px, 95vw); margin: var(--space-md) auto; text-align: left; }
-        .item-card p, .item-card ul { margin-left: 0; text-align: left; }
-        .project-links { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: 1rem; justify-content: flex-start; }
+        .item-card h3, .item-card p, .item-card ul { text-align: left; margin-left: 0;}
+        .project-links { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: 1.5rem; justify-content: flex-start; }
         .language-item { margin-bottom: 1.5rem; }
         .language-item p { margin-bottom: 0.5rem; font-weight: 600; color: var(--text-primary); }
         .progress-bar-bg { background-color: var(--bg-tertiary); border-radius: 4px; overflow: hidden; height: 1rem; }
@@ -78,18 +78,6 @@
             </div>
         </section>
 
-        <section id="insights">
-            <div class="container">
-                <h2 class="section-title" style="display: flex; align-items: center; justify-content: center;">
-                    <span id="live-indicator" class="live-indicator"></span>
-                    <span id="insights-title">Bilateral Economic Intelligence: Italy-India</span>
-                </h2>
-                <div id="insights-container" class="grid-container">
-                    <p style="text-align:center; margin: 0 auto; grid-column: 1 / -1;">Accessing intelligence feeds...</p>
-                </div>
-            </div>
-        </section>
-
         <section id="skills">
             <div class="container">
                 <h2 class="section-title">Core Competencies</h2>
@@ -102,36 +90,56 @@
             </div>
         </section>
         
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">Key Projects</h2>
+                <div class="item-card fade-in">
+                    <h3 style="display: flex; align-items: center; justify-content: flex-start;">
+                        <span id="live-indicator" class="live-indicator"></span>
+                        <span id="insights-title">Bilateral Economic Intelligence: Italy-India</span>
+                    </h3>
+                    <p>A live, real-time intelligence feed tracking the latest economic and business news concerning the Italy-India corridor. This project demonstrates API integration and dynamic data handling.</p>
+                    <div id="insights-container" style="display: flex; flex-direction: column; gap: var(--space-md); margin-top: var(--space-md);">
+                        <p style="text-align:left;">Accessing intelligence feeds...</p>
+                    </div>
+                </div>
+                <div class="item-card fade-in">
+                    <h3>🌍 Global Trade Analysis Engine</h3>
+                    <p>An executive project dossier showcasing a predictive analytics engine for simulating international trade costs between the world's top 10 economies.</p>
+                    <div class="project-links">
+                        <a href="projects/trade-compliance/index.html" class="btn btn-primary">Open Project Dossier</a>
+                        <a href="projects/trade-compliance/documentation.html" class="btn btn-secondary">Review Documentation</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="experience">
             <div class="container">
                 <h2 class="section-title">Professional Experience</h2>
-                <div class="card item-card fade-in"><h3>HR & Communications Intern</h3><p><strong>University of Parma, Parma, Italy</strong> | Mar 2025 - Jun 2025</p><ul><li>Orchestrated the university's flagship "Open Day" recruitment event, managing strategic communications and logistics for an audience of over 6,000 national and international students.</li><li>Developed and implemented specialized onboarding programs that significantly improved campus integration and navigation for new students.</li></ul></div>
-                <div class="card item-card fade-in"><h3>Junior Business & Marketing Analyst</h3><p><strong>Shubh Labh Pvt Ltd., Bombay, India</strong> | May 2024 - Dec 2024</p><ul><li>Executed data-driven marketing strategies that yielded an 8% uplift in customer engagement and business reach across key channels.</li><li>Engineered and deployed process improvements in marketing operations, resulting in a 15% increase in team productivity and a measurable reduction in client investment risk.</li></ul></div>
+                <div class="item-card fade-in"><h3>HR & Communications Intern</h3><p><strong>University of Parma, Parma, Italy</strong> | Mar 2025 - Jun 2025</p><ul><li>Orchestrated the university's flagship "Open Day" recruitment event, managing strategic communications and logistics for an audience of over 6,000 national and international students.</li><li>Developed and implemented specialized onboarding programs that significantly improved campus integration and navigation for new students.</li></ul></div>
+                <div class="item-card fade-in"><h3>Junior Business & Marketing Analyst</h3><p><strong>Shubh Labh Pvt Ltd., Bombay, India</strong> | May 2024 - Dec 2024</p><ul><li>Executed data-driven marketing strategies that yielded an 8% uplift in customer engagement and business reach across key channels.</li><li>Engineered and deployed process improvements in marketing operations, resulting in a 15% increase in team productivity and a measurable reduction in client investment risk.</li></ul></div>
             </div>
-        </section>
-        
-        <section id="projects">
-            <div class="container"><h2 class="section-title">Key Project</h2><div class="card item-card fade-in"><h3>🌍 Global Trade Analysis Engine</h3><p>An executive project dossier showcasing a predictive analytics engine for simulating international trade costs between the world's top 10 economies.</p><div class="project-links"><a href="projects/trade-compliance/index.html" class="btn btn-primary">Open Project Dossier</a><a href="projects/trade-compliance/demo.html" class="btn btn-warning">View Economic Briefing</a><a href="projects/trade-compliance/documentation.html" class="btn btn-secondary">Review Documentation</a></div></div></div>
         </section>
 
         <section id="education">
             <div class="container">
                 <h2 class="section-title">Academic Background</h2>
-                <div class="card item-card fade-in"><h3>Laurea Magistrale in International Business and Development</h3><p><strong>University of Parma, Parma, Italy</strong> | 2022 – 2025</p><p>This two-year Master's program, taught entirely in English, provided a deep dive into international economics, global marketing strategies, and development economics. The curriculum emphasized team-based project work and hands-on experience through internships and exchange opportunities, equipping me with advanced analytical, managerial, and intercultural skills for the global job market.</p></div>
-                <div class="card item-card fade-in"><h3>Laurea triennale in Commerce</h3><p><strong>Swami Ramanand Teerth Marathwada University, Maharashtra, India</strong> | 2018 – 2021</p><p>A comprehensive three-year program that built a strong foundation in core commercial disciplines. The curriculum covered essential knowledge in accounting, applied statistics, business economics, and mercantile law, preparing me with the analytical skills necessary for a career in finance, management, and corporate strategy.</p></div>
+                <div class="item-card fade-in"><h3>Laurea Magistrale in International Business and Development</h3><p><strong>University of Parma, Parma, Italy</strong> | 2022 – 2025</p><p>This two-year Master's program, taught entirely in English, provided a deep dive into international economics, global marketing strategies, and development economics. The curriculum emphasized team-based project work and hands-on experience through internships and exchange opportunities, equipping me with advanced analytical, managerial, and intercultural skills for the global job market.</p></div>
+                <div class="item-card fade-in"><h3>Laurea triennale in Commerce</h3><p><strong>Swami Ramanand Teerth Marathwada University, Maharashtra, India</strong> | 2018 – 2021</p><p>A comprehensive three-year program that built a strong foundation in core commercial disciplines. The curriculum covered essential knowledge in accounting, applied statistics, business economics, and mercantile law, preparing me with the analytical skills necessary for a career in finance, management, and corporate strategy.</p></div>
             </div>
         </section>
 
         <section id="certifications">
-            <div class="container"><h2 class="section-title">Certifications & Advanced Training</h2><div class="card fade-in"><ul class="checklist"><li>Financial accounting and management - Politecnico di Milano</li><li>Investment Risk Management - Coursera</li><li>Business analysis and project management - Coursera</li></ul></div></div>
+            <div class="container"><h2 class="section-title">Certifications & Advanced Training</h2><div class="card" style="max-width: 900px; margin: 0 auto;"><ul class="checklist"><li>Financial accounting and management - Politecnico di Milano</li><li>Investment Risk Management - Coursera</li><li>Business analysis and project management - Coursera</li></ul></div></div>
         </section>
 
         <section id="languages">
-            <div class="container"><h2 class="section-title">Language Proficiency</h2><div class="card fade-in"><div class="language-item"><p>English</p><div class="progress-bar-bg"><div class="progress-bar" data-width="100%"></div></div></div><div class="language-item"><p>Hindi</p><div class="progress-bar-bg"><div class="progress-bar" data-width="100%"></div></div></div><div class="language-item"><p>Italian</p><div class="progress-bar-bg"><div class="progress-bar" data-width="85%"></div></div></div></div></div>
+            <div class="container"><h2 class="section-title">Language Proficiency</h2><div class="card" style="max-width: 900px; margin: 0 auto;"><div class="language-item"><p>English</p><div class="progress-bar-bg"><div class="progress-bar" data-width="100%"></div></div></div><div class="language-item"><p>Hindi</p><div class="progress-bar-bg"><div class="progress-bar" data-width="100%"></div></div></div><div class="language-item"><p>Italian</p><div class="progress-bar-bg"><div class="progress-bar" data-width="85%"></div></div></div></div></div>
         </section>
 
         <section id="interests">
-            <div class="container"><h2 class="section-title">Interests & Focus Areas</h2><div class="card fade-in"><ul class="checklist"><li>Market Analysis of Technological Trends</li><li>Financial Education & Literacy</li><li>Intercultural Networking & Communication</li><li>International Business Strategy</li></ul></div></div>
+            <div class="container"><h2 class="section-title">Interests & Focus Areas</h2><div class="card" style="max-width: 900px; margin: 0 auto;"><ul class="checklist"><li>Market Analysis of Technological Trends</li><li>Financial Education & Literacy</li><li>Intercultural Networking & Communication</li><li>International Business Strategy</li></ul></div></div>
         </section>
 
         <section id="contact">
@@ -165,23 +173,6 @@
             const italyFeed = `${RSS_BASE}https://news.google.com/rss/search?q=italy+economy+business&hl=en-US&gl=US&ceid=US:en`;
             const indiaFeed = `${RSS_BASE}https://news.google.com/rss/search?q=india+economy+business&hl=en-US&gl=US&ceid=US:en`;
 
-            const staticInsights = [ { title: 'AI-Driven Logistics', description: 'Global supply chains are realizing a 5-10% efficiency increase via AI-driven logistics and predictive analytics.' }, { title: 'Cross-Border E-commerce', description: 'The Southeast Asian e-commerce market grew by over 25% last fiscal year, driven by mobile commerce.' }, { title: 'Italy-India Trade Relations', description: 'Trade between Italy and India is projected to grow 15% annually, led by machinery and pharmaceuticals.' }, { title: 'ESG Investment Trends', description: 'Companies with high ESG scores are outperforming peers by 3-5%, indicating a major shift in investment strategy.' } ];
-
-            function renderStaticInsights() {
-                insightsTitle.textContent = "Curated Intelligence Dossier"; // Change title for fallback
-                insightsContainer.innerHTML = '';
-                const shuffled = staticInsights.sort(() => 0.5 - Math.random());
-                let selected = shuffled.slice(0, 4);
-
-                selected.forEach(item => {
-                    const insightEl = document.createElement('div');
-                    insightEl.className = 'card fade-in';
-                    insightEl.innerHTML = `<h4>${item.title}</h4><p>${item.description}</p>`;
-                    insightsContainer.appendChild(insightEl);
-                    observer.observe(insightEl);
-                });
-            }
-
             async function fetchAndCombineFeeds() {
                 try {
                     const [italyResponse, indiaResponse] = await Promise.all([ fetch(italyFeed), fetch(indiaFeed) ]);
@@ -192,26 +183,26 @@
                     if (italyData.status !== 'ok' || indiaData.status !== 'ok') throw new Error('API status was not ok.');
                     
                     const combinedItems = [...(italyData.items || []), ...(indiaData.items || [])];
-                    if (combinedItems.length === 0) throw new Error('No news items found.');
+                    if (combinedItems.length === 0) throw new Error('No news items found from feeds.');
                     
                     combinedItems.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
                     insightsContainer.innerHTML = '';
-                    liveIndicator.style.display = 'inline-block'; // Show the live dot!
+                    liveIndicator.style.display = 'inline-block';
                     
-                    combinedItems.slice(0, 4).forEach(item => {
+                    combinedItems.slice(0, 3).forEach(item => {
                         const insightEl = document.createElement('div');
-                        insightEl.className = 'card fade-in';
                         const title = item.title.replace(/<[^>]*>/g, "");
                         const sourceName = item.author || "Google News";
-                        insightEl.innerHTML = `<h4><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none;">${title}</a></h4><p>Source: ${sourceName} | ${new Date(item.pubDate).toLocaleDateString()}</p>`;
+                        insightEl.innerHTML = `<p style="margin:0;"><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">${title}</a><br><span style="font-size: 0.8rem; color: var(--text-muted);">Source: ${sourceName} | ${new Date(item.pubDate).toLocaleDateString()}</span></p>`;
                         insightsContainer.appendChild(insightEl);
-                        observer.observe(insightEl);
                     });
 
                 } catch (error) {
-                    console.error('Bilateral news fetch failed, rendering static fallback. Error:', error);
-                    renderStaticInsights();
+                    console.error('Bilateral news fetch failed. Error:', error);
+                    insightsTitle.textContent = "Intelligence Feed";
+                    liveIndicator.style.display = 'none';
+                    insightsContainer.innerHTML = '<p style="text-align:left;">Live intelligence feed is currently unavailable.</p>';
                 }
             }
             
