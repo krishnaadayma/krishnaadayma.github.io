@@ -52,42 +52,85 @@
         footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: clamp(2rem, 6vw, 3rem) var(--space-md); margin-top: clamp(3rem, 8vw, 4rem); border-top: 1px solid var(--border-color); }
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
-        /* --- Google Translate Widget Styling --- */
+   /* --- UPGRADED Google Translate Widget Styling V2 --- */
 #google_translate_element {
     position: absolute;
     top: var(--space-md);
     right: var(--space-md);
     z-index: 1001;
 }
-/* Style the widget itself */
+
+/* Style the widget itself to look like a button */
 .goog-te-gadget-simple {
-    background-color: var(--bg-tertiary) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: var(--radius-md) !important;
+    background-color: transparent !important;
+    border: none !important;
     padding: 0.5rem !important;
     cursor: pointer;
+    display: flex !important;
+    align-items: center !important;
+    transition: background-color var(--transition-fast);
+    border-radius: var(--radius-md);
 }
-.goog-te-gadget-simple span {
+
+.goog-te-gadget-simple:hover {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Add a professional "language" icon before the text */
+.goog-te-gadget-simple::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='2' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform var(--transition-fast);
+}
+
+.goog-te-gadget-simple:hover::before {
+    transform: scale(1.1);
+}
+
+/* Style the text (e.g., "English") */
+.goog-te-gadget-simple .goog-te-menu-value span {
     color: var(--text-secondary) !important;
+    font-weight: 500 !important;
+    font-size: 0.9rem;
 }
-.goog-te-gadget-icon {
-    display: none !important; /* Hide the Google icon */
+.goog-te-gadget-simple .goog-te-menu-value span:hover {
+    color: var(--text-primary) !important;
 }
-/* This is for the dropdown menu that appears */
+
+/* Hide the default Google icon and dropdown arrow */
+.goog-te-gadget-icon,
+.goog-te-menu-value img {
+    display: none !important;
+}
+
+/* Style the dropdown menu that appears */
+body > .skiptranslate {
+    display: none !important; /* HIDE THE UGLY GOOGLE TOOLBAR */
+}
 .goog-te-menu-frame {
     border-radius: var(--radius-lg) !important;
     box-shadow: var(--shadow-lg) !important;
-}
-.goog-te-menu2 {
     background: var(--bg-secondary) !important;
     border: 1px solid var(--border-color) !important;
 }
-.goog-te-menu2-item-selected .text, .goog-te-menu2-item:hover .text {
+.goog-te-menu2-item .text {
+    color: var(--text-muted) !important;
+    font-weight: 500 !important;
+}
+.goog-te-menu2-item-selected .text,
+.goog-te-menu2-item:hover .text {
     color: var(--text-primary) !important;
     font-weight: 600 !important;
 }
-.goog-te-menu2-item .text {
-    color: var(--text-muted) !important;
+body {
+    top: 0 !important; /* CRITICAL: Prevent gap at top of page */
 }
     </style>
 </head>
@@ -262,6 +305,7 @@
 </html>
 </body>
 </html>
+
 
 
 
