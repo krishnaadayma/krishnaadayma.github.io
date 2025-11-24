@@ -796,27 +796,27 @@
         
         async function fetchNews() {
             const newsContainer = document.getElementById('news-feed-container');
-            // Using a reliable RSS to JSON converter to fetch news without a client-side API key.
-            const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Ffeeds.reuters.com%2Freuters%2FbusinessNews';
+            const rssToJsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('http://feeds.reuters.com/reuters/businessNews')}`;
+            const proxyUrl = `https://thingproxy.freeboard.io/fetch/${rssToJsonUrl}`;
 
             try {
-                const response = await fetch(rssUrl);
+                const response = await fetch(proxyUrl);
                 if (!response.ok) throw new Error(`Network response was not ok. Status: ${response.status}`);
                 
                 const data = await response.json();
                 
-                if (data.status !== 'ok') throw new Error(`API returned an error.`);
+                if (data.status !== 'ok') throw new Error(`API returned an error: ${data.message || 'Unknown error'}`);
 
-                const articles = data.items.slice(0, 5); // Get top 5 articles
+                const articles = data.items.slice(0, 5);
                 
-                newsContainer.innerHTML = ''; // Clear loading message
+                newsContainer.innerHTML = '';
                 
                 articles.forEach(article => {
                     const newsItem = document.createElement('div');
                     newsItem.className = 'news-item';
                     newsItem.innerHTML = `
                         <a href="${article.link}" target="_blank" rel="noopener noreferrer">${article.title}</a>
-                        <p>${new Date(article.pubDate).toLocaleDateString()}</p>
+                        <p>Reuters - ${new Date(article.pubDate).toLocaleDateString()}</p>
                     `;
                     newsContainer.appendChild(newsItem);
                 });
