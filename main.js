@@ -1,10 +1,10 @@
 /**
  * ==================================================================================
- *  MAIN APPLICATION SCRIPT (main.js) - FINAL ALIGNED VERSION
+ *  MAIN APPLICATION SCRIPT (main.js) - FINAL ALIGNED & BUG-FIXED VERSION
  * ==================================================================================
- *  This file contains all dynamic functionality for the portfolio page, including
- *  translation logic, animations, the live news feed, and scroll-triggered events.
- *  It is designed to work flawlessly with the final index.html and style.css.
+ *  This file contains all dynamic functionality for the portfolio page. It includes
+ *  the critical bug fix for the news feed, ensuring the "Accessing..." message
+ *  is correctly replaced by live articles.
  */
 
 // Make the setLanguage function globally available so the onclick attribute in index.html can find it.
@@ -26,8 +26,7 @@ function runPageScripts() {
 
     /**
      * Sub-function 1: UI Initialization
-     * This handles tasks that need to run once the DOM is ready, like binding
-     * events and setting initial states.
+     * Handles tasks that need to run once the DOM is ready.
      */
     function initializeUI() {
         // --- Bind Translation Buttons ---
@@ -51,7 +50,6 @@ function runPageScripts() {
 
     /**
      * Sub-function 2: Intersection Observer for Scroll Animations
-     * Triggers 'fade-in' and progress bar animations as elements enter the viewport.
      */
     function initializeScrollObserver() {
         const observerOptions = { threshold: 0.2 };
@@ -72,8 +70,8 @@ function runPageScripts() {
     }
 
     /**
-     * Sub-function 3: Live News Feed
-     * Fetches, combines, and displays real-time news for the Italy-India corridor.
+     * Sub-function 3: Live News Feed (with BUG FIX)
+     * Fetches, combines, and displays real-time news.
      */
     async function initializeNewsFeed() {
         const insightsContainer = document.getElementById('insights-container');
@@ -81,6 +79,12 @@ function runPageScripts() {
         const insightsTitle = document.getElementById('insights-title');
 
         if (!insightsContainer || !liveIndicator || !insightsTitle) return;
+        
+        // **BUG FIX:** Find and remove the initial "Accessing..." message.
+        const loadingMessage = insightsContainer.querySelector('p');
+        if (loadingMessage) {
+            loadingMessage.remove();
+        }
 
         const RSS_BASE_URL = 'https://api.rss2json.com/v1/api.json?rss_url=';
         const italyFeedUrl = `${RSS_BASE_URL}https://news.google.com/rss/search?q=italy+economy+business&hl=en-US&gl=US&ceid=US:en`;
@@ -96,7 +100,6 @@ function runPageScripts() {
             const combinedItems = [...(italyData.items || []), ...(indiaData.items || [])].sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
             if (combinedItems.length === 0) throw new Error('No news items found.');
 
-            insightsContainer.innerHTML = '';
             liveIndicator.style.display = 'inline-block';
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(e => {
@@ -110,6 +113,7 @@ function runPageScripts() {
             combinedItems.slice(0, 4).forEach(item => {
                 const articleCard = document.createElement('div');
                 articleCard.className = 'card fade-in';
+                articleCard.style.padding = 'var(--space-md)'; // Use a smaller padding for nested cards
                 articleCard.innerHTML = `<h4><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-size: 1rem;">${item.title.replace(/<[^>]*>/g, "")}</a></h4><p style="font-size: 0.8rem; margin-bottom: 0;">Source: ${item.author || "Google News"}</p>`;
                 insightsContainer.appendChild(articleCard);
                 observer.observe(articleCard);
@@ -173,8 +177,6 @@ function runPageScripts() {
 }
 
 // --- GLOBAL INITIALIZER ---
-// Waits for the window to be fully loaded, then waits 500ms for maximum stability
-// before running all scripts. This solves all animation/translation conflicts.
 window.onload = () => {
     setTimeout(runPageScripts, 500);
 };
