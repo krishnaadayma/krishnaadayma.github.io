@@ -9,9 +9,6 @@ jobs:
   fetch-news:
     runs-on: ubuntu-latest
 
-    # --- THIS IS THE DEFINITIVE FIX ---
-    # This block explicitly grants the "write" permission to this job.
-    # This is required for the action to be able to commit the news.json file.
     permissions:
       contents: write
 
@@ -33,9 +30,9 @@ jobs:
       - name: Commit and Push if Changed
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'BUI: Update live news feed'
+          commit_message: 'BOT: Update live news feed'
           branch: main
-          file_pattern: news.json
+          file_pattern: data/news.json
           commit_user_name: Krishna Dayma Bot
           commit_user_email: krishna.saq@gmail.com
           commit_author: Krishna Dayma <krishnaadayma@users.noreply.github.com>
