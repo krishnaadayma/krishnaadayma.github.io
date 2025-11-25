@@ -9,28 +9,27 @@ jobs:
   fetch-news:
     runs-on: ubuntu-latest
 
+    # --- THIS IS THE DEFINITIVE FIX ---
+    # This block explicitly grants the "write" permission to this job.
+    # This is required for the action to be able to commit the news.json file.
+    permissions:
+      contents: write
+
     steps:
-      # Step 1: Check out the repository code
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js.
-      # The 'cache' option has been REMOVED to solve the lock file error.
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      # Step 3: Install dependencies using npm install.
-      # This command is reliable and does not need a package-lock.json file.
       - name: Install Dependencies
         run: npm install
 
-      # Step 4: Run the script to fetch the news.
       - name: Run Fetch Script
         run: node ./.github/workflows/fetch-script.js
 
-      # Step 5: Commit the new news.json file.
       - name: Commit and Push if Changed
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
