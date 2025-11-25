@@ -1,0 +1,115 @@
+/* ==================================================================================
+   RESPONSIVE.CSS - Mobile & Tablet Styles
+   ================================================================================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+    header {
+        min-height: 40vh;
+        padding: var(--space-lg) var(--space-sm);
+    }
+
+    section {
+        padding: var(--space-lg) 0;
+    }
+
+    .container {
+        padding: 0 var(--space-sm);
+    }
+
+    .card {
+        padding: var(--space-md);
+    }
+
+    .skills-grid,
+    .news-grid,
+    .projects-grid,
+    .experience-grid,
+    .education-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #custom-translate-widget {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+
+    .btn {
+        padding: 0.6rem 1rem;
+        font-size: var(--font-size-sm);
+    }
+
+    #globe-canvas {
+        width: 250px !important;
+        height: 250px !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: var(--space-sm);
+    }
+
+    .checklist li {
+        font-size: var(--font-size-sm);
+    }
+
+    #globe-canvas {
+        display: none;
+    }
+}
+
+/* Large Screens */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1400px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    .card {
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: none;
+    }
+
+    #particles-js,
+    #globe-canvas,
+    #custom-translate-widget,
+    .btn {
+        display: none !important;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
