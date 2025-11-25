@@ -8,29 +8,25 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="../../css/animations.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  
+  <!-- Page-specific styles -->
   <style>
-    :root { --bg-primary: #121212; --bg-secondary: #1E1E1E; --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999; --accent-primary: #A0A0A0; --accent-secondary: #4a5568; --border-color: #2C2C2C; --radius: 0.8rem; --shadow: 0 8px 30px rgba(0,0,0,0.6); --transition: 0.2s ease; }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    body{ margin:0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-secondary); line-height: 1.6; padding: 2rem; position: relative; }
+    body { padding: 2rem; }
     #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.2; pointer-events: none; }
-    .container{ max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-    header{ background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--border-color); margin-bottom: 2rem; box-shadow: var(--shadow); }
-    h1{ color: var(--text-primary); font-size:clamp(2rem, 5vw, 3rem); }
-    .card { background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border-color); margin-bottom: 2rem; }
-    h2 { margin: 0 0 1rem; color: var(--accent-primary); font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
-    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.75rem 1.25rem; border-radius:.6rem; border:1px solid var(--border-color); background:var(--accent-secondary); color: var(--text-primary); text-decoration: none; transition: var(--transition); }
-    .btn:hover, .btn:focus { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.5); outline: none; }
-    .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; font-weight: 700; }
-    footer{ margin-top: 2rem; padding-top: 2rem; text-align:center; color:var(--text-muted); border-top: 1px solid var(--border-color); }
-    #custom-translate-widget { position: fixed; top: 1rem; right: 1.5rem; z-index: 9999; background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: 0.5rem; border: 1px solid var(--border-color); }
-    #custom-translate-widget a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.2rem; outline: none; }
-    #custom-translate-widget a:focus { outline: none; }
-    #custom-translate-widget a.active, #custom-translate-widget a:hover { color: var(--text-primary); }
-    #custom-translate-widget span { color: var(--border-color); margin: 0 0.2rem; }
-    body > .skiptranslate, .goog-te-spinner-pos { display: none !important; }
-    html.translated-ltr, html.translated-rtl { margin-top: 0 !important; }
-    body { top: 0 !important; }
-    font[style] { background-color: transparent !important; color: inherit !important; }
+    header { min-height: auto; display: block; text-align: left; background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: var(--radius-md); padding: 2.5rem; border: 1px solid var(--border-color); margin-bottom: 2rem; }
+    .subtitle { text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-top: 0.5rem; }
+    pre { background: var(--bg-tertiary); padding: 1rem; border-radius: var(--radius-sm); overflow-x: auto; font-size: 0.85rem; }
+    code { font-family: 'Fira Code', monospace; }
+    h3 { font-size: 1.1rem; color: var(--text-muted); font-weight: 600; margin: 1.5rem 0 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    footer { margin-top: 2rem; padding-top: 2rem; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border-color); }
   </style>
 </head>
 <body>
@@ -42,15 +38,15 @@
   </div>
   <canvas id="bg-canvas"></canvas>
   <div class="container">
-    <header><h1>Technical Documentation</h1><p class="subtitle">PROJECT: GLOBAL TRADE ANALYSIS ENGINE (KD-GTA-002)</p></header>
+    <header class="fade-in"><h1>Technical Documentation</h1><p class="subtitle">PROJECT: GLOBAL TRADE ANALYSIS ENGINE (KD-GTA-002)</p></header>
     <main>
-      <div class="card">
+      <div class="card fade-in">
         <h2>SYSTEM OVERVIEW</h2>
-        <p>The Global Trade Analysis Engine is a client-side JavaScript application designed to provide high-level estimates for landed costs in international trade. It utilizes a static dataset representing macroeconomic indicators and trade policies for the world's top 10 economies.</p>
-        <div><h3>DATA MODEL & LOGIC</h3><p>The application's logic is powered by a static JavaScript object in <code>app.js</code>. Key data points include Base Duty Rates, Free Trade Agreements (FTAs), and Shipping Costs.</p></div>
-        <div><h3>CALCULATION FLOW</h3><ol><li>Determine the base duty rate from the selected product category.</li><li>Check if an FTA exists to potentially waive the duty.</li><li>Calculate final duty and VAT.</li><li>Add shipping and insurance to arrive at the Total Landed Cost.</li></ol></div>
+        <p>The Global Trade Analysis Engine is a client-side JavaScript application designed to provide high-level estimates for landed costs in international trade. It utilizes a static dataset representing simplified duty rates and trade agreements.</p>
+        <div><h3>DATA MODEL & LOGIC</h3><p>The application's logic is powered by a static JavaScript object in <code>app.js</code>. Key data points include Base Duty Rates, Free Trade Agreements (FTAs), and currency conversion rates.</p></div>
+        <div><h3>CALCULATION FLOW</h3><ol><li>Determine the base duty rate from the selected product category.</li><li>Check if an FTA exists to potentially waive the duty.</li><li>Calculate final landed cost including shipping and insurance estimates.</li></ol></div>
       </div>
-      <div class="card">
+      <div class="card fade-in">
         <h2>ACTION PANEL</h2><p>Return to the main portfolio or the interactive dashboard.</p>
         <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
             <a class="btn btn-primary" href="../../index.html?v=4">🏠 Return to Portfolio</a>
@@ -72,6 +68,17 @@
         document.querySelectorAll('#custom-translate-widget a').forEach(el => el.classList.remove('active'));
         const activeEl = document.querySelector(`.lang-${currentLang}`);
         if (activeEl) activeEl.classList.add('active');
+        
+        // Initialize fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.25 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
       }, 500);
     };
   </script>
