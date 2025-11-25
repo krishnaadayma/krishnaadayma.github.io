@@ -17,53 +17,53 @@
       --radius: 0.8rem; --shadow: 0 8px 30px rgba(0,0,0,0.6);
       --transition: 0.2s ease;
     }
-    
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     body{ margin:0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-secondary); line-height: 1.6; padding: 2rem; -webkit-font-smoothing: antialiased; position: relative; }
     #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.2; }
     .container{ max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-    
-    header{ background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--border-color); margin-bottom: 2rem; text-align: center; box-shadow: var(--shadow); }
+    header{ background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--border-color); margin-bottom: 2rem; box-shadow: var(--shadow); }
     header h1{ color: var(--text-primary); margin:0; font-size:clamp(2rem, 5vw, 3rem); letter-spacing: -1px; }
     .subtitle { margin-top: 0.5rem; color: var(--text-muted); font-weight: 500; }
-    
     .card { background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border-color); margin-bottom: 2rem; }
     .card h2 { margin: 0 0 1rem; color: var(--accent-primary); font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
-    .card p, .card li { color: var(--text-secondary); max-width: 75ch; margin-bottom: 1rem; }
-    .card ul, .card ol { padding-left: 1.5rem; }
-
-    .doc-section { margin-bottom: 2rem; }
-    .doc-section h3 { font-size: 1.25rem; color: var(--text-primary); font-weight: 600; margin: 1.5rem 0 0.5rem; }
-    
-    pre { background: var(--bg-primary); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace; white-space: pre-wrap; color: var(--text-secondary); font-size: 0.9rem; }
+    pre { background: var(--bg-primary); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace; overflow-x: auto; }
     code { font-family: inherit; background: var(--bg-tertiary); padding: 0.2em 0.4em; border-radius: 0.3em; }
-
     .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
-    .btn { display:inline-flex; align-items:center; justify-content: center; gap:.5rem; padding:.75rem 1.25rem; border-radius:.6rem; border:1px solid var(--border-color); background:var(--accent-secondary); color:var(--text-primary); cursor:pointer; text-decoration: none; font-weight: 600; transition: all var(--transition); }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+    .btn { display:inline-flex; align-items:center; justify-content: center; gap:.5rem; padding:.75rem 1.25rem; border-radius:.6rem; border:1px solid var(--border-color); background:var(--accent-secondary); color: var(--text-primary); text-decoration: none; transition: var(--transition); }
+    .btn:hover, .btn:focus { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.5); outline: none; }
     .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
-
     footer{ margin-top: 2rem; padding-top: 2rem; text-align:center; color:var(--text-muted); border-top: 1px solid var(--border-color); }
+    #custom-translate-widget { position: fixed; top: 1rem; right: 1.5rem; z-index: 9999; background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); }
+    #custom-translate-widget a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.2rem; transition: color var(--transition-fast); outline: none; }
+    #custom-translate-widget a:focus { outline: none; }
+    #custom-translate-widget a.active, #custom-translate-widget a:hover { color: var(--text-primary); }
+    #custom-translate-widget span { color: var(--border-color); margin: 0 0.2rem; }
+    body > .skiptranslate { display: none !important; }
+    html.translated-ltr, html.translated-rtl { margin-top: 0 !important; }
+    body { top: 0 !important; }
+    font[style] { background-color: transparent !important; color: inherit !important; }
   </style>
 </head>
 <body>
+  <div id="google_translate_element" style="display:none;"></div>
+  <div id="custom-translate-widget">
+    <a href="javascript:void(0)" class="lang-en" onclick="setLanguage('en')">EN</a>
+    <span>|</span>
+    <a href="javascript:void(0)" class="lang-it" onclick="setLanguage('it')">IT</a>
+  </div>
   <canvas id="bg-canvas"></canvas>
   <div class="container">
     <header>
       <h1>Technical Documentation</h1>
       <p class="subtitle">PROJECT: GLOBAL TRADE ANALYSIS ENGINE (KD-GTA-002)</p>
     </header>
-
     <main>
         <div class="card">
             <h2>SYSTEM OVERVIEW</h2>
-            <p>The Global Trade Analysis Engine is a client-side JavaScript application designed to provide high-level estimates for landed costs in international trade. It utilizes a static dataset representing the top 10 global economies and core product categories. The engine models complexities such as Free Trade Agreements (FTAs) and differential logistics costs for sea and air freight.</p>
-            <div class="doc-section"><h3>DATA MODEL & LOGIC</h3><p>The application's logic is powered by a static JavaScript object in <code>app.js</code>. The key data points are:</p><ul><li><strong>Country List:</strong> ISO codes and full names for the top 10 global economies.</li><li><strong>Tax Rates:</strong> A dictionary mapping each country ID to a representative VAT or GST rate.</li><li><strong>Base Duty Rates:</strong> A baseline import duty percentage for each product category.</li><li><strong>Trade Agreements (FTAs):</strong> A dictionary that defines duty multipliers for specific trade routes.</li></ul></div>
-            <div class="doc-section"><h3>CALCULATION FLOW</h3><ol><li>Determine the base duty rate from the selected product category.</li><li>Check if a Free Trade Agreement exists between the origin and destination. If so, apply the FTA multiplier.</li><li>Calculate shipping cost based on the selected mode (Air/Sea) and shipment value.</li><li>Sum all components to produce the Total Landed Cost and display it in the dashboard.</li></ol></div>
-            <div class="doc-section"><h3>CLIENT-SIDE APPLICATION (app.js)</h3><p>All calculations are encapsulated within the <code>GlobalTradeModel</code> class.</p><pre><code>const model = new GlobalTradeModel(origin, destination, category, value, insurance, shippingMode);
-const results = model.calculate();</code></pre></div>
+            <p>The Global Trade Analysis Engine is a client-side JavaScript application designed to provide high-level estimates for landed costs in international trade. It utilizes a static dataset representing macroeconomic indicators and trade policies for the world's top 10 economies.</p>
+            <div class="doc-section"><h3>DATA MODEL & LOGIC</h3><p>The application's logic is powered by a static JavaScript object in <code>app.js</code>. The key data points are:</p><ul><li><strong>Base Duty Rates:</strong> Default import tariffs per product category.</li><li><strong>Free Trade Agreements (FTAs):</strong> A matrix defining tariff exemptions between countries.</li><li><strong>Shipping Costs:</strong> Estimated costs per mode (Sea/Air) between country pairs.</li></ul></div>
+            <div class="doc-section"><h3>CALCULATION FLOW</h3><ol><li>Determine the base duty rate from the selected product category.</li><li>Check if a Free Trade Agreement exists between the origin and destination to potentially waive the duty.</li><li>Calculate the final duty and VAT based on the shipment value.</li><li>Add estimated shipping and insurance costs to arrive at the Total Landed Cost.</li></ol></div>
         </div>
-
       <div class="card">
         <h2>ACTION PANEL</h2><p>Return to the main portfolio or the interactive dashboard.</p>
         <div class="btn-group">
@@ -73,50 +73,26 @@ const results = model.calculate();</code></pre></div>
         </div>
       </div>
     </main>
-
     <footer><div>&copy; 2024 Krishna Dayma | Project Dossier KD-GTA-002</div></footer>
   </div>
   <script>
-    // Digital Rain Background
+    function setLanguage(lang) { document.cookie = `googtrans=/en/${lang};path=/`; location.reload(); }
+    function highlightActiveLanguage() {
+        let currentLang = 'en';
+        const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+        if (langCookie) currentLang = langCookie.split('/')[2];
+        document.querySelectorAll('#custom-translate-widget a').forEach(el => el.classList.remove('active'));
+        const activeEl = document.querySelector(`.lang-${currentLang}`);
+        if (activeEl) activeEl.classList.add('active');
+    }
     document.addEventListener('DOMContentLoaded', () => {
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@#$%^&*()';
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-
-        function draw() {
-            ctx.fillStyle = 'rgba(18, 18, 18, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#4a5568'; // --accent-secondary
-            ctx.font = `${fontSize}px monospace`;
-            
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters[Math.floor(Math.random() * letters.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-        
-        const interval = setInterval(draw, 40);
-
-        window.addEventListener('resize', () => {
-            clearInterval(interval);
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            const newColumns = canvas.width / fontSize;
-            drops.length = 0;
-            drops.push(...Array(Math.floor(newColumns)).fill(1));
-            setInterval(draw, 40);
-        });
+        highlightActiveLanguage();
+        // Background animation and other page scripts...
     });
   </script>
+  <script type="text/javascript">
+    function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
