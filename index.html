@@ -4,61 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krishna Dayma - International Business & Data Analyst Portfolio</title>
-    <meta name="description" content="The definitive portfolio for Krishna Dayma, an International Business & Data Analyst.">
+    <meta name="description" content="Portfolio for Krishna Dayma, an International Business & Data Analyst.">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2">
+    
+    <!-- Modular CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
+    <!-- Language Widget -->
     <div id="google_translate_element" style="display: none;"></div>
-    <div id="custom-translate-widget"><a class="lang-en">EN</a><span>|</span><a class="lang-it">IT</a></div>
+    <div id="custom-translate-widget">
+        <a class="lang-en">EN</a><span>|</span><a class="lang-it">IT</a>
+    </div>
     
+    <!-- Header with Particles -->
     <header>
         <div id="particles-js"></div>
         <div class="container">
             <div class="header-content">
                 <h1>Krishna Dayma</h1>
-                <p>International Business & Data Analyst</p>
-                <p>Data-Driven Strategies | Cross-Cultural Communication | Process Optimization</p>
+                <p class="subtitle">International Business & Data Analyst</p>
+                <p class="tagline">Data-Driven Strategies | Cross-Cultural Communication | Process Optimization</p>
             </div>
         </div>
     </header>
     
+    <!-- Main Content -->
     <main id="main-content">
+        
+        <!-- About Section -->
         <section id="about">
             <canvas id="globe-canvas"></canvas>
             <div class="container fade-in">
                 <h2 class="section-title">Professional Summary</h2>
-                <p style="text-align: center; margin: 0 auto; max-width: 80ch;">A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets. Fluent in three languages and equipped with a cross-cultural perspective, I excel at optimizing processes, driving market expansion, and delivering measurable results in dynamic, international environments.</p>
+                <p class="about-text">A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets. Fluent in three languages and equipped with a cross-cultural perspective, I excel at optimizing processes, driving market expansion, and delivering measurable results in dynamic, international environments.</p>
             </div>
         </section>
 
+        <!-- Skills Section -->
         <section id="skills">
             <div class="container">
                 <h2 class="section-title">Core Competencies</h2>
-                <div class="grid-container skills-grid">
-                    <div class="card fade-in"><h3>Data Analysis</h3><p>Excel, Data Visualization, Business Intelligence (BI)</p></div>
-                    <div class="card fade-in"><h3>Business Strategy</h3><p>International Trade, Market Research, Strategic Planning</p></div>
-                    <div class="card fade-in"><h3>Process Optimization</h3><p>Workflow Improvement, Productivity Enhancement, Risk Reduction</p></div>
-                    <div class="card fade-in"><h3>Platforms & Software</h3><p>MS Office Suite (Excel, PowerPoint), Canva, Power BI, G-Suite</p></div>
+                <div class="skills-grid">
+                    <div class="card fade-in">
+                        <h3>Data Analysis</h3>
+                        <p>Excel, Data Visualization, Business Intelligence (BI)</p>
+                    </div>
+                    <div class="card fade-in">
+                        <h3>Business Strategy</h3>
+                        <p>International Trade, Market Research, Strategic Planning</p>
+                    </div>
+                    <div class="card fade-in">
+                        <h3>Process Optimization</h3>
+                        <p>Workflow Improvement, Productivity Enhancement, Risk Reduction</p>
+                    </div>
+                    <div class="card fade-in">
+                        <h3>Platforms & Software</h3>
+                        <p>MS Office Suite, Canva, Power BI, G-Suite</p>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- Live News Section -->
         <section id="news">
             <div class="container">
-                <h2 class="section-title"><span id="insights-title">Intelligence Feed</span><span id="live-indicator" style="display: none;"></span></h2>
-                <div id="insights-container" class="grid-container">
-                    <p style="text-align: center; grid-column: 1 / -1;">Accessing live economic intelligence...</p>
+                <h2 class="section-title">
+                    <span id="insights-title">Intelligence Feed</span>
+                    <span id="live-indicator"></span>
+                </h2>
+                <div id="insights-container" class="news-grid">
+                    <p class="loading-text">Accessing live economic intelligence...</p>
                 </div>
             </div>
         </section>
 
+        <!-- Projects Section -->
         <section id="projects">
             <div class="container">
                 <h2 class="section-title">Key Projects</h2>
-                <div class="content-wrapper">
+                <div class="projects-grid">
                     <div class="card item-card fade-in">
                         <h3>🌍 Global Trade Analysis Engine</h3>
                         <p>An executive dashboard for simulating landed costs in international trade, featuring real-time duty calculations and FTA detection.</p>
@@ -68,88 +102,94 @@
             </div>
         </section>
 
+        <!-- Experience Section -->
         <section id="experience">
             <div class="container">
                 <h2 class="section-title">Professional Experience</h2>
-                <div class="content-wrapper">
+                <div class="experience-grid">
                     <div class="card item-card fade-in">
                         <h3>HR & Communications Intern</h3>
-                        <p><strong>Sidel Group, Parma, Italy</strong> | Oct 2024 – Present</p>
+                        <p class="company">Sidel Group, Parma, Italy | Oct 2024 – Present</p>
                         <p>Manage internal communication projects and contribute to HR operations for a global manufacturing leader.</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Education Section -->
         <section id="education">
             <div class="container">
                 <h2 class="section-title">Academic Background</h2>
-                <div class="content-wrapper">
+                <div class="education-grid">
                     <div class="card item-card fade-in">
                         <h3>Laurea Magistrale in International Business and Development</h3>
-                        <p><strong>University of Parma, Italy</strong> | 2022 – 2025</p>
-                        <p>This program focuses on global business strategies, economic development policies, and advanced quantitative analysis for international markets.</p>
+                        <p class="institution">University of Parma, Italy | 2022 – 2025</p>
+                        <p>Global business strategies, economic development policies, and advanced quantitative analysis.</p>
                     </div>
                     <div class="card item-card fade-in">
-                        <h3>Laurea triennale in Commerce</h3>
-                        <p><strong>Swami Ramanand Teerth Marathwada University, India</strong> | 2018 – 2021</p>
-                        <p>A comprehensive foundational degree covering business management, financial accounting, and economic principles.</p>
+                        <h3>Laurea Triennale in Commerce</h3>
+                        <p class="institution">Swami Ramanand Teerth Marathwada University, India | 2018 – 2021</p>
+                        <p>Business management, financial accounting, and economic principles.</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Certifications Section -->
         <section id="certifications">
             <div class="container">
-                <h2 class="section-title">Certifications & Advanced Training</h2>
-                <div class="content-wrapper">
-                    <div class="card fade-in">
-                        <ul class="checklist">
-                            <li>Financial accounting and management - Politecnico di Milano</li>
-                            <li>Advanced data analytics - Coursera</li>
-                            <li>Project Management Professional (PMP) - In progress</li>
-                        </ul>
-                    </div>
+                <h2 class="section-title">Certifications & Training</h2>
+                <div class="card fade-in">
+                    <ul class="checklist">
+                        <li>Financial Accounting and Management - Politecnico di Milano</li>
+                        <li>Advanced Data Analytics - Coursera</li>
+                        <li>Project Management Professional (PMP) - In Progress</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
+        <!-- Languages Section -->
         <section id="languages">
             <div class="container">
                 <h2 class="section-title">Language Proficiency</h2>
-                <div class="content-wrapper">
-                    <div class="card fade-in">
-                        <div class="language-item">
-                            <p>English</p>
-                            <div class="progress-wrapper"><div class="progress-bar" data-width="95%"></div></div>
+                <div class="card fade-in">
+                    <div class="language-item" data-lang="english">
+                        <p>English</p>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar" data-width="95%"></div>
                         </div>
-                        <div class="language-item">
-                            <p>Italian</p>
-                            <div class="progress-wrapper"><div class="progress-bar" data-width="85%"></div></div>
+                    </div>
+                    <div class="language-item" data-lang="italian">
+                        <p>Italian</p>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar" data-width="85%"></div>
                         </div>
-                        <div class="language-item">
-                            <p>Hindi</p>
-                            <div class="progress-wrapper"><div class="progress-bar" data-width="100%"></div></div>
+                    </div>
+                    <div class="language-item" data-lang="hindi">
+                        <p>Hindi</p>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar" data-width="100%"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Contact Section -->
         <section id="contact">
             <div class="container">
                 <h2 class="section-title">Get In Touch</h2>
-                <div class="content-wrapper">
-                    <div class="card fade-in" style="text-align: center;">
-                        <p style="font-size: 1.1rem;">I am actively seeking opportunities and am open to collaboration.</p>
-                        <p><strong>Email:</strong> <a href="mailto:krishna.saq@gmail.com">krishna.saq@gmail.com</a></p>
-                        <p><strong>Mobile:</strong> <a href="tel:+393756320447">+39 375 632 0447</a></p>
-                    </div>
+                <div class="card fade-in contact-card">
+                    <p class="contact-intro">I am actively seeking opportunities and am open to collaboration.</p>
+                    <p><strong>Email:</strong> <a href="mailto:krishna.saq@gmail.com">krishna.saq@gmail.com</a></p>
+                    <p><strong>Mobile:</strong> <a href="tel:+393756320447">+39 375 632 0447</a></p>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2025 Krishna Dayma. All rights reserved.</p>
@@ -159,11 +199,16 @@
     <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <!-- Google Translate Initialization Script -->
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <!-- Main Application Logic -->
-    <script src="main.js?v=2" defer></script>
+    <!-- Modular JavaScript -->
+    <script src="js/config.js"></script>
+    <script src="js/translate.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/scroll.js"></script>
+    <script src="js/news.js"></script>
+    <script src="js/particles-init.js"></script>
+    <script src="js/globe.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
