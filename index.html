@@ -5,38 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krishna Dayma - International Business & Data Analyst Portfolio</title>
     <meta name="description" content="The definitive portfolio for Krishna Dayma, an International Business & Data Analyst.">
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Hidden Google Translate element required for the API -->
     <div id="google_translate_element" style="display: none;"></div>
-
-    <!-- Custom Language Switcher Widget -->
-    <div id="custom-translate-widget">
-        <a class="lang-en">EN</a>
-        <span>|</span>
-        <a class="lang-it">IT</a>
-    </div>
-
-    <!-- Header Section -->
-    <header>
-        <div id="particles-js"></div>
-        <div class="container"><div class="header-content"><h1>Krishna Dayma</h1><p>International Business & Data Analyst</p><p>Data-Driven Strategies | Cross-Cultural Communication | Process Optimization</p></div></div>
-    </header>
-
-    <!-- Main Content -->
+    <div id="custom-translate-widget"><a class="lang-en">EN</a><span>|</span><a class="lang-it">IT</a></div>
+    <header><div id="particles-js"></div><div class="container"><div class="header-content"><h1>Krishna Dayma</h1><p>International Business & Data Analyst</p><p>Data-Driven Strategies | Cross-Cultural Communication | Process Optimization</p></div></div></header>
     <main id="main-content">
         <section id="about">
-            <canvas id="globe-canvas" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1200px; height: 1200px; z-index: -1; opacity: 0.1; pointer-events: none;"></canvas>
             <div class="container fade-in"><h2 class="section-title">Professional Summary</h2><p style="text-align: center; margin: 0 auto; max-width: 80ch;">A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets. Fluent in three languages and equipped with a cross-cultural perspective, I excel at optimizing processes, driving market expansion, and delivering measurable results in dynamic, international environments.</p></div>
         </section>
         <section id="skills">
-            <div class="container"><h2 class="section-title">Core Competencies</h2><div class="grid-container"><div class="card fade-in"><h3>Data Analysis</h3><p>Excel, Data Visualization, Business Intelligence (BI)</p></div><div class="card fade-in"><h3>Business Strategy</h3><p>International Trade, Market Research, Strategic Planning</p></div><div class="card fade-in"><h3>Process Optimization</h3><p>Workflow Improvement, Productivity Enhancement, Risk Reduction</p></div><div class="card fade-in"><h3>Platforms & Software</h3><p>MS Office Suite (Excel, PowerPoint), Canva, Power BI, G-Suite</p></div></div></div>
+            <!-- THIS IS THE FIX: Added 'skills-grid' class directly -->
+            <div class="container"><h2 class="section-title">Core Competencies</h2><div class="grid-container skills-grid"><div class="card fade-in"><h3>Data Analysis</h3><p>Excel, Data Visualization, Business Intelligence (BI)</p></div><div class="card fade-in"><h3>Business Strategy</h3><p>International Trade, Market Research, Strategic Planning</p></div><div class="card fade-in"><h3>Process Optimization</h3><p>Workflow Improvement, Productivity Enhancement, Risk Reduction</p></div><div class="card fade-in"><h3>Platforms & Software</h3><p>MS Office Suite (Excel, PowerPoint), Canva, Power BI, G-Suite</p></div></div></div>
         </section>
         <section id="projects">
             <div class="container"><h2 class="section-title">Key Projects</h2><div class="content-wrapper"><div class="card item-card fade-in"><h3>🌍 Global Trade Analysis Engine</h3><p>An executive project dossier showcasing a predictive analytics engine for simulating international trade costs.</p><div class="project-links"><a href="projects/trade-compliance/index.html?v=final" class="btn btn-primary">Open Project Dossier</a></div></div><div class="card item-card fade-in"><h3 style="display: flex; align-items: center;"><span id="live-indicator" class="live-indicator"></span><span id="insights-title">Bilateral Economic Intelligence</span></h3><p>A live, real-time intelligence feed tracking the latest economic and business news concerning the Italy-India corridor.</p><div id="insights-container" class="grid-container"><p style="text-align:left; grid-column: 1 / -1;">Accessing intelligence feeds...</p></div></div></div></div>
@@ -57,25 +41,15 @@
             <div class="container"><h2 class="section-title">Get In Touch</h2><div class="content-wrapper"><div class="card fade-in" style="text-align: center;"><p style="font-size: 1.1rem;">I am actively seeking opportunities and am open to collaboration.</p><p><strong>Email:</strong> <a href="mailto:krishna.saq@gmail.com" style="color: var(--accent-primary);">krishna.saq@gmail.com</a></p><p><strong>Mobile:</strong> <a href="tel:+393756320447" style="color: var(--accent-primary);">+39 375 632 0447</a></p></div></div></div>
         </section>
     </main>
-
-    <!-- Footer -->
     <footer><div class="container"><p>&copy; 2025 Krishna Dayma. All rights reserved.</p></div></footer>
 
     <!-- External Libraries -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <!-- Google Translate Initialization Script -->
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-       <!-- External Libraries -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <!-- Google Translate Initialization Script -->
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <!-- Main Application Logic (deferred to load after page content) -->
+    <!-- Main Application Logic -->
     <script src="animations.js" defer></script>
     <script src="main.js" defer></script>
 </body>
