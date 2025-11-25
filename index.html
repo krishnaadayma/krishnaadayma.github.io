@@ -9,82 +9,49 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK V10 (FINAL) ===== */
+        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK V11 (DEFINITIVE) ===== */
         :root {
             --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
             --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
             --accent-primary: #A0A0A0; --accent-secondary: #4a5568;
             --border-color: #2C2C2C; --live-red: #ff4d4d;
             --gradient-primary: linear-gradient(135deg, #1E1E1E 0%, #121212 100%);
-            --text-base: clamp(1rem, 3vw, 1.125rem); --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
-            --text-xl: clamp(1.25rem, 4vw, 1.5rem); --text-2xl: clamp(1.5rem, 5vw, 1.875rem);
-            --text-3xl: clamp(1.875rem, 6vw, 2.25rem); --text-4xl: clamp(2.25rem, 8vw, 3rem);
-            --space-sm: clamp(0.75rem, 2vw, 1rem); --space-md: clamp(1rem, 3vw, 1.5rem);
-            --space-lg: clamp(1.5rem, 4vw, 2rem); --space-xl: clamp(2rem, 6vw, 3rem);
-            --space-2xl: clamp(3rem, 8vw, 4rem);
-            --radius-md: 0.5rem; --radius-lg: 0.75rem;
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.5); --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
             --transition-fast: 0.2s ease;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; color: var(--text-secondary); background-color: var(--bg-primary); overflow-x: hidden; }
-        .container { width: 100%; max-width: min(1200px, 95vw); margin: 0 auto; padding: 0 var(--space-md); position: relative; z-index: 2; }
-        h1, h2, h3 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: var(--space-sm); text-align: center;}
-        h1 { font-size: var(--text-4xl); } h2 { font-size: var(--text-3xl); } h3 { font-size: var(--text-2xl); color: var(--accent-primary); }
-        p { color: var(--text-muted); margin-bottom: var(--space-sm); line-height: 1.6; font-size: var(--text-base); max-width: 65ch; }
-        header { background: var(--gradient-primary); padding: var(--space-2xl) 0; margin-bottom: var(--space-xl); position: relative; overflow: hidden; border-bottom: 1px solid var(--border-color); }
+        .container { width: 100%; max-width: min(1200px, 95vw); margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 2; }
+        h1, h2, h3 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: 1rem; text-align: center;}
+        p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6; max-width: 65ch; }
+        header { background: var(--gradient-primary); padding: 4rem 0; margin-bottom: 3rem; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-color); }
         #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; pointer-events: none; }
         .header-content { position: relative; z-index: 1; text-align: center; }
         .header-content p { margin-left: auto; margin-right: auto; }
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--bg-tertiary); color: var(--text-primary); padding: var(--space-sm) var(--space-lg); text-decoration: none; border-radius: var(--radius-md); font-weight: 600; border: 1px solid var(--border-color); transition: all var(--transition-fast); }
-        .btn:hover, .btn:focus { background: #404040; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--bg-tertiary); color: var(--text-primary); padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 0.5rem; font-weight: 600; border: 1px solid var(--border-color); transition: all var(--transition-fast); }
+        .btn:hover, .btn:focus { background: #404040; transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.5); outline: none; }
         .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
-        section { padding: var(--space-2xl) 0; width: 100%; position: relative; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-primary); margin: var(--space-sm) auto 0; border-radius: 2px; }
-        .card { background: var(--bg-secondary); padding: var(--space-lg); border-radius: var(--radius-lg); border: 1px solid var(--border-color); display: flex; flex-direction: column; }
+        section { padding: 3rem 0; width: 100%; position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-primary); margin: 1rem auto 0; border-radius: 2px; }
+        .card { background: var(--bg-secondary); padding: 2rem; border-radius: 0.75rem; border: 1px solid var(--border-color); display: flex; flex-direction: column; }
         .card h3, .card p, .card ul { text-align: left; }
-        .card ul { padding-left: 1.25rem; color: var(--text-muted); }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: var(--space-lg); }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: 1.5rem; }
         .live-indicator { display: none; width: 10px; height: 10px; background-color: var(--live-red); border-radius: 50%; margin-right: 12px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); } }
-        footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: var(--space-xl) 0; margin-top: var(--space-2xl); border-top: 1px solid var(--border-color); }
-        
-        /* --- CUSTOM TRANSLATION TOGGLE --- */
-        #custom-translate-widget {
-            position: fixed; top: 1rem; right: 1.5rem; z-index: 9999;
-            background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);
-        }
-        #custom-translate-widget a {
-            color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem;
-            padding: 0.2rem; transition: color var(--transition-fast);
-            outline: none;
-        }
-        #custom-translate-widget a:focus {
-            outline: none;
-        }
-        #custom-translate-widget a.active, #custom-translate-widget a:hover {
-            color: var(--text-primary);
-        }
-        #custom-translate-widget span {
-            color: var(--border-color); margin: 0 0.2rem;
-        }
-        
-        /* ===== DEFINITIVE FIX FOR ALL GOOGLE TRANSLATE VISUAL BUGS ===== */
-        body > .skiptranslate { display: none !important; }
+        footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: 3rem 0; margin-top: 4rem; border-top: 1px solid var(--border-color); }
+        #custom-translate-widget { position: fixed; top: 1rem; right: 1.5rem; z-index: 9999; background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: 0.5rem; border: 1px solid var(--border-color); }
+        #custom-translate-widget a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.2rem; transition: color var(--transition-fast); outline: none; }
+        #custom-translate-widget a:focus, .btn:focus { outline: none; }
+        #custom-translate-widget a.active, #custom-translate-widget a:hover { color: var(--text-primary); }
+        #custom-translate-widget span { color: var(--border-color); margin: 0 0.2rem; }
+        body > .skiptranslate, .goog-te-spinner-pos { display: none !important; }
         html.translated-ltr, html.translated-rtl { margin-top: 0 !important; }
         body { top: 0 !important; }
-        font[style] {
-            background-color: transparent !important;
-            color: inherit !important;
-        }
+        font[style] { background-color: transparent !important; color: inherit !important; }
     </style>
 </head>
 <body>
-    <!-- Hidden element for Google's engine -->
     <div id="google_translate_element" style="display: none;"></div>
-
-    <!-- Custom EN | IT Toggle -->
     <div id="custom-translate-widget">
         <a href="javascript:void(0)" class="lang-en" onclick="setLanguage('en')">EN</a>
         <span>|</span>
@@ -97,186 +64,96 @@
     </header>
 
     <main id="main-content">
-        <!-- All your sections remain here -->
         <section id="about">
-            <canvas id="globe-canvas" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1200px; height: 1200px; z-index: 1; opacity: 0.1;"></canvas>
-            <div class="container">
-                <h2 class="section-title">Professional Summary</h2>
-                <div class="grid-container"><p style="text-align: center; margin: 0 auto;">A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets. Fluent in three languages and equipped with a cross-cultural perspective, I excel at optimizing processes, driving market expansion, and delivering measurable results in dynamic, international environments.</p></div>
-            </div>
+            <canvas id="globe-canvas" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 1200px; max-height: 1200px; width: 100%; height: 100%; z-index: 1; opacity: 0.1;"></canvas>
+            <div class="container"><h2 class="section-title">Professional Summary</h2><p style="text-align: center; margin: 0 auto;">A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets. Fluent in three languages and equipped with a cross-cultural perspective, I excel at optimizing processes, driving market expansion, and delivering measurable results in dynamic, international environments.</p></div>
         </section>
-
         <section id="skills">
-            <div class="container">
-                <h2 class="section-title">Core Competencies</h2>
-                <div class="grid-container">
-                    <div class="card"><h3>Data Analysis</h3><p>Excel, Data Visualization, Business Intelligence (BI)</p></div>
-                    <div class="card"><h3>Business Strategy</h3><p>International Trade, Market Research, Strategic Planning</p></div>
-                    <div class="card"><h3>Process Optimization</h3><p>Workflow Improvement, Productivity Enhancement, Risk Reduction</p></div>
-                    <div class="card"><h3>Platforms & Software</h3><p>MS Office Suite (Excel, PowerPoint), Canva, Power BI, G-Suite</p></div>
-                </div>
-            </div>
+            <div class="container"><h2 class="section-title">Core Competencies</h2><div class="grid-container"><div class="card"><h3>Data Analysis</h3><p>Excel, Data Visualization, Business Intelligence (BI)</p></div><div class="card"><h3>Business Strategy</h3><p>International Trade, Market Research, Strategic Planning</p></div><div class="card"><h3>Process Optimization</h3><p>Workflow Improvement, Productivity Enhancement, Risk Reduction</p></div><div class="card"><h3>Platforms & Software</h3><p>MS Office Suite (Excel, PowerPoint), Canva, Power BI, G-Suite</p></div></div></div>
         </section>
-        
         <section id="projects">
-            <div class="container">
-                <h2 class="section-title">Key Projects</h2>
-                <div class="grid-container">
-                    <div class="card">
-                        <h3 style="display: flex; align-items: center;"><span class="live-indicator"></span><span>Bilateral Economic Intelligence</span></h3>
-                        <p>A live intelligence feed tracking economic news for the Italy-India corridor, powered by a 24/7 automated GitHub Action.</p>
-                        <div id="insights-container" style="margin-top: auto; padding-top: var(--space-md);"><p style="text-align:left;">Initializing live feed...</p></div>
-                    </div>
-                    <div class="card">
-                        <h3>🌍 Global Trade Analysis Engine</h3>
-                        <p>An executive project dossier showcasing a predictive analytics engine for simulating international trade costs between the world's top 10 economies.</p>
-                        <div class="project-links" style="margin-top: auto; padding-top: var(--space-md);"><a href="projects/trade-compliance/index.html" class="btn btn-primary">Open Project Dossier</a></div>
-                    </div>
-                </div>
-            </div>
+            <div class="container"><h2 class="section-title">Key Projects</h2><div class="grid-container"><div class="card"><h3 style="display: flex; align-items: center;"><span class="live-indicator"></span><span>Bilateral Economic Intelligence</span></h3><p>A live intelligence feed tracking economic news for the Italy-India corridor, powered by a 24/7 automated GitHub Action.</p><div id="insights-container" style="margin-top: auto; padding-top: 1rem;"><p style="text-align:left;">Initializing live feed...</p></div></div><div class="card"><h3>🌍 Global Trade Analysis Engine</h3><p>An executive project dossier showcasing a predictive analytics engine for simulating international trade costs.</p><div style="margin-top: auto; padding-top: 1rem;"><a href="projects/trade-compliance/index.html" class="btn btn-primary">Open Project Dossier</a></div></div></div></div>
         </section>
-
-        <!-- EXPERIENCE SECTION - UPDATED TO CARD LAYOUT -->
         <section id="experience">
-            <div class="container">
-                <h2 class="section-title">Professional Experience</h2>
-                <div class="grid-container">
-                    <div class="card">
-                        <h3>HR & Communications Intern</h3>
-                        <p><strong>University of Parma, Parma, Italy</strong> | Mar 2025 - Jun 2025</p>
-                        <ul>
-                            <li>Orchestrated the university's flagship "Open Day" recruitment event for over 6,000 students.</li>
-                            <li>Developed specialized onboarding programs that improved campus integration.</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h3>Junior Business & Marketing Analyst</h3>
-                        <p><strong>Shubh Labh Pvt Ltd., Bombay, India</strong> | May 2024 - Dec 2024</p>
-                        <ul>
-                            <li>Drove an 8% uplift in customer engagement via data-driven marketing strategies.</li>
-                            <li>Engineered process improvements that boosted team productivity by 15%.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <div class="container"><h2 class="section-title">Professional Experience</h2><div class="grid-container"><div class="card"><h3>HR & Communications Intern</h3><p><strong>University of Parma, Italy</strong> | Mar 2025 - Jun 2025</p><ul><li>Orchestrated the university's flagship "Open Day" recruitment event for over 6,000 students.</li><li>Developed specialized onboarding programs that improved campus integration.</li></ul></div><div class="card"><h3>Junior Business & Marketing Analyst</h3><p><strong>Shubh Labh Pvt Ltd., India</strong> | May 2024 - Dec 2024</p><ul><li>Drove an 8% uplift in customer engagement via data-driven marketing strategies.</li><li>Engineered process improvements that boosted team productivity by 15%.</li></ul></div></div></div>
         </section>
-        
-        <!-- EDUCATION SECTION - UPDATED TO CARD LAYOUT -->
         <section id="education">
-            <div class="container">
-                 <h2 class="section-title">Academic Background</h2>
-                <div class="grid-container">
-                    <div class="card">
-                        <h3>Laurea Magistrale in International Business and Development</h3>
-                        <p><strong>University of Parma, Parma, Italy</strong> | 2022 – 2025</p>
-                    </div>
-                    <div class="card">
-                        <h3>Laurea triennale in Commerce</h3>
-                        <p><strong>Swami Ramanand Teerth Marathwada University, India</strong> | 2018 – 2021</p>
-                    </div>
-                </div>
-            </div>
+            <div class="container"><h2 class="section-title">Academic Background</h2><div class="grid-container"><div class="card"><h3>Laurea Magistrale in International Business</h3><p><strong>University of Parma, Italy</strong> | 2022 – 2025</p></div><div class="card"><h3>Laurea triennale in Commerce</h3><p><strong>SRTM University, India</strong> | 2018 – 2021</p></div></div></div>
         </section>
-        
         <section id="contact">
-            <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="card" style="max-width: 900px; margin: 0 auto; text-align: center;">
-                    <p style="text-align: center; margin-left: auto; margin-right: auto; font-size: var(--text-lg);">I am currently seeking new opportunities and am open to collaboration.</p>
-                    <p><strong>Email:</strong> <a href="mailto:krishna.saq@gmail.com" style="color: var(--accent-primary);">krishna.saq@gmail.com</a></p>
-                    <p><strong>Mobile:</strong> <a href="tel:+393756320447" style="color: var(--accent-primary);">+39 375 632 0447</a></p>
-                    <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/krishnaadayma" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary);">linkedin.com/in/krishnaadayma</a></p>
-                </div>
-            </div>
+            <div class="container"><h2 class="section-title">Get In Touch</h2><div class="card" style="max-width: 900px; margin: 0 auto; text-align: center;"><p style="text-align: center; margin-left: auto; margin-right: auto;">I am currently seeking new opportunities and am open to collaboration.</p><p><strong>Email:</strong> <a href="mailto:krishna.saq@gmail.com" style="color: var(--accent-primary);">krishna.saq@gmail.com</a></p><p><strong>Mobile:</strong> <a href="tel:+393756320447" style="color: var(--accent-primary);">+39 375 632 0447</a></p><p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/krishnaadayma" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary);">linkedin.com/in/krishnaadayma</a></p></div></div>
         </section>
     </main>
     
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Krishna Dayma. All Rights Reserved.</p>
-        </div>
-    </footer>
+    <footer><div class="container"><p>&copy; 2025 Krishna Dayma. All Rights Reserved.</p></div></footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
-    <!-- Translation Engine Initialization -->
     <script type="text/javascript">
-        function googleTranslateElementInit() {
-          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-        }
+      function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); }
+      function setLanguage(lang) { document.cookie = `googtrans=/en/${lang};path=/`; location.reload(); }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <!-- MAIN PAGE SCRIPTS (with BULLETPROOF translation) -->
     <script>
-        // --- BULLETPROOF TRANSLATE FUNCTION ---
-        function setLanguage(lang) {
-            document.cookie = `googtrans=/en/${lang};path=/`;
-            location.reload();
-        }
+      function runPageScripts() {
+          // --- Highlight active language ---
+          let currentLang = 'en';
+          const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+          if (langCookie) currentLang = langCookie.split('/')[2];
+          document.querySelectorAll('#custom-translate-widget a').forEach(el => el.classList.remove('active'));
+          const activeEl = document.querySelector(`.lang-${currentLang}`);
+          if (activeEl) activeEl.classList.add('active');
 
-        // --- Highlight active language based on cookie ---
-        function highlightActiveLanguage() {
-            let currentLang = 'en'; // Default
-            const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
-            if (langCookie) {
-                currentLang = langCookie.split('/')[2];
-            }
-            document.querySelectorAll('#custom-translate-widget a').forEach(el => el.classList.remove('active'));
-            const activeEl = document.querySelector(`.lang-${currentLang}`);
-            if (activeEl) {
-                activeEl.classList.add('active');
-            }
-        }
-        
-        // --- ALL OTHER SCRIPTS ---
-        document.addEventListener('DOMContentLoaded', function() {
-            highlightActiveLanguage();
-            
-            const insightsContainer = document.getElementById('insights-container');
-            const liveIndicator = document.querySelector('.live-indicator');
+          // --- Live News Feed ---
+          const insightsContainer = document.getElementById('insights-container');
+          const liveIndicator = document.querySelector('.live-indicator');
+          function fetchAndDisplayNews() {
+              fetch('news.json?cachebust=' + new Date().getTime())
+                  .then(response => { if (!response.ok) throw new Error('Network error'); return response.json(); })
+                  .then(data => {
+                      if (data && data.length > 0) {
+                          insightsContainer.innerHTML = '';
+                          if(liveIndicator) liveIndicator.style.display = 'inline-block';
+                          data.slice(0, 3).forEach(item => {
+                              const insightEl = document.createElement('div');
+                              const pubDate = item.isoDate ? new Date(item.isoDate).toLocaleDateString() : 'Recently';
+                              const title = item.title ? item.title.replace(/<[^>]*>/g, "") : "No title";
+                              insightEl.innerHTML = `<p style="margin:0; padding-bottom: 1rem;"><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">${title}</a><br><span style="font-size: 0.8rem; color: var(--text-muted);">Source: ${item.creator || "News"} | ${pubDate}</span></p>`;
+                              insightsContainer.appendChild(insightEl);
+                          });
+                      }
+                  }).catch(error => { insightsContainer.innerHTML = '<p style="text-align:left;">Intelligence feed is currently updating...</p>'; });
+          }
+          fetchAndDisplayNews();
+          setInterval(fetchAndDisplayNews, 30000);
 
-            function fetchAndDisplayNews() {
-                fetch('news.json?cachebust=' + new Date().getTime())
-                    .then(response => { if (!response.ok) throw new Error('Network error'); return response.json(); })
-                    .then(data => {
-                        if (data && data.length > 0) {
-                            insightsContainer.innerHTML = '';
-                            if(liveIndicator) liveIndicator.style.display = 'inline-block';
-                            data.slice(0, 3).forEach(item => {
-                                const insightEl = document.createElement('div');
-                                const pubDate = item.isoDate ? new Date(item.isoDate).toLocaleDateString() : 'Recently';
-                                const title = item.title.replace(/<[^>]*>/g, "");
-                                insightEl.innerHTML = `<p style="margin:0; padding-bottom: var(--space-sm);"><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">${title}</a><br><span style="font-size: 0.8rem; color: var(--text-muted);">Source: ${item.creator || "News"} | ${pubDate}</span></p>`;
-                                insightsContainer.appendChild(insightEl);
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        insightsContainer.innerHTML = '<p style="text-align:left;">Intelligence feed is currently updating. Please check back shortly.</p>';
-                    });
-            }
-
-            fetchAndDisplayNews();
-            setInterval(fetchAndDisplayNews, 30000);
-
+          // --- Particles.js Animation ---
+          if (typeof particlesJS !== 'undefined') {
             particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
-            const globeCanvas = document.getElementById('globe-canvas');
-            if (globeCanvas) {
-                const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-                const renderer = new THREE.WebGLRenderer({ canvas: globeCanvas, alpha: true });
-                const globe = new THREE.Mesh(new THREE.SphereGeometry(1.5, 32, 32), new THREE.MeshBasicMaterial({ color: 0xA0A0A0, wireframe: true }));
-                scene.add(globe); camera.position.z = 2.5;
-                function animate() { requestAnimationFrame(animate); globe.rotation.y += 0.001; renderer.render(scene, camera); }
-                animate();
-                new ResizeObserver(() => {
-                    const container = document.getElementById('about'); const size = Math.min(container.offsetWidth, 1200);
-                    camera.aspect = 1; camera.updateProjectionMatrix(); renderer.setSize(size, size);
-                }).observe(document.getElementById('about'));
-            }
-        });
+          }
+
+          // --- Three.js Globe Animation ---
+          const globeCanvas = document.getElementById('globe-canvas');
+          if (globeCanvas && typeof THREE !== 'undefined') {
+              const scene = new THREE.Scene();
+              const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+              const renderer = new THREE.WebGLRenderer({ canvas: globeCanvas, alpha: true });
+              const globe = new THREE.Mesh(new THREE.SphereGeometry(1.5, 32, 32), new THREE.MeshBasicMaterial({ color: 0xA0A0A0, wireframe: true }));
+              scene.add(globe); camera.position.z = 2.5;
+              function animate() { requestAnimationFrame(animate); globe.rotation.y += 0.001; renderer.render(scene, camera); }
+              animate();
+              new ResizeObserver(() => {
+                  const container = document.getElementById('about'); const size = Math.min(container.offsetWidth, 1200);
+                  camera.aspect = 1; camera.updateProjectionMatrix(); renderer.setSize(size, size);
+              }).observe(document.getElementById('about'));
+          }
+      }
+      // --- MASTER INITIALIZER ---
+      // This waits for the page to be loaded and gives Google Translate time to work before running animations.
+      window.onload = function() {
+        setTimeout(runPageScripts, 500); // 500ms delay for stability
+      };
     </script>
 </body>
 </html>
