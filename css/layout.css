@@ -1,0 +1,107 @@
+/* ==================================================================================
+   LAYOUT.CSS - Container, Grid & Section Layouts
+   ================================================================================== */
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    position: relative;
+}
+
+/* Sections */
+section {
+    padding: var(--space-xl) 0;
+    position: relative;
+}
+
+/* Section Title */
+.section-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--accent-primary);
+    margin: var(--space-sm) auto 0;
+    border-radius: 2px;
+}
+
+/* Header */
+header {
+    position: relative;
+    text-align: center;
+    padding: var(--space-xl) var(--space-md);
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.header-content {
+    position: relative;
+    z-index: 10;
+}
+
+.header-content h1 {
+    margin-bottom: var(--space-sm);
+    letter-spacing: -0.02em;
+}
+
+.subtitle, .tagline {
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Grid Systems */
+.skills-grid,
+.news-grid,
+.projects-grid,
+.experience-grid,
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md);
+}
+
+/* About Section */
+#about {
+    position: relative;
+    overflow: hidden;
+}
+
+#about .container {
+    position: relative;
+    z-index: 1;
+}
+
+.about-text {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 80ch;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: var(--space-lg) var(--space-md);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    margin-top: var(--space-xl);
+}
+
+footer p {
+    margin: 0;
+    font-size: var(--font-size-sm);
+}
