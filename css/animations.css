@@ -1,0 +1,104 @@
+/* ==================================================================================
+   ANIMATIONS.CSS - Keyframes & Animation Classes
+   ================================================================================== */
+
+/* Fade In Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Language Item Slide In */
+.language-item {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.language-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Skills Grid - 3D Card Flip */
+.skills-grid {
+    perspective: 1000px;
+}
+
+.skills-grid .card {
+    transform-style: preserve-3d;
+    transform: rotateY(90deg);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.skills-grid .card.visible {
+    transform: rotateY(0deg);
+}
+
+/* Pulse Animation for Live Indicator */
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+}
+
+/* Particles Container */
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Globe Canvas */
+#globe-canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Hover Effects */
+.card {
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.btn {
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+}
+
+/* Smooth Link Underline */
+a {
+    position: relative;
+}
+
+section a:not(.btn)::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-primary);
+    transition: width var(--transition-normal);
+}
+
+section a:not(.btn):hover::after {
+    width: 100%;
+}
