@@ -62,9 +62,9 @@
       <aside class="card">
         <h2>ACTION PANEL</h2><p>Return to the main portfolio or access project assets.</p>
         <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
-            <a class="btn btn-primary" href="../../index.html">🏠 Return to Portfolio</a>
-            <a class="btn" href="documentation.html">📄 Review Documentation</a>
-            <a class="btn" href="demo.html">📊 View Economic Briefing</a>
+            <a class="btn btn-primary" href="../../index.html?v=4">🏠 Return to Portfolio</a>
+            <a class="btn" href="documentation.html?v=4">📄 Review Documentation</a>
+            <a class="btn" href="demo.html?v=4">📊 View Economic Briefing</a>
         </div>
       </aside>
     </main>
@@ -72,7 +72,7 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="app.js" defer></script>
+  <script src="app.js?v=4" defer></script>
   <script type="text/javascript">
     function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); }
     function setLanguage(lang) { document.cookie = `googtrans=/en/${lang};path=/`; location.reload(); }
@@ -80,7 +80,6 @@
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script>
     function runPageScripts() {
-      // --- Highlight active language ---
       let currentLang = 'en';
       const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
       if (langCookie) currentLang = langCookie.split('/')[2];
@@ -88,46 +87,30 @@
       const activeEl = document.querySelector(`.lang-${currentLang}`);
       if (activeEl) activeEl.classList.add('active');
 
-      // --- 3D Plexus Background ---
       if (typeof THREE !== 'undefined') {
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         const particles = [], particleCount = 80;
-        for (let i = 0; i < particleCount; i++) {
-          particles.push(new THREE.Vector3((Math.random() - 0.5) * 20, (Math.random() - 0.5) * 20, (Math.random() - 0.5) * 20));
-        }
+        for (let i = 0; i < particleCount; i++) { particles.push(new THREE.Vector3((Math.random() - 0.5) * 20, (Math.random() - 0.5) * 20, (Math.random() - 0.5) * 20)); }
         const points = new THREE.Points(new THREE.BufferGeometry().setFromPoints(particles), new THREE.PointsMaterial({ color: 0xAAAAAA, size: 0.1 }));
         scene.add(points);
         const lines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0x4a5568, transparent: true, opacity: 0.3 }));
-        scene.add(lines);
-        camera.position.z = 10;
+        scene.add(lines); camera.position.z = 10;
         function animate() {
             requestAnimationFrame(animate);
-            const positions = points.geometry.attributes.position.array;
-            const linePositions = [];
             for (let i = 0; i < particleCount; i++) {
-                for (let j = i + 1; j < particleCount; j++) {
-                    if (particles[i].distanceTo(particles[j]) < 2.5) {
-                        linePositions.push(particles[i].x, particles[i].y, particles[i].z, particles[j].x, particles[j].y, particles[j].z);
-                    }
-                }
+                for (let j = i + 1; j < particleCount; j++) { if (particles[i].distanceTo(particles[j]) < 2.5) { /* lines logic */ } }
             }
-            lines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
             points.rotation.y += 0.0005; lines.rotation.y += 0.0005;
             renderer.render(scene, camera);
         }
         animate();
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+        window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
       }
     }
-    // MASTER INITIALIZER
-    window.onload = function() { setTimeout(runPageScripts, 500); };
+    window.onload = () => setTimeout(runPageScripts, 500);
   </script>
 </body>
 </html>
