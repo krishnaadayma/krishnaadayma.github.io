@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK V9 (BULLETPROOF) ===== */
+        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK V10 (FINAL) ===== */
         :root {
             --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
             --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
@@ -50,29 +50,35 @@
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); } }
         footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: var(--space-xl) 0; margin-top: var(--space-2xl); border-top: 1px solid var(--border-color); }
         
-        /* --- CUSTOM TRANSLATION TOGGLE V2 (BULLETPROOF) --- */
-#custom-translate-widget {
-    position: fixed; top: 1rem; right: 1.5rem; z-index: 9999;
-    background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);
-}
-#custom-translate-widget a {
-    color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem;
-    padding: 0.2rem; transition: color var(--transition-fast);
-    outline: none; /* THIS IS THE FIX: Removes the ugly browser glow */
-}
-#custom-translate-widget a:focus {
-    outline: none; /* Extra rule to ensure focus glow is also removed */
-}
-#custom-translate-widget a.active, #custom-translate-widget a:hover {
-    color: var(--text-primary);
-}
-#custom-translate-widget span {
-    color: var(--border-color); margin: 0 0.2rem;
-}
-/* Hide Google's default UI */
-body > .skiptranslate { display: none !important; }
-html.translated-ltr, html.translated-rtl { margin-top: 0 !important; }
-body { top: 0 !important; }
+        /* --- CUSTOM TRANSLATION TOGGLE --- */
+        #custom-translate-widget {
+            position: fixed; top: 1rem; right: 1.5rem; z-index: 9999;
+            background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);
+        }
+        #custom-translate-widget a {
+            color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            padding: 0.2rem; transition: color var(--transition-fast);
+            outline: none;
+        }
+        #custom-translate-widget a:focus {
+            outline: none;
+        }
+        #custom-translate-widget a.active, #custom-translate-widget a:hover {
+            color: var(--text-primary);
+        }
+        #custom-translate-widget span {
+            color: var(--border-color); margin: 0 0.2rem;
+        }
+        
+        /* ===== DEFINITIVE FIX FOR ALL GOOGLE TRANSLATE VISUAL BUGS ===== */
+        body > .skiptranslate { display: none !important; }
+        html.translated-ltr, html.translated-rtl { margin-top: 0 !important; }
+        body { top: 0 !important; }
+        /* This rule targets the <font> tags Google injects and forces them to match your theme */
+        font[style] {
+            background-color: transparent !important;
+            color: inherit !important;
+        }
     </style>
 </head>
 <body>
@@ -181,7 +187,6 @@ body { top: 0 !important; }
     <script>
         // --- BULLETPROOF TRANSLATE FUNCTION ---
         function setLanguage(lang) {
-            // Set the cookie and reload
             document.cookie = `googtrans=/en/${lang};path=/`;
             location.reload();
         }
@@ -202,7 +207,7 @@ body { top: 0 !important; }
         
         // --- ALL OTHER SCRIPTS ---
         document.addEventListener('DOMContentLoaded', function() {
-            highlightActiveLanguage(); // Set active language on page load
+            highlightActiveLanguage();
             
             const insightsContainer = document.getElementById('insights-container');
             const liveIndicator = document.querySelector('.live-indicator');
@@ -250,4 +255,3 @@ body { top: 0 !important; }
     </script>
 </body>
 </html>
-
