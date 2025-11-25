@@ -1,9 +1,9 @@
 /**
  * ==================================================================================
- *  MAIN APPLICATION SCRIPT (main.js) - HEAVY ANIMATION ORCHESTRATOR
+ *  MAIN APPLICATION SCRIPT (main.js) - CORRECTED VERSION
  * ==================================================================================
- *  This file handles core page logic and now calls the 'animations.js' script
- *  to run all the advanced visual effects, keeping the codebase clean.
+ *  This version removes the faulty code that was breaking the CSS rendering.
+ *  It now correctly orchestrates the page logic and advanced animations.
  */
 
 window.setLanguage = function(lang) {
@@ -18,7 +18,17 @@ function googleTranslateElementInit() {
 function runPageScripts() {
 
     function initializeUI() {
-        // ... (UI initialization code remains the same)
+        // ... (This function remains unchanged)
+        const btnEN = document.querySelector('.lang-en');
+        const btnIT = document.querySelector('.lang-it');
+        if (btnEN) btnEN.addEventListener('click', () => window.setLanguage('en'));
+        if (btnIT) btnIT.addEventListener('click', () => window.setLanguage('it'));
+        let currentLanguage = 'en';
+        const googleTranslateCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+        if (googleTranslateCookie) { currentLanguage = googleTranslateCookie.split('/')[2]; }
+        document.querySelectorAll('#custom-translate-widget a').forEach(el => el.classList.remove('active'));
+        const activeLanguageElement = document.querySelector(`.lang-${currentLanguage}`);
+        if (activeLanguageElement) { activeLanguageElement.classList.add('active'); }
     }
 
     function initializeScrollObserver() {
@@ -27,7 +37,6 @@ function runPageScripts() {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    // Handle progress bars
                     if (entry.target.matches('.language-item')) {
                         const progressBar = entry.target.querySelector('.progress-bar');
                         if (progressBar) progressBar.style.width = progressBar.dataset.width;
@@ -37,12 +46,41 @@ function runPageScripts() {
             });
         };
         const observer = new IntersectionObserver(observerCallback, observerOptions);
-        // Observe all .fade-in elements AND the new skills-grid cards
         document.querySelectorAll('.fade-in, .skills-grid .card, .language-item').forEach(el => observer.observe(el));
     }
 
     async function initializeNewsFeed() {
-        // ... (News feed logic remains the same)
+        // ... (This function remains unchanged and is correct)
+        const insightsContainer = document.getElementById('insights-container');
+        const liveIndicator = document.getElementById('live-indicator');
+        const insightsTitle = document.getElementById('insights-title');
+        if (!insightsContainer || !liveIndicator || !insightsTitle) return;
+        const newsFileUrl = `news.json?v=${new Date().getTime()}`;
+        try {
+            const response = await fetch(newsFileUrl);
+            if (!response.ok) throw new Error(`Network error: ${response.status}`);
+            const allItems = await response.json();
+            if (!Array.isArray(allItems) || allItems.length === 0) throw new Error('News file is empty or invalid.');
+            const articlesToDisplay = allItems.slice(0, 4);
+            insightsContainer.innerHTML = '';
+            insightsTitle.textContent = "Bilateral Economic Intelligence";
+            liveIndicator.style.display = 'inline-block';
+            articlesToDisplay.forEach(item => {
+                const articleCard = document.createElement('div');
+                articleCard.className = 'card fade-in';
+                articleCard.style.padding = 'var(--space-md)';
+                const title = item.title || "Untitled Article";
+                const source = item.author || "Google News";
+                const link = item.link || "#";
+                articleCard.innerHTML = `<h4><a href="${link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-size: 1rem;">${title}</a></h4><p style="font-size: 0.8rem; margin-bottom: 0;">Source: ${source}</p>`;
+                insightsContainer.appendChild(articleCard);
+            });
+        } catch (error) {
+            console.error('News feed init failed:', error);
+            insightsTitle.textContent = "Intelligence Feed";
+            liveIndicator.style.display = 'none';
+            insightsContainer.innerHTML = '<p style="text-align:left; grid-column: 1 / -1;">Live feed is currently unavailable.</p>';
+        }
     }
 
     // --- ORCHESTRATION ---
@@ -50,19 +88,14 @@ function runPageScripts() {
     initializeScrollObserver();
     initializeNewsFeed();
     
-    // **NEW:** Run all the heavy animations from the dedicated script
     if (typeof runAdvancedAnimations === 'function') {
         runAdvancedAnimations();
     } else {
-        console.error("Advanced animations script not found.");
+        console.error("Advanced animations script ('animations.js') not found or failed to load.");
     }
 }
 
+// **REMOVED FAULTY CODE FROM HERE**
 window.onload = () => {
-    // Add a specific class to the skills grid to target the 3D animation
-    const skillsGrid = document.querySelector('#skills .grid-container');
-    if (skillsGrid) {
-        skillsGrid.classList.add('skills-grid');
-    }
     setTimeout(runPageScripts, 500);
 };
