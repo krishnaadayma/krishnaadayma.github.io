@@ -17,18 +17,24 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm' # This speeds up future installs
+          cache: 'npm' # optional: speeds up installs but won't help corrupted tarballs
 
-      # --- THIS IS THE CLEAN, NEW METHOD ---
-      # This single command reads package.json and installs all dependencies.
+      - name: Clear npm cache
+        run: npm cache clean --force
+
+      - name: Configure npm fetch retries
+        run: |
+          npm config set fetch-retries 5
+          npm config set fetch-retry-factor 2
+          npm config set fetch-retry-mintimeout 2000
+          npm config set fetch-retry-maxtimeout 60000
+
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
-      # Now that dependencies are installed, the script can run.
       - name: Run Fetch Script
         run: node ./.github/workflows/fetch-script.js
 
-      # Commit the results back to the repository.
       - name: Commit and Push if Changed
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
