@@ -102,3 +102,90 @@ section a:not(.btn)::after {
 section a:not(.btn):hover::after {
     width: 100%;
 }
+
+/* Staggered fade-in for skills grid */
+.skills-grid .card:nth-child(1) { transition-delay: 0.1s; }
+.skills-grid .card:nth-child(2) { transition-delay: 0.2s; }
+.skills-grid .card:nth-child(3) { transition-delay: 0.3s; }
+.skills-grid .card:nth-child(4) { transition-delay: 0.4s; }
+
+/* Staggered fade-in for other grids */
+.news-grid .card:nth-child(1),
+.projects-grid .card:nth-child(1),
+.experience-grid .card:nth-child(1),
+.education-grid .card:nth-child(1) { transition-delay: 0.1s; }
+
+.news-grid .card:nth-child(2),
+.projects-grid .card:nth-child(2),
+.experience-grid .card:nth-child(2),
+.education-grid .card:nth-child(2) { transition-delay: 0.2s; }
+
+.news-grid .card:nth-child(3),
+.projects-grid .card:nth-child(3),
+.experience-grid .card:nth-child(3),
+.education-grid .card:nth-child(3) { transition-delay: 0.3s; }
+
+.news-grid .card:nth-child(4),
+.projects-grid .card:nth-child(4),
+.experience-grid .card:nth-child(4),
+.education-grid .card:nth-child(4) { transition-delay: 0.4s; }
+
+/* Staggered language items */
+.language-item:nth-child(1) { transition-delay: 0.1s; }
+.language-item:nth-child(2) { transition-delay: 0.2s; }
+.language-item:nth-child(3) { transition-delay: 0.3s; }
+
+/* Text reveal animation */
+@keyframes textReveal {
+    from {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-content h1 {
+    animation: textReveal 1s ease forwards;
+}
+
+.header-content .subtitle {
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.3s forwards;
+}
+
+.header-content .tagline {
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+}
+
+/* Section fade-in on scroll */
+section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ensure header is always visible */
+header {
+    opacity: 1;
+    transform: none;
+}

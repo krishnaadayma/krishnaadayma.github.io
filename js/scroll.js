@@ -29,9 +29,9 @@ function initializeScrollObserver() {
     
     const observer = new IntersectionObserver(observerCallback, observerOptions);
     
-    // Observe all animated elements
+    // Observe all animated elements including sections
     const animatedElements = document.querySelectorAll(
-        '.fade-in, .skills-grid .card, .language-item'
+        '.fade-in, .skills-grid .card, .language-item, section'
     );
     
     animatedElements.forEach(el => observer.observe(el));
