@@ -1,35 +1,51 @@
-name: Fetch Live News
+name: Fetch Live News Feed
 
+# Controls when the action will run.
+# Runs on a schedule (every 6 hours), and also allows manual runs.
 on:
   schedule:
-    # Runs every 5 minutes
-    - cron: '*/5 * * * *'
-  workflow_dispatch: # Allows manual running
-
-# THIS IS THE CRITICAL FIX: Granting write permissions to the bot
-permissions:
-  contents: write
+    - cron: '0 */6 * * *' # Runs at minute 0 of every 6th hour
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
 jobs:
   fetch-news:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Check out your repository's code so the job can access it.
       - name: Check out repository
         uses: actions/checkout@v3
 
+      # Step 2: Set up Node.js environment, which is needed to run the fetch script.
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: npm install rss-parser
-
-      - name: Fetch and process news
+      # Step 3: Run the javascript file that fetches and combines the news feeds.
+      # This script will generate a new 'news.json' file.
+      - name: Run fetch script
         run: node ./.github/workflows/fetch-script.js
 
-      - name: Commit changes
+      # Step 4: Commit the newly generated 'news.json' file back to your repository.
+      - name: Commit and push if changed
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "BOT: Update live news feed"
+          # --- THIS IS THE CRITICAL FIX ---
+          # Before attempting to commit, this tells the action to pull the latest
+          # changes from the main branch. This prevents the "non-fast-forward" error.
+          pull_options: '--rebase'
+          
+          # Commit message for the update.
+          commit_message: 'BUI: Update live news feed'
+          
+          # The branch to commit to.
+          branch: main
+          
+          # The file(s) to add to the commit.
           file_pattern: news.json
+          
+          # User details for the commit.
+          commit_user_name: Krishna Dayma Bot
+          commit_user_email: krishna.saq@gmail.com
+          commit_author: Krishna Dayma <krishnaadayma@users.noreply.github.com>
