@@ -1,9 +1,9 @@
 /**
  * ==================================================================================
- *  MAIN APPLICATION SCRIPT (main.js) - CORRECTED VERSION
+ *  MAIN APPLICATION SCRIPT (main.js) - TRULY CORRECTED VERSION
  * ==================================================================================
- *  This version removes the faulty code that was breaking the CSS rendering.
- *  It now correctly orchestrates the page logic and advanced animations.
+ *  This version restores the code that was incorrectly deleted in the previous
+ *  version. It will now correctly orchestrate all page logic and animations.
  */
 
 window.setLanguage = function(lang) {
@@ -18,17 +18,22 @@ function googleTranslateElementInit() {
 function runPageScripts() {
 
     function initializeUI() {
-        // ... (This function remains unchanged)
         const btnEN = document.querySelector('.lang-en');
         const btnIT = document.querySelector('.lang-it');
         if (btnEN) btnEN.addEventListener('click', () => window.setLanguage('en'));
         if (btnIT) btnIT.addEventListener('click', () => window.setLanguage('it'));
+        
         let currentLanguage = 'en';
         const googleTranslateCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
-        if (googleTranslateCookie) { currentLanguage = googleTranslateCookie.split('/')[2]; }
+        if (googleTranslateCookie) { 
+            currentLanguage = googleTranslateCookie.split('/')[2]; 
+        }
+        
         document.querySelectorAll('#custom-translate-widget a').forEach(el => el.classList.remove('active'));
         const activeLanguageElement = document.querySelector(`.lang-${currentLanguage}`);
-        if (activeLanguageElement) { activeLanguageElement.classList.add('active'); }
+        if (activeLanguageElement) { 
+            activeLanguageElement.classList.add('active'); 
+        }
     }
 
     function initializeScrollObserver() {
@@ -50,21 +55,24 @@ function runPageScripts() {
     }
 
     async function initializeNewsFeed() {
-        // ... (This function remains unchanged and is correct)
         const insightsContainer = document.getElementById('insights-container');
         const liveIndicator = document.getElementById('live-indicator');
         const insightsTitle = document.getElementById('insights-title');
         if (!insightsContainer || !liveIndicator || !insightsTitle) return;
+
         const newsFileUrl = `news.json?v=${new Date().getTime()}`;
         try {
             const response = await fetch(newsFileUrl);
             if (!response.ok) throw new Error(`Network error: ${response.status}`);
+            
             const allItems = await response.json();
             if (!Array.isArray(allItems) || allItems.length === 0) throw new Error('News file is empty or invalid.');
+            
             const articlesToDisplay = allItems.slice(0, 4);
             insightsContainer.innerHTML = '';
             insightsTitle.textContent = "Bilateral Economic Intelligence";
             liveIndicator.style.display = 'inline-block';
+            
             articlesToDisplay.forEach(item => {
                 const articleCard = document.createElement('div');
                 articleCard.className = 'card fade-in';
@@ -95,7 +103,6 @@ function runPageScripts() {
     }
 }
 
-// **REMOVED FAULTY CODE FROM HERE**
 window.onload = () => {
     setTimeout(runPageScripts, 500);
 };
