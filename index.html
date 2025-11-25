@@ -9,13 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK V11 (DEFINITIVE) ===== */
+        /* ===== EXECUTIVE GRAY PALETTE CSS FRAMEWORK V12 (DEFINITIVE) ===== */
         :root {
             --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
             --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
             --accent-primary: #A0A0A0; --accent-secondary: #4a5568;
             --border-color: #2C2C2C; --live-red: #ff4d4d;
-            --gradient-primary: linear-gradient(135deg, #1E1E1E 0%, #121212 100%);
             --transition-fast: 0.2s ease;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,31 +22,37 @@
         body { font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; color: var(--text-secondary); background-color: var(--bg-primary); overflow-x: hidden; }
         .container { width: 100%; max-width: min(1200px, 95vw); margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 2; }
         h1, h2, h3 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: 1rem; text-align: center;}
-        p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6; max-width: 65ch; }
-        header { background: var(--gradient-primary); padding: 4rem 0; margin-bottom: 3rem; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-color); }
+        h1 { font-size: clamp(2.5rem, 6vw, 3.5rem); } h2 { font-size: clamp(2rem, 5vw, 2.5rem); } h3 { font-size: clamp(1.2rem, 4vw, 1.25rem); color: var(--text-primary);}
+        p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.7; max-width: 65ch; }
+        p strong { color: var(--text-secondary); font-weight: 600; }
+        ul { list-style-position: inside; padding-left: 0; color: var(--text-muted); }
+        li { margin-bottom: 0.5rem; }
+        header { background: linear-gradient(135deg, #1E1E1E 0%, #121212 100%); padding: 4rem 0; margin-bottom: 3rem; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-color); }
         #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; pointer-events: none; }
         .header-content { position: relative; z-index: 1; text-align: center; }
-        .header-content p { margin-left: auto; margin-right: auto; }
+        .header-content p { margin: 1rem auto; }
         .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--bg-tertiary); color: var(--text-primary); padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 0.5rem; font-weight: 600; border: 1px solid var(--border-color); transition: all var(--transition-fast); }
         .btn:hover, .btn:focus { background: #404040; transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.5); outline: none; }
-        .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
+        .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; font-weight: 700; }
         section { padding: 3rem 0; width: 100%; position: relative; }
         .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-primary); margin: 1rem auto 0; border-radius: 2px; }
-        .card { background: var(--bg-secondary); padding: 2rem; border-radius: 0.75rem; border: 1px solid var(--border-color); display: flex; flex-direction: column; }
+        .card { background: var(--bg-secondary); padding: 2rem; border-radius: 0.75rem; border: 1px solid var(--border-color); display: flex; flex-direction: column; height: 100%; }
         .card h3, .card p, .card ul { text-align: left; }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: 1.5rem; }
         .live-indicator { display: none; width: 10px; height: 10px; background-color: var(--live-red); border-radius: 50%; margin-right: 12px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); } }
         footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: 3rem 0; margin-top: 4rem; border-top: 1px solid var(--border-color); }
+        
+        /* ===== TRANSLATION WIDGET & FIXES (DEFINITIVE) ===== */
         #custom-translate-widget { position: fixed; top: 1rem; right: 1.5rem; z-index: 9999; background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: 0.5rem; border: 1px solid var(--border-color); }
         #custom-translate-widget a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.2rem; transition: color var(--transition-fast); outline: none; }
-        #custom-translate-widget a:focus, .btn:focus { outline: none; }
+        #custom-translate-widget a:focus { outline: none; }
         #custom-translate-widget a.active, #custom-translate-widget a:hover { color: var(--text-primary); }
         #custom-translate-widget span { color: var(--border-color); margin: 0 0.2rem; }
         body > .skiptranslate, .goog-te-spinner-pos { display: none !important; }
         html.translated-ltr, html.translated-rtl { margin-top: 0 !important; }
         body { top: 0 !important; }
-        font[style] { background-color: transparent !important; color: inherit !important; }
+        font[style] { background: transparent !important; color: inherit !important; }
     </style>
 </head>
 <body>
@@ -72,13 +77,12 @@
             <div class="container"><h2 class="section-title">Core Competencies</h2><div class="grid-container"><div class="card"><h3>Data Analysis</h3><p>Excel, Data Visualization, Business Intelligence (BI)</p></div><div class="card"><h3>Business Strategy</h3><p>International Trade, Market Research, Strategic Planning</p></div><div class="card"><h3>Process Optimization</h3><p>Workflow Improvement, Productivity Enhancement, Risk Reduction</p></div><div class="card"><h3>Platforms & Software</h3><p>MS Office Suite (Excel, PowerPoint), Canva, Power BI, G-Suite</p></div></div></div>
         </section>
         <section id="projects">
-            <div class="container"><h2 class="section-title">Key Projects</h2><div class="grid-container"><div class="card"><h3 style="display: flex; align-items: center;"><span class="live-indicator"></span><span>Bilateral Economic Intelligence</span></h3><p>A live intelligence feed tracking economic news for the Italy-India corridor, powered by a 24/7 automated GitHub Action.</p><div id="insights-container" style="margin-top: auto; padding-top: 1rem;"><p style="text-align:left;">Initializing live feed...</p></div></div><div class="card"><h3>🌍 Global Trade Analysis Engine</h3><p>An executive project dossier showcasing a predictive analytics engine for simulating international trade costs.</p><div style="margin-top: auto; padding-top: 1rem;"><a href="projects/trade-compliance/index.html" class="btn btn-primary">Open Project Dossier</a></div></div></div></div>
+            <div class="container"><h2 class="section-title">Key Projects</h2><div class="grid-container"><div class="card"><h3 style="display: flex; align-items: center;"><span class="live-indicator"></span><span>Bilateral Economic Intelligence</span></h3><p>A live intelligence feed tracking economic news for the Italy-India corridor, powered by a 24/7 automated GitHub Action.</p><div id="insights-container" style="margin-top: auto; padding-top: 1rem;"><p style="text-align:left;">Initializing live feed...</p></div></div><div class="card"><h3>🌍 Global Trade Analysis Engine</h3><p>An executive project dossier showcasing a predictive analytics engine for simulating international trade costs.</p><div style="margin-top: auto; padding-top: 1rem;"><a href="projects/trade-compliance/index.html?v=3" class="btn btn-primary">Open Project Dossier</a></div></div></div></div>
         </section>
         <section id="experience">
             <div class="container"><h2 class="section-title">Professional Experience</h2><div class="grid-container"><div class="card"><h3>HR & Communications Intern</h3><p><strong>University of Parma, Parma, Italy</strong> | Mar 2025 - Jun 2025</p><ul><li>Orchestrated the university's flagship "Open Day" recruitment event for over 6,000 students.</li><li>Developed specialized onboarding programs that improved campus integration.</li></ul></div><div class="card"><h3>Junior Business & Marketing Analyst</h3><p><strong>Shubh Labh Pvt Ltd., Bombay, India</strong> | May 2024 - Dec 2024</p><ul><li>Drove an 8% uplift in customer engagement via data-driven marketing strategies.</li><li>Engineered process improvements that boosted team productivity by 15%.</li></ul></div></div></div>
         </section>
         
-        <!-- EDUCATION SECTION - TEXT RESTORED -->
         <section id="education">
             <div class="container">
                 <h2 class="section-title">Academic Background</h2>
@@ -96,7 +100,7 @@
         </section>
 
         <section id="contact">
-            <div class="container"><h2 class="section-title">Get In Touch</h2><div class="card" style="max-width: 900px; margin: 0 auto; text-align: center;"><p style="text-align: center; margin-left: auto; margin-right: auto;">I am currently seeking new opportunities and am open to collaboration.</p><p><strong>Email:</strong> <a href="mailto:krishna.saq@gmail.com" style="color: var(--accent-primary);">krishna.saq@gmail.com</a></p><p><strong>Mobile:</strong> <a href="tel:+393756320447" style="color: var(--accent-primary);">+39 375 632 0447</a></p><p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/krishnaadayma" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary);">linkedin.com/in/krishnaadayma</a></p></div></div>
+            <div class="container"><h2 class="section-title">Get In Touch</h2><div class="card" style="max-width: 900px; margin: 0 auto; text-align: center;"><p style="font-size: 1.1rem; text-align: center; margin-left: auto; margin-right: auto;">I am currently seeking new opportunities and am open to collaboration.</p><p><strong>Email:</strong> <a href="mailto:krishna.saq@gmail.com" style="color: var(--accent-primary);">krishna.saq@gmail.com</a></p><p><strong>Mobile:</strong> <a href="tel:+393756320447" style="color: var(--accent-primary);">+39 375 632 0447</a></p><p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/krishnaadayma" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary);">linkedin.com/in/krishnaadayma</a></p></div></div>
         </section>
     </main>
     
@@ -112,7 +116,7 @@
 
     <script>
       function runPageScripts() {
-          // --- Highlight active language ---
+          // Highlight active language
           let currentLang = 'en';
           const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
           if (langCookie) currentLang = langCookie.split('/')[2];
@@ -120,35 +124,31 @@
           const activeEl = document.querySelector(`.lang-${currentLang}`);
           if (activeEl) activeEl.classList.add('active');
 
-          // --- Live News Feed ---
+          // Live News Feed
           const insightsContainer = document.getElementById('insights-container');
-          const liveIndicator = document.querySelector('.live-indicator');
-          function fetchAndDisplayNews() {
+          function fetchNews() {
               fetch('news.json?cachebust=' + new Date().getTime())
-                  .then(response => { if (!response.ok) throw new Error('Network error'); return response.json(); })
+                  .then(response => response.ok ? response.json() : Promise.reject('Network error'))
                   .then(data => {
                       if (data && data.length > 0) {
                           insightsContainer.innerHTML = '';
+                          const liveIndicator = document.querySelector('.live-indicator');
                           if(liveIndicator) liveIndicator.style.display = 'inline-block';
                           data.slice(0, 3).forEach(item => {
-                              const insightEl = document.createElement('div');
-                              const pubDate = item.isoDate ? new Date(item.isoDate).toLocaleDateString() : 'Recently';
-                              const title = item.title ? item.title.replace(/<[^>]*>/g, "") : "No title";
-                              insightEl.innerHTML = `<p style="margin:0; padding-bottom: 1rem;"><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">${title}</a><br><span style="font-size: 0.8rem; color: var(--text-muted);">Source: ${item.creator || "News"} | ${pubDate}</span></p>`;
-                              insightsContainer.appendChild(insightEl);
+                              insightsContainer.innerHTML += `<p style="margin:0; padding-bottom: 1rem;"><a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">${item.title || "No title"}</a><br><span style="font-size: 0.8rem; color: var(--text-muted);">Source: ${item.creator || "News"} | ${new Date(item.isoDate).toLocaleDateString()}</span></p>`;
                           });
                       }
-                  }).catch(error => { insightsContainer.innerHTML = '<p style="text-align:left;">Intelligence feed is currently updating...</p>'; });
+                  }).catch(() => { insightsContainer.innerHTML = '<p style="text-align:left;">Intelligence feed is currently updating...</p>'; });
           }
-          fetchAndDisplayNews();
-          setInterval(fetchAndDisplayNews, 30000);
+          fetchNews();
+          setInterval(fetchNews, 30000);
 
-          // --- Particles.js Animation ---
+          // Particles.js Animation
           if (typeof particlesJS !== 'undefined') {
             particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.4,"random":true},"size":{"value":2,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
           }
 
-          // --- Three.js Globe Animation ---
+          // Three.js Globe Animation
           const globeCanvas = document.getElementById('globe-canvas');
           if (globeCanvas && typeof THREE !== 'undefined') {
               const scene = new THREE.Scene();
@@ -159,15 +159,13 @@
               function animate() { requestAnimationFrame(animate); globe.rotation.y += 0.001; renderer.render(scene, camera); }
               animate();
               new ResizeObserver(() => {
-                  const container = document.getElementById('about'); const size = Math.min(container.offsetWidth, 1200);
+                  const size = Math.min(document.getElementById('about').offsetWidth, 1200);
                   camera.aspect = 1; camera.updateProjectionMatrix(); renderer.setSize(size, size);
               }).observe(document.getElementById('about'));
           }
       }
-      // --- MASTER INITIALIZER ---
-      window.onload = function() {
-        setTimeout(runPageScripts, 500); // 500ms delay for stability
-      };
+      // MASTER INITIALIZER
+      window.onload = () => setTimeout(runPageScripts, 500);
     </script>
 </body>
 </html>
