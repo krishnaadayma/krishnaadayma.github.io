@@ -1,64 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ================================================================================== -->
+    <!--  HEAD SECTION - METADATA, FONTS, AND STYLES                                        -->
+    <!-- ================================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krishna Dayma - International Business & Data Analyst Portfolio</title>
-    <meta name="description" content="Krishna Dayma - International Business & Data Analyst specializing in data-driven strategies, cross-cultural communication, and process optimization.">
+    <meta name="description" content="The definitive portfolio for Krishna Dayma, an International Business & Data Analyst specializing in data-driven strategies, cross-cultural communication, and process optimization.">
+
+    <!-- Preconnecting to Google Fonts for performance optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Importing the 'Inter' font family from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Internal Stylesheet -->
     <style>
         /* ================================================================================== */
-        /* EXECUTIVE GRAY PALETTE CSS FRAMEWORK - FINAL DEFINITIVE VERSION                  */
-        /* This stylesheet contains all necessary rules, including every bug fix.           */
+        /*  EXECUTIVE GRAY PALETTE CSS FRAMEWORK - V15 (DEFINITIVE, UNABRIDGED & VERBOSE)     */
+        /*  This stylesheet contains all necessary rules, including all previous bug fixes.   */
+        /*  It is intentionally verbose for maximum clarity and completeness.                */
         /* ================================================================================== */
+
+        /* --- SECTION 1: ROOT VARIABLES & GLOBAL RESET --- */
+
+        /* :root defines CSS variables for consistent theming across the entire document. */
         :root {
-            --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
-            --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
-            --accent-primary: #A0A0A0; --accent-secondary: #4a5568;
-            --border-color: #2C2C2C; --live-red: #ff4d4d;
+            /* Color Palette */
+            --bg-primary: #121212;      /* Primary background color (deepest gray) */
+            --bg-secondary: #1E1E1E;    /* Secondary background, for cards and footers */
+            --bg-tertiary: #2a2a2a;     /* Tertiary background, for interactive elements */
+            --text-primary: #EAEAEA;    /* Primary text color (near white) */
+            --text-secondary: #CCCCCC;  /* Secondary text color (light gray) */
+            --text-muted: #999999;      /* Muted text for less important details */
+            --accent-primary: #A0A0A0;  /* Primary accent color for titles and highlights */
+            --accent-secondary: #4a5568;/* Secondary accent for lines and subtle elements */
+            --border-color: #2C2C2C;    /* Border color for cards and widgets */
+            --live-red: #ff4d4d;        /* Color for the 'live' indicator dot */
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #1E1E1E 0%, #121212 100%);
+
+            /* Transitions */
             --transition-fast: 0.2s ease;
         }
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; color: var(--text-secondary); background-color: var(--bg-primary); overflow-x: hidden; }
-        .container { width: 100%; max-width: min(1200px, 95vw); margin-left: auto; margin-right: auto; padding: 0 1.5rem; position: relative; z-index: 2; }
-        h1, h2, h3 { color: var(--text-primary); line-height: 1.2; font-weight: 700; margin-bottom: 1rem; text-align: center;}
-        h1 { font-size: clamp(2.5rem, 6vw, 3.5rem); } h2 { font-size: clamp(2rem, 5vw, 2.5rem); } h3 { font-size: clamp(1.2rem, 4vw, 1.25rem); color: var(--text-primary);}
-        p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.7; max-width: 65ch; }
-        p strong { color: var(--text-secondary); font-weight: 600; }
-        ul { list-style-position: inside; padding-left: 0; margin-left: 0; color: var(--text-muted); }
-        li { margin-bottom: 0.5rem; }
-        header { background: linear-gradient(135deg, #1E1E1E 0%, #121212 100%); padding: 4rem 0; margin-bottom: 3rem; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-color); }
-        #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; pointer-events: none; }
-        .header-content { position: relative; z-index: 1; text-align: center; }
-        .header-content p { margin: 1rem auto; }
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--bg-tertiary); color: var(--text-primary); padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 0.5rem; font-weight: 600; border: 1px solid var(--border-color); transition: all var(--transition-fast); cursor: pointer; }
-        .btn:hover, .btn:focus { background: #404040; transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.5); outline: none; -webkit-tap-highlight-color: transparent; }
-        .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; font-weight: 700; }
-        section { padding: 3rem 0; width: 100%; position: relative; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-primary); margin: 1rem auto 0; border-radius: 2px; }
-        .card { background: var(--bg-secondary); padding: 2rem; border-radius: 0.75rem; border: 1px solid var(--border-color); display: flex; flex-direction: column; height: 100%; }
-        .card h3, .card p, .card ul { text-align: left; }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: 1.5rem; }
-        .live-indicator { display: none; width: 10px; height: 10px; background-color: var(--live-red); border-radius: 50%; margin-right: 12px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); } }
-        footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: 3rem 0; margin-top: 4rem; border-top: 1px solid var(--border-color); }
-        
-        /* --- TRANSLATION WIDGET & ALL BUG FIXES (DEFINITIVE) --- */
-        #custom-translate-widget { position: fixed; top: 1rem; right: 1.5rem; z-index: 9999; background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: 0.5rem; border: 1px solid var(--border-color); }
-        #custom-translate-widget a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.2rem; transition: color var(--transition-fast); outline: none; -webkit-tap-highlight-color: transparent; }
-        #custom-translate-widget a:focus { outline: none; }
-        #custom-translate-widget a.active, #custom-translate-widget a:hover { color: var(--text-primary); }
-        #custom-translate-widget span { color: var(--border-color); margin: 0 0.2rem; }
-        body > .skiptranslate, .goog-te-spinner-pos { display: none !important; }
-        html.translated-ltr, html.translated-rtl { margin-top: 0 !important; }
-        body { top: 0 !important; }
-        font[style] { background: transparent !important; color: inherit !important; }
+
+        /* Universal box-sizing reset for predictable layout calculations. */
+        *, 
+        *::before, 
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Smooth scrolling for anchor links. */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* --- SECTION 2: CORE BODY & TYPOGRAPHY --- */
+
+        /* Default body styles. */
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden; /* Prevents horizontal scrollbars */
+            -webkit-font-smoothing: antialiased; /* Smoother font rendering on WebKit browsers */
+            -moz-osx-font-smoothing: grayscale; /* Smoother font rendering on Firefox */
+        }
+
+        /* Main heading (H1) styles. */
+        h1 {
+            color: var(--text-primary);
+            line-height: 1.2;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: clamp(2.5rem, 6vw, 3.5rem); /* Responsive font size */
+        }
+
+        /* Section headings (H2) styles. */
+        h2 {
+            color: var(--text-primary);
+            line-height: 1.2;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+        }
+
+        /* Card and sub-headings (H3) styles. */
+        h3 {
+            color: var(--text-primary);
+            line-height: 1.2;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: clamp(1.2rem, 4vw, 1.25rem);
+        }
+
+        /* Paragraph styles. */
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            max-width: 65ch; /* Optimal line length for readability */
+        }
+
+        /* Strong tag emphasis. */
+        p strong {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* Unordered list styles. */
+        ul {
+            list-style-position: inside;
+            padding-left: 0;
+            margin-left: 0;
+            color: var(--text-muted);
+        }
+
+        /* List item styles. */
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- SECTION 3: LAYOUT & COMPONENTS --- */
+
+        /* Main content container. */
+        .container {
+            width: 100%;
+            max-width: min(1200px, 95vw);
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header element styles. */
+        header {
+            background: var(--gradient-primary);
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+            padding-left: 0;
+            padding-right: 0;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* General section styles. */
+        section {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            padding-left: 0;
+            padding-right: 0;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Section title underline decorator. */
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-primary);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Card component for content blocks. */
+        .card {
+            background-color: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Ensures cards in a grid row are the same height */
+        }
+
+        /* Specific text alignment for elements inside a card. */
+        .card h3, .card p, .card ul {
+            text-align: left;
+        }
+
+        /* CSS Grid container for responsive card layouts. */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Button component styles. */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+
+        /* Primary button variant. */
+        .btn-primary {
+            background: linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%);
+            color: #121212;
+            font-weight: 700;
+        }
+
+        /* Footer styles. */
+        footer {
+            background-color: var(--bg-secondary);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* --- SECTION 4: ANIMATIONS & SPECIAL EFFECTS --- */
+
+        /* Particle.js container styles. */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0; /* Behind header content */
+            pointer-events: none; /* Allows clicks to pass through */
+        }
+
+        /* Pulsing animation keyframes for the 'live' indicator. */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+        }
+
+        /* 'Live' indicator dot styles. */
+        .live-indicator {
+            display: none; /* Hidden by default */
+            width: 10px;
+            height: 10px;
+            background-color: var(--live-red);
+            border-radius: 50%;
+            margin-right: 12px;
+            animation-name: pulse;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+        }
+
+        /* --- SECTION 5: TRANSLATION WIDGET & ALL BUG FIXES (DEFINITIVE) --- */
+
+        /* Custom language switcher widget container. */
+        #custom-translate-widget {
+            position: fixed;
+            top: 1rem;
+            right: 1.5rem;
+            z-index: 9999;
+            background-color: var(--bg-secondary);
+            padding: 0.4rem 0.6rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Links inside the widget. */
+        #custom-translate-widget a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.2rem;
+            transition: color var(--transition-fast);
+            /* BUG FIX: Removes the ugly default browser focus outline (glow). */
+            outline: none;
+            -webkit-tap-highlight-color: transparent; /* For mobile tap glow */
+        }
+
+        /* BUG FIX: Explicitly remove focus outline again for maximum compatibility. */
+        #custom-translate-widget a:focus, .btn:focus {
+            outline: none;
+        }
+
+        /* Hover and 'active' state for language links. */
+        #custom-translate-widget a:hover,
+        #custom-translate-widget a.active {
+            color: var(--text-primary);
+        }
+
+        /* Separator pipe | in the widget. */
+        #custom-translate-widget span {
+            color: var(--border-color);
+            margin: 0 0.2rem;
+            cursor: default;
+        }
+
+        /* BUG FIX: Hide Google's default translation UI elements. */
+        body > .skiptranslate, 
+        .goog-te-spinner-pos {
+            display: none !important;
+        }
+
+        /* BUG FIX: Prevent Google from adding a top margin to the page when translated. */
+        html.translated-ltr, 
+        html.translated-rtl {
+            margin-top: 0 !important;
+        }
+        body {
+            top: 0 !important;
+        }
+
+        /* BUG FIX: Force translated text inside <font> tags to inherit color and have a transparent background. */
+        font[style] {
+            background: transparent !important;
+            color: inherit !important;
+        }
     </style>
 </head>
 <body>
+    <!-- ================================================================================== -->
+    <!--  BODY CONTENT - HTML STRUCTURE                                                     -->
+    <!-- ================================================================================== -->
+    
     <!-- Hidden Google Translate element. This must be present for the engine to work. -->
     <div id="google_translate_element" style="display: none;"></div>
     
@@ -69,7 +350,7 @@
         <a href="javascript:void(0)" class="lang-it" onclick="setLanguage('it')">IT</a>
     </div>
 
-    <!-- Header Section with particle animation background -->
+    <!-- Header Section -->
     <header>
         <div id="particles-js"></div>
         <div class="container">
@@ -84,33 +365,50 @@
 
     <!-- Main content container -->
     <main id="main-content">
+        <!-- Professional Summary Section -->
         <section id="about">
             <canvas id="globe-canvas" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 1200px; max-height: 1200px; width: 100%; height: 100%; z-index: 1; opacity: 0.1;"></canvas>
             <div class="container"><h2 class="section-title">Professional Summary</h2><p style="text-align: center; margin: 0 auto;">A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets. Fluent in three languages and equipped with a cross-cultural perspective, I excel at optimizing processes, driving market expansion, and delivering measurable results in dynamic, international environments.</p></div>
         </section>
+
+        <!-- Core Competencies Section -->
         <section id="skills">
             <div class="container"><h2 class="section-title">Core Competencies</h2><div class="grid-container"><div class="card"><h3>Data Analysis</h3><p>Excel, Data Visualization, Business Intelligence (BI)</p></div><div class="card"><h3>Business Strategy</h3><p>International Trade, Market Research, Strategic Planning</p></div><div class="card"><h3>Process Optimization</h3><p>Workflow Improvement, Productivity Enhancement, Risk Reduction</p></div><div class="card"><h3>Platforms & Software</h3><p>MS Office Suite (Excel, PowerPoint), Canva, Power BI, G-Suite</p></div></div></div>
         </section>
+
+        <!-- Key Projects Section -->
         <section id="projects">
             <div class="container"><h2 class="section-title">Key Projects</h2><div class="grid-container"><div class="card"><h3 style="display: flex; align-items: center;"><span class="live-indicator"></span><span>Bilateral Economic Intelligence</span></h3><p>A live intelligence feed tracking economic news for the Italy-India corridor, powered by a 24/7 automated GitHub Action.</p><div id="insights-container" style="margin-top: auto; padding-top: 1rem;"><p style="text-align:left;">Initializing live feed...</p></div></div><div class="card"><h3>🌍 Global Trade Analysis Engine</h3><p>An executive project dossier showcasing a predictive analytics engine for simulating international trade costs.</p><div style="margin-top: auto; padding-top: 1rem;"><a href="projects/trade-compliance/index.html?v=final" class="btn btn-primary">Open Project Dossier</a></div></div></div></div>
         </section>
+
+        <!-- Professional Experience Section -->
         <section id="experience">
             <div class="container"><h2 class="section-title">Professional Experience</h2><div class="grid-container"><div class="card"><h3>HR & Communications Intern</h3><p><strong>University of Parma, Parma, Italy</strong> | Mar 2025 - Jun 2025</p><ul><li>Orchestrated the university's flagship "Open Day" recruitment event for over 6,000 students.</li><li>Developed specialized onboarding programs that improved campus integration.</li></ul></div><div class="card"><h3>Junior Business & Marketing Analyst</h3><p><strong>Shubh Labh Pvt Ltd., Bombay, India</strong> | May 2024 - Dec 2024</p><ul><li>Drove an 8% uplift in customer engagement via data-driven marketing strategies.</li><li>Engineered process improvements that boosted team productivity by 15%.</li></ul></div></div></div>
         </section>
+        
+        <!-- Academic Background Section -->
         <section id="education">
             <div class="container"><h2 class="section-title">Academic Background</h2><div class="grid-container"><div class="card"><h3>Laurea Magistrale in International Business and Development</h3><p><strong>University of Parma, Parma, Italy</strong> | 2022 – 2025</p></div><div class="card"><h3>Laurea triennale in Commerce</h3><p><strong>Swami Ramanand Teerth Marathwada University, India</strong> | 2018 – 2021</p></div></div></div>
         </section>
+
+        <!-- Contact Section -->
         <section id="contact">
             <div class="container"><h2 class="section-title">Get In Touch</h2><div class="card" style="max-width: 900px; margin: 0 auto; text-align: center;"><p style="font-size: 1.1rem; text-align: center; margin-left: auto; margin-right: auto;">I am currently seeking new opportunities and am open to collaboration.</p><p><strong>Email:</strong> <a href="mailto:krishna.saq@gmail.com" style="color: var(--accent-primary);">krishna.saq@gmail.com</a></p><p><strong>Mobile:</strong> <a href="tel:+393756320447" style="color: var(--accent-primary);">+39 375 632 0447</a></p><p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/krishnaadayma" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary);">linkedin.com/in/krishnaadayma</a></p></div></div>
         </section>
     </main>
+
+    <!-- Footer Section -->
     <footer><div class="container"><p>&copy; 2025 Krishna Dayma. All Rights Reserved.</p></div></footer>
+
+    <!-- ================================================================================== -->
+    <!--  SCRIPTS SECTION - LIBRARIES & APPLICATION LOGIC                                 -->
+    <!-- ================================================================================== -->
 
     <!-- External libraries for animations -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- Google Translate scripts -->
+    <!-- Google Translate scripts and cookie-based language setter function -->
     <script type="text/javascript">
       function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); }
       function setLanguage(lang) { document.cookie = `googtrans=/en/${lang};path=/`; window.location.reload(); }
@@ -120,80 +418,150 @@
     <!-- Main Application Logic & Animation Initializer -->
     <script>
       /**
-       * This is the master function that runs all page-specific scripts.
-       * It is called with a delay after the window loads to prevent conflicts
-       * with the Google Translate engine, ensuring all animations are smooth.
+       * This is the master function that runs all page-specific scripts. It is intentionally
+       * detailed and broken into many sub-functions for clarity. It is called with a 
+       * strategic delay after the window loads. This prevents all conflicts with the Google
+       * Translate engine, guaranteeing that all animations are smooth and all elements
+       * are loaded before scripts try to manipulate them.
        */
       function runPageScripts() {
           
-          // --- Sub-function 1: Set Active Language ---
-          // Reads the Google Translate cookie and applies the 'active' class to the correct language link.
+          /**
+           * Sub-function 1: Set Active Language
+           * This function's sole responsibility is to check the Google Translate cookie and
+           * apply the 'active' CSS class to the correct language link in the widget.
+           */
           function highlightActiveLanguage() {
-              let currentLang = 'en'; // Default to English
-              const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
-              if (langCookie) {
-                  currentLang = langCookie.split('/')[2];
+              // Default to English if no cookie is found.
+              let currentLanguage = 'en'; 
+              // Find the specific cookie that Google Translate uses.
+              const googleTranslateCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+              
+              if (googleTranslateCookie) {
+                  // The cookie format is like 'googtrans=/en/it'. We need the third part.
+                  currentLanguage = googleTranslateCookie.split('/')[2];
               }
+              
+              // First, remove the 'active' class from all links to reset the state.
               document.querySelectorAll('#custom-translate-widget a').forEach(el => el.classList.remove('active'));
-              const activeEl = document.querySelector(`.lang-${currentLang}`);
-              if (activeEl) {
-                  activeEl.classList.add('active');
+              
+              // Then, find the specific link to highlight (e.g., '.lang-it') and add the class.
+              const activeLanguageElement = document.querySelector(`.lang-${currentLanguage}`);
+              if (activeLanguageElement) {
+                  activeLanguageElement.classList.add('active');
               }
           }
 
-          // --- Sub-function 2: Live News Feed ---
-          // Fetches and displays the latest news from the news.json file.
+          /**
+           * Sub-function 2: Live News Feed
+           * This function fetches and displays the latest news from the news.json file.
+           * It includes a cache-busting parameter to ensure fresh data is always loaded.
+           */
           function initializeNewsFeed() {
               const insightsContainer = document.getElementById('insights-container');
-              if (!insightsContainer) return; // Exit if the element doesn't exist
+              if (!insightsContainer) {
+                  // Defensive coding: If the container element isn't found, do nothing.
+                  return; 
+              }
               
-              function fetchNews() {
-                  fetch('news.json?cachebust=' + new Date().getTime()) // Cache-busting
-                      .then(response => response.ok ? response.json() : Promise.reject('Network error'))
+              function fetchAndRenderNews() {
+                  // Add a timestamp to the URL to prevent the browser from caching the JSON file.
+                  const cacheBustingUrl = 'news.json?cachebust=' + new Date().getTime();
+                  
+                  fetch(cacheBustingUrl)
+                      .then(response => {
+                          if (response.ok) {
+                              return response.json();
+                          } else {
+                              return Promise.reject('Network error or file not found');
+                          }
+                      })
                       .then(data => {
                           if (data && data.length > 0) {
-                              insightsContainer.innerHTML = '';
+                              insightsContainer.innerHTML = ''; // Clear previous content
                               const liveIndicator = document.querySelector('.live-indicator');
-                              if (liveIndicator) liveIndicator.style.display = 'inline-block';
+                              if (liveIndicator) {
+                                  liveIndicator.style.display = 'inline-block';
+                              }
                               
-                              data.slice(0, 3).forEach(item => {
+                              // Display only the first 3 news items.
+                              const articlesToDisplay = data.slice(0, 3);
+                              articlesToDisplay.forEach(item => {
                                   const title = item.title || "No title available";
                                   const link = item.link || "#";
                                   const creator = item.creator || "News Source";
                                   const pubDate = item.isoDate ? new Date(item.isoDate).toLocaleDateString() : "Recent";
-                                  insightsContainer.innerHTML += `<p style="margin:0; padding-bottom: 1rem;"><a href="${link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">${title}</a><br><span style="font-size: 0.8rem; color: var(--text-muted);">Source: ${creator} | ${pubDate}</span></p>`;
+                                  
+                                  // Build the HTML for one news item.
+                                  const articleHtml = `
+                                    <p style="margin:0; padding-bottom: 1rem;">
+                                      <a href="${link}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">${title}</a>
+                                      <br>
+                                      <span style="font-size: 0.8rem; color: var(--text-muted);">Source: ${creator} | ${pubDate}</span>
+                                    </p>`;
+                                  insightsContainer.innerHTML += articleHtml;
                               });
                           }
-                      }).catch(() => { insightsContainer.innerHTML = '<p style="text-align:left;">Intelligence feed is currently updating...</p>'; });
+                      }).catch((error) => {
+                          console.error("Failed to load news feed:", error);
+                          insightsContainer.innerHTML = '<p style="text-align:left;">Intelligence feed is currently updating...</p>'; 
+                      });
               }
-              fetchNews(); // Initial fetch
-              setInterval(fetchNews, 30000); // Refresh every 30 seconds
+              
+              fetchAndRenderNews(); // Fetch immediately on page load.
+              setInterval(fetchAndRenderNews, 30000); // And then refresh every 30 seconds.
           }
 
-          // --- Sub-function 3: Header Particle Animation ---
+          /**
+           * Sub-function 3: Header Particle Animation
+           * Initializes the Particles.js animation in the header.
+           */
           function initializeParticles() {
               if (typeof particlesJS !== 'undefined') {
-                  particlesJS('particles-js', {"particles":{"number":{"value":80,"density":{"enable":true,"value_area":800}},"color":{"value":"#A0A0A0"},"shape":{"type":"circle"},"opacity":{"value":0.3,"random":true},"size":{"value":2.5,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4a5568","opacity":0.2,"width":1},"move":{"enable":true,"speed":1,"direction":"none","out_mode":"out"}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false},"resize":true},"modes":{"grab":{"distance":140,"line_linked":{"opacity":0.5}}}},"retina_detect":true});
+                  const particlesConfig = {
+                      "particles": {
+                          "number": {"value": 80, "density": {"enable": true, "value_area": 800}},
+                          "color": {"value": "#A0A0A0"},
+                          "shape": {"type": "circle"},
+                          "opacity": {"value": 0.3, "random": true},
+                          "size": {"value": 2.5, "random": true},
+                          "line_linked": {"enable": true, "distance": 150, "color": "#4a5568", "opacity": 0.2, "width": 1},
+                          "move": {"enable": true, "speed": 1, "direction": "none", "out_mode": "out"}
+                      },
+                      "interactivity": {
+                          "detect_on": "canvas",
+                          "events": {"onhover": {"enable": true, "mode": "grab"}, "onclick": {"enable": false}, "resize": true},
+                          "modes": {"grab": {"distance": 140, "line_linked": {"opacity": 0.5}}}
+                      },
+                      "retina_detect": true
+                  };
+                  particlesJS('particles-js', particlesConfig);
               }
           }
 
-          // --- Sub-function 4: About Section Globe Animation ---
+          /**
+           * Sub-function 4: About Section Globe Animation
+           * Initializes the Three.js rotating wireframe globe.
+           */
           function initializeGlobe() {
               const globeCanvas = document.getElementById('globe-canvas');
               if (globeCanvas && typeof THREE !== 'undefined') {
                   const scene = new THREE.Scene();
                   const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
                   const renderer = new THREE.WebGLRenderer({ canvas: globeCanvas, alpha: true, antialias: true });
-                  const globe = new THREE.Mesh(new THREE.SphereGeometry(1.5, 32, 32), new THREE.MeshBasicMaterial({ color: 0xA0A0A0, wireframe: true }));
+                  const globeGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+                  const globeMaterial = new THREE.MeshBasicMaterial({ color: 0xA0A0A0, wireframe: true });
+                  const globe = new THREE.Mesh(globeGeometry, globeMaterial);
+                  
                   scene.add(globe);
                   camera.position.z = 2.8;
                   
-                  function animate() {
-                      requestAnimationFrame(animate);
-                      globe.rotation.y += 0.001;
+                  function animateGlobe() {
+                      requestAnimationFrame(animateGlobe);
+                      globe.rotation.y += 0.001; // Slow rotation
                       renderer.render(scene, camera);
                   }
-                  animate();
+                  animateGlobe();
 
                   new ResizeObserver(() => {
                       const container = document.getElementById('about');
@@ -207,17 +575,19 @@
               }
           }
 
-          // --- Execute all sub-functions ---
+          // --- MASTER EXECUTION BLOCK for runPageScripts ---
+          // Calls all the necessary sub-functions in order.
           highlightActiveLanguage();
           initializeNewsFeed();
           initializeParticles();
           initializeGlobe();
       }
 
-      // --- MASTER INITIALIZER ---
-      // This is the single entry point. It waits for the entire page (including images and scripts) 
-      // to be fully loaded, then waits an additional 500ms for maximum stability before
-      // running all the visual scripts. This definitively solves all animation conflicts.
+      // --- GLOBAL INITIALIZER ---
+      // This is the single entry point for all JavaScript on the page. It waits for the entire 
+      // window to be fully loaded (including images, stylesheets, etc.), then waits an 
+      // additional 500ms for maximum stability. This strategic delay definitively solves 
+      // all animation conflicts with the Google Translate engine's DOM manipulation.
       window.onload = () => {
         setTimeout(runPageScripts, 500);
       };
