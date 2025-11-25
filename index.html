@@ -43,9 +43,9 @@
         section { padding: var(--space-2xl) 0; width: 100%; position: relative; }
         .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-primary); margin: var(--space-sm) auto 0; border-radius: 2px; }
         .card { background: var(--bg-secondary); padding: var(--space-lg); border-radius: var(--radius-lg); border: 1px solid var(--border-color); display: flex; flex-direction: column; }
-        .card h3, .card p { text-align: left; }
+        .card h3, .card p, .card ul { text-align: left; }
+        .card ul { padding-left: 1.25rem; color: var(--text-muted); }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: var(--space-lg); }
-        .item-card { border-left: 4px solid var(--accent-primary); max-width: min(900px, 95vw); margin: var(--space-md) auto; text-align: left; padding: var(--space-md); }
         .live-indicator { display: none; width: 10px; height: 10px; background-color: var(--live-red); border-radius: 50%; margin-right: 12px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); } }
         footer { background: var(--bg-secondary); color: var(--text-muted); text-align: center; padding: var(--space-xl) 0; margin-top: var(--space-2xl); border-top: 1px solid var(--border-color); }
@@ -74,7 +74,6 @@
         body > .skiptranslate { display: none !important; }
         html.translated-ltr, html.translated-rtl { margin-top: 0 !important; }
         body { top: 0 !important; }
-        /* This rule targets the <font> tags Google injects and forces them to match your theme */
         font[style] {
             background-color: transparent !important;
             color: inherit !important;
@@ -137,19 +136,45 @@
             </div>
         </section>
 
+        <!-- EXPERIENCE SECTION - UPDATED TO CARD LAYOUT -->
         <section id="experience">
             <div class="container">
                 <h2 class="section-title">Professional Experience</h2>
-                <div class="item-card"><h3>HR & Communications Intern</h3><p><strong>University of Parma, Parma, Italy</strong> | Mar 2025 - Jun 2025</p><ul><li>Orchestrated the university's flagship "Open Day" recruitment event for over 6,000 students.</li><li>Developed specialized onboarding programs that improved campus integration.</li></ul></div>
-                <div class="item-card"><h3>Junior Business & Marketing Analyst</h3><p><strong>Shubh Labh Pvt Ltd., Bombay, India</strong> | May 2024 - Dec 2024</p><ul><li>Drove an 8% uplift in customer engagement via data-driven marketing strategies.</li><li>Engineered process improvements that boosted team productivity by 15%.</li></ul></div>
+                <div class="grid-container">
+                    <div class="card">
+                        <h3>HR & Communications Intern</h3>
+                        <p><strong>University of Parma, Parma, Italy</strong> | Mar 2025 - Jun 2025</p>
+                        <ul>
+                            <li>Orchestrated the university's flagship "Open Day" recruitment event for over 6,000 students.</li>
+                            <li>Developed specialized onboarding programs that improved campus integration.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Junior Business & Marketing Analyst</h3>
+                        <p><strong>Shubh Labh Pvt Ltd., Bombay, India</strong> | May 2024 - Dec 2024</p>
+                        <ul>
+                            <li>Drove an 8% uplift in customer engagement via data-driven marketing strategies.</li>
+                            <li>Engineered process improvements that boosted team productivity by 15%.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
         
+        <!-- EDUCATION SECTION - UPDATED TO CARD LAYOUT -->
         <section id="education">
             <div class="container">
                  <h2 class="section-title">Academic Background</h2>
-                <div class="item-card"><h3>Laurea Magistrale in International Business and Development</h3><p><strong>University of Parma, Parma, Italy</strong> | 2022 – 2025</p></div>
-                <div class="item-card"><h3>Laurea triennale in Commerce</h3><p><strong>Swami Ramanand Teerth Marathwada University, India</strong> | 2018 – 2021</p></div>
+                <div class="grid-container">
+                    <div class="card">
+                        <h3>Laurea Magistrale in International Business and Development</h3>
+                        <p><strong>University of Parma, Parma, Italy</strong> | 2022 – 2025</p>
+                    </div>
+                    <div class="card">
+                        <h3>Laurea triennale in Commerce</h3>
+                        <p><strong>Swami Ramanand Teerth Marathwada University, India</strong> | 2018 – 2021</p>
+                    </div>
+                </div>
             </div>
         </section>
         
