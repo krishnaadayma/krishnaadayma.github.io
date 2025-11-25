@@ -17,18 +17,24 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm' # optional: speeds up installs but won't help corrupted tarballs
+          cache: 'npm'
 
-      - name: Clear npm cache
-        run: npm cache clean --force
-
-      - name: Configure npm fetch retries
+      # --- THIS IS THE CRITICAL FIX ---
+      # Added a step to verify that the necessary package files exist before installing.
+      # This provides a clear error message if they are missing.
+      - name: Verify Package Files
         run: |
-          npm config set fetch-retries 5
-          npm config set fetch-retry-factor 2
-          npm config set fetch-retry-mintimeout 2000
-          npm config set fetch-retry-maxtimeout 60000
+          if [ ! -f package.json ]; then
+            echo "Error: package.json not found in the root directory."
+            exit 1
+          fi
+          if [ ! -f package-lock.json ]; then
+            echo "Error: package-lock.json not found in the root directory."
+            exit 1
+          fi
+          echo "package.json and package-lock.json found."
 
+      # 'npm ci' is the correct command to use with a package-lock.json file.
       - name: Install Dependencies
         run: npm ci
 
