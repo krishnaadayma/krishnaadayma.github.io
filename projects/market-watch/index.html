@@ -145,6 +145,28 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            background: var(--bg-primary);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(160, 160, 160, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(160, 160, 160, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
 
         .header-content {
@@ -180,7 +202,7 @@
            COMPONENTS - From components.css
            ================================================================================== */
         .card {
-            background: rgba(30, 30, 30, 0.8);
+            background: #232323;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: var(--radius-md);
@@ -200,6 +222,20 @@
 
         .card h3 {
             margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .card p {
+            color: var(--text-secondary);
+        }
+        
+        /* TradingView widget visibility fix */
+        .tradingview-widget-container {
+            background: #ffffff;
+            min-height: 250px;
+            border-radius: 8px;
+            padding: 8px;
+            margin-top: var(--space-sm);
         }
 
         .btn {
@@ -261,8 +297,8 @@
            ANIMATIONS - From animations.css
            ================================================================================== */
         .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
+            opacity: 1;
+            transform: translateY(0);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
@@ -405,7 +441,7 @@
         }
 
         .market-item {
-            background: rgba(30, 30, 30, 0.8);
+            background: #232323;
             padding: var(--space-md);
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
@@ -418,19 +454,27 @@
 
         .market-item:hover {
             border-color: var(--accent-primary);
-            background: rgba(40, 40, 40, 0.8);
+            background: #2a2a2a;
         }
 
         .market-info h3 {
-            color: var(--text-primary);
+            color: var(--accent-primary);
             margin-bottom: var(--space-xs);
             font-size: var(--font-size-lg);
+            font-weight: 600;
         }
 
         .market-info p {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: var(--font-size-sm);
             margin: 0;
+        }
+        
+        .market-widget {
+            background: #ffffff;
+            min-height: 80px;
+            border-radius: 8px;
+            padding: 8px;
         }
 
         #live-indicator {
@@ -535,6 +579,7 @@
 <body>
     <!-- Header -->
     <header>
+        <div id="particles-js"></div>
         <div class="header-content">
             <h1>Global Market Watch</h1>
             <p class="subtitle">Live tracking of stock indices for the world's top 10 economic superpowers</p>
@@ -570,8 +615,8 @@
                               "height": "250",
                               "locale": "en",
                               "dateRange": "1M",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "autosize": true
                             }
                             </script>
@@ -590,8 +635,8 @@
                               "height": "250",
                               "locale": "en",
                               "dateRange": "1M",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "autosize": true
                             }
                             </script>
@@ -610,8 +655,8 @@
                               "height": "250",
                               "locale": "en",
                               "dateRange": "1M",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "autosize": true
                             }
                             </script>
@@ -630,8 +675,8 @@
                               "height": "250",
                               "locale": "en",
                               "dateRange": "1M",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "autosize": true
                             }
                             </script>
@@ -650,8 +695,8 @@
                               "height": "250",
                               "locale": "en",
                               "dateRange": "1M",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "autosize": true
                             }
                             </script>
@@ -670,8 +715,8 @@
                               "height": "250",
                               "locale": "en",
                               "dateRange": "1M",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "autosize": true
                             }
                             </script>
@@ -690,8 +735,8 @@
                               "height": "250",
                               "locale": "en",
                               "dateRange": "1M",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "autosize": true
                             }
                             </script>
@@ -710,8 +755,8 @@
                               "height": "250",
                               "locale": "en",
                               "dateRange": "1M",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "autosize": true
                             }
                             </script>
@@ -730,8 +775,8 @@
                               "height": "250",
                               "locale": "en",
                               "dateRange": "1M",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "autosize": true
                             }
                             </script>
@@ -750,8 +795,8 @@
                               "height": "250",
                               "locale": "en",
                               "dateRange": "1M",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "autosize": true
                             }
                             </script>
@@ -784,8 +829,8 @@
                             {
                               "symbol": "FOREXCOM:SPXUSD",
                               "width": "100%",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "locale": "en"
                             }
                             </script>
@@ -804,8 +849,8 @@
                             {
                               "symbol": "HSI:HSI",
                               "width": "100%",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "locale": "en"
                             }
                             </script>
@@ -824,8 +869,8 @@
                             {
                               "symbol": "PEPPERSTONE:JPN225",
                               "width": "100%",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
+                              "colorTheme": "light",
+                              "isTransparent": false,
                               "locale": "en"
                             }
                             </script>
@@ -840,38 +885,3 @@
                     </div>
                     <div class="market-widget">
                         <div class="tradingview-widget-container">
-                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
-                            {
-                              "symbol": "PEPPERSTONE:GER40",
-                              "width": "100%",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
-                              "locale": "en"
-                            }
-                            </script>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="market-item">
-                    <div class="market-info">
-                        <h3>SENSEX</h3>
-                        <p>India</p>
-                    </div>
-                    <div class="market-widget">
-                        <div class="tradingview-widget-container">
-                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
-                            {
-                              "symbol": "BSE:SENSEX",
-                              "width": "100%",
-                              "colorTheme": "dark",
-                              "isTransparent": true,
-                              "locale": "en"
-                            }
-                            </script>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="market-item">
-                    <div class="market-
