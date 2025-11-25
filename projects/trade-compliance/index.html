@@ -9,43 +9,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ===== "SUITS" EXECUTIVE DOSSIER THEME V5 (DEFINITIVE) ===== */
-    :root {
-      --bg-primary: #121212; --bg-secondary: #1E1E1E; --bg-tertiary: #2a2a2a;
-      --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999;
-      --accent-primary: #A0A0A0; --accent-secondary: #4a5568; --border-color: #2C2C2C;
-      --radius: 0.8rem; --shadow: 0 8px 30px rgba(0,0,0,0.6);
-      --transition: 0.2s ease;
-    }
+    :root { --bg-primary: #121212; --bg-secondary: #1E1E1E; --text-primary: #EAEAEA; --text-secondary: #CCCCCC; --text-muted: #999999; --accent-primary: #A0A0A0; --accent-secondary: #4a5568; --border-color: #2C2C2C; --radius: 0.8rem; --shadow: 0 8px 30px rgba(0,0,0,0.6); --transition: 0.2s ease; }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body{ margin:0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-secondary); line-height: 1.6; padding: 2rem; -webkit-font-smoothing: antialiased; position: relative; }
-    #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.1; }
+    body{ margin:0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-secondary); line-height: 1.6; padding: 2rem; position: relative; }
+    #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.1; pointer-events: none; }
     .container{ max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
     header{ background: var(--bg-secondary); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--border-color); margin-bottom: 2rem; text-align: center; box-shadow: var(--shadow); }
-    header h1{ color: var(--text-primary); margin:0; font-size:clamp(2rem, 5vw, 3rem); letter-spacing: -1px; }
-    .subtitle { margin-top: 0.5rem; color: var(--text-muted); font-weight: 500; }
-    .main-grid { display: grid; grid-template-columns: 1fr 380px; gap: 2rem; align-items: start; }
-    @media (max-width: 1024px){ .main-grid { grid-template-columns: 1fr; } }
+    h1 { color: var(--text-primary); font-size:clamp(2rem, 5vw, 3rem); }
     .card { background: rgba(30, 30, 30, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border-color); }
-    .card h2 { margin: 0 0 1rem; color: var(--accent-primary); font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
-    .briefing-section h3 { font-size: 1.1rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
-    .calculator-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
-    @media (max-width: 768px){ .calculator-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px){ .calculator-grid { grid-template-columns: 1fr; } }
+    h2 { color: var(--accent-primary); font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; margin-bottom: 1rem; }
     label{ display:block; color:var(--text-primary); margin-bottom: 0.5rem; font-weight: 600; }
     input, select{ width:100%; padding: 0.8rem; border-radius: 0.5rem; border: 1px solid var(--border-color); background:var(--bg-primary); color:var(--text-primary); font-size:1rem; }
-    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
-    .btn { display:inline-flex; align-items:center; justify-content: center; gap:.5rem; padding:.75rem 1.25rem; border-radius:.6rem; border:1px solid var(--border-color); background:var(--accent-secondary); color: var(--text-primary); text-decoration: none; transition: var(--transition); }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.75rem 1.25rem; border-radius:.6rem; border:1px solid var(--border-color); background:var(--accent-secondary); color: var(--text-primary); text-decoration: none; transition: var(--transition); }
     .btn:hover, .btn:focus { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.5); outline: none; }
-    .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; border-color: #888888; font-weight: 700; }
+    .btn-primary{ background:linear-gradient(135deg, #BDBDBD 0%, #A0A0A0 100%); color: #121212; font-weight: 700; }
     footer{ margin-top: 2rem; padding-top: 2rem; text-align:center; color:var(--text-muted); border-top: 1px solid var(--border-color); }
-    #custom-translate-widget { position: fixed; top: 1rem; right: 1.5rem; z-index: 9999; background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); }
-    #custom-translate-widget a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.2rem; transition: color var(--transition-fast); outline: none; }
+    #custom-translate-widget { position: fixed; top: 1rem; right: 1.5rem; z-index: 9999; background: var(--bg-secondary); padding: 0.4rem 0.6rem; border-radius: 0.5rem; border: 1px solid var(--border-color); }
+    #custom-translate-widget a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.2rem; outline: none; }
     #custom-translate-widget a:focus { outline: none; }
     #custom-translate-widget a.active, #custom-translate-widget a:hover { color: var(--text-primary); }
     #custom-translate-widget span { color: var(--border-color); margin: 0 0.2rem; }
-    body > .skiptranslate { display: none !important; }
+    body > .skiptranslate, .goog-te-spinner-pos { display: none !important; }
     html.translated-ltr, html.translated-rtl { margin-top: 0 !important; }
     body { top: 0 !important; }
     font[style] { background-color: transparent !important; color: inherit !important; }
@@ -60,59 +45,89 @@
   </div>
   <canvas id="bg-canvas"></canvas>
   <div class="container">
-    <header>
-      <h1>Project Dossier: Global Trade Analysis Engine</h1>
-      <p class="subtitle">An interactive dashboard for landed cost simulation.</p>
-    </header>
-    <main class="main-grid">
-      <div class="card">
-        <h2>PROJECT BRIEFING</h2>
-        <div class="briefing-section"><h3>Objective</h3><p>To engineer a predictive analytics engine that simulates the total landed cost and logistical complexities for trade routes between the world's top 10 economies.</p></div>
-        <div class="briefing-section"><h3>Key Features</h3><ul><li>Multi-Factor Cost Analysis: Dynamically calculates duties, taxes, shipping, and insurance.</li><li>Global Trade Logic: Models complex Free-Trade Agreements (FTAs).</li><li>Client-Side Processing: Ensures data privacy and instant response times.</li></ul></div>
+    <header><h1>Project Dossier: Global Trade Analysis Engine</h1><p class="subtitle">An interactive dashboard for landed cost simulation.</p></header>
+    <main style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
+      <div class="card" style="grid-column: 1 / -1;">
+        <h2>INTERACTIVE ANALYSIS DASHBOARD</h2>
+        <form onsubmit="return false;" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+          <div><label for="origin">Origin</label><select id="origin"></select></div><div><label for="destination">Destination</label><select id="destination"></select></div>
+          <div><label for="category">Category</label><select id="category"><option value="electronics">Electronics</option><option value="machinery">Machinery</option><option value="automotive">Automotive</option></select></div>
+          <div><label for="value">Value</label><input id="value" type="number" min="0" value="50000" /></div><div><label for="insurance">Insurance</label><input id="insurance" type="number" min="0" value="250" /></div>
+          <div><label for="shipping-mode">Mode</label><select id="shipping-mode"><option value="sea">Sea</option><option value="air">Air</option></select></div>
+        </form>
+        <div style="margin-top: 1.5rem;"><button class="btn btn-primary" id="analyzeBtn" type="button">▶️ Run Analysis</button></div>
+        <div id="processing-overlay" style="display: none; text-align: center; padding: 2rem;"><div style="border: 4px solid var(--bg-tertiary); border-top: 4px solid var(--accent-primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div><div id="processing-status">Initializing...</div></div>
+        <div id="results-dashboard" style="display: none; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem;"></div>
       </div>
       <aside class="card">
-        <h2>ACTION PANEL</h2><p>Return to the main portfolio or access project assets and documentation.</p>
-        <div class="btn-group" style="flex-direction: column;">
-            <a class="btn btn-primary" href="../../index.html" title="Return to Main Portfolio">🏠 Return to Main Portfolio</a>
-            <a class="btn" href="documentation.html">📄 Review Technical Documentation</a>
+        <h2>ACTION PANEL</h2><p>Return to the main portfolio or access project assets.</p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+            <a class="btn btn-primary" href="../../index.html">🏠 Return to Portfolio</a>
+            <a class="btn" href="documentation.html">📄 Review Documentation</a>
             <a class="btn" href="demo.html">📊 View Economic Briefing</a>
         </div>
       </aside>
-      <div class="card" style="grid-column: 1 / -1;">
-        <h2>INTERACTIVE ANALYSIS DASHBOARD</h2>
-        <form onsubmit="return false;" class="calculator-grid">
-          <div><label for="origin">Origin Country</label><select id="origin"></select></div><div><label for="destination">Destination Country</label><select id="destination"></select></div>
-          <div><label for="category">Product Category</label><select id="category"><option value="electronics">Electronics</option><option value="machinery">Machinery</option><option value="automotive">Automotive</option></select></div>
-          <div><label for="value">Shipment Value</label><input id="value" type="number" min="0" value="50000" /></div><div><label for="insurance">Insurance Cost</label><input id="insurance" type="number" min="0" value="250" /></div>
-          <div><label for="shipping-mode">Shipping Mode</label><select id="shipping-mode"><option value="sea">Sea Freight</option><option value="air">Air Freight</option></select></div>
-        </form>
-        <div class="btn-group"><button class="btn btn-primary" id="analyzeBtn" type="button">▶️ Run Analysis</button></div>
-        <div id="processing-overlay" style="display: none; text-align: center; padding: 2rem;"><div class="spinner" style="border: 4px solid var(--bg-tertiary); border-top: 4px solid var(--accent-primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div><div id="processing-status">Initializing...</div></div>
-        <div id="results-dashboard" style="display: none; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem;"></div>
-      </div>
     </main>
-    <footer><div>&copy; 2024 Krishna Dayma | Project Dossier KD-GTA-002</div></footer>
+    <footer><div>&copy; 2025 Krishna Dayma | Project Dossier KD-GTA-002</div></footer>
   </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="app.js" defer></script>
-  <script>
-    function setLanguage(lang) { document.cookie = `googtrans=/en/${lang};path=/`; location.reload(); }
-    function highlightActiveLanguage() {
-        let currentLang = 'en';
-        const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
-        if (langCookie) currentLang = langCookie.split('/')[2];
-        document.querySelectorAll('#custom-translate-widget a').forEach(el => el.classList.remove('active'));
-        const activeEl = document.querySelector(`.lang-${currentLang}`);
-        if (activeEl) activeEl.classList.add('active');
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-        highlightActiveLanguage();
-        // Background animation and other page scripts...
-    });
-  </script>
   <script type="text/javascript">
     function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); }
+    function setLanguage(lang) { document.cookie = `googtrans=/en/${lang};path=/`; location.reload(); }
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function runPageScripts() {
+      // --- Highlight active language ---
+      let currentLang = 'en';
+      const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+      if (langCookie) currentLang = langCookie.split('/')[2];
+      document.querySelectorAll('#custom-translate-widget a').forEach(el => el.classList.remove('active'));
+      const activeEl = document.querySelector(`.lang-${currentLang}`);
+      if (activeEl) activeEl.classList.add('active');
+
+      // --- 3D Plexus Background ---
+      if (typeof THREE !== 'undefined') {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        const particles = [], particleCount = 80;
+        for (let i = 0; i < particleCount; i++) {
+          particles.push(new THREE.Vector3((Math.random() - 0.5) * 20, (Math.random() - 0.5) * 20, (Math.random() - 0.5) * 20));
+        }
+        const points = new THREE.Points(new THREE.BufferGeometry().setFromPoints(particles), new THREE.PointsMaterial({ color: 0xAAAAAA, size: 0.1 }));
+        scene.add(points);
+        const lines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0x4a5568, transparent: true, opacity: 0.3 }));
+        scene.add(lines);
+        camera.position.z = 10;
+        function animate() {
+            requestAnimationFrame(animate);
+            const positions = points.geometry.attributes.position.array;
+            const linePositions = [];
+            for (let i = 0; i < particleCount; i++) {
+                for (let j = i + 1; j < particleCount; j++) {
+                    if (particles[i].distanceTo(particles[j]) < 2.5) {
+                        linePositions.push(particles[i].x, particles[i].y, particles[i].z, particles[j].x, particles[j].y, particles[j].z);
+                    }
+                }
+            }
+            lines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+            points.rotation.y += 0.0005; lines.rotation.y += 0.0005;
+            renderer.render(scene, camera);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+      }
+    }
+    // MASTER INITIALIZER
+    window.onload = function() { setTimeout(runPageScripts, 500); };
+  </script>
 </body>
 </html>
