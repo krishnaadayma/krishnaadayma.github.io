@@ -60,9 +60,9 @@
       <div class="card fade-in">
         <h2>ACTION PANEL</h2><p>Return to the main portfolio or the interactive analysis tool.</p>
         <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
-            <a class="btn btn-primary" href="../../index.html">🏠 Return to Portfolio</a>
-            <a class="btn" href="index.html">▶️ Go to Interactive Analysis</a>
-            <a class="btn" href="documentation.html">📄 Review Documentation</a>
+            <a class="btn btn-primary" href="../../index.html?v=4">🏠 Return to Portfolio</a>
+            <a class="btn" href="index.html?v=4">▶️ Go to Interactive Analysis</a>
+            <a class="btn" href="documentation.html?v=4">📄 Review Documentation</a>
         </div>
       </div>
     </main>
@@ -77,7 +77,6 @@
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script>
     function runPageScripts() {
-        // --- Highlight active language ---
         let currentLang = 'en';
         const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
         if (langCookie) currentLang = langCookie.split('/')[2];
@@ -85,43 +84,31 @@
         const activeEl = document.querySelector(`.lang-${currentLang}`);
         if (activeEl) activeEl.classList.add('active');
 
-        // --- Background Cubes ---
         if (typeof THREE !== 'undefined') {
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             const cubes = [];
-            const cubeCount = 50;
             const geometry = new THREE.BoxGeometry(1, 1, 1);
-            for (let i = 0; i < cubeCount; i++) {
+            for (let i = 0; i < 50; i++) {
                 const material = new THREE.MeshBasicMaterial({ color: 0xAAAAAA, wireframe: true, transparent: true, opacity: Math.random() * 0.5 + 0.1 });
                 const cube = new THREE.Mesh(geometry, material);
                 cube.position.set((Math.random() - 0.5) * 30, (Math.random() - 0.5) * 30, (Math.random() - 0.5) * 30);
                 cube.userData.rotationSpeed = { x: (Math.random() - 0.5) * 0.005, y: (Math.random() - 0.5) * 0.005 };
-                scene.add(cube);
-                cubes.push(cube);
+                scene.add(cube); cubes.push(cube);
             }
             camera.position.z = 15;
-            function animateCubes() {
-                requestAnimationFrame(animateCubes);
-                cubes.forEach(cube => { cube.rotation.x += cube.userData.rotationSpeed.x; cube.rotation.y += cube.userData.rotationSpeed.y; });
-                renderer.render(scene, camera);
-            }
+            function animateCubes() { requestAnimationFrame(animateCubes); cubes.forEach(cube => { cube.rotation.x += cube.userData.rotationSpeed.x; cube.rotation.y += cube.userData.rotationSpeed.y; }); renderer.render(scene, camera); }
             animateCubes();
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+            window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
         }
 
-        // --- SIMULATED DATA & CHARTS ---
         const COUNTRIES_DATA = [ { id: 'usa', name: 'USA', gdp: 28.8, growth: 2.1 }, { id: 'china', name: 'China', gdp: 20.5, growth: 4.5 }, { id: 'germany', name: 'Germany', gdp: 4.9, growth: 1.5 }, { id: 'japan', name: 'Japan', gdp: 4.5, growth: 1.2 }, { id: 'india', name: 'India', gdp: 4.2, growth: 6.5 }, { id: 'uk', name: 'UK', gdp: 3.8, growth: 1.8 }, { id: 'france', name: 'France', gdp: 3.2, growth: 1.4 }, { id: 'italy', name: 'Italy', gdp: 2.3, growth: 1.1 }, { id: 'brazil', name: 'Brazil', gdp: 2.2, growth: 2.5 }, { id: 'canada', name: 'Canada', gdp: 2.1, growth: 2.0 }];
         function renderChart(container, data, dataKey, maxValue, unit = '') {
             container.innerHTML = '';
             data.forEach(country => {
-                const item = document.createElement('div'); item.className = 'chart-bar-item';
-                item.innerHTML = `<div class="bar-label">${country.name}</div><div class="bar-wrapper"><div class="bar" data-width="${(country[dataKey] / maxValue) * 100}%"></div></div><div class="bar-value">${country[dataKey]}${unit}</div>`;
-                container.appendChild(item);
+                container.innerHTML += `<div class="chart-bar-item"><div class="bar-label">${country.name}</div><div class="bar-wrapper"><div class="bar" data-width="${(country[dataKey] / maxValue) * 100}%"></div></div><div class="bar-value">${country[dataKey]}${unit}</div></div>`;
             });
         }
         renderChart(document.getElementById('gdp-chart'), COUNTRIES_DATA, 'gdp', Math.max(...COUNTRIES_DATA.map(c => c.gdp)), 'T');
@@ -131,17 +118,14 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    if (entry.target.querySelector('.bar')) {
-                        entry.target.querySelectorAll('.bar').forEach(bar => { bar.style.width = bar.dataset.width; });
-                    }
+                    if (entry.target.querySelector('.bar')) { entry.target.querySelectorAll('.bar').forEach(bar => { bar.style.width = bar.dataset.width; }); }
                     observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.25 });
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     }
-    // MASTER INITIALIZER
-    window.onload = function() { setTimeout(runPageScripts, 500); };
+    window.onload = () => setTimeout(runPageScripts, 500);
   </script>
 </body>
 </html>
