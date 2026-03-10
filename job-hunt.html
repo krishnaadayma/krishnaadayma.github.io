@@ -835,23 +835,18 @@ async function callClaude(prompt) {
     return null;
   }
 
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+  const PROXY_URL = 'https://script.google.com/macros/s/AKfycbxXOnSrVZC4tPXoIGcLoRpkeIfJTrLTGRJWAZHhMkM3-x1WyWIUJaaQjihO7M_lwr6Zwg/exec';
+
+  const res = await fetch(PROXY_URL, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': key,
-      'anthropic-version': '2023-06-01'
-    },
-    body: JSON.stringify({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 1024,
-      messages: [{ role: 'user', content: prompt }]
-    })
+    redirect: 'follow',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify({ prompt: prompt, apiKey: key })
   });
 
   const data = await res.json();
-  if (data.error) throw new Error(data.error.message);
-  return data.content[0].text;
+  if (data.error) throw new Error(data.error);
+  return data.result;
 }
 
 // ─── CV Tailor ───────────────────────────────────────────────────
