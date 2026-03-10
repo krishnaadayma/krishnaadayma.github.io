@@ -835,20 +835,19 @@ async function callClaude(prompt) {
     return null;
   }
 
-  // Uses Google Gemini API — free tier, no credit card needed
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`;
+  // Routes through Google Apps Script proxy (bypasses CORS)
+  const PROXY_URL = 'https://script.google.com/macros/s/AKfycbzsCC-MHYKpOCdywb6gnmWlqbuGHkTnH3gLaWjGTaVthML2cBGaIH_ZJIzwHQYKHeToRg/exec';
 
-  const res = await fetch(url, {
+  const res = await fetch(PROXY_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }]
-    })
+    redirect: 'follow',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify({ prompt: prompt, apiKey: key })
   });
 
   const data = await res.json();
-  if (data.error) throw new Error(data.error.message);
-  return data.candidates[0].content.parts[0].text;
+  if (data.error) throw new Error(data.error);
+  return data.result;
 }
 
 // ─── CV Tailor ───────────────────────────────────────────────────
