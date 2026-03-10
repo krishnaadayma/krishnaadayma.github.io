@@ -716,9 +716,9 @@
       <div class="card-desc">Your API key is stored only in your browser. Never sent anywhere except directly to Anthropic's API.</div>
 
       <div class="config-row">
-        <div class="config-key">Claude API Key</div>
+        <div class="config-key">Gemini API Key</div>
         <div class="config-val">
-          <input type="password" id="cfg-apikey" placeholder="sk-ant-..." oninput="saveConfig()">
+          <input type="password" id="cfg-apikey" placeholder="AIza..." oninput="saveConfig()">
         </div>
       </div>
       <div class="config-row">
@@ -831,22 +831,24 @@ function switchTab(name) {
 async function callClaude(prompt) {
   const key = getApiKey();
   if (!key || key.length < 20) {
-    showToast('⚠️ Add your Claude API key in the Setup tab first');
+    showToast('⚠️ Add your Gemini API key in the Setup tab first');
     return null;
   }
 
-  const PROXY_URL = 'https://script.google.com/macros/s/AKfycbxXOnSrVZC4tPXoIGcLoRpkeIfJTrLTGRJWAZHhMkM3-x1WyWIUJaaQjihO7M_lwr6Zwg/exec';
+  // Uses Google Gemini API — free tier, no credit card needed
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`;
 
-  const res = await fetch(PROXY_URL, {
+  const res = await fetch(url, {
     method: 'POST',
-    redirect: 'follow',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify({ prompt: prompt, apiKey: key })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }]
+    })
   });
 
   const data = await res.json();
-  if (data.error) throw new Error(data.error);
-  return data.result;
+  if (data.error) throw new Error(data.error.message);
+  return data.candidates[0].content.parts[0].text;
 }
 
 // ─── CV Tailor ───────────────────────────────────────────────────
