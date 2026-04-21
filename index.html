@@ -1,219 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krishna Dayma - International Business & Data Analyst Portfolio</title>
-    <meta name="description" content="Portfolio for Krishna Dayma, an International Business & Data Analyst.">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Modular CSS -->
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/responsive.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Krishna Dayma | International Business & Data Analyst</title>
+  <meta name="description" content="Portfolio of Krishna Dayma featuring global trade analytics projects, market intelligence dashboards, experience, education, and contact details." />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/about.css" />
+  <link rel="stylesheet" href="css/projects.css" />
+  <link rel="stylesheet" href="css/skills.css" />
+  <link rel="stylesheet" href="css/contact.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
-    <!-- Language Widget -->
-    <div id="google_translate_element" style="display: none;"></div>
-    <div id="custom-translate-widget">
-        <a class="lang-en">EN</a><span>|</span><a class="lang-it">IT</a>
+  <div id="google_translate_element" style="display:none;"></div>
+
+  <header class="site-header" id="top">
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="container nav-inner">
+        <a class="brand" href="#top">Krishna Dayma</a>
+        <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="nav-menu">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+          <div class="lang-switch" aria-label="Language switcher">
+            <a href="javascript:void(0)" class="lang-en" onclick="setLanguage('en')">EN</a>
+            <span>|</span>
+            <a href="javascript:void(0)" class="lang-it" onclick="setLanguage('it')">IT</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-content" data-animate="fade-up">
+        <p class="eyebrow">International Business & Data Analyst</p>
+        <h1 id="hero-title">Data-driven strategies for global market growth.</h1>
+        <p class="hero-copy">I translate complex international trade and financial data into practical, high-impact decisions for globally operating teams.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">View My Work</a>
+          <a class="btn btn-outline" href="#contact">Let's Connect</a>
+        </div>
+      </div>
+      <a class="scroll-indicator" href="#about" aria-label="Scroll to about section">Scroll</a>
+    </section>
+  </header>
+
+  <main>
+    <section id="about" class="section about">
+      <div class="container split">
+        <figure class="about-media" data-animate="fade-right">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80" alt="Professional workspace representing analytics and strategy" />
+        </figure>
+        <div class="about-content" data-animate="fade-left">
+          <h2>Professional Summary</h2>
+          <p>A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets.</p>
+          <p>Fluent in three languages and equipped with a cross-cultural perspective, I optimize processes, support market expansion, and deliver measurable outcomes in dynamic international environments.</p>
+          <div class="stats-grid" aria-label="Professional highlights">
+            <article><strong>3</strong><span>Languages</span></article>
+            <article><strong>2+</strong><span>Flagship Projects</span></article>
+            <article><strong>2024–Now</strong><span>Global HR Experience</span></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section skills">
+      <div class="container">
+        <h2 data-animate="fade-up">Core Competencies</h2>
+        <div class="skills-grid">
+          <article class="skill-card" data-animate="fade-up"><h3>Data Analysis</h3><ul><li>Excel</li><li>Data Visualization</li><li>Business Intelligence (BI)</li></ul></article>
+          <article class="skill-card" data-animate="fade-up"><h3>Business Strategy</h3><ul><li>International Trade</li><li>Market Research</li><li>Strategic Planning</li></ul></article>
+          <article class="skill-card" data-animate="fade-up"><h3>Process Optimization</h3><ul><li>Workflow Improvement</li><li>Productivity Enhancement</li><li>Risk Reduction</li></ul></article>
+          <article class="skill-card" data-animate="fade-up"><h3>Platforms & Software</h3><ul><li>MS Office Suite</li><li>Canva</li><li>Power BI</li><li>G-Suite</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects">
+      <div class="container">
+        <h2 data-animate="fade-up">Featured Projects</h2>
+        <div class="project-grid">
+          <article class="project-card" data-animate="fade-up">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80" alt="Global trade analytics dashboard preview" />
+            <div class="project-body">
+              <h3>Global Trade Analysis Engine</h3>
+              <p>Executive dashboard for landed cost simulation, duty calculations, and FTA detection.</p>
+              <div class="tags"><span>Trade</span><span>Analytics</span><span>Dashboard</span></div>
+              <a class="btn btn-primary" href="projects/trade-compliance/index.html">View Project</a>
+            </div>
+          </article>
+          <article class="project-card" data-animate="fade-up">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=900&q=80" alt="Global stock market dashboard" />
+            <div class="project-body">
+              <h3>Global Market Watch</h3>
+              <p>Live tracking dashboard of stock indices across major world economies and market centers.</p>
+              <div class="tags"><span>Markets</span><span>Live Data</span><span>Finance</span></div>
+              <a class="btn btn-primary" href="projects/market-watch/index.html">View Live Markets</a>
+            </div>
+          </article>
+          <article class="project-card" data-animate="fade-up">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="International business intelligence workflow" />
+            <div class="project-body">
+              <h3>Strategic Intelligence Workflows</h3>
+              <p>Cross-functional analytics methods for market prioritization, communication, and operational planning.</p>
+              <div class="tags"><span>Strategy</span><span>Operations</span><span>Insights</span></div>
+              <a class="btn btn-outline" href="#experience">See Experience</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section experience">
+      <div class="container">
+        <h2 data-animate="fade-up">Experience, Education & Certifications</h2>
+        <div class="timeline">
+          <article class="timeline-item" data-animate="fade-up">
+            <h3>HR & Communications Intern</h3>
+            <p class="meta">Sidel Group, Parma, Italy | Oct 2024 – Present</p>
+            <p>Manage internal communication projects and support HR operations for a global manufacturing leader.</p>
+          </article>
+          <article class="timeline-item" data-animate="fade-up">
+            <h3>Laurea Magistrale in International Business and Development</h3>
+            <p class="meta">University of Parma, Italy | 2022 – 2025</p>
+            <p>Focus on global business strategy, economic development policy, and advanced quantitative analysis.</p>
+          </article>
+          <article class="timeline-item" data-animate="fade-up">
+            <h3>Laurea Triennale in Commerce</h3>
+            <p class="meta">Swami Ramanand Teerth Marathwada University, India | 2018 – 2021</p>
+            <p>Foundational training in business management, accounting, and economics.</p>
+          </article>
+          <article class="timeline-item" data-animate="fade-up">
+            <h3>Certifications & Language Proficiency</h3>
+            <p class="meta">Professional Development</p>
+            <p>Financial Accounting and Management (Politecnico di Milano), Advanced Data Analytics (Coursera), PMP (In Progress). Languages: English, Italian, Hindi.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container contact-grid">
+        <div class="contact-info" data-animate="fade-right">
+          <h2>Get In Touch</h2>
+          <p>I am actively seeking opportunities and open to collaboration across data, business, and global strategy initiatives.</p>
+          <p><strong>Email:</strong> <a href="mailto:krishna.saq@gmail.com">krishna.saq@gmail.com</a></p>
+          <p><strong>Mobile:</strong> <a href="tel:+393756320447">+39 375 632 0447</a></p>
+        </div>
+        <form id="contact-form" class="contact-form" novalidate data-animate="fade-left">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required />
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+          <p id="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 Krishna Dayma. All rights reserved.</p>
+      <a href="#top" class="back-to-top">Back to top ↑</a>
     </div>
-    
-    <!-- Header with Particles -->
-    <header>
-        <div id="particles-js"></div>
-        <div class="container">
-            <div class="header-content">
-                <h1>Krishna Dayma</h1>
-                <p class="subtitle">International Business & Data Analyst</p>
-                <p class="tagline">Data-Driven Strategies | Cross-Cultural Communication | Process Optimization</p>
-            </div>
-        </div>
-    </header>
-    
-    <!-- Main Content -->
-    <main id="main-content">
-        
-        <!-- About Section -->
-        <section id="about">
-            <canvas id="globe-canvas"></canvas>
-            <div class="container fade-in">
-                <h2 class="section-title">Professional Summary</h2>
-                <p class="about-text">A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets. Fluent in three languages and equipped with a cross-cultural perspective, I excel at optimizing processes, driving market expansion, and delivering measurable results in dynamic, international environments.</p>
-            </div>
-        </section>
+  </footer>
 
-        <!-- Skills Section -->
-        <section id="skills">
-            <div class="container">
-                <h2 class="section-title">Core Competencies</h2>
-                <div class="skills-grid">
-                    <div class="card fade-in">
-                        <h3>Data Analysis</h3>
-                        <p>Excel, Data Visualization, Business Intelligence (BI)</p>
-                    </div>
-                    <div class="card fade-in">
-                        <h3>Business Strategy</h3>
-                        <p>International Trade, Market Research, Strategic Planning</p>
-                    </div>
-                    <div class="card fade-in">
-                        <h3>Process Optimization</h3>
-                        <p>Workflow Improvement, Productivity Enhancement, Risk Reduction</p>
-                    </div>
-                    <div class="card fade-in">
-                        <h3>Platforms & Software</h3>
-                        <p>MS Office Suite, Canva, Power BI, G-Suite</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Live News Section -->
-        <section id="news">
-            <div class="container">
-                <h2 class="section-title">
-                    <span id="insights-title">Intelligence Feed</span>
-                    <span id="live-indicator"></span>
-                </h2>
-                <div id="insights-container" class="news-grid">
-                    <p class="loading-text">Accessing live economic intelligence...</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects">
-            <div class="container">
-                <h2 class="section-title">Key Projects</h2>
-                <div class="projects-grid">
-                    <div class="card item-card fade-in">
-                        <h3>🌍 Global Trade Analysis Engine</h3>
-                        <p>An executive dashboard for simulating landed costs in international trade, featuring real-time duty calculations and FTA detection.</p>
-                        <a class="btn btn-primary" href="projects/trade-compliance/index.html">View Project</a>
-                    </div>
-                    <div class="card item-card fade-in">
-                        <h3>📈 Global Market Watch</h3>
-                        <p>Live market data dashboard tracking stock indices for the world's top 10 economic superpowers with real-time updates.</p>
-                        <a class="btn btn-primary" href="projects/market-watch/index.html">View Live Markets</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience">
-            <div class="container">
-                <h2 class="section-title">Professional Experience</h2>
-                <div class="experience-grid">
-                    <div class="card item-card fade-in">
-                        <h3>HR & Communications Intern</h3>
-                        <p class="company">Sidel Group, Parma, Italy | Oct 2024 – Present</p>
-                        <p>Manage internal communication projects and contribute to HR operations for a global manufacturing leader.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Education Section -->
-        <section id="education">
-            <div class="container">
-                <h2 class="section-title">Academic Background</h2>
-                <div class="education-grid">
-                    <div class="card item-card fade-in">
-                        <h3>Laurea Magistrale in International Business and Development</h3>
-                        <p class="institution">University of Parma, Italy | 2022 – 2025</p>
-                        <p>Global business strategies, economic development policies, and advanced quantitative analysis.</p>
-                    </div>
-                    <div class="card item-card fade-in">
-                        <h3>Laurea Triennale in Commerce</h3>
-                        <p class="institution">Swami Ramanand Teerth Marathwada University, India | 2018 – 2021</p>
-                        <p>Business management, financial accounting, and economic principles.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Certifications Section -->
-        <section id="certifications">
-            <div class="container">
-                <h2 class="section-title">Certifications & Training</h2>
-                <div class="card fade-in">
-                    <ul class="checklist">
-                        <li>Financial Accounting and Management - Politecnico di Milano</li>
-                        <li>Advanced Data Analytics - Coursera</li>
-                        <li>Project Management Professional (PMP) - In Progress</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Languages Section -->
-        <section id="languages">
-            <div class="container">
-                <h2 class="section-title">Language Proficiency</h2>
-                <div class="card fade-in">
-                    <div class="language-item" data-lang="english">
-                        <p>English</p>
-                        <div class="progress-wrapper">
-                            <div class="progress-bar" data-width="95%"></div>
-                        </div>
-                    </div>
-                    <div class="language-item" data-lang="italian">
-                        <p>Italian</p>
-                        <div class="progress-wrapper">
-                            <div class="progress-bar" data-width="85%"></div>
-                        </div>
-                    </div>
-                    <div class="language-item" data-lang="hindi">
-                        <p>Hindi</p>
-                        <div class="progress-wrapper">
-                            <div class="progress-bar" data-width="100%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact">
-            <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="card fade-in contact-card">
-                    <p class="contact-intro">I am actively seeking opportunities and am open to collaboration.</p>
-                    <p><strong>Email:</strong> <a href="mailto:krishna.saq@gmail.com">krishna.saq@gmail.com</a></p>
-                    <p><strong>Mobile:</strong> <a href="tel:+393756320447">+39 375 632 0447</a></p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Krishna Dayma. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- External Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <!-- Modular JavaScript -->
-    <script src="js/config.js"></script>
-    <script src="js/translate.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/scroll.js"></script>
-    <script src="js/news.js"></script>
-    <script src="js/particles-init.js"></script>
-    <script src="js/globe.js"></script>
-    <script src="js/main.js"></script>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+    }
+    function setLanguage(lang) {
+      document.cookie = `googtrans=/en/${lang};path=/`;
+      location.reload();
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/form.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
