@@ -1,0 +1,22 @@
+.about { background: #fff; }
+.split {
+  display: grid;
+  grid-template-columns: minmax(220px, 420px) 1fr;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+.about-media { position: relative; margin: 0; }
+.about-media::after {
+  content: '';
+  position: absolute;
+  inset: auto -14px -14px auto;
+  width: 120px;
+  height: 120px;
+  background: rgba(37, 99, 235, 0.15);
+  border-radius: var(--radius);
+  z-index: -1;
+}
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1rem; }
+.stats-grid article { background: #eff6ff; border: 1px solid #dbeafe; border-radius: 12px; padding: 0.9rem; text-align: center; }
+.stats-grid strong { display: block; color: var(--secondary-blue); }
+.stats-grid span { font-size: 0.8rem; color: var(--gray-600); }

@@ -1,28 +1,10 @@
-/* ==================================================================================
-   MAIN.JS - Application Orchestrator
-   Imports and initializes all modules
-   ================================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.Navbar) window.Navbar.init();
+  if (window.Animations) window.Animations.init();
+  if (window.ContactForm) window.ContactForm.init();
 
-function initializeApp() {
-    console.log('🚀 Initializing Portfolio...');
-    
-    // Core UI
-    initializeUI();
-    
-    // Scroll animations
-    initializeScrollObserver();
-    
-    // Live news feed
-    initializeNewsFeed();
-    
-    // Visual effects
-    initializeParticles();
-    initializeGlobe();
-    
-    console.log('✅ Portfolio ready!');
-}
-
-// Start application when DOM is ready
-window.addEventListener('load', () => {
-    setTimeout(initializeApp, CONFIG.ANIMATION.fadeDelay);
+  const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+  const lang = langCookie ? langCookie.split('/')[2] : 'en';
+  const active = document.querySelector(`.lang-${lang}`);
+  if (active) active.classList.add('active');
 });

@@ -1,0 +1,18 @@
+.site-header { position: relative; }
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  background: rgba(248, 250, 252, 0.9);
+  border-bottom: 1px solid var(--gray-400);
+}
+.navbar.is-scrolled { box-shadow: var(--shadow-sm); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; min-height: 72px; }
+.brand { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--dark); }
+.nav-links { display: flex; align-items: center; gap: 1rem; }
+.nav-links a { color: var(--gray-600); font-weight: 500; }
+.nav-links a.active, .nav-links a:hover { color: var(--primary-blue); }
+.lang-switch { display: inline-flex; gap: 0.4rem; align-items: center; padding-left: 0.4rem; border-left: 1px solid var(--gray-400); }
+.menu-toggle { display: none; background: transparent; border: 0; cursor: pointer; }
+.menu-toggle span { display: block; width: 24px; height: 2px; margin: 5px 0; background: var(--dark); }
