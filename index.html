@@ -1,200 +1,1444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Krishna Dayma | International Business & Data Analyst</title>
-  <meta name="description" content="Portfolio of Krishna Dayma featuring global trade analytics projects, market intelligence dashboards, experience, education, and contact details." />
-  <meta name="theme-color" content="#2563eb" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Aadayma — International Business & Data Analyst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-hover: #1c1c1c;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent: #c9a96e;
+            --accent-light: #e0c99a;
+            --border: #2a2a2a;
+            --border-light: #333333;
+            --success: #4ade80;
+            --gradient-start: #c9a96e;
+            --gradient-end: #8b7355;
+        }
 
-  <link rel="stylesheet" href="css/variables.css" />
-  <link rel="stylesheet" href="css/navbar.css" />
-  <link rel="stylesheet" href="css/hero.css" />
-  <link rel="stylesheet" href="css/about.css" />
-  <link rel="stylesheet" href="css/projects.css" />
-  <link rel="stylesheet" href="css/skills.css" />
-  <link rel="stylesheet" href="css/contact.css" />
-  <link rel="stylesheet" href="css/animations.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-light);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* Noise Texture Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            border-bottom-color: var(--border);
+            padding: 1rem 3rem;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 3rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(201, 169, 110, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            align-items: center;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--bg-primary);
+            box-shadow: 0 4px 20px rgba(201, 169, 110, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201, 169, 110, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-image-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(10, 10, 10, 0.8) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .hero-image-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .hero-stats {
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            gap: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            z-index: 3;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Marquee */
+        .marquee-section {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .marquee-item {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            padding: 0 3rem;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .marquee-item::after {
+            content: '◆';
+            color: var(--accent);
+            font-size: 0.5rem;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--bg-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .highlight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .highlight-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(201, 169, 110, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .highlight-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .skill-category h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        .skill-list li::before {
+            content: '→';
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: var(--bg-secondary);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.08);
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(10, 10, 10, 0.9) 100%);
+        }
+
+        .project-tags {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 2;
+        }
+
+        .project-tag {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 0.375rem 0.875rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-desc {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: gap 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 0.75rem;
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--border) 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -3rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--bg-primary);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            transform: translateX(-5.5px);
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--accent);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .timeline-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .timeline-date {
+            font-size: 0.875rem;
+            color: var(--accent);
+            font-weight: 600;
+            background: rgba(201, 169, 110, 0.1);
+            padding: 0.375rem 1rem;
+            border-radius: 100px;
+        }
+
+        .timeline-org {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .timeline-desc {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Certifications Grid */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .cert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .cert-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .cert-provider {
+            font-size: 0.875rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-status {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 4rem 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand span {
+            color: var(--accent);
+        }
+
+        .footer-desc {
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 400px;
+        }
+
+        .footer-links h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+        }
+
+        .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content {
+                order: 2;
+            }
+
+            .hero-image {
+                order: 1;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .hero-subtitle {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .certs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-stats {
+                position: relative;
+                bottom: 0;
+                left: 0;
+                transform: none;
+                margin-top: 2rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-primary);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
 </head>
 <body>
-  <div id="google_translate_element" style="display:none;"></div>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-text">KA</div>
+    </div>
 
-  <header class="site-header" id="top">
-    <nav class="navbar" aria-label="Main navigation">
-      <div class="container nav-inner">
-        <a class="brand" href="#top">Krishna Dayma</a>
-        <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
-          <span></span><span></span><span></span>
-        </button>
-        <div class="nav-links" id="nav-menu">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#experience">Experience</a>
-          <a href="#contact">Contact</a>
-          <div class="lang-switch" aria-label="Language switcher">
-            <a href="javascript:void(0)" class="lang-en" onclick="setLanguage('en')">EN</a>
-            <span>|</span>
-            <a href="javascript:void(0)" class="lang-it" onclick="setLanguage('it')">IT</a>
-          </div>
-        </div>
-      </div>
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">Krishna<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
 
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-content" data-animate="fade-up">
-        <p class="eyebrow">International Business & Data Analyst</p>
-        <h1 id="hero-title">Data-driven strategies for global market growth.</h1>
-        <p class="hero-copy">I translate complex international trade and financial data into practical, high-impact decisions for globally operating teams.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#projects">View My Work</a>
-          <a class="btn btn-outline" href="#contact">Let's Connect</a>
-        </div>
-      </div>
-      <a class="scroll-indicator" href="#about" aria-label="Scroll to about section">Scroll</a>
-    </section>
-  </header>
-
-  <main>
-    <section id="about" class="section about">
-      <div class="container split">
-        <figure class="about-media" data-animate="fade-right">
-          <img loading="lazy" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80" alt="Professional workspace representing analytics and strategy" />
-        </figure>
-        <div class="about-content" data-animate="fade-left">
-          <h2>Professional Summary</h2>
-          <p>A strategic analyst at the intersection of international business and data science. I specialize in translating complex datasets into actionable growth strategies for global markets.</p>
-          <p>Fluent in three languages and equipped with a cross-cultural perspective, I optimize processes, support market expansion, and deliver measurable outcomes in dynamic international environments.</p>
-          <div class="stats-grid" aria-label="Professional highlights">
-            <article><strong>3</strong><span>Languages</span></article>
-            <article><strong>2+</strong><span>Flagship Projects</span></article>
-            <article><strong>2024–Now</strong><span>Global HR Experience</span></article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" class="section skills">
-      <div class="container">
-        <h2 data-animate="fade-up">Core Competencies</h2>
-        <div class="skills-grid">
-          <article class="skill-card" data-animate="fade-up"><h3>Data Analysis</h3><ul><li>Excel</li><li>Data Visualization</li><li>Business Intelligence (BI)</li></ul></article>
-          <article class="skill-card" data-animate="fade-up"><h3>Business Strategy</h3><ul><li>International Trade</li><li>Market Research</li><li>Strategic Planning</li></ul></article>
-          <article class="skill-card" data-animate="fade-up"><h3>Process Optimization</h3><ul><li>Workflow Improvement</li><li>Productivity Enhancement</li><li>Risk Reduction</li></ul></article>
-          <article class="skill-card" data-animate="fade-up"><h3>Platforms & Software</h3><ul><li>MS Office Suite</li><li>Canva</li><li>Power BI</li><li>G-Suite</li></ul></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="section projects">
-      <div class="container">
-        <h2 data-animate="fade-up">Featured Projects</h2>
-        <div class="project-grid">
-          <article class="project-card" data-animate="fade-up">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80" alt="Global trade analytics dashboard preview" />
-            <div class="project-body">
-              <h3>Global Trade Analysis Engine</h3>
-              <p>Executive dashboard for landed cost simulation, duty calculations, and FTA detection.</p>
-              <div class="tags"><span>Trade</span><span>Analytics</span><span>Dashboard</span></div>
-              <a class="btn btn-primary" href="projects/trade-compliance/index.html">View Project</a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid">
+            <div class="hero-content fade-up">
+                <div class="hero-label">Portfolio 2025</div>
+                <h1 class="hero-title">
+                    International<br>
+                    Business &<br>
+                    <span class="highlight">Data Analyst</span>
+                </h1>
+                <p class="hero-subtitle">
+                    A strategic analyst at the intersection of international business and data science. 
+                    I specialize in translating complex datasets into actionable growth strategies for global markets.
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View Projects ↗</a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                </div>
             </div>
-          </article>
-          <article class="project-card" data-animate="fade-up">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=900&q=80" alt="Global stock market dashboard" />
-            <div class="project-body">
-              <h3>Global Market Watch</h3>
-              <p>Live tracking dashboard of stock indices across major world economies and market centers.</p>
-              <div class="tags"><span>Markets</span><span>Live Data</span><span>Finance</span></div>
-              <a class="btn btn-primary" href="projects/market-watch/index.html">View Live Markets</a>
+            <div class="hero-image fade-up">
+                <div class="hero-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?w=800&h=1000&fit=crop" alt="Krishna Aadayma - Professional Portrait">
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Languages</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2+</span>
+                        <span class="stat-label">Flagship Projects</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2024</span>
+                        <span class="stat-label">Global HR Exp.</span>
+                    </div>
+                </div>
             </div>
-          </article>
-          <article class="project-card" data-animate="fade-up">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="International business intelligence workflow" />
-            <div class="project-body">
-              <h3>Strategic Intelligence Workflows</h3>
-              <p>Cross-functional analytics methods for market prioritization, communication, and operational planning.</p>
-              <div class="tags"><span>Strategy</span><span>Operations</span><span>Insights</span></div>
-              <a class="btn btn-outline" href="#experience">See Experience</a>
-            </div>
-          </article>
         </div>
-      </div>
     </section>
 
-    <section id="experience" class="section experience">
-      <div class="container">
-        <h2 data-animate="fade-up">Experience, Education & Certifications</h2>
-        <div class="timeline">
-          <article class="timeline-item" data-animate="fade-up">
-            <h3>HR & Communications Intern</h3>
-            <p class="meta">Sidel Group, Parma, Italy | Oct 2024 – Present</p>
-            <p>Manage internal communication projects and support HR operations for a global manufacturing leader.</p>
-          </article>
-          <article class="timeline-item" data-animate="fade-up">
-            <h3>Laurea Magistrale in International Business and Development</h3>
-            <p class="meta">University of Parma, Italy | 2022 – 2025</p>
-            <p>Focus on global business strategy, economic development policy, and advanced quantitative analysis.</p>
-          </article>
-          <article class="timeline-item" data-animate="fade-up">
-            <h3>Laurea Triennale in Commerce</h3>
-            <p class="meta">Swami Ramanand Teerth Marathwada University, India | 2018 – 2021</p>
-            <p>Foundational training in business management, accounting, and economics.</p>
-          </article>
-          <article class="timeline-item" data-animate="fade-up">
-            <h3>Certifications & Language Proficiency</h3>
-            <p class="meta">Professional Development</p>
-            <p>Financial Accounting and Management (Politecnico di Milano), Advanced Data Analytics (Coursera), PMP (In Progress). Languages: English, Italian, Hindi.</p>
-          </article>
+    <!-- Marquee -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-item">Data Analysis</div>
+            <div class="marquee-item">Business Strategy</div>
+            <div class="marquee-item">International Trade</div>
+            <div class="marquee-item">Market Research</div>
+            <div class="marquee-item">Process Optimization</div>
+            <div class="marquee-item">Power BI</div>
+            <div class="marquee-item">Excel</div>
+            <div class="marquee-item">Strategic Planning</div>
+            <div class="marquee-item">Data Analysis</div>
+            <div class="marquee-item">Business Strategy</div>
+            <div class="marquee-item">International Trade</div>
+            <div class="marquee-item">Market Research</div>
+            <div class="marquee-item">Process Optimization</div>
+            <div class="marquee-item">Power BI</div>
+            <div class="marquee-item">Excel</div>
+            <div class="marquee-item">Strategic Planning</div>
         </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section contact">
-      <div class="container contact-grid">
-        <div class="contact-info" data-animate="fade-right">
-          <h2>Get In Touch</h2>
-          <p>I am actively seeking opportunities and open to collaboration across data, business, and global strategy initiatives.</p>
-          <p><strong>Email:</strong> <a href="mailto:krishna.saq@gmail.com">krishna.saq@gmail.com</a></p>
-          <p><strong>Mobile:</strong> <a href="tel:+393756320447">+39 375 632 0447</a></p>
-        </div>
-        <form id="contact-form" class="contact-form" novalidate data-animate="fade-left">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" required />
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required />
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-          <button type="submit" class="btn btn-primary">Send Message</button>
-          <p id="form-message" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>&copy; 2026 Krishna Dayma. All rights reserved.</p>
-      <a href="#top" class="back-to-top">Back to top ↑</a>
     </div>
-  </footer>
 
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
-    }
-    function setLanguage(lang) {
-      document.cookie = `googtrans=/en/${lang};path=/`;
-      location.reload();
-    }
-  </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script src="js/navbar.js"></script>
-  <script src="js/animations.js"></script>
-  <script src="js/form.js"></script>
-  <script src="js/main.js"></script>
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-header fade-up">
+            <div class="section-label">About Me</div>
+            <h2 class="section-title">Strategic thinker with a<br>global perspective</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-text fade-up">
+                <p>
+                    Fluent in three languages and equipped with a cross-cultural perspective, I optimize processes, 
+                    support market expansion, and deliver measurable outcomes in dynamic international environments.
+                </p>
+                <p>
+                    Currently based in Parma, Italy, I bring a unique blend of analytical rigor and business acumen 
+                    to every project. My approach combines data-driven insights with strategic foresight to help 
+                    organizations navigate complex global markets.
+                </p>
+                <div style="margin-top: 2rem;">
+                    <a href="#contact" class="btn btn-primary">Let's Collaborate ↗</a>
+                </div>
+            </div>
+            <div class="about-highlights fade-up">
+                <div class="highlight-card">
+                    <div class="highlight-icon">📊</div>
+                    <div class="highlight-title">Data-Driven</div>
+                    <div class="highlight-desc">Transforming raw data into strategic business intelligence</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">🌍</div>
+                    <div class="highlight-title">Global Mindset</div>
+                    <div class="highlight-desc">Cross-cultural expertise across Europe and Asia</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">⚡</div>
+                    <div class="highlight-title">Results Focused</div>
+                    <div class="highlight-desc">Delivering measurable outcomes and process improvements</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">🎯</div>
+                    <div class="highlight-title">Strategic Vision</div>
+                    <div class="highlight-desc">Long-term planning with agile execution capabilities</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-header fade-up">
+            <div class="section-label">Core Competencies</div>
+            <h2 class="section-title">Skills & Expertise</h2>
+        </div>
+        <div class="skills-grid fade-up">
+            <div class="skill-category">
+                <h3>Data Analysis</h3>
+                <ul class="skill-list">
+                    <li>Excel</li>
+                    <li>Data Visualization</li>
+                    <li>Business Intelligence (BI)</li>
+                    <li>Power BI</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Business Strategy</h3>
+                <ul class="skill-list">
+                    <li>International Trade</li>
+                    <li>Market Research</li>
+                    <li>Strategic Planning</li>
+                    <li>Risk Assessment</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Process Optimization</h3>
+                <ul class="skill-list">
+                    <li>Workflow Improvement</li>
+                    <li>Productivity Enhancement</li>
+                    <li>Risk Reduction</li>
+                    <li>Quality Assurance</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Platforms & Software</h3>
+                <ul class="skill-list">
+                    <li>MS Office Suite</li>
+                    <li>Canva</li>
+                    <li>Power BI</li>
+                    <li>G-Suite</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="section-header fade-up">
+            <div class="section-label">Featured Work</div>
+            <h2 class="section-title">Selected Projects</h2>
+        </div>
+        <div class="projects-grid fade-up">
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop" alt="Global Trade Analysis Engine">
+                    <div class="project-tags">
+                        <span class="project-tag">Trade</span>
+                        <span class="project-tag">Analytics</span>
+                        <span class="project-tag">Dashboard</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Global Trade Analysis Engine</h3>
+                    <p class="project-desc">Executive dashboard for landed cost simulation, duty calculations, and FTA detection. Built to streamline international trade operations.</p>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=500&fit=crop" alt="Global Market Watch">
+                    <div class="project-tags">
+                        <span class="project-tag">Finance</span>
+                        <span class="project-tag">Live Data</span>
+                        <span class="project-tag">Markets</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Global Market Watch</h3>
+                    <p class="project-desc">Live tracking dashboard of stock indices across major world economies and market centers. Real-time financial intelligence.</p>
+                    <a href="#" class="project-link">View Live Markets →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop" alt="Strategic Intelligence Workflows">
+                    <div class="project-tags">
+                        <span class="project-tag">Strategy</span>
+                        <span class="project-tag">Operations</span>
+                        <span class="project-tag">Insights</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Strategic Intelligence Workflows</h3>
+                    <p class="project-desc">Cross-functional analytics methods for market prioritization, communication, and operational planning frameworks.</p>
+                    <a href="#" class="project-link">See Experience →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="section-header fade-up">
+            <div class="section-label">Career Path</div>
+            <h2 class="section-title">Experience & Education</h2>
+        </div>
+        <div class="timeline fade-up">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">HR & Communications Intern</h3>
+                        <span class="timeline-date">Oct 2024 – Present</span>
+                    </div>
+                    <div class="timeline-org">Sidel Group, Parma, Italy</div>
+                    <p class="timeline-desc">Manage internal communication projects and support HR operations for a global manufacturing leader. Coordinating cross-border initiatives and optimizing internal workflows.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">Laurea Magistrale in International Business</h3>
+                        <span class="timeline-date">2022 – 2025</span>
+                    </div>
+                    <div class="timeline-org">University of Parma, Italy</div>
+                    <p class="timeline-desc">Focus on global business strategy, economic development policy, and advanced quantitative analysis. Specialized in emerging market dynamics.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">Laurea Triennale in Commerce</h3>
+                        <span class="timeline-date">2018 – 2021</span>
+                    </div>
+                    <div class="timeline-org">Swami Ramanand Teerth Marathwada University, India</div>
+                    <p class="timeline-desc">Foundational training in business management, accounting, and economics. Graduated with honors and active participation in international business forums.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="certs-grid fade-up">
+            <div class="cert-card">
+                <div class="cert-title">Financial Accounting and Management</div>
+                <div class="cert-provider">Politecnico di Milano</div>
+                <div class="cert-status">Completed</div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-title">Advanced Data Analytics</div>
+                <div class="cert-provider">Coursera</div>
+                <div class="cert-status">Completed</div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-title">Project Management Professional</div>
+                <div class="cert-provider">PMI</div>
+                <div class="cert-status">In Progress</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Footer Section -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">Krishna<span>.</span></div>
+                <p class="footer-desc">
+                    International Business & Data Analyst based in Parma, Italy. 
+                    Specializing in global market strategy, data analytics, and cross-cultural business operations.
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+                    <li><a href="https://github.com/krishnaadayma" target="_blank">GitHub</a></li>
+                    <li><a href="mailto:contact@krishnaadayma.com">Email</a></li>
+                    <li><a href="#">Resume</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copyright">© 2025 Krishna Aadayma. All rights reserved.</div>
+            <div class="footer-social">
+                <a href="#" class="social-link">in</a>
+                <a href="#" class="social-link">gh</a>
+                <a href="#" class="social-link">@</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-up animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero image
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroImage = document.querySelector('.hero-image');
+            if (heroImage && scrolled < window.innerHeight) {
+                heroImage.style.transform = `translateY(${scrolled * 0.15}px)`;
+            }
+        });
+
+        // Dynamic marquee speed based on scroll
+        let lastScrollY = window.scrollY;
+        const marqueeTrack = document.querySelector('.marquee-track');
+        
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const scrollDelta = currentScrollY - lastScrollY;
+            const currentAnimation = window.getComputedStyle(marqueeTrack).animationDuration;
+            
+            if (Math.abs(scrollDelta) > 5) {
+                marqueeTrack.style.animationDuration = '15s';
+            } else {
+                marqueeTrack.style.animationDuration = '30s';
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+
+        // Magnetic button effect
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                button.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'translate(0, 0)';
+            });
+        });
+    </script>
 </body>
 </html>
