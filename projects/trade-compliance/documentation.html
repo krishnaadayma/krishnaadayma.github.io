@@ -1,94 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Technical Documentation: Trade Engine | Krishna Dayma</title>
-  <meta name="description" content="Technical documentation for the Global Trade Analysis Engine project." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Documentation | Krishna Aadayma</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-hover: #1c1c1c;
+            --bg-code: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent: #c9a96e;
+            --accent-light: #e0c99a;
+            --border: #2a2a2a;
+            --border-light: #333333;
+            --success: #4ade80;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --gradient-start: #c9a96e;
+            --gradient-end: #8b7355;
+        }
 
-  <!-- Shared CSS -->
-  <link rel="stylesheet" href="../../css/variables.css">
-  <link rel="stylesheet" href="../../css/base.css">
-  <link rel="stylesheet" href="../../css/layout.css">
-  <link rel="stylesheet" href="../../css/navbar.css">
-  <link rel="stylesheet" href="../../css/components.css">
-  <link rel="stylesheet" href="../../css/animations.css">
-  <link rel="stylesheet" href="../../css/responsive.css">
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-  <!-- Page-specific styles -->
-  <style>
-    #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.2; pointer-events: none; }
-    .project-wrap { padding: 2rem 0 4rem; }
-    .page-header { min-height: auto; display: block; text-align: left; background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: var(--radius-md); padding: 2.5rem; border: 1px solid var(--border-color); margin-bottom: 2rem; }
-    .subtitle { text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-top: 0.5rem; }
-    pre { background: var(--bg-tertiary); padding: 1rem; border-radius: var(--radius-sm); overflow-x: auto; font-size: 0.85rem; }
-    code { font-family: 'Fira Code', monospace; }
-    h3 { font-size: 1.1rem; color: var(--text-muted); font-weight: 600; margin: 1.5rem 0 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
-    .page-footer { margin-top: 2rem; padding-top: 2rem; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border-color); }
-  </style>
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .logo {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700;
+            color: var(--text-primary); text-decoration: none; letter-spacing: -0.02em;
+        }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none; font-size: 0.875rem;
+            font-weight: 500; letter-spacing: 0.05em; transition: color 0.3s ease; position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+            background: var(--accent); transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--text-secondary); text-decoration: none; font-size: 0.875rem;
+            font-weight: 500; transition: color 0.3s ease;
+        }
+        .back-link:hover { color: var(--accent); }
+
+        .hero {
+            min-height: 35vh; display: flex; flex-direction: column; justify-content: center;
+            padding: 10rem 3rem 3rem; position: relative; overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+            background: linear-gradient(135deg, rgba(201, 169, 110, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-label {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--accent); margin-bottom: 1.5rem;
+        }
+        .hero-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1rem;
+        }
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 1.125rem; color: var(--text-secondary); max-width: 700px; line-height: 1.7;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem 3rem 6rem; }
+
+        .doc-nav {
+            display: flex; gap: 0.5rem; margin-bottom: 3rem; flex-wrap: wrap;
+        }
+        .doc-nav a {
+            background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary);
+            padding: 0.625rem 1.25rem; border-radius: 100px; font-size: 0.8125rem; font-weight: 600;
+            text-decoration: none; transition: all 0.3s ease;
+        }
+        .doc-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+        .doc-section {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
+            padding: 2.5rem; margin-bottom: 2rem; transition: all 0.3s ease;
+        }
+        .doc-section:hover { border-color: var(--border-light); }
+        .doc-section h2 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 600;
+            margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem;
+        }
+        .doc-section h3 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; font-weight: 600;
+            margin: 1.5rem 0 0.75rem; color: var(--accent);
+        }
+        .doc-section p {
+            color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem; font-size: 0.9375rem;
+        }
+        .doc-section ul {
+            margin: 1rem 0 1rem 1.5rem; color: var(--text-secondary);
+        }
+        .doc-section li { margin-bottom: 0.5rem; line-height: 1.7; }
+
+        .code-block {
+            background: var(--bg-code); border: 1px solid var(--border); border-radius: 12px;
+            padding: 1.5rem; margin: 1rem 0; overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        .code-block .comment { color: var(--text-muted); }
+        .code-block .keyword { color: var(--accent); }
+        .code-block .string { color: var(--success); }
+        .code-block .number { color: var(--warning); }
+
+        .tag {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(201, 169, 110, 0.1); color: var(--accent);
+            padding: 0.375rem 1rem; border-radius: 100px; font-size: 0.8125rem;
+            font-weight: 600; margin-right: 0.5rem; margin-bottom: 0.5rem;
+        }
+
+        .flow-diagram {
+            display: flex; align-items: center; justify-content: center; gap: 1rem;
+            margin: 2rem 0; flex-wrap: wrap;
+        }
+        .flow-step {
+            background: var(--bg-hover); border: 1px solid var(--border); border-radius: 12px;
+            padding: 1rem 1.5rem; text-align: center; min-width: 140px;
+        }
+        .flow-step .step-num {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700;
+            color: var(--accent); margin-bottom: 0.25rem;
+        }
+        .flow-step .step-label { font-size: 0.8125rem; color: var(--text-secondary); }
+        .flow-arrow { color: var(--accent); font-size: 1.5rem; }
+
+        footer {
+            background: var(--bg-secondary); padding: 3rem; text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        .footer-brand { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .footer-brand span { color: var(--accent); }
+        .footer-text { color: var(--text-muted); font-size: 0.875rem; }
+
+        .fade-up {
+            opacity: 0; transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        .loader {
+            position: fixed; inset: 0; background: var(--bg-primary); z-index: 10000;
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .loader.hidden { opacity: 0; visibility: hidden; }
+        .loader-text {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700;
+            color: var(--accent); animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero { padding: 8rem 1.5rem 2rem; }
+            .container { padding: 2rem 1.5rem 4rem; }
+            .doc-section { padding: 1.5rem; }
+            .flow-diagram { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); }
+        }
+    </style>
 </head>
 <body>
-  <div id="google_translate_element" style="display:none;"></div>
-  <nav class="navbar" aria-label="Main navigation">
-    <div class="container nav-inner">
-      <a class="brand" href="../../index.html">Krishna Dayma</a>
-      <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
-      <div class="nav-links" id="nav-menu">
-        <a href="../../index.html#projects">Projects</a>
-        <a href="../../index.html#experience">Experience</a>
-        <a href="../../index.html#contact">Contact</a>
-        <div class="lang-switch"><a href="javascript:void(0)" class="lang-en" onclick="setLanguage('en')">EN</a><span>|</span><a href="javascript:void(0)" class="lang-it" onclick="setLanguage('it')">IT</a></div>
-      </div>
-    </div>
-  </nav>
+    <div class="loader" id="loader"><div class="loader-text">KA</div></div>
+    <div class="noise-overlay"></div>
 
-  <canvas id="bg-canvas"></canvas>
+    <nav>
+        <a href="../../index.html" class="logo">Krishna<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Calculator</a></li>
+            <li><a href="demo.html">Economic Briefing</a></li>
+            <li><a href="documentation.html">Documentation</a></li>
+            <li><a href="../../index.html" class="back-link">← Portfolio</a></li>
+        </ul>
+    </nav>
 
-  <main class="project-wrap">
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-label">Technical Reference</div>
+        <h1 class="hero-title">Trade Engine<br><span class="highlight">Documentation</span></h1>
+        <p class="hero-subtitle">System overview, data model, calculation logic, and implementation details for the Global Trade Analysis Engine.</p>
+    </section>
+
     <div class="container">
-      <div class="page-header fade-in"><h1>Technical Documentation</h1><p class="subtitle">PROJECT: GLOBAL TRADE ANALYSIS ENGINE (KD-GTA-002)</p></div>
-      <div class="card fade-in">
-        <h2>SYSTEM OVERVIEW</h2>
-        <p>The Global Trade Analysis Engine is a client-side JavaScript application designed to provide high-level estimates for landed costs in international trade. It utilizes a static dataset representing simplified duty rates and trade agreements.</p>
-        <div><h3>DATA MODEL & LOGIC</h3><p>The application's logic is powered by a static JavaScript object in <code>app.js</code>. Key data points include Base Duty Rates, Free Trade Agreements (FTAs), and currency conversion rates.</p></div>
-        <div><h3>CALCULATION FLOW</h3><ol><li>Determine the base duty rate from the selected product category.</li><li>Check if an FTA exists to potentially waive the duty.</li><li>Calculate final landed cost including shipping and insurance estimates.</li></ol></div>
-      </div>
-      <div class="card fade-in">
-        <h2>ACTION PANEL</h2><p>Return to the main portfolio or the interactive dashboard.</p>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
-            <a class="btn btn-primary" href="../../index.html">🏠 Return to Portfolio</a>
-            <a class="btn" href="index.html">▶️ Go to Interactive Analysis</a>
-            <a class="btn" href="demo.html">📊 View Economic Briefing</a>
+        <div class="doc-nav fade-up">
+            <a href="#overview">Overview</a>
+            <a href="#data-model">Data Model</a>
+            <a href="#calculation">Calculation Flow</a>
+            <a href="#api">API Reference</a>
+            <a href="#fta">FTA Logic</a>
         </div>
-      </div>
-      <footer class="page-footer"><div>&copy; 2025 Krishna Dayma | Project Dossier KD-GTA-002</div></footer>
-    </div>
-  </main>
 
-  <script type="text/javascript">
-    function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); }
-    function setLanguage(lang) { document.cookie = `googtrans=/en/${lang};path=/`; location.reload(); }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script src="../../js/navbar.js"></script>
-  <script src="../../js/main.js"></script>
-  <script>
-    window.onload = () => {
-      setTimeout(() => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.25 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-      }, 500);
-    };
-  </script>
+        <div class="doc-section fade-up" id="overview">
+            <h2>📋 System Overview</h2>
+            <p>The Global Trade Analysis Engine is a client-side JavaScript application designed to provide high-level estimates for landed costs in international trade. It utilizes a static dataset representing simplified duty rates and trade agreements.</p>
+            <div style="margin-top:1rem;">
+                <span class="tag">Client-Side</span>
+                <span class="tag">Vanilla JS</span>
+                <span class="tag">Static Data</span>
+                <span class="tag">Educational</span>
+            </div>
+        </div>
+
+        <div class="doc-section fade-up" id="data-model">
+            <h2>🗄️ Data Model & Logic</h2>
+            <p>The application's logic is powered by a static JavaScript object. Key data points include:</p>
+            <ul>
+                <li><strong>Base Duty Rates</strong> — Per product category (Machinery: 5.5%, Textiles: 12%, etc.)</li>
+                <li><strong>Country-Specific Rates</strong> — Override base rates for specific jurisdictions</li>
+                <li><strong>Free Trade Agreements</strong> — Bilateral and multilateral treaty database</li>
+                <li><strong>Currency Conversion</strong> — Static rates for cost normalization</li>
+                <li><strong>Shipping Rates</strong> — Modal cost factors (Sea: 3%, Air: 12%, etc.)</li>
+            </ul>
+            <div class="code-block">
+<span class="comment">// Duty rate structure</span>
+<span class="keyword">const</span> DUTY_RATES = {
+    machinery: { base: <span class="number">5.5</span>, IT: <span class="number">0</span>, IN: <span class="number">7.5</span>, US: <span class="number">2.5</span>, ... },
+    textiles:  { base: <span class="number">12.0</span>, IT: <span class="number">0</span>, IN: <span class="number">15</span>, US: <span class="number">8.0</span>, ... },
+    <span class="comment">// ... additional categories</span>
+};
+            </div>
+        </div>
+
+        <div class="doc-section fade-up" id="calculation">
+            <h2>🧮 Calculation Flow</h2>
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <div class="step-num">1</div>
+                    <div class="step-label">Product Value</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-num">2</div>
+                    <div class="step-label">Add Freight</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-num">3</div>
+                    <div class="step-label">Add Insurance</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-num">4</div>
+                    <div class="step-label">CIF Value</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-num">5</div>
+                    <div class="step-label">Apply Duty</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-num">6</div>
+                    <div class="step-label">Add VAT</div>
+                </div>
+            </div>
+            <ol style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 2;">
+                <li>Determine the base duty rate from the selected product category</li>
+                <li>Check if an FTA exists to potentially waive the duty</li>
+                <li>Calculate CIF (Cost + Insurance + Freight)</li>
+                <li>Apply duty to CIF value</li>
+                <li>Add destination VAT/GST on (CIF + Duty)</li>
+                <li>Sum all components for total landed cost</li>
+            </ol>
+        </div>
+
+        <div class="doc-section fade-up" id="api">
+            <h2>⚡ API Reference</h2>
+            <h3>calculate(origin, destination, category, value, insurance, mode)</h3>
+            <p>Main calculation function. Returns an object with all cost components.</p>
+            <div class="code-block">
+<span class="comment">// Example usage</span>
+<span class="keyword">const</span> result = calculate({
+    origin: <span class="string">'IT'</span>,
+    destination: <span class="string">'IN'</span>,
+    category: <span class="string">'machinery'</span>,
+    value: <span class="number">50000</span>,
+    insurance: <span class="number">1.5</span>,
+    mode: <span class="string">'sea'</span>
+});
+
+<span class="comment">// Returns:</span>
+<span class="comment">// { cif: 51750, duty: 3881.25, vat: 10013.63, total: 65644.88 }</span>
+            </div>
+        </div>
+
+        <div class="doc-section fade-up" id="fta">
+            <h2>🤝 FTA Logic</h2>
+            <p>The engine checks for active Free Trade Agreements between origin and destination countries. If an active FTA is found, the duty rate is set to 0.</p>
+            <div class="code-block">
+<span class="keyword">const</span> FTAS = [
+    { from: <span class="string">'IT'</span>, to: <span class="string">'DE'</span>, name: <span class="string">'EU Single Market'</span>, active: <span class="keyword">true</span> },
+    { from: <span class="string">'IN'</span>, to: <span class="string">'AE'</span>, name: <span class="string">'India-UAE CEPA'</span>, active: <span class="keyword">true</span> },
+    { from: <span class="string">'IT'</span>, to: <span class="string">'IN'</span>, name: <span class="string">'EU-India FTA'</span>, active: <span class="keyword">false</span> },
+    <span class="comment">// ... additional agreements</span>
+];
+            </div>
+            <p style="margin-top:1rem;">Pending FTAs are displayed as informational badges but do not affect duty calculations.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-brand">Krishna<span>.</span></div>
+        <div class="footer-text">Trade Engine Documentation • For educational purposes</div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('loader').classList.add('hidden'), 600);
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
