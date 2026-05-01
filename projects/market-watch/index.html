@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Market Watch | Krishna Aadayma</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-hover: #1c1c1c;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent: #c9a96e;
+            --accent-light: #e0c99a;
+            --border: #2a2a2a;
+            --border-light: #333333;
+            --success: #4ade80;
+            --danger: #ef4444;
+            --gradient-start: #c9a96e;
+            --gradient-end: #8b7355;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10rem 3rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(201, 169, 110, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        /* Market Overview Bar */
+        .market-bar {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem 3rem;
+            overflow-x: auto;
+        }
+
+        .market-bar-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 3rem;
+            min-width: max-content;
+        }
+
+        .market-ticker {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .ticker-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        .ticker-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .ticker-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.25rem 0.625rem;
+            border-radius: 100px;
+        }
+
+        .ticker-change.up {
+            color: var(--success);
+            background: rgba(74, 222, 128, 0.1);
+        }
+
+        .ticker-change.down {
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 3rem;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .last-updated {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Market Grid */
+        .markets-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .market-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .market-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .market-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .market-card:hover::before {
+            opacity: 1;
+        }
+
+        .market-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .market-region {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .market-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.375rem;
+            font-weight: 600;
+        }
+
+        .market-flag {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .market-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .market-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            padding: 0.375rem 0.875rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .market-change.up {
+            color: var(--success);
+            background: rgba(74, 222, 128, 0.1);
+        }
+
+        .market-change.down {
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Mini Chart */
+        .mini-chart {
+            height: 60px;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .mini-chart svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .chart-line {
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .chart-area {
+            opacity: 0.1;
+        }
+
+        .market-meta {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.6875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.25rem;
+        }
+
+        .meta-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 600;
+        }
+
+        /* Analysis Section */
+        .analysis-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .insight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .insight-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .insight-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.9375rem;
+        }
+
+        .sentiment-meter {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .sentiment-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .sentiment-bar {
+            height: 8px;
+            background: var(--bg-hover);
+            border-radius: 100px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .sentiment-fill {
+            height: 100%;
+            border-radius: 100px;
+            background: linear-gradient(90deg, var(--danger), var(--accent), var(--success));
+            transition: width 0.8s ease;
+        }
+
+        .sentiment-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand span {
+            color: var(--accent);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .markets-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+            .hero {
+                padding: 8rem 1.5rem 3rem;
+            }
+            .container {
+                padding: 3rem 1.5rem;
+            }
+            .markets-grid {
+                grid-template-columns: 1fr;
+            }
+            .market-bar {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Loading */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-primary);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-text">KA</div>
+    </div>
+    <div class="noise-overlay"></div>
+
+    <nav>
+        <a href="../../index.html" class="logo">Krishna<span>.</span></a>
+        <a href="../../index.html" class="back-link">← Back to Portfolio</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-label">Live Dashboard</div>
+        <h1 class="hero-title">Global Market<br><span class="highlight">Watch</span></h1>
+        <p class="hero-subtitle">Live tracking of stock indices for major world economies. Real-time data visualization across global financial markets.</p>
+    </section>
+
+    <div class="market-bar">
+        <div class="market-bar-inner">
+            <div class="market-ticker">
+                <span class="ticker-name">S&P 500</span>
+                <span class="ticker-value">4,783.45</span>
+                <span class="ticker-change up">+1.24%</span>
+            </div>
+            <div class="market-ticker">
+                <span class="ticker-name">NASDAQ</span>
+                <span class="ticker-value">15,120.33</span>
+                <span class="ticker-change up">+0.89%</span>
+            </div>
+            <div class="market-ticker">
+                <span class="ticker-name">DOW JONES</span>
+                <span class="ticker-value">37,545.20</span>
+                <span class="ticker-change down">-0.34%</span>
+            </div>
+            <div class="market-ticker">
+                <span class="ticker-name">FTSE 100</span>
+                <span class="ticker-value">7,682.30</span>
+                <span class="ticker-change up">+0.56%</span>
+            </div>
+            <div class="market-ticker">
+                <span class="ticker-name">NIKKEI 225</span>
+                <span class="ticker-value">33,377.42</span>
+                <span class="ticker-change down">-1.12%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section-header fade-up">
+            <div>
+                <div class="section-label">Markets</div>
+                <h2 class="section-title">Major Indices</h2>
+            </div>
+            <div class="last-updated">Last updated: <span id="timestamp">--:--:-- UTC</span></div>
+        </div>
+
+        <div class="markets-grid fade-up">
+            <!-- Americas -->
+            <div class="market-card">
+                <div class="market-header">
+                    <div>
+                        <div class="market-region">Americas</div>
+                        <div class="market-name">S&P 500</div>
+                    </div>
+                    <div class="market-flag">🇺🇸</div>
+                </div>
+                <div class="market-value">4,783.45</div>
+                <div class="market-change up">▲ +1.24% (+58.72)</div>
+                <div class="mini-chart">
+                    <svg viewBox="0 0 300 60" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="spGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4ade80;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#4ade80;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        <path class="chart-area" d="M0,45 Q30,42 60,38 T120,35 T180,30 T240,25 T300,15 L300,60 L0,60 Z" fill="url(#spGradient)"/>
+                        <path class="chart-line" d="M0,45 Q30,42 60,38 T120,35 T180,30 T240,25 T300,15" stroke="#4ade80"/>
+                    </svg>
+                </div>
+                <div class="market-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Open</div>
+                        <div class="meta-value">4,724.73</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">High</div>
+                        <div class="meta-value">4,791.20</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Low</div>
+                        <div class="meta-value">4,718.50</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-card">
+                <div class="market-header">
+                    <div>
+                        <div class="market-region">Americas</div>
+                        <div class="market-name">NASDAQ Composite</div>
+                    </div>
+                    <div class="market-flag">🇺🇸</div>
+                </div>
+                <div class="market-value">15,120.33</div>
+                <div class="market-change up">▲ +0.89% (+133.45)</div>
+                <div class="mini-chart">
+                    <svg viewBox="0 0 300 60" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="nasGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4ade80;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#4ade80;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        <path class="chart-area" d="M0,50 Q30,48 60,45 T120,40 T180,38 T240,32 T300,20 L300,60 L0,60 Z" fill="url(#nasGradient)"/>
+                        <path class="chart-line" d="M0,50 Q30,48 60,45 T120,40 T180,38 T240,32 T300,20" stroke="#4ade80"/>
+                    </svg>
+                </div>
+                <div class="market-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Open</div>
+                        <div class="meta-value">14,986.88</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">High</div>
+                        <div class="meta-value">15,145.60</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Low</div>
+                        <div class="meta-value">14,975.20</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-card">
+                <div class="market-header">
+                    <div>
+                        <div class="market-region">Americas</div>
+                        <div class="market-name">Dow Jones</div>
+                    </div>
+                    <div class="market-flag">🇺🇸</div>
+                </div>
+                <div class="market-value">37,545.20</div>
+                <div class="market-change down">▼ -0.34% (-127.65)</div>
+                <div class="mini-chart">
+                    <svg viewBox="0 0 300 60" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="dowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        <path class="chart-area" d="M0,20 Q30,22 60,25 T120,28 T180,32 T240,38 T300,45 L300,60 L0,60 Z" fill="url(#dowGradient)"/>
+                        <path class="chart-line" d="M0,20 Q30,22 60,25 T120,28 T180,32 T240,38 T300,45" stroke="#ef4444"/>
+                    </svg>
+                </div>
+                <div class="market-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Open</div>
+                        <div class="meta-value">37,672.85</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">High</div>
+                        <div class="meta-value">37,695.40</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Low</div>
+                        <div class="meta-value">37,520.10</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Europe -->
+            <div class="market-card">
+                <div class="market-header">
+                    <div>
+                        <div class="market-region">Europe</div>
+                        <div class="market-name">FTSE 100</div>
+                    </div>
+                    <div class="market-flag">🇬🇧</div>
+                </div>
+                <div class="market-value">7,682.30</div>
+                <div class="market-change up">▲ +0.56% (+42.80)</div>
+                <div class="mini-chart">
+                    <svg viewBox="0 0 300 60" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="ftseGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4ade80;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#4ade80;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        <path class="chart-area" d="M0,48 Q30,46 60,44 T120,40 T180,36 T240,32 T300,25 L300,60 L0,60 Z" fill="url(#ftseGradient)"/>
+                        <path class="chart-line" d="M0,48 Q30,46 60,44 T120,40 T180,36 T240,32 T300,25" stroke="#4ade80"/>
+                    </svg>
+                </div>
+                <div class="market-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Open</div>
+                        <div class="meta-value">7,639.50</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">High</div>
+                        <div class="meta-value">7,695.20</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Low</div>
+                        <div class="meta-value">7,635.80</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-card">
+                <div class="market-header">
+                    <div>
+                        <div class="market-region">Europe</div>
+                        <div class="market-name">DAX 40</div>
+                    </div>
+                    <div class="market-flag">🇩🇪</div>
+                </div>
+                <div class="market-value">16,720.45</div>
+                <div class="market-change up">▲ +0.78% (+129.30)</div>
+                <div class="mini-chart">
+                    <svg viewBox="0 0 300 60" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="daxGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4ade80;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#4ade80;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        <path class="chart-area" d="M0,50 Q30,47 60,44 T120,40 T180,35 T240,30 T300,22 L300,60 L0,60 Z" fill="url(#daxGradient)"/>
+                        <path class="chart-line" d="M0,50 Q30,47 60,44 T120,40 T180,35 T240,30 T300,22" stroke="#4ade80"/>
+                    </svg>
+                </div>
+                <div class="market-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Open</div>
+                        <div class="meta-value">16,591.15</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">High</div>
+                        <div class="meta-value">16,735.80</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Low</div>
+                        <div class="meta-value">16,585.40</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-card">
+                <div class="market-header">
+                    <div>
+                        <div class="market-region">Europe</div>
+                        <div class="market-name">CAC 40</div>
+                    </div>
+                    <div class="market-flag">🇫🇷</div>
+                </div>
+                <div class="market-value">7,485.20</div>
+                <div class="market-change down">▼ -0.15% (-11.25)</div>
+                <div class="mini-chart">
+                    <svg viewBox="0 0 300 60" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="cacGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        <path class="chart-area" d="M0,25 Q30,27 60,28 T120,30 T180,32 T240,35 T300,38 L300,60 L0,60 Z" fill="url(#cacGradient)"/>
+                        <path class="chart-line" d="M0,25 Q30,27 60,28 T120,30 T180,32 T240,35 T300,38" stroke="#ef4444"/>
+                    </svg>
+                </div>
+                <div class="market-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Open</div>
+                        <div class="meta-value">7,496.45</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">High</div>
+                        <div class="meta-value">7,505.20</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Low</div>
+                        <div class="meta-value">7,478.90</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Asia-Pacific -->
+            <div class="market-card">
+                <div class="market-header">
+                    <div>
+                        <div class="market-region">Asia-Pacific</div>
+                        <div class="market-name">Nikkei 225</div>
+                    </div>
+                    <div class="market-flag">🇯🇵</div>
+                </div>
+                <div class="market-value">33,377.42</div>
+                <div class="market-change down">▼ -1.12% (-378.65)</div>
+                <div class="mini-chart">
+                    <svg viewBox="0 0 300 60" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="nikGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        <path class="chart-area" d="M0,15 Q30,18 60,22 T120,28 T180,32 T240,38 T300,48 L300,60 L0,60 Z" fill="url(#nikGradient)"/>
+                        <path class="chart-line" d="M0,15 Q30,18 60,22 T120,28 T180,32 T240,38 T300,48" stroke="#ef4444"/>
+                    </svg>
+                </div>
+                <div class="market-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Open</div>
+                        <div class="meta-value">33,756.07</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">High</div>
+                        <div class="meta-value">33,780.50</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Low</div>
+                        <div class="meta-value">33,350.20</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-card">
+                <div class="market-header">
+                    <div>
+                        <div class="market-region">Asia-Pacific</div>
+                        <div class="market-name">Hang Seng</div>
+                    </div>
+                    <div class="market-flag">🇭🇰</div>
+                </div>
+                <div class="market-value">16,345.80</div>
+                <div class="market-change up">▲ +0.45% (+73.20)</div>
+                <div class="mini-chart">
+                    <svg viewBox="0 0 300 60" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="hsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4ade80;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#4ade80;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        <path class="chart-area" d="M0,45 Q30,43 60,40 T120,38 T180,35 T240,32 T300,28 L300,60 L0,60 Z" fill="url(#hsGradient)"/>
+                        <path class="chart-line" d="M0,45 Q30,43 60,40 T120,38 T180,35 T240,32 T300,28" stroke="#4ade80"/>
+                    </svg>
+                </div>
+                <div class="market-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Open</div>
+                        <div class="meta-value">16,272.60</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">High</div>
+                        <div class="meta-value">16,380.40</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Low</div>
+                        <div class="meta-value">16,265.80</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-card">
+                <div class="market-header">
+                    <div>
+                        <div class="market-region">Asia-Pacific</div>
+                        <div class="market-name">SSE Composite</div>
+                    </div>
+                    <div class="market-flag">🇨🇳</div>
+                </div>
+                <div class="market-value">2,945.20</div>
+                <div class="market-change down">▼ -0.62% (-18.40)</div>
+                <div class="mini-chart">
+                    <svg viewBox="0 0 300 60" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="sseGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        <path class="chart-area" d="M0,22 Q30,24 60,26 T120,28 T180,30 T240,34 T300,40 L300,60 L0,60 Z" fill="url(#sseGradient)"/>
+                        <path class="chart-line" d="M0,22 Q30,24 60,26 T120,28 T180,30 T240,34 T300,40" stroke="#ef4444"/>
+                    </svg>
+                </div>
+                <div class="market-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Open</div>
+                        <div class="meta-value">2,963.60</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">High</div>
+                        <div class="meta-value">2,968.20</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Low</div>
+                        <div class="meta-value">2,938.50</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="analysis-section">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div>
+                    <div class="section-label">Analysis</div>
+                    <h2 class="section-title">Market Insights</h2>
+                </div>
+            </div>
+            <div class="analysis-grid fade-up">
+                <div class="insight-card">
+                    <h3>Global Market Summary</h3>
+                    <p>Markets are showing mixed signals today with US indices largely positive while Asian markets face headwinds. The S&P 500 and NASDAQ continue their upward momentum driven by tech sector strength. European markets are cautiously optimistic with the DAX leading gains. Asian markets, particularly Japan's Nikkei, are experiencing profit-taking after recent rallies. Investors are closely monitoring central bank policy signals and upcoming earnings reports.</p>
+                </div>
+                <div class="sentiment-meter">
+                    <div class="sentiment-title">Market Sentiment</div>
+                    <div class="sentiment-bar">
+                        <div class="sentiment-fill" style="width: 62%"></div>
+                    </div>
+                    <div class="sentiment-labels">
+                        <span>Bearish</span>
+                        <span>Neutral</span>
+                        <span>Bullish</span>
+                    </div>
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent);">62%</div>
+                        <div style="font-size: 0.875rem; color: var(--text-muted);">Bullish Sentiment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-brand">Krishna<span>.</span></div>
+        <div class="footer-text">Global Market Watch • Data for educational purposes</div>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 600);
+        });
+
+        // Live timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            const timeString = now.toISOString().split('T')[1].split('.')[0];
+            document.getElementById('timestamp').textContent = timeString + ' UTC';
+        }
+        updateTimestamp();
+        setInterval(updateTimestamp, 1000);
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Simulate live ticker updates
+        const tickers = document.querySelectorAll('.market-value');
+        setInterval(() => {
+            tickers.forEach(ticker => {
+                const current = parseFloat(ticker.textContent.replace(/,/g, ''));
+                const change = (Math.random() - 0.5) * 2;
+                const newValue = (current + change).toFixed(2);
+                ticker.textContent = newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            });
+        }, 5000);
+    </script>
+</body>
+</html>
