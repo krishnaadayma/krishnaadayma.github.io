@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koenigsegg — Analytics</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg:#07090e;--s1:#0d1018;--s2:#12151f;--s3:#181c28;
+  --border:rgba(255,255,255,0.06);
+  --gold:#c8a84b;--gold2:#e2c96a;--gold3:#f0dfa0;
+  --gold-dim:rgba(200,168,75,0.10);--gold-glow:rgba(200,168,75,0.25);
+  --red:#d94f4f;--green:#3ecf8e;--blue:#4a90e2;
+  --text:#d8dde8;--muted:#5e6578;--muted2:#8892a4;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);cursor:none;}
+
+#cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s;}
+#cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(200,168,75,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease,width .2s,height .2s,border-color .2s;}
+.ring-expand #cursor-ring{width:48px!important;height:48px!important;border-color:var(--gold)!important;}
+
+body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.013) 0,rgba(255,255,255,.013) 1px,transparent 1px,transparent 7px),repeating-linear-gradient(-45deg,rgba(255,255,255,.013) 0,rgba(255,255,255,.013) 1px,transparent 1px,transparent 7px);pointer-events:none;z-index:0;}
+
+.amb{position:fixed;pointer-events:none;z-index:0;border-radius:50%;filter:blur(80px);}
+#amb1{width:700px;height:400px;top:-150px;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(200,168,75,.07) 0%,transparent 70%);}
+#amb2{width:400px;height:400px;bottom:-100px;right:-100px;background:radial-gradient(ellipse,rgba(74,144,226,.05) 0%,transparent 70%);}
+
+#app{position:relative;z-index:1;height:100vh;display:flex;flex-direction:column;}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;flex-shrink:0;border-bottom:1px solid var(--border);background:rgba(7,9,14,.96);backdrop-filter:blur(20px);position:relative;z-index:50;}
+.nav-brand{display:flex;align-items:center;gap:14px;}
+.nav-emblem{width:34px;height:34px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px var(--gold-glow);font-size:14px;}
+.nav-wordmark{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--gold2);}
+.nav-tagline{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:1px;}
+
+.nav-links{display:flex;align-items:center;gap:2px;}
+.nav-btn{display:flex;align-items:center;gap:8px;padding:8px 20px;border:none;background:transparent;font-family:'Barlow',sans-serif;font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border-radius:6px;cursor:pointer;transition:all .25s;position:relative;}
+.nav-btn:hover{color:var(--text);}
+.nav-btn.active{color:var(--gold);}
+.nav-btn.active::after{content:'';position:absolute;bottom:-1px;left:20px;right:20px;height:2px;background:var(--gold);box-shadow:0 0 8px var(--gold-glow);}
+.nb-num{font-size:9px;width:16px;height:16px;border-radius:50%;background:var(--gold-dim);color:var(--gold);display:flex;align-items:center;justify-content:center;border:1px solid rgba(200,168,75,.2);}
+.nav-btn.active .nb-num{background:var(--gold);color:var(--bg);}
+
+.nav-right{display:flex;align-items:center;gap:16px;}
+.era-pill{display:flex;align-items:center;gap:8px;padding:6px 14px;background:var(--s2);border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--muted2);}
+.era-pill select{background:transparent;border:none;color:var(--text);font-family:'Barlow',sans-serif;font-size:11px;outline:none;cursor:pointer;}
+.era-pill select option{background:var(--s2);}
+.live-ind{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--gold);font-weight:500;letter-spacing:2px;text-transform:uppercase;}
+.live-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:livepulse 2s infinite;}
+@keyframes livepulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+/* PAGES */
+#pages{flex:1;overflow:hidden;position:relative;}
+.page{position:absolute;inset:0;overflow-y:auto;padding:36px 48px 48px;opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .4s ease,transform .4s ease;}
+.page.active{opacity:1;pointer-events:all;transform:translateY(0);}
+.page::-webkit-scrollbar{width:4px;}
+.page::-webkit-scrollbar-track{background:transparent;}
+.page::-webkit-scrollbar-thumb{background:var(--s3);border-radius:2px;}
+
+/* PAGE HEADER */
+.ph{margin-bottom:32px;}
+.ph-eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:2px;line-height:1;color:var(--gold2);}
+.ph-title span{color:var(--text);}
+.ph-sub{font-size:13px;color:var(--muted2);margin-top:8px;font-weight:300;letter-spacing:.3px;max-width:600px;line-height:1.6;}
+.ph-line{width:60px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:16px;}
+
+/* KPI STRIP */
+.kpi-strip{display:grid;gap:14px;margin-bottom:24px;}
+.cols5{grid-template-columns:repeat(5,1fr);}
+.cols4{grid-template-columns:repeat(4,1fr);}
+.cols3{grid-template-columns:repeat(3,1fr);}
+
+.kpi-card{background:var(--s1);border:1px solid var(--border);border-top:2px solid var(--gold);border-radius:12px;padding:18px 20px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;animation:fadeUp .5s ease both;}
+.kpi-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(200,168,75,.1);}
+.kpi-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,168,75,.04),transparent 50%);opacity:0;transition:opacity .3s;}
+.kpi-card:hover::before{opacity:1;}
+.kpi-lbl{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.kpi-val{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;color:var(--gold2);line-height:1;margin-bottom:6px;}
+.kpi-delta{font-size:11px;font-weight:500;}
+.up{color:var(--green);}.dn{color:var(--red);}.neu{color:var(--muted2);}
+
+/* CARDS */
+.card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:24px;animation:fadeUp .55s ease both;}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;}
+.card-title{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1.5px;color:var(--gold2);}
+.card-sub{font-size:11px;color:var(--muted);margin-top:3px;font-weight:300;letter-spacing:.3px;}
+.badge{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:20px;background:var(--gold-dim);color:var(--gold);border:1px solid rgba(200,168,75,.2);white-space:nowrap;}
+.badge.green{background:rgba(62,207,142,.1);color:var(--green);border-color:rgba(62,207,142,.2);}
+.badge.blue{background:rgba(74,144,226,.1);color:var(--blue);border-color:rgba(74,144,226,.2);}
+
+/* LAYOUTS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:20px;}
+.g12{display:grid;grid-template-columns:1fr 2fr;gap:20px;}
+.mb20{margin-bottom:20px;}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;}
+thead th{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 14px 12px;text-align:left;border-bottom:1px solid var(--border);}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.03);transition:background .15s;}
+tbody tr:hover{background:rgba(200,168,75,.04);}
+tbody td{padding:13px 14px;font-size:12.5px;}
+.gv{color:var(--gold2);font-weight:600;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.5px;}
+.pill{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+.pill.sold{background:rgba(62,207,142,.1);color:var(--green);}
+.pill.prod{background:rgba(74,144,226,.1);color:var(--blue);}
+.pill.disc{background:rgba(100,100,120,.12);color:var(--muted2);}
+.bar-row{display:flex;align-items:center;gap:8px;font-size:11px;}
+.mini-bg{flex:1;height:4px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;}
+.mini-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));}
+
+/* REGION BARS */
+.region-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.rl{font-size:12px;min-width:100px;}
+.rb-bg{flex:1;height:28px;background:rgba(255,255,255,.04);border-radius:6px;overflow:hidden;}
+.rb{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:12px;font-size:11px;font-weight:600;color:var(--bg);font-family:'Bebas Neue',sans-serif;letter-spacing:.5px;}
+
+/* TIMELINE */
+.tl{display:flex;flex-direction:column;}
+.tl-row{display:flex;gap:16px;}
+.tl-spine{display:flex;flex-direction:column;align-items:center;}
+.tl-dot{width:11px;height:11px;background:var(--gold);border-radius:50%;border:2px solid var(--gold2);flex-shrink:0;margin-top:4px;box-shadow:0 0 10px var(--gold-glow);}
+.tl-line{flex:1;width:2px;background:rgba(200,168,75,.15);margin:4px 0;min-height:28px;}
+.tl-content{padding-bottom:22px;}
+.tl-year{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold);letter-spacing:1px;}
+.tl-name{font-size:13px;font-weight:500;margin-top:1px;}
+.tl-desc{font-size:11px;color:var(--muted2);margin-top:3px;font-weight:300;line-height:1.5;}
+
+/* RECORD CARDS */
+.rec-card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:20px;transition:all .25s;position:relative;overflow:hidden;animation:fadeUp .5s ease both;}
+.rec-card:hover{border-color:rgba(200,168,75,.3);box-shadow:0 8px 32px rgba(200,168,75,.08);}
+.rec-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+.rec-big{font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:1px;color:var(--gold2);line-height:1;}
+.rec-unit{font-size:12px;color:var(--muted2);margin-top:2px;font-weight:300;}
+.rec-name{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.rec-model{font-size:12px;color:var(--text);margin-top:8px;}
+.rec-year{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:.5px;}
+
+/* FUNNEL */
+.f-row{display:flex;align-items:center;gap:12px;margin-bottom:13px;}
+.f-lbl{font-size:12px;min-width:120px;color:var(--muted2);}
+.f-bg{flex:1;height:34px;background:rgba(255,255,255,.03);border-radius:7px;overflow:hidden;}
+.f-fill{height:100%;border-radius:7px;display:flex;align-items:center;padding-left:14px;font-size:12px;font-weight:600;color:var(--bg);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
+
+/* STAT BOX */
+.stat-box{background:var(--gold-dim);border:1px solid rgba(200,168,75,.15);border-radius:10px;padding:16px;text-align:center;}
+.stat-big{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--gold2);letter-spacing:1px;}
+.stat-lbl{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+
+/* SEG */
+.seg-list{display:flex;flex-direction:column;gap:12px;}
+.seg-row{display:flex;align-items:center;gap:10px;font-size:12px;}
+.seg-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
+.seg-pct{margin-left:auto;font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.5px;}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:24px 0;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--s3);border-radius:2px;}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div class="amb" id="amb1"></div>
+<div class="amb" id="amb2"></div>
+
+<div id="app">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">
+      <div class="nav-emblem">👁</div>
+      <div>
+        <div class="nav-wordmark">Koenigsegg</div>
+        <div class="nav-tagline">Performance Analytics</div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="goTo('overview',this)" onmouseenter="ringExpand()" onmouseleave="ringNormal()"><span class="nb-num">1</span>Overview</button>
+      <button class="nav-btn" onclick="goTo('models',this)" onmouseenter="ringExpand()" onmouseleave="ringNormal()"><span class="nb-num">2</span>Models</button>
+      <button class="nav-btn" onclick="goTo('markets',this)" onmouseenter="ringExpand()" onmouseleave="ringNormal()"><span class="nb-num">3</span>Markets</button>
+      <button class="nav-btn" onclick="goTo('campaigns',this)" onmouseenter="ringExpand()" onmouseleave="ringNormal()"><span class="nb-num">4</span>Campaigns</button>
+      <button class="nav-btn" onclick="goTo('records',this)" onmouseenter="ringExpand()" onmouseleave="ringNormal()"><span class="nb-num">5</span>Records</button>
+    </div>
+
+    <div class="nav-right">
+      <div class="era-pill">📅
+        <select id="eraFilter" onchange="updateEra()">
+          <option value="all">All Eras (2002–2024)</option>
+          <option value="cc">CC Era (2002–2009)</option>
+          <option value="agera">Agera Era (2010–2018)</option>
+          <option value="modern" selected>Modern Era (2019–2024)</option>
+        </select>
+      </div>
+      <div class="live-ind"><div class="live-dot"></div>Live</div>
+    </div>
+  </nav>
+
+  <div id="pages">
+
+    <!-- PAGE 1: OVERVIEW -->
+    <div class="page active" id="page-overview">
+      <div class="ph">
+        <div class="ph-eyebrow">Koenigsegg Automotive AB · Ängelholm, Sweden · Est. 1994</div>
+        <div class="ph-title">Performance <span>Overview</span></div>
+        <div class="ph-sub">Comprehensive view of production output, revenue performance, and brand health across all eras since the first CC8S rolled out of the factory in 2002.</div>
+        <div class="ph-line"></div>
+      </div>
+      <div class="kpi-strip cols5">
+        <div class="kpi-card" style="animation-delay:.04s"><div class="kpi-lbl">Total Cars Built</div><div class="kpi-val" id="ov-total">255+</div><div class="kpi-delta neu">Since 2002 · incl. prototypes</div></div>
+        <div class="kpi-card" style="animation-delay:.08s"><div class="kpi-lbl">Avg Annual Output</div><div class="kpi-val" id="ov-annual">~35</div><div class="kpi-delta up">▲ Capacity doubled 2023</div></div>
+        <div class="kpi-card" style="animation-delay:.12s"><div class="kpi-lbl">Avg Revenue / Car</div><div class="kpi-val" id="ov-rev">$2.4M</div><div class="kpi-delta up">▲ Across active lineup</div></div>
+        <div class="kpi-card" style="animation-delay:.16s"><div class="kpi-lbl">Employees</div><div class="kpi-val" id="ov-emp">600+</div><div class="kpi-delta up">▲ 20% YoY growth</div></div>
+        <div class="kpi-card" style="animation-delay:.2s"><div class="kpi-lbl">World Records</div><div class="kpi-val" id="ov-rec">7+</div><div class="kpi-delta up">▲ Latest Aug 2025</div></div>
+      </div>
+      <div class="g21 mb20">
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Annual Production Output</div><div class="card-sub">Cars produced per year — 2002 to 2024 (est.)</div></div><div class="badge">22 Years</div></div>
+          <div style="height:230px"><canvas id="prodChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Revenue Mix</div><div class="card-sub">By model tier — current lineup</div></div></div>
+          <div style="height:155px;display:flex;align-items:center;justify-content:center;"><canvas id="donutChart" style="max-width:150px;max-height:155px;"></canvas></div>
+          <div class="seg-list" style="margin-top:14px">
+            <div class="seg-row"><div class="seg-dot" style="background:#c8a84b"></div>Jesko / Absolut (~$3M)<div class="seg-pct" style="color:#c8a84b">45%</div></div>
+            <div class="seg-row"><div class="seg-dot" style="background:#e2c96a"></div>CC850 (~$3.65M)<div class="seg-pct" style="color:#e2c96a">28%</div></div>
+            <div class="seg-row"><div class="seg-dot" style="background:#4a90e2"></div>Gemera (~$1.7M)<div class="seg-pct" style="color:#4a90e2">18%</div></div>
+            <div class="seg-row"><div class="seg-dot" style="background:#3ecf8e"></div>Regera (~$1.9M)<div class="seg-pct" style="color:#3ecf8e">9%</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Horsepower Evolution</div><div class="card-sub">Peak power per flagship — CC8S to Gemera</div></div><div class="badge">655 → 2,300 hp</div></div>
+          <div style="height:200px"><canvas id="hpChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Price Evolution</div><div class="card-sub">Base launch price across all models ($M USD)</div></div><div class="badge">$0.35M → $3.65M</div></div>
+          <div style="height:200px"><canvas id="priceChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 2: MODELS -->
+    <div class="page" id="page-models">
+      <div class="ph">
+        <div class="ph-eyebrow">Complete Model Registry</div>
+        <div class="ph-title">Every <span>Car Ever Built</span></div>
+        <div class="ph-sub">Full production history from the CC8S in 2002 through to the Gemera and CC850 currently rolling off the Ängelholm production floor.</div>
+        <div class="ph-line"></div>
+      </div>
+      <div class="kpi-strip cols4">
+        <div class="kpi-card" style="animation-delay:.04s"><div class="kpi-lbl">Production Models</div><div class="kpi-val">9</div><div class="kpi-delta neu">Across 3 eras</div></div>
+        <div class="kpi-card" style="animation-delay:.08s"><div class="kpi-lbl">Currently Active</div><div class="kpi-val">3</div><div class="kpi-delta up">Jesko · Gemera · CC850</div></div>
+        <div class="kpi-card" style="animation-delay:.12s"><div class="kpi-lbl">Sell-Through Rate</div><div class="kpi-val">100%</div><div class="kpi-delta up">▲ Every model sold out</div></div>
+        <div class="kpi-card" style="animation-delay:.16s"><div class="kpi-lbl">Peak Power (Gemera)</div><div class="kpi-val">2,300hp</div><div class="kpi-delta up">4-seat hypercar record</div></div>
+      </div>
+      <div class="card mb20">
+        <div class="card-head"><div><div class="card-title">Production Registry — All Models</div><div class="card-sub">Every production model with units built, power, pricing and sell-out status</div></div></div>
+        <table>
+          <thead><tr><th>Model</th><th>Years</th><th>Units</th><th>Max Power</th><th>Launch Price</th><th>Sell-Through</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>CC8S</strong></td><td style="color:var(--muted2)">2002–2004</td><td><span class="gv">6</span></td><td>655 hp</td><td>~$350K</td><td><div class="bar-row"><div class="mini-bg"><div class="mini-fill" style="width:100%"></div></div>100%</div></td><td><span class="pill disc">Discontinued</span></td></tr>
+            <tr><td><strong>CCR</strong></td><td style="color:var(--muted2)">2004–2006</td><td><span class="gv">14</span></td><td>806 hp</td><td>~$590K</td><td><div class="bar-row"><div class="mini-bg"><div class="mini-fill" style="width:100%"></div></div>100%</div></td><td><span class="pill disc">Discontinued</span></td></tr>
+            <tr><td><strong>CCX / CCXR</strong></td><td style="color:var(--muted2)">2006–2010</td><td><span class="gv">~30</span></td><td>1,018 hp</td><td>~$695K</td><td><div class="bar-row"><div class="mini-bg"><div class="mini-fill" style="width:100%"></div></div>100%</div></td><td><span class="pill disc">Discontinued</span></td></tr>
+            <tr><td><strong>Agera (all variants)</strong></td><td style="color:var(--muted2)">2010–2018</td><td><span class="gv">~85</span></td><td>1,341 hp</td><td>$1.5M–$2.5M</td><td><div class="bar-row"><div class="mini-bg"><div class="mini-fill" style="width:100%"></div></div>100%</div></td><td><span class="pill disc">Discontinued</span></td></tr>
+            <tr><td><strong>One:1</strong></td><td style="color:var(--muted2)">2014</td><td><span class="gv">7</span></td><td>1,341 hp</td><td>~$2M</td><td><div class="bar-row"><div class="mini-bg"><div class="mini-fill" style="width:100%"></div></div>100%</div></td><td><span class="pill disc">Discontinued</span></td></tr>
+            <tr><td><strong>Regera</strong></td><td style="color:var(--muted2)">2016–2023</td><td><span class="gv">85</span></td><td>1,500 hp</td><td>~$1.9M</td><td><div class="bar-row"><div class="mini-bg"><div class="mini-fill" style="width:100%"></div></div>100%</div></td><td><span class="pill sold">Sold Out</span></td></tr>
+            <tr><td><strong>Jesko Attack</strong></td><td style="color:var(--muted2)">2019–</td><td><span class="gv">125</span></td><td>1,603 hp</td><td>~$3M</td><td><div class="bar-row"><div class="mini-bg"><div class="mini-fill" style="width:100%"></div></div>100%</div></td><td><span class="pill sold">Sold Out</span></td></tr>
+            <tr><td><strong>Gemera</strong></td><td style="color:var(--muted2)">2024–</td><td><span class="gv">300</span><span style="color:var(--muted);font-size:10px;margin-left:4px">planned</span></td><td>1,700–2,300 hp</td><td>$1.7M</td><td><div class="bar-row"><div class="mini-bg"><div class="mini-fill" style="width:35%"></div></div>~35%</div></td><td><span class="pill prod">In Production</span></td></tr>
+            <tr><td><strong>CC850</strong></td><td style="color:var(--muted2)">2023–</td><td><span class="gv">70</span><span style="color:var(--muted);font-size:10px;margin-left:4px">planned</span></td><td>1,385 hp</td><td>$3.65M</td><td><div class="bar-row"><div class="mini-bg"><div class="mini-fill" style="width:60%"></div></div>~60%</div></td><td><span class="pill prod">In Production</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Units Produced by Model</div><div class="card-sub">Production volume comparison across all models</div></div></div>
+          <div style="height:220px"><canvas id="unitsChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Power-to-Price Ratio</div><div class="card-sub">Horsepower per $100K invested at launch price</div></div></div>
+          <div style="height:220px"><canvas id="pprChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3: MARKETS -->
+    <div class="page" id="page-markets">
+      <div class="ph">
+        <div class="ph-eyebrow">Global Market Intelligence</div>
+        <div class="ph-title">World <span>Markets</span></div>
+        <div class="ph-sub">Regional sales distribution, buyer demographics, and the customer acquisition funnel across 40+ countries worldwide.</div>
+        <div class="ph-line"></div>
+      </div>
+      <div class="kpi-strip cols4">
+        <div class="kpi-card" style="animation-delay:.04s"><div class="kpi-lbl">Countries Sold In</div><div class="kpi-val">40+</div><div class="kpi-delta neu">Across 4 regions</div></div>
+        <div class="kpi-card" style="animation-delay:.08s"><div class="kpi-lbl">Top Market</div><div class="kpi-val">EU</div><div class="kpi-delta up">▲ 38% of all sales</div></div>
+        <div class="kpi-card" style="animation-delay:.12s"><div class="kpi-lbl">Est. Total Funding</div><div class="kpi-val">$198M</div><div class="kpi-delta up">▲ NEVS investment</div></div>
+        <div class="kpi-card" style="animation-delay:.16s"><div class="kpi-lbl">Waitlist (est.)</div><div class="kpi-val">500+</div><div class="kpi-delta neu">Deposit-placed buyers</div></div>
+      </div>
+      <div class="g21 mb20">
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Regional Sales Growth</div><div class="card-sub">% revenue share by region — 2019 vs 2022 vs 2024</div></div></div>
+          <div style="height:240px"><canvas id="regionChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Market Breakdown</div><div class="card-sub">% of total units — 2024 est.</div></div></div>
+          <div style="margin-top:8px">
+            <div class="region-row"><div class="rl">🇩🇪 Europe</div><div class="rb-bg"><div class="rb" style="width:38%;background:linear-gradient(90deg,#4a90e2,#7ab0ff)">38%</div></div></div>
+            <div class="region-row"><div class="rl">🇺🇸 Americas</div><div class="rb-bg"><div class="rb" style="width:30%;background:linear-gradient(90deg,#c8a84b,#e2c96a)">30%</div></div></div>
+            <div class="region-row"><div class="rl">🇸🇦 Middle East</div><div class="rb-bg"><div class="rb" style="width:18%;background:linear-gradient(90deg,#3ecf8e,#6ae0ae)">18%</div></div></div>
+            <div class="region-row"><div class="rl">🇨🇳 Asia-Pacific</div><div class="rb-bg"><div class="rb" style="width:14%;background:linear-gradient(90deg,#d94f4f,#f07070)">14%</div></div></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px">
+            <div class="stat-box"><div class="stat-big">15+</div><div class="stat-lbl">Dealerships</div></div>
+            <div class="stat-box"><div class="stat-big">$198M</div><div class="stat-lbl">Total Funding</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Customer Acquisition Funnel</div><div class="card-sub">Estimated hypercar buyer journey — annual basis</div></div></div>
+          <div style="margin-top:6px">
+            <div class="f-row"><div class="f-lbl">Brand Awareness</div><div class="f-bg"><div class="f-fill" style="width:100%;background:linear-gradient(90deg,#c8a84b,#e2c96a)">~10M+</div></div></div>
+            <div class="f-row"><div class="f-lbl">Website Visits</div><div class="f-bg"><div class="f-fill" style="width:72%;background:linear-gradient(90deg,#4a90e2,#7ab0ff)">~2.4M</div></div></div>
+            <div class="f-row"><div class="f-lbl">Qualified Enquiries</div><div class="f-bg"><div class="f-fill" style="width:42%;background:linear-gradient(90deg,#3ecf8e,#6ae0ae)">~4,000</div></div></div>
+            <div class="f-row"><div class="f-lbl">Deposit Placed</div><div class="f-bg"><div class="f-fill" style="width:18%;background:linear-gradient(90deg,#e2c96a,#c8a84b)">~500</div></div></div>
+            <div class="f-row"><div class="f-lbl">Cars Delivered</div><div class="f-bg"><div class="f-fill" style="width:8%;background:linear-gradient(90deg,#d94f4f,#f07070)">~35</div></div></div>
+          </div>
+          <div style="margin-top:16px;padding:14px;background:var(--gold-dim);border-radius:10px;border:1px solid rgba(200,168,75,.2)">
+            <div style="font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">Enquiry → Delivery Rate</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold2);letter-spacing:1px">0.875% <span style="font-size:12px;color:var(--muted2);font-family:'Barlow',sans-serif;font-weight:300">· Ultra-exclusive by design</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Buyer Profile</div><div class="card-sub">Typical Koenigsegg customer demographic (est.)</div></div></div>
+          <div style="height:240px"><canvas id="buyerChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 4: CAMPAIGNS -->
+    <div class="page" id="page-campaigns">
+      <div class="ph">
+        <div class="ph-eyebrow">Brand & Marketing Performance</div>
+        <div class="ph-title">Campaigns <span>& Brand</span></div>
+        <div class="ph-sub">Marketing ROI, digital presence metrics, media impact, and estimated brand value growth across channels since 2016.</div>
+        <div class="ph-line"></div>
+      </div>
+      <div class="kpi-strip cols4">
+        <div class="kpi-card" style="animation-delay:.04s"><div class="kpi-lbl">Est. Brand Value</div><div class="kpi-val">$480M</div><div class="kpi-delta up">▲ 22% YoY</div></div>
+        <div class="kpi-card" style="animation-delay:.08s"><div class="kpi-lbl">Social Followers</div><div class="kpi-val">4.2M+</div><div class="kpi-delta up">▲ All platforms combined</div></div>
+        <div class="kpi-card" style="animation-delay:.12s"><div class="kpi-lbl">Media Impressions</div><div class="kpi-val">~50M</div><div class="kpi-delta up">▲ Per major launch event</div></div>
+        <div class="kpi-card" style="animation-delay:.16s"><div class="kpi-lbl">Pre-Orders / Launch</div><div class="kpi-val">100%</div><div class="kpi-delta up">▲ Always sells out</div></div>
+      </div>
+      <div class="g2 mb20">
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Digital Channel Reach</div><div class="card-sub">Estimated followers & monthly visitors (millions)</div></div></div>
+          <div style="height:230px"><canvas id="digitalChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Brand Value Growth</div><div class="card-sub">Estimated brand valuation 2016–2024 ($M)</div></div></div>
+          <div style="height:230px"><canvas id="brandChart"></canvas></div>
+        </div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Campaign ROI by Type</div><div class="card-sub">Return on marketing investment per channel (est.)</div></div></div>
+          <div style="height:200px"><canvas id="roiChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Media Coverage Impact</div><div class="card-sub">Key launches — estimated global impressions</div></div></div>
+          <div style="margin-top:8px">
+            <div class="region-row"><div class="rl" style="min-width:140px">Jesko Reveal (Geneva)</div><div class="rb-bg"><div class="rb" style="width:65%;background:linear-gradient(90deg,#c8a84b,#e2c96a)">~48M</div></div></div>
+            <div class="region-row"><div class="rl" style="min-width:140px">Gemera Debut</div><div class="rb-bg"><div class="rb" style="width:56%;background:linear-gradient(90deg,#4a90e2,#7ab0ff)">~41M</div></div></div>
+            <div class="region-row"><div class="rl" style="min-width:140px">CC850 Reveal</div><div class="rb-bg"><div class="rb" style="width:48%;background:linear-gradient(90deg,#3ecf8e,#6ae0ae)">~35M</div></div></div>
+            <div class="region-row"><div class="rl" style="min-width:140px">Agera RS Record '17</div><div class="rb-bg"><div class="rb" style="width:82%;background:linear-gradient(90deg,#e2c96a,#c8a84b)">~60M</div></div></div>
+            <div class="region-row"><div class="rl" style="min-width:140px">Jesko 0-400-0 '25</div><div class="rb-bg"><div class="rb" style="width:100%;background:linear-gradient(90deg,#d94f4f,#f07070)">~75M</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 5: RECORDS -->
+    <div class="page" id="page-records">
+      <div class="ph">
+        <div class="ph-eyebrow">Speed · Power · Engineering Extremes</div>
+        <div class="ph-title">World <span>Records</span></div>
+        <div class="ph-sub">Every official speed record, Guinness certification, and engineering milestone Koenigsegg has achieved since the CC8S first took to the track in 2002.</div>
+        <div class="ph-line"></div>
+      </div>
+      <div class="g3 mb20">
+        <div class="rec-card" style="animation-delay:.04s"><div class="rec-name">Top Speed Record</div><div class="rec-big">277.9</div><div class="rec-unit">mph — 447.2 km/h · Guinness Certified</div><div class="rec-model">Agera RS · Tonopah, Nevada</div><div class="rec-year">November 4, 2017</div></div>
+        <div class="rec-card" style="animation-delay:.08s"><div class="rec-name">0–400–0 km/h Record</div><div class="rec-big">25.21</div><div class="rec-unit">seconds — Aug 2025 record</div><div class="rec-model">Jesko Absolut · Smashed own 2024 record</div><div class="rec-year">August 2025</div></div>
+        <div class="rec-card" style="animation-delay:.12s"><div class="rec-name">0–400 km/h Alone</div><div class="rec-big">14.58</div><div class="rec-unit">seconds — world class</div><div class="rec-model">Agera RS · Nevada Highway</div><div class="rec-year">2017 · World record in class</div></div>
+      </div>
+      <div class="g2 mb20">
+        <div class="card">
+          <div class="card-head"><div><div class="card-title">Record-Breaking Timeline</div><div class="card-sub">Every major milestone — 2002 to 2025</div></div></div>
+          <div class="tl">
+            <div class="tl-row"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-year">2002</div><div class="tl-name">CC8S — Guinness World Record</div><div class="tl-desc">Most powerful production car engine at 655 hp. First Koenigsegg record.</div></div></div>
+            <div class="tl-row"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-year">2005</div><div class="tl-name">CCR — Production Car Top Speed</div><div class="tl-desc">241 mph / 387.87 km/h at Nardo Ring. Broke McLaren F1's long-standing record.</div></div></div>
+            <div class="tl-row"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-year">2011</div><div class="tl-name">Agera — 0–300 km/h World Record</div><div class="tl-desc">0 to 300 km/h and back to 0 in 21.19 seconds. Guinness certified.</div></div></div>
+            <div class="tl-row"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-year">2017</div><div class="tl-name">Agera RS — Triple World Record Day</div><div class="tl-desc">277.9 mph top speed · 0–400–0 in 36.44 sec · 0–400 in 14.58 sec. Nevada public road.</div></div></div>
+            <div class="tl-row"><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-year">2024</div><div class="tl-name">Jesko Absolut — New 0–400–0</div><div class="tl-desc">Sets new 0–400–0 benchmark. Surpasses all previous hypercar benchmarks.</div></div></div>
+            <div class="tl-row"><div class="tl-spine"><div class="tl-dot"></div></div><div class="tl-content"><div class="tl-year">2025</div><div class="tl-name">Jesko Absolut — 25.21 Seconds</div><div class="tl-desc">Breaks its own 2024 record. 0–400–0 in 25.21 seconds. August 2025.</div></div></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div class="card">
+            <div class="card-head"><div><div class="card-title">0–400–0 Progress</div><div class="card-sub">Time in seconds — lower is better</div></div></div>
+            <div style="height:170px"><canvas id="rec400Chart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><div><div class="card-title">Top Speed vs Competition</div><div class="card-sub">Claimed / achieved peak speed (km/h)</div></div><div class="badge green">Koenigsegg leads</div></div>
+            <div style="height:150px"><canvas id="speedCompChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div class="g3">
+        <div class="stat-box" style="animation-delay:.04s"><div class="stat-big">1,603</div><div class="stat-lbl">hp — Jesko on E85 fuel</div></div>
+        <div class="stat-box" style="animation-delay:.08s"><div class="stat-big">300+</div><div class="stat-lbl">mph theoretical (Jesko Absolut)</div></div>
+        <div class="stat-box" style="animation-delay:.12s"><div class="stat-big">9</div><div class="stat-lbl">Guinness world records held</div></div>
+      </div>
+    </div>
+
+  </div><!-- /pages -->
+</div><!-- /app -->
+
+<script>
+// CURSOR
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+function ringExpand(){document.body.classList.add('ring-expand');}
+function ringNormal(){document.body.classList.remove('ring-expand');}
+document.querySelectorAll('button,a,select').forEach(el=>{el.addEventListener('mouseenter',ringExpand);el.addEventListener('mouseleave',ringNormal);});
+
+// NAVIGATION
+let chartsBuilt={};
+function goTo(name,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(!chartsBuilt[name]){buildCharts(name);chartsBuilt[name]=true;}
+}
+
+// CHART DEFAULTS
+Chart.defaults.color='#5e6578';
+Chart.defaults.font.family='Barlow';
+const G='#c8a84b',G2='#e2c96a',BL='#4a90e2',GR='#3ecf8e',RD='#d94f4f';
+const TT={backgroundColor:'#12151f',borderColor:'rgba(200,168,75,.2)',borderWidth:1,padding:12,titleFont:{size:12,weight:'600'},bodyFont:{size:11}};
+function grad(ctx,c1,c2='rgba(0,0,0,0)',h=300){const g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,c1);g.addColorStop(1,c2);return g;}
+
+function buildCharts(page){
+  if(page==='overview') buildOverview();
+  if(page==='models')   buildModels();
+  if(page==='markets')  buildMarkets();
+  if(page==='campaigns') buildCampaigns();
+  if(page==='records')  buildRecords();
+}
+
+function buildOverview(){
+  const pc=document.getElementById('prodChart').getContext('2d');
+  new Chart(pc,{type:'bar',data:{labels:['02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],datasets:[{label:'Cars Produced',data:[2,4,6,8,10,8,9,7,10,12,12,14,15,16,20,22,18,10,8,12,20,30,38],backgroundColor:ctx=>{const v=ctx.raw;return v>=30?G:v>=20?'rgba(200,168,75,.65)':v>=10?'rgba(200,168,75,.4)':'rgba(200,168,75,.22)';},borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${c.raw} cars`}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9},callback:v=>v+' cars'}}}}});
+
+  const dc=document.getElementById('donutChart').getContext('2d');
+  new Chart(dc,{type:'doughnut',data:{labels:['Jesko','CC850','Gemera','Regera'],datasets:[{data:[45,28,18,9],backgroundColor:[G,G2,BL,GR],borderWidth:0,hoverOffset:6}]},options:{responsive:false,cutout:'72%',plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${c.label}: ${c.raw}%`}}}}});
+
+  const hc=document.getElementById('hpChart').getContext('2d');
+  new Chart(hc,{type:'line',data:{labels:["CC8S '02","CCR '04","CCX '06","Agera '10","One:1 '14","Regera '16","Jesko '19","Gemera '24"],datasets:[{label:'Max HP',data:[655,806,1018,1140,1341,1500,1603,2300],borderColor:G,backgroundColor:grad(hc,'rgba(200,168,75,.28)'),fill:true,tension:.4,pointBackgroundColor:G,pointBorderColor:'#07090e',pointBorderWidth:2,pointRadius:5,pointHoverRadius:8,borderWidth:2.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${c.raw.toLocaleString()} hp`}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9},callback:v=>v.toLocaleString()+' hp'}}}}});
+
+  const prc=document.getElementById('priceChart').getContext('2d');
+  new Chart(prc,{type:'line',data:{labels:['CC8S','CCR','CCX','Agera','One:1','Regera','Jesko','CC850','Gemera'],datasets:[{label:'Price $M',data:[.35,.59,.695,1.5,2.0,1.9,3.0,3.65,1.7],borderColor:BL,backgroundColor:grad(prc,'rgba(74,144,226,.28)'),fill:true,tension:.4,pointBackgroundColor:BL,pointBorderColor:'#07090e',pointBorderWidth:2,pointRadius:5,pointHoverRadius:8,borderWidth:2.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` $${c.raw}M USD`}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9},callback:v=>'$'+v+'M'}}}}});
+}
+
+function buildModels(){
+  const uc=document.getElementById('unitsChart').getContext('2d');
+  new Chart(uc,{type:'bar',data:{labels:['CC8S','CCR','CCX/R','Agera','One:1','Regera','Jesko','Gemera*','CC850*'],datasets:[{label:'Units',data:[6,14,30,85,7,85,125,105,42],backgroundColor:[G,G,G,G,G,GR,G2,BL,G],borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${c.raw} units`}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9}}}}}});
+
+  const pp=document.getElementById('pprChart').getContext('2d');
+  new Chart(pp,{type:'bar',data:{labels:['CC8S','CCR','CCX','Agera','One:1','Regera','Jesko','CC850','Gemera'],datasets:[{label:'HP per $100K',data:[187,137,147,96,100,79,54,38,135],backgroundColor:ctx=>ctx.raw>150?GR:ctx.raw>100?G2:ctx.raw>60?G:'rgba(200,168,75,.4)',borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${c.raw} hp per $100K`}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9}}}}}});
+}
+
+function buildMarkets(){
+  const rc=document.getElementById('regionChart').getContext('2d');
+  new Chart(rc,{type:'bar',data:{labels:['Europe','Americas','Middle East','Asia-Pacific'],datasets:[{label:'2019',data:[35,28,16,11],backgroundColor:'rgba(200,168,75,.3)',borderRadius:4,borderSkipped:false},{label:'2022',data:[37,29,17,13],backgroundColor:'rgba(200,168,75,.55)',borderRadius:4,borderSkipped:false},{label:'2024',data:[38,30,18,14],backgroundColor:G,borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,padding:14,font:{size:11}}},tooltip:TT},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9},callback:v=>v+'%'}}}}});
+
+  const bc=document.getElementById('buyerChart').getContext('2d');
+  new Chart(bc,{type:'polarArea',data:{labels:['Tech Entrepreneurs','Finance & Banking','Royalty & Nobility','Car Collectors','Motorsport'],datasets:[{data:[34,28,16,14,8],backgroundColor:['rgba(200,168,75,.75)','rgba(74,144,226,.7)','rgba(62,207,142,.7)','rgba(226,201,106,.7)','rgba(217,79,79,.65)'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:10,padding:10,font:{size:10}}},tooltip:TT},scales:{r:{grid:{color:'rgba(255,255,255,.05)'},ticks:{display:false}}}}});
+}
+
+function buildCampaigns(){
+  const dc=document.getElementById('digitalChart').getContext('2d');
+  new Chart(dc,{type:'bar',data:{labels:['Instagram','YouTube','Facebook','Twitter/X','LinkedIn','Website'],datasets:[{label:'Followers / Visitors (M)',data:[2.1,.85,.62,.38,.24,2.4],backgroundColor:[G,G2,BL,GR,'rgba(200,168,75,.5)','rgba(74,144,226,.5)'],borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${c.raw}M`}}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9},callback:v=>v+'M'}}}}});
+
+  const bv=document.getElementById('brandChart').getContext('2d');
+  new Chart(bv,{type:'line',data:{labels:['2016','2017','2018','2019','2020','2021','2022','2023','2024'],datasets:[{label:'Brand Value $M',data:[120,160,195,220,200,260,320,390,480],borderColor:G,backgroundColor:grad(bv,'rgba(200,168,75,.28)'),fill:true,tension:.45,pointBackgroundColor:G,pointBorderColor:'#07090e',pointBorderWidth:2,pointRadius:4,pointHoverRadius:7,borderWidth:2.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` $${c.raw}M`}}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9},callback:v=>'$'+v+'M'}}}}});
+
+  const ro=document.getElementById('roiChart').getContext('2d');
+  new Chart(ro,{type:'bar',data:{labels:['Auto Shows','Social Media','PR/Editorial','YouTube','Partnerships','Digital Ads'],datasets:[{label:'ROI %',data:[820,340,560,420,380,180],backgroundColor:ctx=>ctx.raw>700?GR:ctx.raw>450?G2:ctx.raw>350?G:'rgba(200,168,75,.4)',borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${c.raw}% ROI`}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9},callback:v=>v+'%'}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+}
+
+function buildRecords(){
+  const r4=document.getElementById('rec400Chart').getContext('2d');
+  new Chart(r4,{type:'line',data:{labels:["Agera '17","Agera RS '17","Bugatti SS","SSC Tuatara","Jesko '24","Jesko '25"],datasets:[{label:'0-400-0 (sec)',data:[36.44,36.44,41.96,38.8,27.4,25.21],borderColor:G,backgroundColor:grad(r4,'rgba(200,168,75,.22)'),fill:true,tension:.4,pointBackgroundColor:ctx=>ctx.dataIndex===5?GR:G,pointBorderColor:'#07090e',pointBorderWidth:2,pointRadius:5,pointHoverRadius:8,borderWidth:2.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${c.raw} seconds`}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9},callback:v=>v+' sec'}}}}});
+
+  const sc=document.getElementById('speedCompChart').getContext('2d');
+  new Chart(sc,{type:'bar',data:{labels:['Bugatti\nChiron SS','Rimac\nNevera','Hennessey\nVenom F5','SSC\nTuatara','Koenigsegg\nAgera RS','Koenigsegg\nJesko Abs.'],datasets:[{label:'Top Speed (km/h)',data:[440,412,484,508,447,330],backgroundColor:['rgba(74,144,226,.6)','rgba(74,144,226,.6)','rgba(62,207,142,.6)','rgba(62,207,142,.6)',G,G2],borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${c.raw} km/h`}}},scales:{x:{grid:{display:false},ticks:{font:{size:8}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9},callback:v=>v+' km/h'},min:300}}}});
+}
+
+// ERA FILTER
+const eraData={
+  all:{total:'255+',annual:'~22',rev:'$1.8M',emp:'600+',rec:'7+'},
+  cc:{total:'~55',annual:'~8',rev:'$620K',emp:'~80',rec:'2'},
+  agera:{total:'~120',annual:'~14',rev:'$1.6M',emp:'~250',rec:'4'},
+  modern:{total:'~80',annual:'~35',rev:'$2.4M',emp:'600+',rec:'3+'}
+};
+function updateEra(){
+  const d=eraData[document.getElementById('eraFilter').value];
+  ['ov-total','ov-annual','ov-rev','ov-emp','ov-rec'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=[d.total,d.annual,d.rev,d.emp,d.rec][i];});
+}
+
+// INIT
+chartsBuilt['overview']=true;
+buildOverview();
+</script>
+</body>
+</html>
